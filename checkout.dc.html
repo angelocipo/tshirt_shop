@@ -328,8 +328,10 @@ class Component extends DCLogic {
         }),
       });
       const ct = res.headers.get('content-type') || '';
+      const ct = res.headers.get('content-type') || '';
       if (!ct.includes('application/json')) {
-        throw new Error('Pagamento non disponibile in anteprima. Pubblica il sito (Vercel con STRIPE_SECRET_KEY) per completare l\u2019ordine.');
+        const body = (await res.text()).slice(0, 300).replace(/\s+/g, ' ');
+        throw new Error(`Server error HTTP ${res.status} (${ct || 'no content-type'}): ${body}`);
       }
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Errore');
