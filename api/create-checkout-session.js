@@ -6,11 +6,23 @@
 const Stripe = require('stripe');
 const { PRICING, angoliArrotondatiPrice } = require('./_pricing-data');
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// Lazy init so a missing key returns a clean JSON error instead of crashing the
+// function at module load (newer stripe throws in the constructor when key is empty).
+let stripe = null;
+function getStripe() {
+  if (!process.env.STRIPE_SECRET_KEY) return null;
+  if (!stripe) stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  return stripe;
+}
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+  const stripe = getStripe();
+  if (!stripe) {
+    res.status(500).json({ error: 'STRIPE_SECRET_KEY non configurata su Vercel (Environment Variables → Production → redeploy).' });
     return;
   }
 

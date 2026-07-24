@@ -6,7 +6,12 @@
 // Needs the raw request body for signature verification — see vercel.json config note below.
 
 const Stripe = require('stripe');
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+let stripe = null;
+function getStripe() {
+  if (!process.env.STRIPE_SECRET_KEY) return null;
+  if (!stripe) stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  return stripe;
+}
 const { createInvoiceForOrder } = require('./create-invoice');
 const { sendEmail } = require('./_email-client');
 
@@ -38,6 +43,11 @@ module.exports = async (req, res) => {
   }
 
   let event;
+  const stripe = getStripe();
+  if (!stripe) {
+    res.status(500).send('STRIPE_SECRET_KEY non configurata');
+    return;
+  }
   try {
     const buf = await buffer(req);
     const sig = req.headers['stripe-signature'];
