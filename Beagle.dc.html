@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
+  <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
+  <style>
+    body { background: var(--color-bg); }
+    .swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--color-divider); cursor: pointer; padding: 0; }
+    .swatch:hover { border-color: var(--color-text); }
+    .swatch-selected { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent); }
+    .size-btn { min-width: 46px; height: 40px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .size-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+    .size-selected { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
+    .zone-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider); cursor: pointer; }
+    .zone-row:last-child { border-bottom: none; }
+    .zone-check { width: 18px; height: 18px; border: 1.5px solid var(--color-divider); flex: none; display: flex; align-items: center; justify-content: center; }
+    .zone-check-on { background: var(--color-accent); border-color: var(--color-accent); }
+    .qty-btn { width: 36px; height: 36px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+    .thumb { width: 100%; aspect-ratio: 1; background: var(--color-surface); border: 1px solid var(--color-divider); cursor: pointer; padding: 0; }
+    .thumb-selected { border-color: var(--color-accent); border-width: 2px; }
+
+    .theme-indigo {
+      --color-accent: #4f5cd6; --color-accent-100: #eef0fc; --color-accent-200: #d7dbf7; --color-accent-300: #b7bff0;
+      --color-accent-400: #8b96e6; --color-accent-500: #4f5cd6; --color-accent-600: #3541b9; --color-accent-700: #262f8f;
+      --color-accent-800: #1b2266; --color-accent-900: #141a4a;
+    }
+    .theme-forest {
+      --color-accent: #3f9a4c; --color-accent-100: #eaf3ea; --color-accent-200: #cfe6d0; --color-accent-300: #a8d2ab;
+      --color-accent-400: #74b87b; --color-accent-500: #3f9a4c; --color-accent-600: #2c7d39; --color-accent-700: #1f612c;
+      --color-accent-800: #164a21; --color-accent-900: #0f3618;
+    }
+    .theme-ochre {
+      --color-accent: #c98a1a; --color-accent-100: #faf1e0; --color-accent-200: #f3ddb0; --color-accent-300: #e9c47a;
+      --color-accent-400: #dba845; --color-accent-500: #c98a1a; --color-accent-600: #a86f10; --color-accent-700: #82550c;
+      --color-accent-800: #5e3d09; --color-accent-900: #402a07;
+    }
+    .theme-ink {
+      --color-accent: #46433f; --color-accent-100: #ececeb; --color-accent-200: #d6d5d4; --color-accent-300: #b7b5b3;
+      --color-accent-400: #8f8c8a; --color-accent-500: #605d5b; --color-accent-600: #46433f; --color-accent-700: #302d2b;
+      --color-accent-800: #201e1c; --color-accent-900: #131211;
+    }
+  </style>
+</helmet>
+
+<div style="max-width: 1180px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
+
+  <nav class="nav" style="margin: 0 0 var(--space-6); padding-inline: 0;">
+    <div class="nav-brand">T-SHIRT SHOP</div>
+    <a href="#">Uomo</a>
+    <a href="#">Donna</a>
+    <a href="#">Bambino</a>
+    <a href="#">Servizio Stampa</a>
+    <button type="button" class="btn btn-secondary btn-icon" aria-label="Carrello">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg>
+    </button>
+  </nav>
+
+  <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
+    <span class="tag tag-accent">24H</span>
+    <span class="tag tag-neutral">Made in Italy</span>
+    <span class="tag tag-neutral">Cotone Premium</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--space-8); align-items: start;">
+
+    <div style="min-width: 0;">
+      <div style="max-width: 480px;">
+      <div style="aspect-ratio: 1; margin-bottom: var(--space-3);">
+        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-shirt" shape="rect" style="width:100%;height:100%;" placeholder="Foto maglietta — vista frontale" src="{{ heroImageSrc }}" hint-size="100%,100%"></x-import>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-2);">
+        <button type="button" class="thumb" aria-label="Vista retro"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="thumb-back" shape="rect" style="width:100%;height:100%;" placeholder="Retro" hint-size="100%,100%"></x-import></button>
+        <button type="button" class="thumb" aria-label="Dettaglio stampa"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="thumb-detail" shape="rect" style="width:100%;height:100%;" placeholder="Dettaglio stampa" hint-size="100%,100%"></x-import></button>
+      </div>
+      </div>
+    </div>
+
+    <div style="min-width: 0;">
+      <h1 style="margin-bottom: 4px;">Maglietta Unisex 24H</h1>
+      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);">T-shirt personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
+      <div style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; margin-bottom: var(--space-4);">{{ totalPriceLabel }}</div>
+      <hr class="hr" style="margin-top:0;">
+
+      <div style="margin-bottom: var(--space-4);">
+        <div class="field"><label>Colore — {{ selectedColorName }}</label></div>
+        <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+          <div>
+            <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: var(--space-2);">1A. Colori 24H — disponibili</div>
+            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+              <sc-for list="{{ colors24h }}" as="c" hint-placeholder-count="17">
+                <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.name }}" aria-label="{{ c.name }}" onClick="{{ c.select }}"></button>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div class="text-muted" style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-2);">1B. Su ordinazione — 1 settimana</div>
+            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+              <sc-for list="{{ colorsOrder }}" as="c" hint-placeholder-count="19">
+                <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.name }}" aria-label="{{ c.name }}" onClick="{{ c.select }}"></button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: var(--space-4);">
+        <div class="field"><label>Misura — {{ selectedSize }}</label></div>
+        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3);">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
+            <button type="button" class="{{ s.btnClass }}" onClick="{{ s.select }}">{{ s.label }}</button>
+          </sc-for>
+        </div>
+        <table class="table" style="font-size: 13px;">
+          <thead>
+            <tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A: Lar.</td><td>49</td><td>52</td><td>55</td><td>58</td><td>62</td><td>66</td></tr>
+            <tr><td>B: Alt.</td><td>69</td><td>71</td><td>73</td><td>75</td><td>77</td><td>79</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: var(--space-4);">
+        <div class="field"><label>Stampa su</label></div>
+        <div>
+          <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
+            <div>
+              <div class="zone-row" onClick="{{ z.toggle }}">
+                <div style="display:flex; align-items:center; gap: var(--space-2);">
+                  <div class="{{ z.checkClass }}">
+                    <sc-if value="{{ z.checked }}" hint-placeholder-val="{{ false }}">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    </sc-if>
+                  </div>
+                  <span style="font-size: 14px;">{{ z.label }}</span>
+                </div>
+                <span class="text-muted" style="font-size: 13px;">{{ z.priceLabel }}</span>
+              </div>
+              <sc-if value="{{ z.checked }}" hint-placeholder-val="{{ false }}">
+                <sc-if value="{{ z.isCuore }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-2) 0 var(--space-3);">
+                    <div class="field">
+                      <label>Larghezza — {{ cuoreWidth }}cm</label>
+                      <input type="range" min="3" max="8" step="1" value="{{ cuoreWidth }}" onChange="{{ setCuoreWidth }}" style="width:100%; accent-color: var(--color-accent);">
+                    </div>
+                    <div class="field">
+                      <label>Altezza — {{ cuoreHeight }}cm</label>
+                      <input type="range" min="3" max="8" step="1" value="{{ cuoreHeight }}" onChange="{{ setCuoreHeight }}" style="width:100%; accent-color: var(--color-accent);">
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ z.isDavanti }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-2) 0 var(--space-3);">
+                    <div class="field">
+                      <label>Larghezza davanti — {{ davantiWidthCm }}cm</label>
+                      <input type="range" min="0" max="11" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                    </div>
+                    <div class="field">
+                      <label>Altezza davanti — {{ davantiHeightCm }}cm</label>
+                      <input type="range" min="0" max="11" step="1" value="{{ davantiHeightIdx }}" onChange="{{ setDavantiHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ z.isRetro }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-2) 0 var(--space-3);">
+                    <div class="field">
+                      <label>Larghezza retro — {{ retroWidthCm }}cm</label>
+                      <input type="range" min="0" max="11" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                    </div>
+                    <div class="field">
+                      <label>Altezza retro — {{ retroHeightCm }}cm</label>
+                      <input type="range" min="0" max="11" step="1" value="{{ retroHeightIdx }}" onChange="{{ setRetroHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                    </div>
+                  </div>
+                </sc-if>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+        <div class="field" style="margin: 0;"><label>Quantità</label></div>
+        <div style="display:flex; align-items:center; gap: var(--space-2);">
+          <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci">–</button>
+          <span style="min-width: 24px; text-align: center; font-family: var(--font-heading); font-weight: 800;">{{ quantity }}</span>
+          <button type="button" class="qty-btn" onClick="{{ incQty }}" aria-label="Aumenta">+</button>
+        </div>
+      </div>
+
+      <hr class="hr">
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label>File Upload</label>
+        <label class="btn btn-secondary btn-block" style="cursor: pointer;">
+          Carica il tuo design
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <input type="file" accept="image/*,.pdf,.ai,.eps" multiple style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;">
+        </label>
+      </div>
+
+      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted">Quantità</span><span>× {{ quantity }}</span></div>
+        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span>Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg></button>
+
+      <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}">Richiedi un preventivo ufficiale<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
+
+      <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Consegna in 24 ore</div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg>Prodotto a Roma</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;forest&quot;,&quot;ochre&quot;,&quot;ink&quot;],&quot;section&quot;:&quot;Color&quot;}}">
+const COLORS = [
+  { name: '01 Bianco', hex: '#eeeeee', group: '24h' },
+  { name: '02 Nero', hex: '#000000', group: '24h' },
+  { name: '03 Giallo', hex: '#fee233', group: '24h' },
+  { name: '05 Blue Royal', hex: '#0c62a7', group: '24h' },
+  { name: '10 Celeste', hex: '#c5def1', group: '24h' },
+  { name: '12 Turchese Chiaro', hex: '#1aa1cf', group: '24h' },
+  { name: '20 Verde Kelly', hex: '#138e51', group: '24h' },
+  { name: '31 Arancione', hex: '#ee8936', group: '24h' },
+  { name: '43 Turchese Scuro', hex: '#1690bf', group: '24h' },
+  { name: '55 Blue Navy', hex: '#011e42', group: '24h' },
+  { name: '56 Verde Bottiglia', hex: '#054237', group: '24h' },
+  { name: '57 Granata', hex: '#8a1918', group: '24h' },
+  { name: '58 Grigio', hex: '#c4c4c4', group: '24h' },
+  { name: '60 Rosso', hex: '#da0b34', group: '24h' },
+  { name: '71 Viola', hex: '#741467', group: '24h' },
+  { name: '83 Verde Prato', hex: '#549e2f', group: '24h' },
+  { name: '114 Verde Oasis', hex: '#c2d689', group: '24h' },
+  { name: '45 Blue Luna', hex: '#134f66', group: 'order' },
+  { name: '46 Piombo', hex: '#494e42', group: 'order' },
+  { name: '48 Rosa Chiaro', hex: '#f7cdd5', group: 'order' },
+  { name: '78 Rosa', hex: '#d9106c', group: 'order' },
+  { name: '86 Blue Denim', hex: '#4d6880', group: 'order' },
+  { name: '87 Cioccolato', hex: '#673c2f', group: 'order' },
+  { name: '98 Menta', hex: '#a1d9d6', group: 'order' },
+  { name: '108 Grigio Perla', hex: '#b4afab', group: 'order' },
+  { name: '152 Verde Avventura', hex: '#545f4b', group: 'order' },
+  { name: '267 Azzurro Scuro', hex: '#679a9e', group: 'order' },
+  { name: '276 Ocra', hex: '#c4a157', group: 'order' },
+  { name: '277 Mattone Rosso', hex: '#a56f69', group: 'order' },
+  { name: '132 Bianco Vintage', hex: '#efe6e5', group: 'order' },
+  { name: '229 Angora', hex: '#d9b8a9', group: 'order' },
+  { name: '73 Sweet Yellow', hex: '#efe1aa', group: 'order' },
+  { name: '120 Corallo', hex: '#fc6e6d', group: 'order' },
+  { name: '481 Silk Pink', hex: '#e783a0', group: 'order' },
+  { name: '711 Iris Purple', hex: '#5a5d9d', group: 'order' },
+  { name: '101 Sweet Blue', hex: '#b6cede', group: 'order' },
+];
+const DEFAULT_HERO_IMG = 'img/tshirt-dic-copia.avif';
+const IMAGE_BY_COLOR = {
+  '01 Bianco': 'img/01 bianco.jpeg',
+  '02 Nero': 'img/02 nero.png',
+  '03 Giallo': 'img/03 giallo.png',
+  '05 Blue Royal': 'img/05 royal.png',
+  '10 Celeste': 'img/10 celeste.png',
+  '12 Turchese Chiaro': 'img/12 turchese.png',
+  '43 Turchese Scuro': 'img/43 turchese scuro.png',
+  '55 Blue Navy': 'img/55 blue navy.png',
+  '57 Granata': 'img/57 bordeaux.png',
+  '58 Grigio': 'img/58 grigio.png',
+  '60 Rosso': 'img/60 rosso.jpeg',
+  '71 Viola': 'img/71 viola.jpeg',
+  '114 Verde Oasis': 'img/114 verde oasi.jpeg',
+  '98 Menta': 'img/98 menta.jpeg',
+  '108 Grigio Perla': 'img/p_6554_108_1_1.jpg',
+  '152 Verde Avventura': 'img/152 verde oliva.jpeg',
+  '267 Azzurro Scuro': 'img/267 azzurro sporco.jpeg',
+  '276 Ocra': 'img/276 ochre.jpeg',
+  '277 Mattone Rosso': 'img/277 brick red.jpeg',
+  '132 Bianco Vintage': 'img/p_6554_132_1_1.jpg',
+  '229 Angora': 'img/p_6554_229_1_1.jpg',
+  '73 Sweet Yellow': 'img/p_6554_73_1_1.jpg',
+  '120 Corallo': 'img/p_6554_120_1_1.jpg',
+  '481 Silk Pink': 'img/p_6554_481_1_1.jpg',
+  '711 Iris Purple': 'img/p_6554_711_1_1.jpg',
+  '101 Sweet Blue': 'img/p_6554_101_1_1.jpg',
+  '20 Verde Kelly': 'img/20 verde kelly.png',
+  '31 Arancione': 'img/31 arancione.png',
+  '45 Blue Luna': 'img/45 blue chiaro luna.png',
+  '46 Piombo': 'img/46 grigio scuro.png',
+  '48 Rosa Chiaro': 'img/48 rosa chiaro.png',
+  '56 Verde Bottiglia': 'img/56 verde scuro.png',
+  '78 Rosa': 'img/78 rosa.png',
+  '83 Verde Prato': 'img/83 verde prato.png',
+  '86 Blue Denim': 'img/86 blue denim.png',
+  '87 Cioccolato': 'img/87 cioccolato.png',
+};
+const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+const PRICE_TIERS = [
+  { min: 1, white: 8, other: 8.8 },
+  { min: 5, white: 6.5, other: 7.15 },
+  { min: 10, white: 5, other: 5.5 },
+  { min: 20, white: 3.5, other: 3.85 },
+  { min: 50, white: 2.9, other: 3.2 },
+  { min: 100, white: 2.5, other: 2.75 },
+];
+function garmentUnitPrice(qty, isWhite) {
+  let tier = PRICE_TIERS[0];
+  for (const t of PRICE_TIERS) if (qty >= t.min) tier = t;
+  return isWhite ? tier.white : tier.other;
+}
+const CUORE_PRICE_TIERS = [
+  { min: 1, price: 14 }, { min: 2, price: 10 }, { min: 5, price: 5 },
+  { min: 10, price: 4 }, { min: 20, price: 3.5 }, { min: 50, price: 2.5 },
+  { min: 100, price: 2.2 },
+];
+function cuoreUnitPrice(qty) {
+  let tier = CUORE_PRICE_TIERS[0];
+  for (const t of CUORE_PRICE_TIERS) if (qty >= t.min) tier = t;
+  return tier.price;
+}
+const WH_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 50];
+const AREA_TABLE = [
+  [12, 12, 12, 13, 14, 14, 14, 16, 16, 16, 17, 18],
+  [12, 12, 13, 14, 14, 14, 16, 16, 16, 17, 18, 18],
+  [12, 13, 14, 14, 14, 16, 16, 16, 17, 18, 18, 19],
+  [13, 14, 14, 14, 16, 16, 16, 17, 18, 20.5, 22.5, 25],
+  [14, 14, 14, 16, 16, 16, 17, 18, 19, 22, 24.75, 26],
+  [14, 14, 16, 16, 16, 17, 18, 20, 22, 25, 28, 28],
+  [14, 16, 16, 16, 17, 18, 20, 22, 24, 26, 28, 30],
+  [16, 16, 16, 17, 18, 20, 22, 24, 26, 28, 30, 32],
+  [16, 16, 17, 18, 19, 22, 24, 26, 28, 30, 32, 34],
+  [16, 17, 18, 20.5, 22, 25, 26, 28, 30, 32, 34, 36],
+  [17, 18, 18, 22.5, 24.75, 28, 28, 30, 32, 34, 36, 38],
+  [18, 18, 19, 25, 26, 28, 30, 32, 34, 36, 38, 40],
+];
+function areaUnitPrice(widthIdx, heightIdx) {
+  return AREA_TABLE[widthIdx][heightIdx];
+}
+const DAVANTI_DISCOUNT_TIERS = [
+  { min: 1, mult: 1 }, { min: 2, mult: 0.67 }, { min: 5, mult: 0.61 },
+  { min: 10, mult: 0.56 }, { min: 20, mult: 0.44 }, { min: 50, mult: 0.39 },
+  { min: 100, mult: 0.33 },
+];
+function davantiDiscount(qty) {
+  let tier = DAVANTI_DISCOUNT_TIERS[0];
+  for (const t of DAVANTI_DISCOUNT_TIERS) if (qty >= t.min) tier = t;
+  return tier.mult;
+}
+const ZONE_DEFS = [
+  { key: 'cuore', label: 'Cuore / Manica (max 8×8cm)', price: (qty) => cuoreUnitPrice(qty) },
+  { key: 'davanti', label: 'Davanti (fino a 50×50cm)' },
+  { key: 'retro', label: 'Retro (fino a 50×50cm)' },
+];
+
+class Component extends DCLogic {
+  state = {
+    colorIndex: null,
+    size: 'M',
+    zones: { davanti: true },
+    quantity: 1,
+    cuoreWidth: 8,
+    cuoreHeight: 8,
+    davantiWidthIdx: 4,
+    davantiHeightIdx: 7,
+    retroWidthIdx: 4,
+    retroHeightIdx: 7,
+  };
+
+  fmt(n) { return '€' + n.toFixed(2).replace('.', ','); }
+
+  renderVals() {
+    const st = this.state;
+    const colorsAll = COLORS.map((c, i) => ({
+      ...c,
+      swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
+      select: () => this.setState({ colorIndex: i }),
+    }));
+    const colors24h = colorsAll.filter(c => c.group === '24h');
+    const colorsOrder = colorsAll.filter(c => c.group === 'order');
+    const sizes = SIZES.map(s => ({
+      label: s,
+      btnClass: 'size-btn' + (s === st.size ? ' size-selected' : ''),
+      select: () => this.setState({ size: s }),
+    }));
+    const zonePrice = (key) => {
+      if (key === 'cuore') return cuoreUnitPrice(st.quantity);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(st.quantity);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(st.quantity);
+      return 0;
+    };
+    const zones = ZONE_DEFS.map(z => {
+      const checked = !!st.zones[z.key];
+      const price = zonePrice(z.key);
+      return {
+        label: z.label,
+        checked,
+        isCuore: z.key === 'cuore',
+        isDavanti: z.key === 'davanti',
+        isRetro: z.key === 'retro',
+        checkClass: 'zone-check' + (checked ? ' zone-check-on' : ''),
+        priceLabel: '+' + this.fmt(price),
+        toggle: () => this.setState(s => ({ zones: { ...s.zones, [z.key]: !s.zones[z.key] } })),
+      };
+    });
+    const cuoreChecked = !!st.zones.cuore;
+    const cuoreWidth = st.cuoreWidth;
+    const cuoreHeight = st.cuoreHeight;
+    const setCuoreWidth = (e) => this.setState({ cuoreWidth: Number(e.target.value) });
+    const setCuoreHeight = (e) => this.setState({ cuoreHeight: Number(e.target.value) });
+    const davantiChecked = !!st.zones.davanti;
+    const retroChecked = !!st.zones.retro;
+    const davantiWidthCm = WH_BREAKS[st.davantiWidthIdx];
+    const davantiHeightCm = WH_BREAKS[st.davantiHeightIdx];
+    const retroWidthCm = WH_BREAKS[st.retroWidthIdx];
+    const retroHeightCm = WH_BREAKS[st.retroHeightIdx];
+    const setDavantiWidthIdx = (e) => this.setState({ davantiWidthIdx: Number(e.target.value) });
+    const setDavantiHeightIdx = (e) => this.setState({ davantiHeightIdx: Number(e.target.value) });
+    const setRetroWidthIdx = (e) => this.setState({ retroWidthIdx: Number(e.target.value) });
+    const setRetroHeightIdx = (e) => this.setState({ retroHeightIdx: Number(e.target.value) });
+    const printTotal = ZONE_DEFS.reduce((sum, z) => sum + (st.zones[z.key] ? zonePrice(z.key) : 0), 0);
+    const hasColor = st.colorIndex != null;
+    const activeColor = hasColor ? COLORS[st.colorIndex] : null;
+    const isWhite = hasColor && activeColor.name === '01 Bianco';
+    const selectedColorGroup = hasColor ? activeColor.group : null;
+    const heroImageSrc = hasColor ? (IMAGE_BY_COLOR[activeColor.name] ?? DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
+    const selectedColorNote = !hasColor ? 'Scegli un colore' : (selectedColorGroup === 'order' ? 'Su ordinazione — richiede 1 settimana' : 'Colore 24H — disponibile subito');
+    const garmentPrice = garmentUnitPrice(st.quantity, isWhite);
+    const unitTotal = garmentPrice + printTotal;
+    const grandTotal = unitTotal * st.quantity;
+
+    const themeMap = { indigo: 'theme-indigo', forest: 'theme-forest', ochre: 'theme-ochre', ink: 'theme-ink' };
+    const themeClass = themeMap[this.props.accentTheme] ?? 'theme-indigo';
+
+    return {
+      colors24h, colorsOrder, sizes, zones, themeClass, selectedColorNote, heroImageSrc,
+      cuoreChecked, cuoreWidth, cuoreHeight, setCuoreWidth, setCuoreHeight,
+      davantiChecked, retroChecked,
+      davantiWidthCm, davantiHeightCm, setDavantiWidthIdx, setDavantiHeightIdx, davantiWidthIdx: st.davantiWidthIdx, davantiHeightIdx: st.davantiHeightIdx,
+      retroWidthCm, retroHeightCm, setRetroWidthIdx, setRetroHeightIdx, retroWidthIdx: st.retroWidthIdx, retroHeightIdx: st.retroHeightIdx,
+      selectedColorName: hasColor ? activeColor.name : '—',
+      selectedSize: st.size,
+      quantity: st.quantity,
+      incQty: () => this.setState(s => ({ quantity: Math.min(99, s.quantity + 1) })),
+      decQty: () => this.setState(s => ({ quantity: Math.max(1, s.quantity - 1) })),
+      garmentPriceLabel: this.fmt(garmentPrice),
+      printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
+      totalPriceLabel: this.fmt(grandTotal),
+      checkoutLabel: 'Aggiungi al carrello',
+      checkout: () => {
+        if (!hasColor) { alert('Scegli un colore prima di procedere.'); return; }
+        const zoneList = [];
+        if (st.zones.cuore) zoneList.push('Cuore/manica');
+        if (st.zones.davanti) zoneList.push('Davanti');
+        if (st.zones.retro) zoneList.push('Retro');
+        const orderBody = {
+          productId: 'tshirt',
+          human: {
+            'Colore': activeColor.name,
+            'Taglia': st.size,
+            'Quantità': st.quantity,
+            'Stampa': zoneList.length ? zoneList.join(' + ') : 'Nessuna stampa',
+          },
+          formula: {
+            qty: st.quantity,
+            isWhite,
+            colorName: activeColor.name,
+            size: st.size,
+            zones: { cuore: !!st.zones.cuore, davanti: !!st.zones.davanti, retro: !!st.zones.retro },
+            davantiWidthIdx: st.davantiWidthIdx, davantiHeightIdx: st.davantiHeightIdx,
+            retroWidthIdx: st.retroWidthIdx, retroHeightIdx: st.retroHeightIdx,
+          },
+        };
+        const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
+        const params = new URLSearchParams({
+          id: 'tshirt',
+          name: 'Maglietta Unisex 24H',
+          price: grandTotal.toFixed(2),
+          col: 'misura',
+          cfg,
+        });
+        window.location.href = './checkout.dc.html?' + params.toString();
+      },
+      preventivo: () => {
+        const cName = hasColor ? activeColor.name : 'da definire';
+        const zoneList = [];
+        if (st.zones.cuore) zoneList.push('cuore/manica');
+        if (st.zones.davanti) zoneList.push('davanti');
+        if (st.zones.retro) zoneList.push('retro');
+        const config = `Colore: ${cName}, Taglia: ${st.size}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
+        const params = new URLSearchParams({
+          prodotto: 'Maglietta Unisex 24H',
+          config,
+          quantita: String(st.quantity),
+          prezzo: grandTotal.toFixed(2),
+        });
+        window.location.href = './preventivo.dc.html?' + params.toString();
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>

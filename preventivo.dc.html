@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<meta charset="utf-8">
+
+<title>Preventivo Ufficiale | Tshirt Shop Online</title>
+<link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
+<script src="./doc-page.js"></script>
+<style>
+:root, body {
+  --color-accent: #46433f; --color-accent-100: #ececeb; --color-accent-200: #d6d5d4; --color-accent-300: #b7b5b3;
+  --color-accent-400: #8f8c8a; --color-accent-500: #605d5b; --color-accent-600: #46433f; --color-accent-700: #302d2b;
+  --color-accent-800: #201e1c; --color-accent-900: #131211;
+}
+
+  @media print { .no-print { display: none !important; } }
+  doc-page:not(:defined) { visibility: hidden; }
+  body { font-family: var(--font-body); }
+</style>
+</helmet>
+
+<div class="no-print" style="max-width:900px;margin:16px auto 0;padding:0 16px;display:flex;justify-content:flex-end;gap:10px;">
+  <button onClick="{{ handlePrint }}" style="border:none;background:oklch(0.42 0.12 255);color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:8px;cursor:pointer;">Salva come PDF</button>
+</div>
+
+<doc-page size="a4">
+  <section class="page" style="width:100%;height:100%;padding:56px 64px;box-sizing:border-box;display:flex;flex-direction:column;font-family:var(--font-body);color:var(--color-text);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--color-accent);padding-bottom:20px;margin-bottom:32px;">
+      <div style="flex:1;min-width:0;padding-right:20px;">
+        <div style="font-family:var(--font-heading);font-weight:800;font-size:22px;letter-spacing:-0.01em;">TSHIRT SHOP ONLINE</div>
+        <div style="font-size:12px;color:color-mix(in srgb, var(--color-text) 60%, transparent);margin-top:2px;">by Printing Italy</div>
+      </div>
+      <div style="text-align:right;font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);line-height:1.5;">
+        Via Lorenzo Bonincontri, 26 – 00147 Roma<br>
+        P.IVA 02452700590<br>
+        Lun–Ven 8–12/15–18, Sab. chiuso
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-bottom:28px;">
+      <div>
+        <div style="font-family:var(--font-heading);font-size:22px;font-weight:700;">Preventivo Ufficiale</div>
+        <div style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:4px;">N. {{ quoteNumber }} · {{ dateStr }}</div>
+      </div>
+      <div style="font-size:13px;text-align:right;color:color-mix(in srgb, var(--color-text) 65%, transparent);">
+        Validità preventivo: 30 giorni
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:24px;">
+      <thead>
+        <tr style="border-bottom:1.5px solid var(--color-text);">
+          <th style="text-align:left;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);">Descrizione</th>
+          <th style="text-align:right;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);">Quantità</th>
+          <th style="text-align:right;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);">Totale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);">
+          <td style="padding:14px 6px;vertical-align:top;">
+            <div style="font-weight:600;">{{ prodotto }}</div>
+            <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ configurazione }}</div>
+          </td>
+          <td style="padding:14px 6px;text-align:right;vertical-align:top;">{{ quantita }}</td>
+          <td style="padding:14px 6px;text-align:right;vertical-align:top;font-weight:600;font-family:ui-monospace,monospace;">€ {{ prezzoFmt }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex;justify-content:flex-end;margin-bottom:32px;">
+      <div style="width:260px;">
+        <div style="display:flex;justify-content:space-between;padding:8px 6px;font-size:14px;">
+          <span>Imponibile</span><span style="font-family:ui-monospace,monospace;">€ {{ imponibileFmt }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 6px;font-size:14px;">
+          <span>IVA (22%)</span><span style="font-family:ui-monospace,monospace;">€ {{ ivaFmt }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:10px 6px;font-size:16px;font-weight:700;border-top:1.5px solid var(--color-text);margin-top:4px;">
+          <span>Totale</span><span style="font-family:ui-monospace,monospace;">€ {{ prezzoFmt }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:color-mix(in srgb, var(--color-text) 60%, transparent);line-height:1.6;margin-top:auto;border-top:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);padding-top:16px;">
+      Preventivo generato automaticamente in base alla configurazione selezionata sul sito. Prezzi IVA inclusa, salvo diversa indicazione. Per confermare l'ordine o richiedere modifiche, contattateci a info@tipografia.online o tramite il modulo sul sito.
+    </div>
+  </section>
+</doc-page>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {};
+  componentDidMount() {
+    const params = new URLSearchParams(window.location.search);
+    const prodotto = params.get('prodotto') || 'Prodotto Tipografia Online';
+    const configurazione = params.get('config') || '';
+    const quantita = params.get('quantita') || '-';
+    const prezzo = parseFloat(params.get('prezzo')) || 0;
+    const now = new Date();
+    this.setState({
+      prodotto, configurazione, quantita, prezzo,
+      quoteNumber: `PRT-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`,
+      dateStr: now.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' }),
+    });
+    setTimeout(() => window.print(), 400);
+  }
+  renderVals() {
+    const prezzo = this.state.prezzo || 0;
+    const imponibile = prezzo / 1.22;
+    const iva = prezzo - imponibile;
+    return {
+      prodotto: this.state.prodotto || '',
+      configurazione: this.state.configurazione || '',
+      quantita: this.state.quantita || '-',
+      quoteNumber: this.state.quoteNumber || '',
+      dateStr: this.state.dateStr || '',
+      prezzoFmt: prezzo.toFixed(2),
+      imponibileFmt: imponibile.toFixed(2),
+      ivaFmt: iva.toFixed(2),
+      handlePrint: () => window.print(),
+    };
+  }
+}
+</script>
+</body>
+</html>
