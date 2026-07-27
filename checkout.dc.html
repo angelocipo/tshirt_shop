@@ -10,6 +10,7 @@
 <x-dc>
 <helmet data-dc-atomics>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" href="img/favicon.png">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Checkout | Tshirt Shop Online</title>
@@ -39,6 +40,9 @@
 </nav>
 
 <main class="idx-wrap" style="padding-top:var(--space-8);padding-bottom:calc(var(--space-8) * 2);">
+  <a href="Beagle.dc.html" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--space-4);">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Torna al prodotto
+  </a>
   <h1 style="font-size:32px;margin:0 0 var(--space-6);">Checkout</h1>
 
   <sc-if value="{{ hasProduct }}" hint-placeholder-val="{{ true }}">
@@ -135,11 +139,12 @@
       <div class="field" style="margin:var(--space-4) 0;">
         <label id="ship-zone-label">Consegna</label>
         <div class="seg" role="radiogroup" aria-labelledby="ship-zone-label">
-          <label class="seg-opt"><input type="radio" name="shipZone" value="gratuita" checked="{{ isZoneGratuita }}" onChange="{{ setShipZone }}">Spedizione gratuita</label>
-          <label class="seg-opt"><input type="radio" name="shipZone" value="roma_centro" checked="{{ isZoneRomaCentro }}" onChange="{{ setShipZone }}">Roma Sud/EUR/Centro — € 20</label>
-          <label class="seg-opt"><input type="radio" name="shipZone" value="roma_resto" checked="{{ isZoneRomaResto }}" onChange="{{ setShipZone }}">Resto di Roma — € 30</label>
-          <label class="seg-opt"><input type="radio" name="shipZone" value="italia" checked="{{ isZoneItalia }}" onChange="{{ setShipZone }}">Italia (+1 giorno) — € 25</label>
+          <label class="seg-opt"><input type="radio" name="shipZone" value="gratuita" checked="{{ isZoneGratuita }}" disabled="{{ notFreeByThreshold }}" onChange="{{ setShipZone }}">Spedizione gratuita</label>
+          <label class="seg-opt"><input type="radio" name="shipZone" value="standard" checked="{{ isZoneStandard }}" disabled="{{ freeByThreshold }}" onChange="{{ setShipZone }}">Italia — € 8</label>
         </div>
+        <sc-if value="{{ freeByThreshold }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:var(--space-2) 0 0;font-size:13px;font-weight:700;font-family:var(--font-heading);color:var(--color-accent-700);">Spedizione gratuita applicata — ordine superiore a € 50.</p>
+        </sc-if>
         <p class="card-body" style="margin:var(--space-2) 0 0;">Nessuna consegna in Vaticano. Spedizione gratuita per ordini da € 50.</p>
       </div>
 
@@ -291,9 +296,7 @@ class Component extends DCLogic {
     if (this.state.productCollection === 'strategici') return 0;
     const price = parseFloat(this.state.productPrice) || 0;
     if (price >= 50) return 0;
-    if (this.state.shipZone === 'gratuita') return 0;
-    const rates = { roma_centro: 20, roma_resto: 30, italia: 25 };
-    return rates[this.state.shipZone] ?? 20;
+    return 8;
   }
 
   validate() {
@@ -355,7 +358,10 @@ class Component extends DCLogic {
       productPrice: s.productPrice,
       orderTotal: orderTotal.toFixed(2).replace(/\.00$/, ''),
       shippingLabel: shippingFee === 0 ? 'gratuita' : ('€ ' + shippingFee),
-      isZoneGratuita: s.shipZone === 'gratuita',
+      isZoneGratuita: s.shipZone === 'gratuita' || shippingFee === 0,
+      freeByThreshold: (parseFloat(s.productPrice) || 0) >= 50,
+      notFreeByThreshold: (parseFloat(s.productPrice) || 0) < 50,
+      isZoneStandard: s.shipZone !== 'gratuita',
       isZoneRomaCentro: s.shipZone === 'roma_centro',
       isZoneRomaResto: s.shipZone === 'roma_resto',
       isZoneItalia: s.shipZone === 'italia',

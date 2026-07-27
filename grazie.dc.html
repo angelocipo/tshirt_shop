@@ -8,6 +8,7 @@
 <body>
 <x-dc>
 <helmet>
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <title>Grazie per il tuo ordine | Tshirt Shop Online</title>
@@ -23,6 +24,15 @@
     @keyframes checkpop { 0% { transform: scale(0.4); opacity: 0; } 60% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
     @keyframes drawline { from { stroke-dashoffset: 32; } to { stroke-dashoffset: 0; } }
     .idx-wrap { max-width: 760px; margin: 0 auto; padding: 0 var(--space-6); }
+    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--color-divider); }
+    .steps-grid > div { border-right:1px solid var(--color-divider); }
+    .steps-grid > div:last-child { border-right:none; }
+    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+    @media (max-width: 700px) {
+      .steps-grid { grid-template-columns:1fr; }
+      .steps-grid > div { border-right:none; border-bottom:1px solid var(--color-divider); }
+      .steps-grid > div:last-child { border-bottom:none; }
+    }
   </style>
 </helmet>
 
@@ -50,16 +60,16 @@
     <div style="padding:var(--space-8) var(--space-6);">
       <p style="font-size:16px;color:var(--color-text);max-width:52ch;margin:0 auto var(--space-8);text-align:center;text-wrap:pretty;">Il pagamento è andato a buon fine. A breve riceverai un'email di conferma con il riepilogo dell'ordine e la fattura elettronica.</p>
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--color-divider);margin-bottom:var(--space-8);">
-        <div style="padding:var(--space-5);border-right:1px solid var(--color-divider);">
+      <div class="steps-grid" style="margin-bottom:var(--space-8);">
+        <div style="padding:var(--space-4);border-right:1px solid var(--color-divider);">
           <div style="font-family:var(--font-heading);font-weight:800;font-size:13px;color:var(--color-accent-700);margin-bottom:var(--space-2);">01 — Conferma</div>
           <p style="margin:0;font-size:13.5px;color:var(--color-neutral-700);">Ricevi l'email con riepilogo e fattura elettronica via SDI.</p>
         </div>
-        <div style="padding:var(--space-5);border-right:1px solid var(--color-divider);">
+        <div style="padding:var(--space-4);border-right:1px solid var(--color-divider);">
           <div style="font-family:var(--font-heading);font-weight:800;font-size:13px;color:var(--color-accent-700);margin-bottom:var(--space-2);">02 — Grafica</div>
           <p style="margin:0;font-size:13.5px;color:var(--color-neutral-700);">Controlliamo il tuo file e ti scriviamo se serve una modifica.</p>
         </div>
-        <div style="padding:var(--space-5);">
+        <div style="padding:var(--space-4);">
           <div style="font-family:var(--font-heading);font-weight:800;font-size:13px;color:var(--color-accent-700);margin-bottom:var(--space-2);">03 — Stampa &amp; spedizione</div>
           <p style="margin:0;font-size:13.5px;color:var(--color-neutral-700);">Produciamo e spediamo con corriere tracciato in tutta Italia.</p>
         </div>

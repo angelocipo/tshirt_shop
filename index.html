@@ -8,6 +8,7 @@
 <body>
 <x-dc>
 <helmet>
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -22,35 +23,101 @@
     .cat-card img { transition: none; }
     .why-row { display: grid; grid-template-columns: 1fr; gap: var(--space-3); padding: var(--space-4) 0; border-bottom: 1px solid var(--color-divider); }
     .why-row:last-child { border-bottom: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-8); align-items: center; }
+    .tri-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--color-divider); }
+    .tri-grid > a { border-right: 1px solid var(--color-divider); }
+    .tri-grid > a:last-child { border-right: none; }
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center; }
+    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 var(--space-8); }
+    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+    nav.nav .nav-brand { flex: 0 0 100%; }
+    nav.nav > a:not(.nav-brand) { font-size: 14px; }
+    nav.nav .btn-primary { margin-left: auto; font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }
+    nav.nav .btn-primary:hover { color: var(--color-bg); }
+    a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
+    .lang-switch { display:flex; border:1px solid var(--color-divider); margin-left:auto; }
+    .lang-switch button { font-family: var(--font-heading); font-weight:800; font-size:12px; letter-spacing:0.06em; padding:8px 12px; border:none; background:transparent; color:var(--color-neutral-700); cursor:pointer; }
+    .lang-switch button[aria-pressed="true"] { background: var(--color-accent); color: var(--color-bg); }
+    .lang-switch button:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
+    nav.nav .btn-primary { margin-left: var(--space-3); }
+    @media (max-width: 700px) {
+      nav.nav { justify-content: flex-start; }
+      nav.nav .btn-primary { margin-left: 0; flex: 0 0 100%; }
+      .lang-switch { margin-left: auto; }
+    }
+    @media (max-width: 1000px) {
+      .hero-grid, .split-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .tri-grid { grid-template-columns: 1fr; }
+      .tri-grid > a { border-right: none; border-bottom: 1px solid var(--color-divider); }
+      .tri-grid > a:last-child { border-bottom: none; }
+      .cat-grid { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(30px, 8vw, 44px) !important; }
+      h2 { font-size: 26px !important; }
+    }
   </style>
+  <script>
+    (function () {
+      function apply(lang) {
+        document.querySelectorAll('[data-en]').forEach(function (el) {
+          if (!el.dataset.it) el.dataset.it = el.innerHTML;
+          el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.it;
+        });
+        document.documentElement.lang = lang;
+        document.querySelectorAll('.lang-switch button').forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+        });
+        try { localStorage.setItem('tss-lang', lang); } catch (e) {}
+      }
+      window.__setLang = apply;
+      document.addEventListener('click', function (e) {
+        var b = e.target.closest('.lang-switch button');
+        if (b) apply(b.dataset.lang);
+      });
+      document.addEventListener('DOMContentLoaded', function () {
+        var saved;
+        try { saved = localStorage.getItem('tss-lang'); } catch (e) {}
+        apply(saved === 'en' ? 'en' : 'it');
+      });
+    })();
+  </script>
 </helmet>
 
 <div style="font-family: var(--font-body); color: var(--color-text); background: var(--color-bg);">
 
   <nav class="nav">
     <div class="nav-brand">TSHIRT SHOP ONLINE</div>
-    <a href="#uomo">Uomo</a>
-    <a href="#donna">Donna</a>
-    <a href="#bambino">Bambino</a>
-    <a href="#perche">Perché Noi</a>
-    <a href="contattateci.dc.html">Contatti</a>
-    <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;">Preventivo WhatsApp</a>
+    <a href="#uomo" data-en="Men">Uomo</a>
+    <a href="#donna" data-en="Women">Donna</a>
+    <a href="#bambino" data-en="Kids">Bambino</a>
+    <a href="#perche" data-en="Why Us">Perché Noi</a>
+    <a href="blog.dc.html" data-en="Blog">Blog</a>
+    <a href="contattateci.dc.html" data-en="Contact">Contatti</a>
+    <div class="lang-switch" role="group" aria-label="Lingua / Language">
+      <button type="button" data-lang="it" aria-pressed="true">IT</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;" data-en="Quote on WhatsApp">Preventivo WhatsApp</a>
   </nav>
 
-  <section style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-4) var(--space-6); display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-8); align-items: center;">
+  <section class="hero-grid" style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-4) var(--space-6);">
     <div>
       <div style="display:flex; gap: var(--space-2); margin-bottom: var(--space-4);">
-        <span class="tag tag-accent">STAMPA 24H</span>
-        <span class="tag tag-neutral">ZERO MINIMO</span>
+        <span class="tag tag-accent" data-en="24H PRINTING">STAMPA 24H</span>
+        <span class="tag tag-neutral" data-en="NO MINIMUM">ZERO MINIMO</span>
         <span class="tag tag-neutral">DTF</span>
       </div>
-      <div style="font-family: var(--font-heading); font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 var(--space-2);">Sito in allestimento</div>
-      <h1 style="font-family: var(--font-heading); font-weight: 800; font-size: clamp(40px, 5vw, 68px); line-height: 1.02; margin: 0 0 var(--space-4); text-wrap: pretty;">Stampa T-Shirt Online Professionale</h1>
-      <p style="font-size: 20px; margin: 0 0 var(--space-2); font-weight: 600;">Consegna rapida, qualità professionale, zero minimo d'ordine.</p>
-      <p style="font-size: 16px; color: var(--color-neutral-700); max-width: 52ch; margin: 0 0 var(--space-6);">Stampa t-shirt online con la tecnica DTF (Direct to Film) per aziende, eventi e creator. Spediamo in tutta Italia. Ritiro express a Roma EUR.</p>
+      <div style="font-family: var(--font-heading); font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 var(--space-2);" data-en="Site under construction">Sito in allestimento</div>
+      <h1 style="font-family: var(--font-heading); font-weight: 800; font-size: clamp(40px, 5vw, 68px); line-height: 1.02; margin: 0 0 var(--space-4); text-wrap: pretty;" data-en="Professional Online T-Shirt Printing">Stampa T-Shirt Online Professionale</h1>
+      <p style="font-size: 20px; margin: 0 0 var(--space-2); font-weight: 600;" data-en="Fast delivery, professional quality, no minimum order.">Consegna rapida, qualità professionale, zero minimo d'ordine.</p>
+      <p style="font-size: 16px; color: var(--color-neutral-700); max-width: 52ch; margin: 0 0 var(--space-6);" data-en="Order custom garment printing online with DTF (Direct to Film) technology — for businesses, events and creators. Upload your artwork, we print and ship across Europe.">Ordina online la stampa su capi con tecnica DTF (Direct to Film): per aziende, eventi e creator. Carichi il file, stampiamo e spediamo in tutta Europa.</p>
       <div style="display:flex; gap: var(--space-3); flex-wrap: wrap;">
-        <a class="btn btn-primary" href="./Beagle.dc.html" style="text-decoration:none;">Crea un preventivo in 30 sec</a>
-        <a class="btn btn-secondary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;">Parla su WhatsApp</a>
+        <a class="btn btn-primary" href="./Beagle.dc.html" style="text-decoration:none;" data-en="Get a quote in 30 sec">Crea un preventivo in 30 sec</a>
+        <a class="btn btn-secondary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;" data-en="Chat on WhatsApp">Parla su WhatsApp</a>
       </div>
     </div>
     <a href="./Beagle.dc.html" style="aspect-ratio: 1; display:block;">
@@ -61,18 +128,18 @@
   <div class="hr"></div>
 
   <section style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4);">
-    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--color-divider);">
-      <a href="./Beagle.dc.html" style="text-decoration:none; color:var(--color-text); padding: var(--space-5); border-right: 1px solid var(--color-divider);">
-        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 20px; margin-bottom: var(--space-2);">Stampa Magliette 24H</div>
-        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;">Senza Cappuccio, senza ZIP — preventivo in 30 secondi.</p>
+    <div class="tri-grid">
+      <a href="./Beagle.dc.html" style="text-decoration:none; color:var(--color-text); padding: var(--space-4); border-right: 1px solid var(--color-divider);">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 20px; margin-bottom: var(--space-2);" data-en="24H T-Shirt Printing">Stampa Magliette 24H</div>
+        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;" data-en="Order online, quote in 30 seconds.">Ordina online, preventivo in 30 secondi.</p>
       </a>
-      <a href="./Beagle.dc.html" style="text-decoration:none; color:var(--color-text); padding: var(--space-5); border-right: 1px solid var(--color-divider);">
-        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 20px; margin-bottom: var(--space-2);">Stampa Felpe</div>
-        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;">Senza cappuccio, senza zip, pronte per il tuo logo.</p>
+      <a href="./Beagle.dc.html" style="text-decoration:none; color:var(--color-text); padding: var(--space-4); border-right: 1px solid var(--color-divider);">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 20px; margin-bottom: var(--space-2);" data-en="Sweatshirt Printing">Stampa Felpe</div>
+        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;" data-en="No hood, no zip — ready for your logo.">Senza cappuccio, senza zip, pronte per il tuo logo.</p>
       </a>
-      <a href="#perche" style="text-decoration:none; color:var(--color-text); padding: var(--space-5);">
-        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 20px; margin-bottom: var(--space-2);">Stampa Oro, Argento, Ologramma</div>
-        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;">Novità: finiture metallizzate e olografiche.</p>
+      <a href="#perche" style="text-decoration:none; color:var(--color-text); padding: var(--space-4);">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 20px; margin-bottom: var(--space-2);" data-en="Gold, Silver &amp; Holographic">Stampa Oro, Argento, Ologramma</div>
+        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;" data-en="New: metallic and holographic finishes.">Novità: finiture metallizzate e olografiche.</p>
       </a>
     </div>
   </section>
@@ -80,85 +147,94 @@
   <div class="hr"></div>
 
   <section style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-4);">
-    <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; margin: 0 0 var(--space-6);">I nostri prodotti</h2>
-    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6);">
+    <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; margin: 0 0 var(--space-6);" data-en="Our products">I nostri prodotti</h2>
+    <div class="cat-grid">
       <a id="uomo" class="cat-card" href="./Beagle.dc.html">
         <div style="aspect-ratio: 1; margin-bottom: var(--space-3);">
           <img src="img/uomo-verde-oliva.jpg" alt="Uomo" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
-        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 22px; margin-bottom: var(--space-1);">Uomo</div>
-        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;">Crea magliette che rappresentano il tuo stile e la tua personalità.</p>
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 22px; margin-bottom: var(--space-1);" data-en="Men">Uomo</div>
+        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;" data-en="Create t-shirts that match your style and personality.">Crea magliette che rappresentano il tuo stile e la tua personalità.</p>
       </a>
       <a id="donna" class="cat-card" href="./Beagle.dc.html">
         <div style="aspect-ratio: 1; margin-bottom: var(--space-3);">
           <img src="img/donna-azzurro.jpg" alt="Donna" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
-        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 22px; margin-bottom: var(--space-1);">Donna</div>
-        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;">Ogni maglietta è realizzata su misura secondo le tue preferenze.</p>
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 22px; margin-bottom: var(--space-1);" data-en="Women">Donna</div>
+        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;" data-en="Every garment is made to order to your specification.">Ogni maglietta è realizzata su misura secondo le tue preferenze.</p>
       </a>
       <a id="bambino" class="cat-card" href="./Beagle.dc.html">
         <div style="aspect-ratio: 1; margin-bottom: var(--space-3);">
           <img src="img/bambino-turchese.jpg" alt="Bambino" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
-        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 22px; margin-bottom: var(--space-1);">Bambino</div>
-        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;">Sorprendi i tuoi cari con magliette uniche e significative.</p>
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 22px; margin-bottom: var(--space-1);" data-en="Kids">Bambino</div>
+        <p style="margin:0; color: var(--color-neutral-700); font-size: 14px;" data-en="Surprise your family with unique, meaningful prints.">Sorprendi i tuoi cari con magliette uniche e significative.</p>
       </a>
     </div>
   </section>
 
   <div class="hr"></div>
 
-  <section style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-4); display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center;">
+  <section class="split-grid" style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-4);">
     <div style="aspect-ratio: 1;">
       <img src="img/cosa-stampiamo.avif" alt="Cosa stampiamo" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
     <div>
-      <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 30px; margin: 0 0 var(--space-4);">Cosa Stampiamo</h2>
+      <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 30px; margin: 0 0 var(--space-4);" data-en="What We Print">Cosa Stampiamo</h2>
       <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap: var(--space-3);">
-        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span> T-shirt personalizzate per eventi</li>
-        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span> Abbigliamento promozionale aziendale</li>
-        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span> Felpe e sportswear personalizzati</li>
-        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span> Divise con logo per il personale</li>
-        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span> T-shirt su misura per privati</li>
+        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span data-en=" Custom t-shirts for events"> T-shirt personalizzate per eventi</li>
+        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span data-en=" Corporate promotional apparel"> Abbigliamento promozionale aziendale</li>
+        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span data-en=" Custom sweatshirts and sportswear"> Felpe e sportswear personalizzati</li>
+        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span data-en=" Staff uniforms with your logo"> Divise con logo per il personale</li>
+        <li style="display:flex; gap: var(--space-2); align-items:flex-start;"><span style="color:var(--color-accent-700); font-weight:800;">✓</span data-en=" One-off t-shirts for private customers"> T-shirt su misura per privati</li>
       </ul>
-      <p style="margin-top: var(--space-4); font-size: 13px; color: var(--color-neutral-700);">Stampiamo su cotone e poliestere, non lana.</p>
+      <p style="margin-top: var(--space-4); font-size: 13px; color: var(--color-neutral-700);" data-en="We print on cotton and polyester, not wool.">Stampiamo su cotone e poliestere, non lana.</p>
     </div>
   </section>
 
   <div class="hr"></div>
 
   <section id="perche" style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-4);">
-    <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; margin: 0 0 var(--space-2);">Perché Sceglierci?</h2>
-    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 0 var(--space-8);">
-      <div class="why-row"><strong>Veloci per davvero:</strong>&nbsp;standard 48–72h, Express 24h su richiesta.</div>
-      <div class="why-row"><strong>Qualità che regge i lavaggi:</strong>&nbsp;inchiostri e telai pro, controlli su ogni lotto.</div>
-      <div class="why-row"><strong>Zero minimo su DTG/DTF:</strong>&nbsp;sconti importanti da 20/50/100 pezzi in su.</div>
-      <div class="why-row"><strong>Supporto file:</strong>&nbsp;sistemiamo noi impianti, tracciati, profili colore.</div>
-      <div class="why-row"><strong>Ovunque in Italia:</strong>&nbsp;corriere espresso tracciato; ritiro in sede Roma EUR.</div>
+    <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; margin: 0 0 var(--space-2);" data-en="Why Choose Us?">Perché Sceglierci?</h2>
+    <div class="why-grid">
+      <div class="why-row" data-en="<strong>Genuinely fast:</strong>&nbsp;48–72h standard, 24h Express on request."><strong>Veloci per davvero:</strong>&nbsp;standard 48–72h, Express 24h su richiesta.</div>
+      <div class="why-row" data-en="<strong>Wash-proof quality:</strong>&nbsp;professional inks and screens, checks on every batch."><strong>Qualità che regge i lavaggi:</strong>&nbsp;inchiostri e telai pro, controlli su ogni lotto.</div>
+      <div class="why-row" data-en="<strong>No minimum on DTG/DTF:</strong>&nbsp;serious discounts from 20/50/100 pieces up."><strong>Zero minimo su DTG/DTF:</strong>&nbsp;sconti importanti da 20/50/100 pezzi in su.</div>
+      <div class="why-row" data-en="<strong>Artwork support:</strong>&nbsp;we fix setups, outlines and colour profiles for you."><strong>Supporto file:</strong>&nbsp;sistemiamo noi impianti, tracciati, profili colore.</div>
+      <div class="why-row" data-en="<strong>Shipped everywhere:</strong>&nbsp;tracked express courier across Italy and Europe."><strong>Spedizione ovunque:</strong>&nbsp;corriere espresso tracciato in Italia e in Europa.</div>
     </div>
   </section>
 
   <div class="hr"></div>
 
-  <section style="max-width: 900px; margin: 0 auto; padding: var(--space-10) var(--space-4); text-align:left;">
-    <p style="font-family: var(--font-heading); font-weight: 700; font-size: 24px; line-height: 1.4; margin: 0 0 var(--space-3); text-wrap: pretty;">"Siamo Affidabili, Onesti e offriamo Qualità. Da noi, potrete esprimere la vostra individualità e stile unico attraverso magliette create su misura solo per voi."</p>
-    <div style="font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-neutral-700);">About Us</div>
+  <section style="max-width: 900px; margin: 0 auto; padding: var(--space-8) var(--space-4);">
+    <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 30px; margin: 0 0 var(--space-4);" data-en="Custom Garment Printing Online">Stampa Capi Personalizzati Online</h2>
+    <p style="margin: 0 0 var(--space-3); font-size: 16px; line-height: 1.6; text-wrap: pretty;" data-en="Welcome to <strong>Tshirt Shop Online</strong>, your reference point for <strong>online t-shirt printing</strong>. Whether you are a private customer looking for an original gift, a company that needs <strong>branded apparel</strong>, or a creator who wants made-to-order garments, you are in the right place.">Benvenuto su <strong>Tshirt Shop Online</strong>, il tuo punto di riferimento per la <strong>stampa t-shirt online</strong>. Che tu sia un privato in cerca di un regalo originale, un'azienda che ha bisogno di <strong>abbigliamento con logo</strong>, o un creativo che vuole vestiti su misura, sei nel posto giusto.</p>
+    <p style="margin: 0; font-size: 16px; line-height: 1.6; text-wrap: pretty;" data-en="We specialise in <strong>high-quality garment printing</strong> using <strong>Direct to Film (DTF)</strong>. Order entirely online: upload your artwork, choose colours and sizes, and we produce and ship to you.">Siamo specializzati in <strong>stampa su indumenti di alta qualità</strong> con <strong>stampa diretta su film (DTF)</strong>. Ordini tutto online: carichi il file, scegli colori e taglie, produciamo e spediamo.</p>
   </section>
 
-  <section style="background: var(--color-accent); color: var(--color-bg); padding: var(--space-10) var(--space-4); text-align:left;">
+  <div class="hr"></div>
+
+  <section style="max-width: 900px; margin: 0 auto; padding: var(--space-8) var(--space-4); text-align:left;">
+    <p style="font-family: var(--font-heading); font-weight: 700; font-size: 24px; line-height: 1.4; margin: 0 0 var(--space-3); text-wrap: pretty;" data-en="&quot;We are reliable, honest and we deliver quality. With us you can express your individuality through garments made to order, just for you.&quot;">"Siamo Affidabili, Onesti e offriamo Qualità. Da noi, potrete esprimere la vostra individualità e stile unico attraverso magliette create su misura solo per voi."</p>
+    <div style="font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-neutral-700);" data-en="About Us">About Us</div>
+  </section>
+
+  <section style="background: var(--color-accent); background-image: linear-gradient(to right, rgba(70,67,63,0.94) 0%, rgba(70,67,63,0.86) 55%, rgba(70,67,63,0.55) 100%), url('https://www.printeurope.pro/wp-content/uploads/2024/11/daje-copia.jpg'); background-size: cover; background-position: center right; color: var(--color-bg); padding: var(--space-8) var(--space-4); text-align:left;">
     <div style="max-width: 1280px; margin: 0 auto;">
-      <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: clamp(28px, 4vw, 44px); margin: 0 0 var(--space-3); text-wrap: pretty;">Le nostre magliette fanno strada fino al Vaticano!</h2>
-      <p style="margin: 0 0 var(--space-5); font-size: 16px; max-width: 60ch;">Crea magliette uniche e personalizzate che riflettono il tuo stile e la tua personalità.</p>
-      <a class="btn btn-secondary" href="./Beagle.dc.html" style="text-decoration:none; background: var(--color-bg); color: var(--color-text); border-color: var(--color-bg);">Inizia Ora</a>
+      <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: clamp(28px, 4vw, 44px); margin: 0 0 var(--space-3); text-wrap: pretty;" data-en="Our t-shirts made it all the way to the Vatican!">Le nostre magliette fanno strada fino al Vaticano!</h2>
+      <p style="margin: 0 0 var(--space-4); font-size: 16px; max-width: 60ch;" data-en="Create unique, personalised garments that reflect your style — ordered entirely online.">Crea capi unici e personalizzati che riflettono il tuo stile — tutto ordinabile online.</p>
+      <a class="btn btn-secondary" href="./Beagle.dc.html" style="text-decoration:none; background: var(--color-bg); color: var(--color-text); border-color: var(--color-bg);" data-en="Start Now">Inizia Ora</a>
     </div>
   </section>
 
   <footer style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4); display:flex; justify-content: space-between; align-items:center; flex-wrap:wrap; gap: var(--space-3);">
     <div style="font-size: 13px; color: var(--color-neutral-700);">2026 © Printing Italy — p.Iva: 02452700590</div>
     <div style="display:flex; gap: var(--space-4); font-size: 13px;">
-      <a href="#">Politica di Resi e Rimborsi</a>
-      <a href="#">Privacy Policy</a>
-      <a href="contattateci.dc.html">Contatto</a>
+      <a href="#" data-en="Returns &amp; Refunds Policy">Politica di Resi e Rimborsi</a>
+      <a href="#" data-en="Privacy Policy">Privacy Policy</a>
+      <a href="blog.dc.html">Blog</a>
+      <a href="contattateci.dc.html" data-en="Contact">Contatto</a>
     </div>
   </footer>
 

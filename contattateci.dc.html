@@ -8,6 +8,7 @@
 <body>
 <x-dc>
 <helmet>
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <title>Contattaci | Tshirt Shop Online</title>
@@ -22,7 +23,8 @@
     a:hover { color: var(--color-accent); }
     .idx-wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--space-6); }
     .idx-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
-    @media (max-width: 700px) { .idx-grid-2 { grid-template-columns: 1fr; } }
+    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+    @media (max-width: 700px) { .idx-grid-2 { grid-template-columns: 1fr; } h1 { font-size: clamp(24px, 7vw, 32px) !important; } }
   </style>
 </helmet>
 

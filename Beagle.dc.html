@@ -8,16 +8,39 @@
 <body>
 <x-dc>
 <helmet>
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
+    html, body { height: auto !important; min-height: 100%; overflow: visible !important; overflow-anchor: none; }
     body { background: var(--color-bg); }
     .swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--color-divider); cursor: pointer; padding: 0; }
     .swatch:hover { border-color: var(--color-text); }
+    .prod-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 620px; }
+    .pair-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-4); }
+    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+    image-slot, .thumb { touch-action: pan-y; }
+    @media (max-width: 700px) {
+      nav.nav { justify-content: flex-start; }
+      nav.nav .nav-brand { flex: 0 0 100%; }
+    }
+    @media (max-width: 900px) {
+      .prod-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+      .prod-media { max-width: 100% !important; }
+    }
+    @media (max-width: 600px) {
+      .pair-grid { grid-template-columns: 1fr; gap: var(--space-3); }
+      h1 { font-size: clamp(26px, 7vw, 34px) !important; }
+    }
     .swatch-selected { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent); }
     .size-btn { min-width: 46px; height: 40px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .size-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
     .size-selected { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
+    .size-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .size-row:last-child { border-bottom: none; }
+    .qty-group { display: flex; align-items: center; }
+    .qty-input { width: 52px; height: 36px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
     .zone-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider); cursor: pointer; }
     .zone-row:last-child { border-bottom: none; }
     .zone-check { width: 18px; height: 18px; border: 1.5px solid var(--color-divider); flex: none; display: flex; align-items: center; justify-content: center; }
@@ -69,54 +92,42 @@
     <span class="tag tag-neutral">Cotone Premium</span>
   </div>
 
-  <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--space-8); align-items: start;">
-
-    <div style="min-width: 0;">
-      <div style="max-width: 480px;">
-      <div style="aspect-ratio: 1; margin-bottom: var(--space-3);">
-        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-shirt" shape="rect" style="width:100%;height:100%;" placeholder="Foto maglietta — vista frontale" src="{{ heroImageSrc }}" hint-size="100%,100%"></x-import>
-      </div>
-      <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-2);">
-        <button type="button" class="thumb" aria-label="Vista retro"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="thumb-back" shape="rect" style="width:100%;height:100%;" placeholder="Retro" hint-size="100%,100%"></x-import></button>
-        <button type="button" class="thumb" aria-label="Dettaglio stampa"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="thumb-detail" shape="rect" style="width:100%;height:100%;" placeholder="Dettaglio stampa" hint-size="100%,100%"></x-import></button>
-      </div>
-      </div>
-    </div>
+  <div class="prod-grid">
 
     <div style="min-width: 0;">
       <h1 style="margin-bottom: 4px;">Maglietta Unisex 24H</h1>
       <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);">T-shirt personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
-      <div style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; margin-bottom: var(--space-4);">{{ totalPriceLabel }}</div>
+      <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
+        <div style="aspect-ratio: 1;">
+          <img alt="Maglietta — vista frontale" src="{{ heroImageSrc }}" style="width:100%;height:100%;object-fit:cover;display:block;touch-action:pan-y;">
+        </div>
+      </div>
+      <div style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; margin-bottom: var(--space-4); text-align: right;">{{ totalPriceLabel }}</div>
       <hr class="hr" style="margin-top:0;">
 
       <div style="margin-bottom: var(--space-4);">
-        <div class="field"><label>Colore — {{ selectedColorName }}</label></div>
+        <div class="field"><label style="font-weight: 800; color: #000;">Colore — {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
-          <div>
-            <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: var(--space-2);">1A. Colori 24H — disponibili</div>
-            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
-              <sc-for list="{{ colors24h }}" as="c" hint-placeholder-count="17">
-                <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.name }}" aria-label="{{ c.name }}" onClick="{{ c.select }}"></button>
-              </sc-for>
-            </div>
-          </div>
-          <div>
-            <div class="text-muted" style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-2);">1B. Su ordinazione — 1 settimana</div>
-            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
-              <sc-for list="{{ colorsOrder }}" as="c" hint-placeholder-count="19">
-                <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.name }}" aria-label="{{ c.name }}" onClick="{{ c.select }}"></button>
-              </sc-for>
-            </div>
-          </div>
+        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="36">
+            <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
+          </sc-for>
         </div>
       </div>
 
       <div style="margin-bottom: var(--space-4);">
-        <div class="field"><label>Misura — {{ selectedSize }}</label></div>
-        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3);">
+        <div class="field"><label>Quantità per taglia — {{ quantity }} pz totali</label></div>
+        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
           <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
-            <button type="button" class="{{ s.btnClass }}" onClick="{{ s.select }}">{{ s.label }}</button>
+            <div class="size-row">
+              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
+              <div class="qty-group">
+                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci">–</button>
+                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
+                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta">+</button>
+              </div>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
+            </div>
           </sc-for>
         </div>
         <table class="table" style="font-size: 13px;">
@@ -148,7 +159,7 @@
               </div>
               <sc-if value="{{ z.checked }}" hint-placeholder-val="{{ false }}">
                 <sc-if value="{{ z.isCuore }}" hint-placeholder-val="{{ false }}">
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-2) 0 var(--space-3);">
+                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
                       <label>Larghezza — {{ cuoreWidth }}cm</label>
                       <input type="range" min="3" max="8" step="1" value="{{ cuoreWidth }}" onChange="{{ setCuoreWidth }}" style="width:100%; accent-color: var(--color-accent);">
@@ -160,7 +171,7 @@
                   </div>
                 </sc-if>
                 <sc-if value="{{ z.isDavanti }}" hint-placeholder-val="{{ false }}">
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-2) 0 var(--space-3);">
+                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
                       <label>Larghezza davanti — {{ davantiWidthCm }}cm</label>
                       <input type="range" min="0" max="11" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
@@ -172,7 +183,7 @@
                   </div>
                 </sc-if>
                 <sc-if value="{{ z.isRetro }}" hint-placeholder-val="{{ false }}">
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-2) 0 var(--space-3);">
+                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
                       <label>Larghezza retro — {{ retroWidthCm }}cm</label>
                       <input type="range" min="0" max="11" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
@@ -186,15 +197,6 @@
               </sc-if>
             </div>
           </sc-for>
-        </div>
-      </div>
-
-      <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
-        <div class="field" style="margin: 0;"><label>Quantità</label></div>
-        <div style="display:flex; align-items:center; gap: var(--space-2);">
-          <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci">–</button>
-          <span style="min-width: 24px; text-align: center; font-family: var(--font-heading); font-weight: 800;">{{ quantity }}</span>
-          <button type="button" class="qty-btn" onClick="{{ incQty }}" aria-label="Aumenta">+</button>
         </div>
       </div>
 
@@ -214,6 +216,8 @@
         <div style="display:flex; justify-content:space-between;"><span class="text-muted">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted">Quantità</span><span>× {{ quantity }}</span></div>
         <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span>Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
+        <div class="text-muted" style="text-align: right; font-size: 11.5px;">IVA compresa</div>
       </div>
 
       <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg></button>
@@ -221,7 +225,7 @@
       <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}">Richiedi un preventivo ufficiale<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
-        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Consegna in 24 ore</div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Spedizione pronta in 24 ore</div>
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg>Prodotto a Roma</div>
       </div>
     </div>
@@ -308,6 +312,7 @@ const IMAGE_BY_COLOR = {
   '87 Cioccolato': 'img/87 cioccolato.png',
 };
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+const SIZE_STOCK = { S: 19520, M: 10677, L: 18581, XL: 9532, XXL: 2368, XXXL: 969 };
 const PRICE_TIERS = [
   { min: 1, white: 8, other: 8.8 },
   { min: 5, white: 6.5, other: 7.15 },
@@ -368,9 +373,8 @@ const ZONE_DEFS = [
 class Component extends DCLogic {
   state = {
     colorIndex: null,
-    size: 'M',
-    zones: { davanti: true },
-    quantity: 1,
+    sizeQty: {},
+    zones: {},
     cuoreWidth: 8,
     cuoreHeight: 8,
     davantiWidthIdx: 4,
@@ -388,17 +392,32 @@ class Component extends DCLogic {
       swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
       select: () => this.setState({ colorIndex: i }),
     }));
-    const colors24h = colorsAll.filter(c => c.group === '24h');
-    const colorsOrder = colorsAll.filter(c => c.group === 'order');
+    const lum = (hex) => {
+      const h = hex.replace('#', '');
+      const [r, g, b] = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255)
+        .map(v => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)));
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const colorsByLightness = colorsAll
+      .map(c => ({ ...c, title: c.name + (c.group === 'order' ? ' — su ordinazione (1 settimana)' : ' — 24H') }))
+      .sort((a, b) => lum(b.hex) - lum(a.hex));
+    const sizeQty = st.sizeQty || {};
+    const totalQty = SIZES.reduce((n, s) => n + (sizeQty[s] || 0), 0);
+    const setQtyFor = (s, v) => this.setState(prev => ({
+      sizeQty: { ...prev.sizeQty, [s]: Math.max(0, Math.min(9999, v)) },
+    }));
     const sizes = SIZES.map(s => ({
       label: s,
-      btnClass: 'size-btn' + (s === st.size ? ' size-selected' : ''),
-      select: () => this.setState({ size: s }),
+      qty: sizeQty[s] || 0,
+      stockLabel: (SIZE_STOCK[s] ?? 0).toLocaleString('it-IT') + ' disp.',
+      inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
+      dec: () => setQtyFor(s, (this.state.sizeQty[s] || 0) - 1),
+      setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
     }));
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(st.quantity);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(st.quantity);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(st.quantity);
+      if (key === 'cuore') return cuoreUnitPrice(totalQty);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty);
       return 0;
     };
     const zones = ZONE_DEFS.map(z => {
@@ -437,30 +456,30 @@ class Component extends DCLogic {
     const selectedColorGroup = hasColor ? activeColor.group : null;
     const heroImageSrc = hasColor ? (IMAGE_BY_COLOR[activeColor.name] ?? DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
     const selectedColorNote = !hasColor ? 'Scegli un colore' : (selectedColorGroup === 'order' ? 'Su ordinazione — richiede 1 settimana' : 'Colore 24H — disponibile subito');
-    const garmentPrice = garmentUnitPrice(st.quantity, isWhite);
+    const garmentPrice = garmentUnitPrice(totalQty, isWhite);
     const unitTotal = garmentPrice + printTotal;
-    const grandTotal = unitTotal * st.quantity;
+    const grandTotal = unitTotal * totalQty;
 
+    const sizeBreakdown = SIZES.filter(s => sizeQty[s] > 0).map(s => `${s}×${sizeQty[s]}`).join(', ') || 'nessuna';
     const themeMap = { indigo: 'theme-indigo', forest: 'theme-forest', ochre: 'theme-ochre', ink: 'theme-ink' };
     const themeClass = themeMap[this.props.accentTheme] ?? 'theme-indigo';
 
     return {
-      colors24h, colorsOrder, sizes, zones, themeClass, selectedColorNote, heroImageSrc,
+      colorsByLightness, sizes, zones, themeClass, selectedColorNote, heroImageSrc,
       cuoreChecked, cuoreWidth, cuoreHeight, setCuoreWidth, setCuoreHeight,
       davantiChecked, retroChecked,
       davantiWidthCm, davantiHeightCm, setDavantiWidthIdx, setDavantiHeightIdx, davantiWidthIdx: st.davantiWidthIdx, davantiHeightIdx: st.davantiHeightIdx,
       retroWidthCm, retroHeightCm, setRetroWidthIdx, setRetroHeightIdx, retroWidthIdx: st.retroWidthIdx, retroHeightIdx: st.retroHeightIdx,
       selectedColorName: hasColor ? activeColor.name : '—',
-      selectedSize: st.size,
-      quantity: st.quantity,
-      incQty: () => this.setState(s => ({ quantity: Math.min(99, s.quantity + 1) })),
-      decQty: () => this.setState(s => ({ quantity: Math.max(1, s.quantity - 1) })),
+      quantity: totalQty,
+      unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + ' / pezzo' : '',
       garmentPriceLabel: this.fmt(garmentPrice),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
       totalPriceLabel: this.fmt(grandTotal),
       checkoutLabel: 'Aggiungi al carrello',
       checkout: () => {
         if (!hasColor) { alert('Scegli un colore prima di procedere.'); return; }
+        if (totalQty < 1) { alert('Inserisci la quantità per almeno una taglia.'); return; }
         const zoneList = [];
         if (st.zones.cuore) zoneList.push('Cuore/manica');
         if (st.zones.davanti) zoneList.push('Davanti');
@@ -469,15 +488,15 @@ class Component extends DCLogic {
           productId: 'tshirt',
           human: {
             'Colore': activeColor.name,
-            'Taglia': st.size,
-            'Quantità': st.quantity,
+            'Taglie': sizeBreakdown,
+            'Quantità': totalQty,
             'Stampa': zoneList.length ? zoneList.join(' + ') : 'Nessuna stampa',
           },
           formula: {
-            qty: st.quantity,
+            qty: totalQty,
             isWhite,
             colorName: activeColor.name,
-            size: st.size,
+            sizes: sizeQty,
             zones: { cuore: !!st.zones.cuore, davanti: !!st.zones.davanti, retro: !!st.zones.retro },
             davantiWidthIdx: st.davantiWidthIdx, davantiHeightIdx: st.davantiHeightIdx,
             retroWidthIdx: st.retroWidthIdx, retroHeightIdx: st.retroHeightIdx,
@@ -499,11 +518,11 @@ class Component extends DCLogic {
         if (st.zones.cuore) zoneList.push('cuore/manica');
         if (st.zones.davanti) zoneList.push('davanti');
         if (st.zones.retro) zoneList.push('retro');
-        const config = `Colore: ${cName}, Taglia: ${st.size}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
+        const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
         const params = new URLSearchParams({
           prodotto: 'Maglietta Unisex 24H',
           config,
-          quantita: String(st.quantity),
+          quantita: String(totalQty),
           prezzo: grandTotal.toFixed(2),
         });
         window.location.href = './preventivo.dc.html?' + params.toString();
