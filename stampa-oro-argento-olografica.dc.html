@@ -40,14 +40,26 @@
     nav.nav > a:not(.nav-brand) { font-size: 14px; }
     a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
     @media (max-width: 700px) { nav.nav { justify-content: flex-start; } }
+  
+    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+    nav.nav .nav-brand { flex: 0 0 100%; }
+    nav.nav > a:not(.nav-brand) { font-size: 14px; }
+    nav.nav .btn-primary { margin-left: auto; font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }
+    nav.nav .btn-primary:hover { color: var(--color-bg); }
+    a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
+    @media (max-width: 700px) {
+      nav.nav { justify-content: flex-start; }
+      nav.nav .btn-primary { margin-left: 0; flex: 0 0 100%; }
+    }
   </style>
 </helmet>
 
 <nav class="nav">
-  <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;font-family:var(--font-heading);font-weight:800;">TSHIRT SHOP ONLINE</a>
+  <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-family:var(--font-heading);font-weight:800;">TSHIRT SHOP ONLINE <span style="opacity:.55;font-weight:400;">by Printing Italy</span></a>
   <a href="index.html#uomo">Uomo</a>
   <a href="index.html#donna">Donna</a>
   <a href="index.html#bambino">Bambino</a>
+  <a href="index.html#perche">Perché Noi</a>
   <a href="blog.dc.html">Blog</a>
   <a href="contattateci.dc.html">Contatti</a>
   <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;">Preventivo WhatsApp</a>
