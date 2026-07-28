@@ -20,14 +20,22 @@
     .prod-head, .prod-visual, .prod-config { min-width: 0; }
     /* landscape / wide: image + price beside the configurator */
     @media (min-width: 900px) {
-      .prod-grid { max-width: 1100px; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); }
-      .prod-head { grid-column: 1 / -1; }
-      .prod-visual { position: sticky; top: var(--space-4); }
+      .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6); align-items: start;
+        grid-template-areas: "head head" "left right"; }
+      .prod-head { grid-area: head; }
+      .col-left { grid-area: left; display: flex; flex-direction: column; }
+      .col-right { grid-area: right; }
       .prod-media { max-width: 100% !important; }
     }
-    @media (min-width: 700px) and (max-width: 899px) and (orientation: landscape) {
-      .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 44%) minmax(0, 1fr); column-gap: var(--space-6); }
-      .prod-head { grid-column: 1 / -1; }
+    @media (max-width: 899px) {
+      .col-left, .col-right { display: contents; }
+      .prod-grid { grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "head" "visual" "cfgtop" "qty" "cfgrest"; }
+      .prod-head { grid-area: head; }
+      .prod-visual { grid-area: visual; }
+      .cfg-top { grid-area: cfgtop; }
+      .prod-qty { grid-area: qty; }
+      .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
     }
     .pair-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-4); }
@@ -36,10 +44,6 @@
     @media (max-width: 700px) {
       nav.nav { justify-content: flex-start; }
       nav.nav .nav-brand { flex: 0 0 100%; }
-    }
-    @media (max-width: 900px) {
-      .prod-grid { grid-template-columns: 1fr; gap: var(--space-6); }
-      .prod-media { max-width: 100% !important; }
     }
     @media (max-width: 600px) {
       .pair-grid { grid-template-columns: 1fr; gap: var(--space-3); }
@@ -97,7 +101,7 @@
   </style>
 </helmet>
 
-<div style="max-width: 1180px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
+<div style="max-width: 100%; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
 
   <nav class="nav" style="margin: 0 0 var(--space-6); padding-inline: 0;">
   <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-family:var(--font-heading);font-weight:800;">TSHIRT SHOP ONLINE <span style="opacity:.55;font-weight:400;">by Printing Italy</span></a>
@@ -123,29 +127,15 @@
       <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);">T-shirt personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
     </div>
 
+    <div class="col-left">
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1;">
           <img alt="Maglietta — vista frontale" src="{{ heroImageSrc }}" style="width:100%;height:100%;object-fit:cover;display:block;touch-action:pan-y;">
         </div>
       </div>
-      <div style="font-family: var(--font-heading); font-weight: 800; font-size: 32px; margin-bottom: var(--space-4); text-align: right;">{{ totalPriceLabel }}</div>
     </div>
-
-    <div class="prod-config">
-      <hr class="hr" style="margin-top:0;">
-
-      <div style="margin-bottom: var(--space-4);">
-        <div class="field"><label style="font-weight: 800; color: #000;">Colore — {{ selectedColorName }}</label></div>
-        <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
-        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
-          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="36">
-            <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
-          </sc-for>
-        </div>
-      </div>
-
-      <div style="margin-bottom: var(--space-4);">
+      <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label>Quantità per taglia — {{ quantity }} pz totali</label></div>
         <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
           <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
@@ -170,7 +160,21 @@
           </tbody>
         </table>
       </div>
+    </div>
 
+    <div class="prod-config col-right">
+      <div class="cfg-top" style="margin-bottom: var(--space-4);">
+        <hr class="hr" style="margin-top:0;">
+        <div class="field"><label style="font-weight: 800; color: #000;">Colore — {{ selectedColorName }}</label></div>
+        <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
+        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="36">
+            <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div class="cfg-rest">
       <div style="margin-bottom: var(--space-4);">
         <div class="field"><label>Stampa su</label></div>
         <div>
@@ -234,7 +238,7 @@
 
       <div class="field" style="margin-bottom: var(--space-4);">
         <label>File Upload</label>
-        <label class="btn btn-secondary btn-block" style="cursor: pointer;">
+        <label class="btn btn-secondary btn-block" style="cursor: pointer; flex-wrap: nowrap; white-space: nowrap;">
           Carica il tuo design
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           <input type="file" accept="image/*,.pdf,.ai,.eps" multiple style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;">
@@ -257,6 +261,7 @@
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Spedizione pronta in 24 ore</div>
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg>Prodotto a Roma</div>
+      </div>
       </div>
     </div>
   </div>
