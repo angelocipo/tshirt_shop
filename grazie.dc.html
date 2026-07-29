@@ -8,6 +8,16 @@
 <body>
 <x-dc>
 <helmet>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4XJG8VZY6S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (!window.__gaInit) { window.__gaInit = 1; gtag('js', new Date()); gtag('config', 'G-4XJG8VZY6S'); }
+  </script>
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    if (!window.__fbqInit) { window.__fbqInit = 1; fbq('init', '817112403879732'); fbq('track', 'PageView'); }
+  </script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
@@ -113,6 +123,22 @@ class Component extends DCLogic {
     const sessionId = params.get('session_id');
     const orderRef = sessionId ? sessionId.replace(/^cs_(test_|live_)?/, '').slice(0, 12).toUpperCase() : (params.get('token') || '');
     this.setState({ orderRef });
+    this.trackPurchase(orderRef);
+  }
+
+  /* fire the sale once per order (survives refresh / back-button) */
+  trackPurchase(orderRef) {
+    let order = null;
+    try { order = JSON.parse(localStorage.getItem('ts_pending_order') || 'null'); } catch (_) {}
+    const value = order && order.value ? order.value : null;
+    // no payment reference and no stashed order → this is just someone visiting the page
+    if (!orderRef || !value) return;
+    const key = 'ts_tracked_' + orderRef;
+    try { if (localStorage.getItem(key)) return; localStorage.setItem(key, '1'); } catch (_) {}
+    const items = [{ item_id: order.id || 'tshirt', item_name: order.name || 'T-shirt personalizzata', price: value, quantity: 1 }];
+    if (window.gtag) gtag('event', 'purchase', { transaction_id: orderRef, currency: 'EUR', value, items });
+    if (window.fbq) fbq('track', 'Purchase', { currency: 'EUR', value });
+    try { localStorage.removeItem('ts_pending_order'); } catch (_) {}
   }
   renderVals() {
     return { hasOrderRef: !!this.state.orderRef, orderRef: this.state.orderRef };

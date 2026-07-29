@@ -9,6 +9,16 @@
 <body>
 <x-dc>
 <helmet data-dc-atomics>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4XJG8VZY6S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (!window.__gaInit) { window.__gaInit = 1; gtag('js', new Date()); gtag('config', 'G-4XJG8VZY6S'); }
+  </script>
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    if (!window.__fbqInit) { window.__fbqInit = 1; fbq('init', '817112403879732'); fbq('track', 'PageView'); }
+  </script>
 <meta charset="utf-8">
 <link rel="icon" type="image/png" href="img/favicon.png">
 
@@ -304,6 +314,7 @@ class Component extends DCLogic {
         return actions.order.create({ purchase_units: [{ amount: { value: total, currency_code: 'EUR' }, description: this.state.productName }] });
       },
       onApprove: (data, actions) => actions.order.capture().then((details) => {
+        this.stashOrder(this.computeShippingFee());
         window.location.href = '/grazie.dc.html?token=' + (details.id || '');
       }),
       onError: (err) => this.setState({ errorMsg: 'Pagamento PayPal non riuscito, riprova.' }),
@@ -328,6 +339,18 @@ class Component extends DCLogic {
     return null;
   }
 
+  /* remember the order value so the thank-you page can report the sale to GA4 / Meta */
+  stashOrder(shippingFee) {
+    const value = +((parseFloat(this.state.productPrice) || 0) + shippingFee).toFixed(2);
+    try {
+      localStorage.setItem('ts_pending_order', JSON.stringify({
+        value, currency: 'EUR', name: this.state.productName, id: this.state.productId,
+      }));
+    } catch (_) {}
+    if (window.fbq) fbq('track', 'InitiateCheckout', { value, currency: 'EUR' });
+    if (window.gtag) gtag('event', 'begin_checkout', { currency: 'EUR', value });
+  }
+
   async submit(e) {
     e.preventDefault();
     const err = this.validate();
@@ -335,6 +358,7 @@ class Component extends DCLogic {
     this.setState({ submitting: true, errorMsg: null });
     const { productId, invType, inv, shipSame, ship, shipZone, useSender, sender, orderBody } = this.state;
     const shippingFee = this.computeShippingFee();
+    this.stashOrder(shippingFee);
     try {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',

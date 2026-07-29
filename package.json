@@ -1,8 +1,7 @@
 {
-  "name": "tshirt-shop",
-  "version": "1.0.0",
+  "name": "tipografia-online",
   "private": true,
   "dependencies": {
-    "stripe": "^16.12.0"
+    "stripe": "^17.7.0"
   }
 }
