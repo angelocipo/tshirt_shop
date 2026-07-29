@@ -43,6 +43,7 @@ const PRICING = {
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
   // Reconstructed 1:1 from the real Advanced Product Fields (Studio Wombat) config for this product.
   '197': { nome: 'Stampa Roll-Up 80/85 × 200 cm', type: 'formula',
     rollupRate: (qty) => (qty > 6 ? 20 : qty > 4 ? 25 : 30),
@@ -88,51 +89,53 @@ const PRICING = {
   '5515': { nome: 'Biglietti da Visita Prezzi Strategici', type: 'businessCardStrategici',
     qtyLabels: [100,250,500,1000,2500,5000,10000,15000,20000],
     formats: [
-      { label: 'Quadrato 5,5×5,5 cm', papers: [
-        { label: 'gr. 300 (classico)', deliveries: [
-          { label: '1 Settimana', prices: [24,29,32,33,35,46,68,87,104] },
-          { label: '2 Giorni lavorativi', prices: [57,62,65,66,68,80,100,119,137] },
-        ] },
-        { label: 'gr. 400', deliveries: [ { label: '1 Settimana', prices: [27,30,31,33,39,52,79,105,128] } ] },
-        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [29,32,34,38,46,63,99,132,166] } ] },
-      ] },
       { label: 'Orizzontale 5,5×8,5 cm', papers: [
         { label: 'gr. 300 (classico)', deliveries: [
-          { label: '1 Settimana', prices: [25,27,30,39,44,61,95,126,155] },
-          { label: '2 Giorni lavorativi', prices: [57,59,63,67,77,94,127,159,188] },
+          { label: '1 Settimana', prices: [35,37,40,45,54,71,105,136,165] },
+          { label: '2 Giorni lavorativi', prices: [67,69,73,78,87,104,137,169,198] },
         ] },
         { label: 'gr. 400', deliveries: [
-          { label: '1 Settimana', prices: [29,33,35,45,50,68,106,143,193] },
-          { label: '2 Giorni lavorativi', prices: [63,67,69,72,80,101,139,175,252] },
+          { label: '1 Settimana', prices: [39,43,45,49,58,78,116,153,203] },
+          { label: '2 Giorni lavorativi', prices: [73,77,79,82,90,111,149,185,262] },
         ] },
-        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [29,32,34,39,46,63,99,132,166] } ] },
+        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [39,42,44,48,56,73,109,142,176] } ] },
       ] },
       { label: 'Verticale 5,5×8,5 cm', papers: [
         { label: 'gr. 300 (classico)', deliveries: [
-          { label: '1 Settimana', prices: [25,27,30,39,44,61,95,126,155] },
-          { label: '2 Giorni lavorativi', prices: [57,59,63,67,77,94,127,159,188] },
+          { label: '1 Settimana', prices: [35,37,40,45,54,71,105,136,165] },
+          { label: '2 Giorni lavorativi', prices: [67,69,73,78,87,104,137,169,198] },
         ] },
         { label: 'gr. 400', deliveries: [
-          { label: '1 Settimana', prices: [29,33,35,45,50,68,106,143,193] },
-          { label: '2 Giorni lavorativi', prices: [63,67,69,72,80,101,139,175,252] },
+          { label: '1 Settimana', prices: [39,43,45,49,58,78,116,153,203] },
+          { label: '2 Giorni lavorativi', prices: [73,77,79,82,90,111,149,185,262] },
         ] },
-        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [29,32,34,39,46,63,99,132,166] } ] },
+        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [39,42,44,48,56,73,109,142,176] } ] },
       ] },
       { label: 'Orizzontale 9×5 cm', papers: [
         { label: 'gr. 300 (classico)', deliveries: [
-          { label: '1 Settimana', prices: [26,31,33,36,42,57,88,114,139] },
-          { label: '2 Giorni lavorativi', prices: [58,65,66,69,75,90,121,147,172] },
+          { label: '1 Settimana', prices: [36,41,43,46,52,67,98,124,149] },
+          { label: '2 Giorni lavorativi', prices: [68,75,76,79,85,100,131,157,182] },
         ] },
-        { label: 'gr. 400', deliveries: [ { label: '1 Settimana', prices: [29,33,35,38,47,66,103,140,190] } ] },
-        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [29,32,34,38,46,63,99,132,166] } ] },
+        { label: 'gr. 400', deliveries: [ { label: '1 Settimana', prices: [39,43,45,48,57,76,113,150,200] } ] },
+        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [39,42,44,48,56,73,109,142,176] } ] },
       ] },
       { label: 'Verticale 5×9 cm', papers: [
         { label: 'gr. 300 (classico)', deliveries: [
-          { label: '1 Settimana', prices: [26,31,33,36,42,57,88,114,139] },
-          { label: '2 Giorni lavorativi', prices: [58,65,66,69,75,90,121,147,172] },
+          { label: '1 Settimana', prices: [36,41,43,46,52,67,98,124,149] },
+          { label: '2 Giorni lavorativi', prices: [68,75,76,79,85,100,131,157,182] },
         ] },
-        { label: 'gr. 400', deliveries: [ { label: '1 Settimana', prices: [29,33,35,38,47,66,103,140,190] } ] },
-        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [29,32,34,38,46,63,99,132,166] } ] },
+        { label: 'gr. 400', deliveries: [ { label: '1 Settimana', prices: [39,43,45,48,57,76,113,150,200] } ] },
+        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [39,42,44,48,56,73,109,142,176] } ] },
+      ] },
+      // Order of `formats` MUST match index.html exactly — the client sends a numeric
+      // formatIndex, so a different order here charges the price of a different format.
+      { label: 'Quadrato 5,5×5,5 cm', papers: [
+        { label: 'gr. 300 (classico)', deliveries: [
+          { label: '1 Settimana', prices: [34,39,41,41,45,56,78,97,114] },
+          { label: '2 Giorni lavorativi', prices: [67,72,75,73,78,89,110,129,147] },
+        ] },
+        { label: 'gr. 400', deliveries: [ { label: '1 Settimana', prices: [37,40,41,43,49,62,89,115,138] } ] },
+        { label: 'gr. 500', deliveries: [ { label: '1 Settimana', prices: [39,42,44,48,56,73,109,142,176] } ] },
       ] },
     ] },
   '198': { nome: 'Foto Quadro Personalizzato', type: 'fotoQuadro', basePrice: 30 },
