@@ -262,6 +262,34 @@ function orderEmailHtml(order, total, md) {
     </tr>`;
   }).join('');
 
+  const billingRows = [
+    ['Intestatario', order.customer.name || '—'],
+    ['Tipo', order.customer.isCompany ? 'Azienda' : 'Privato'],
+    ['P. IVA / CF', order.customer.vatNumber || order.customer.fiscalCode || '—'],
+    ['Indirizzo', [order.customer.address, order.customer.cap, order.customer.city].filter(Boolean).join(', ') || '—'],
+    ['Email', md.inv_email || '—'],
+  ];
+  if (order.customer.isCompany) {
+    billingRows.push(['PEC / SDI', [md.inv_pec, md.inv_sdi].filter(Boolean).join(' — ') || '—']);
+  }
+  const billingBlock = `<tr><td style="padding:26px 32px 0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:2px solid ${STEEL};border-collapse:separate;">
+          <tr><td style="padding:14px 16px 4px;">
+            <div style="font:700 11px/1 ${BODY_FONT};letter-spacing:.16em;text-transform:uppercase;color:${STEEL};">Dati per la fatturazione</div>
+            <div style="font:800 20px/1.2 ${HEAD_FONT};color:${INK};padding-top:6px;">La fattura sarà intestata così</div>
+          </td></tr>
+          <tr><td style="padding:8px 16px 16px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+              ${billingRows.map(([k, v]) => `<tr>
+                <td style="padding:7px 0;border-bottom:1px solid ${RULE};font:600 12px/1.4 ${BODY_FONT};letter-spacing:.06em;text-transform:uppercase;color:${MUTED};width:140px;">${k}</td>
+                <td style="padding:7px 0;border-bottom:1px solid ${RULE};font:400 14px/1.4 ${BODY_FONT};color:${INK};">${v}</td>
+              </tr>`).join('')}
+            </table>
+            <div style="padding-top:10px;font:400 13px/1.6 ${BODY_FONT};color:${MUTED};">Serve una correzione? Rispondi a questa email entro un giorno lavorativo, prima dell'emissione.</div>
+          </td></tr>
+        </table>
+      </td></tr>`;
+
   const senderRows = md.sender_use === '1' ? [
     ['Ragione sociale', md.sender_company || '—'],
     ['Indirizzo', [md.sender_address, md.sender_cap, md.sender_city].filter(Boolean).join(', ') || '—'],
@@ -328,6 +356,7 @@ function orderEmailHtml(order, total, md) {
         </table>
       </td></tr>
 
+      ${billingBlock}
       ${senderBlock}
       ${designBlock}
       <tr><td style="padding:28px 32px 0;">

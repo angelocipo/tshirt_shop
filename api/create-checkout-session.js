@@ -319,6 +319,19 @@ module.exports = async (req, res) => {
       },
       quantity: 1,
     }];
+    // Stripe's left-hand summary only renders the line items, so the billing holder and the
+    // custom sender are folded into the first item's description — otherwise the customer
+    // never sees them again between our checkout page and the payment page.
+    {
+      const cc = customer || {};
+      const sn2 = sender || {};
+      const bits = [];
+      const holder = cc.invType === 'azienda' ? (cc.company || cc.name) : cc.name;
+      if (holder) bits.push(`Fattura a: ${holder}${cc.vat ? ' — P.IVA ' + cc.vat : (cc.cf ? ' — CF ' + cc.cf : '')}`);
+      if (sn2.use && sn2.company) bits.push(`Mittente pacco: ${sn2.company}${sn2.city ? ' (' + sn2.city + ')' : ''}`);
+      if (designRef) bits.push(`Rif. file: ${designRef}`);
+      if (bits.length) lineItems[0].price_data.product_data.description = bits.join(' · ').slice(0, 480);
+    }
     const shipFee = Math.max(0, Number(shippingFee) || 0);
     if (shipFee > 0) {
       lineItems.push({
