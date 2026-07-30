@@ -155,7 +155,7 @@ module.exports = async (req, res) => {
       };
       const buyerEmail = md.inv_email || session.customer_details?.email || session.customer_email;
       console.log('Order', order.number, 'session', session.id, 'buyerEmail:', buyerEmail || 'NONE', '— owner:', OWNER_EMAIL);
-      const summaryHtml = orderEmailHtml(order, total);
+      const summaryHtml = orderEmailHtml(order, total, md);
       // Each send gets its OWN try. They used to share one: if the buyer send threw, the owner
       // notification was skipped entirely and the shop never learned about the order.
       if (buyerEmail) {
@@ -234,7 +234,24 @@ function cornerRow() {
   </tr>`;
 }
 
-function orderEmailHtml(order, total) {
+function orderEmailHtml(order, total, md) {
+  md = md || {};
+  const designRows = [];
+  if (md.design_ref) {
+    designRows.push(`Riferimento file: <strong style="color:${INK};">${md.design_ref}</strong>${md.design_files ? ` — ${md.design_files}` : ''}`);
+  }
+  if (md.design_link) {
+    designRows.push(`Link file: <a href="${md.design_link}" style="color:${STEEL};">${md.design_link}</a>`);
+  }
+  const designBlock = designRows.length
+    ? `<tr><td style="padding:22px 32px 0;">
+        <div style="border:1px solid ${RULE};padding:14px 16px;font:400 13px/1.7 ${BODY_FONT};color:${MUTED};">
+          <div style="font:600 11px/1 ${BODY_FONT};letter-spacing:.14em;text-transform:uppercase;color:${STEEL};padding-bottom:8px;">Materiale da stampare</div>
+          ${designRows.join('<br>')}
+          <div style="padding-top:8px;">Cita questo riferimento in ogni comunicazione sull'ordine.</div>
+        </div>
+      </td></tr>`
+    : '';
   const rows = order.lines.map((l) => {
     const lineTotal = l.unitPrice * l.quantity;
     return `<tr>
@@ -285,12 +302,12 @@ function orderEmailHtml(order, total) {
         </table>
       </td></tr>
 
+      ${designBlock}
       <tr><td style="padding:28px 32px 0;">
         <div style="border-top:1px solid ${RULE};padding-top:18px;font:400 14px/1.6 ${BODY_FONT};color:${MUTED};">
           Riceverai la fattura entro un giorno lavorativo, insieme alle istruzioni per l'invio del materiale da stampare.
         </div>
       </td></tr>
-
       <tr><td style="padding:0 32px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${cornerRow()}</table>
       </td></tr>
