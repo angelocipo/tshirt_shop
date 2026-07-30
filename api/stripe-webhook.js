@@ -212,16 +212,18 @@ module.exports = async (req, res) => {
 // Order confirmation email. Table-based and fully inline-styled: email clients
 // strip <style> blocks and ignore flexbox. Colours and type follow the site's
 // own system — steel accent on a light technical ground, condensed headings.
+// (Repainted with the shop's own palette: ink #201e1d, accent red #ec3013, Archivo.)
 // ---------------------------------------------------------------------------
 
-const BG = '#f2f2f3';
-const INK = '#1d1f20';
-const STEEL = '#5980a6';
-const STEEL_DARK = '#26333f';
-const RULE = '#dfe4e9';
-const MUTED = '#6b7378';
-const HEAD_FONT = "'Barlow Condensed','Arial Narrow',Helvetica,Arial,sans-serif";
-const BODY_FONT = "Barlow,Helvetica,Arial,sans-serif";
+const BG = '#f3f2f2';
+const INK = '#201e1d';
+const STEEL = '#ec3013';
+const STEEL_DARK = '#201e1d';
+const RULE = '#cfcccc';
+const MUTED = '#605d5d';
+const ON_DARK = '#a8a4a4';
+const HEAD_FONT = "Archivo,'Helvetica Neue',Helvetica,Arial,sans-serif";
+const BODY_FONT = "Archivo,'Helvetica Neue',Helvetica,Arial,sans-serif";
 
 function eur(n) {
   return '€ ' + n.toFixed(2).replace('.', ',');
@@ -229,8 +231,7 @@ function eur(n) {
 
 function cornerRow() {
   return `<tr>
-    <td style="padding:8px 12px;font:400 12px/1 ${BODY_FONT};color:${STEEL};">+</td>
-    <td style="padding:8px 12px;font:400 12px/1 ${BODY_FONT};color:${STEEL};text-align:right;">+</td>
+    <td colspan="2" style="padding:0;"><div style="height:1px;background:${RULE};font-size:0;line-height:0;">&nbsp;</div></td>
   </tr>`;
 }
 
@@ -269,8 +270,8 @@ function orderEmailHtml(order, total, md) {
     <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:100%;background:#ffffff;border:1px solid ${RULE};">
 
       <tr><td style="background:${STEEL_DARK};padding:26px 32px;">
-        <div style="font:600 11px/1 ${BODY_FONT};letter-spacing:.18em;text-transform:uppercase;color:${STEEL};">Tshirt Shop Online</div>
-        <div style="font:600 34px/1.05 ${HEAD_FONT};letter-spacing:.01em;color:#ffffff;padding-top:8px;">Ordine confermato</div>
+        <div style="font:600 11px/1 ${BODY_FONT};letter-spacing:.18em;text-transform:uppercase;color:${ON_DARK};">Tshirt Shop Online</div>
+        <div style="font:800 34px/1.05 ${HEAD_FONT};letter-spacing:-.01em;color:#ffffff;padding-top:8px;">Ordine confermato</div>
       </td></tr>
 
       <tr><td style="padding:0 32px;">
@@ -296,7 +297,7 @@ function orderEmailHtml(order, total, md) {
           ${rows}
           <tr>
             <td colspan="2" style="padding:18px 0 0;font:600 13px/1 ${BODY_FONT};letter-spacing:.1em;text-transform:uppercase;color:${MUTED};">Totale pagato</td>
-            <td style="padding:18px 0 0;font:600 30px/1 ${HEAD_FONT};color:${INK};text-align:right;white-space:nowrap;">${eur(total)}</td>
+            <td style="padding:18px 0 0;font:800 30px/1 ${HEAD_FONT};color:${INK};text-align:right;white-space:nowrap;">${eur(total)}</td>
           </tr>
           <tr><td colspan="3" style="padding-top:4px;font:400 12px/1.4 ${BODY_FONT};color:${MUTED};text-align:right;">IVA inclusa</td></tr>
         </table>
