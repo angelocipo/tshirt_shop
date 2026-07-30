@@ -8,6 +8,16 @@
 <body>
 <x-dc>
 <helmet>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4XJG8VZY6S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (!window.__gaInit) { window.__gaInit = 1; gtag('js', new Date()); gtag('config', 'G-4XJG8VZY6S'); }
+  </script>
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    if (!window.__fbqInit) { window.__fbqInit = 1; fbq('init', '817112403879732'); fbq('track', 'PageView'); }
+  </script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
@@ -241,8 +251,29 @@
         <label class="btn btn-secondary btn-block" style="cursor: pointer; flex-wrap: nowrap; white-space: nowrap;">
           Carica il tuo design
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <input type="file" accept="image/*,.pdf,.ai,.eps" multiple style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;">
+          <input type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.svg,.pdf,.ai,.eps,.psd,.tif,.tiff,.zip" multiple="{{ true }}" onChange="{{ pickFiles }}" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;">
         </label>
+        <sc-for list="{{ designFiles }}" as="f" hint-placeholder-count="0">
+          <div style="display:flex; align-items:center; gap:8px; padding:6px 4px 6px 8px; margin-top:6px; border:1px solid var(--color-divider); font-size:12px;">
+            <span style="flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ f.name }}</span>
+            <span class="text-muted" style="white-space:nowrap;">{{ f.sizeLabel }}</span>
+            <span style="white-space:nowrap; font-weight:600; font-size:11px; letter-spacing:.04em; text-transform:uppercase;">{{ f.statusLabel }}</span>
+            <button type="button" class="btn btn-ghost" style="padding:0 6px; min-height:0; line-height:1.4;" title="Rimuovi" onClick="{{ f.remove }}">×</button>
+          </div>
+        </sc-for>
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;">JPG, PNG, PDF, AI, EPS, ZIP — max 4 MB per file. File più grandi: inviaceli via email dopo l'ordine.</div>
+        <sc-if value="{{ hasDesignRef }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:11.5px; margin-top:4px;">Riferimento file: <strong>{{ designRef }}</strong></div>
+        </sc-if>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label for="design-link">Oppure incolla un link al file</label>
+        <input class="input" id="design-link" type="url" inputmode="url" placeholder="Canva, SwissTransfer, WeTransfer, Drive…" value="{{ designLink }}" onChange="{{ setDesignLink }}">
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;">Canva e Drive: condividi il link già sbloccato, senza password.</div>
+        <sc-if value="{{ designLinkError }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:11.5px; margin-top:4px; color:#ec3013;">Il link deve iniziare con http:// o https://</div>
+        </sc-if>
       </div>
 
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
@@ -416,9 +447,56 @@ class Component extends DCLogic {
     davantiHeightIdx: 7,
     retroWidthIdx: 4,
     retroHeightIdx: 7,
+    designFiles: [],
+    designRef: null,
+    designLink: '',
   };
 
   fmt(n) { return '€' + n.toFixed(2).replace('.', ','); }
+
+  makeDesignRef() {
+    const alpha = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let s = '';
+    for (let i = 0; i < 6; i++) s += alpha[Math.floor(Math.random() * alpha.length)];
+    return 'DES-' + s;
+  }
+
+  patchFile(id, fields) {
+    this.setState(s => ({ designFiles: s.designFiles.map(f => (f.id === id ? { ...f, ...fields } : f)) }));
+  }
+
+  handleFiles(fileList) {
+    const MAX = 4 * 1024 * 1024;
+    const OK = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'pdf', 'ai', 'eps', 'psd', 'tif', 'tiff', 'zip'];
+    const ref = this.state.designRef || this.makeDesignRef();
+    if (!this.state.designRef) this.setState({ designRef: ref });
+    Array.from(fileList).forEach((file, i) => {
+      const id = 'f' + Date.now() + '_' + i + Math.random().toString(36).slice(2, 6);
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      const entry = { id, name: file.name, size: file.size, status: 'uploading', message: '' };
+      if (!OK.includes(ext)) { entry.status = 'error'; entry.message = 'formato non supportato'; }
+      else if (file.size > MAX) { entry.status = 'error'; entry.message = 'oltre 4 MB'; }
+      this.setState(s => ({ designFiles: [...s.designFiles, entry] }));
+      if (entry.status !== 'error') this.uploadFile(file, id, ref);
+    });
+  }
+
+  async uploadFile(file, id, ref) {
+    try {
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Maglietta Unisex 24H' });
+      const res = await fetch('/api/upload-design?' + qs.toString(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/octet-stream' },
+        body: file,
+      });
+      let data = {};
+      try { data = await res.json(); } catch (_) {}
+      if (!res.ok) throw new Error(data.error || ('errore ' + res.status));
+      this.patchFile(id, { status: 'done' });
+    } catch (ex) {
+      this.patchFile(id, { status: 'error', message: (ex.message || 'invio non riuscito').slice(0, 60) });
+    }
+  }
 
   renderVals() {
     const st = this.state;
@@ -495,11 +573,30 @@ class Component extends DCLogic {
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;
 
+    const fileSizeLabel = (b) => (b < 1024 * 1024 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1).replace('.', ',') + ' MB');
+    const statusText = { uploading: 'invio…', done: 'caricato', error: 'errore' };
+    const designFiles = (st.designFiles || []).map(f => ({
+      name: f.name,
+      sizeLabel: fileSizeLabel(f.size),
+      statusLabel: f.status === 'error' ? (f.message || 'errore') : statusText[f.status],
+      remove: () => this.setState(s => ({ designFiles: s.designFiles.filter(x => x.id !== f.id) })),
+    }));
+    const uploadedFiles = (st.designFiles || []).filter(f => f.status === 'done').map(f => f.name);
+    const uploadingCount = (st.designFiles || []).filter(f => f.status === 'uploading').length;
+    const hasDesignRef = uploadedFiles.length > 0;
+    const designLink = (st.designLink || '').trim();
+    const designLinkOk = /^https?:\/\/\S+\.\S+/i.test(designLink);
+    const designLinkError = designLink.length > 0 && !designLinkOk;
+
     const sizeBreakdown = SIZES.filter(s => sizeQty[s] > 0).map(s => `${s}×${sizeQty[s]}`).join(', ') || 'nessuna';
     const themeMap = { indigo: 'theme-indigo', forest: 'theme-forest', ochre: 'theme-ochre', ink: 'theme-ink' };
     const themeClass = themeMap[this.props.accentTheme] ?? 'theme-indigo';
 
     return {
+      designFiles, hasDesignRef, designRef: st.designRef || '',
+      designLink: st.designLink || '', designLinkError,
+      setDesignLink: (e) => this.setState({ designLink: e.target.value }),
+      pickFiles: (e) => { const fl = e.target.files; if (fl && fl.length) this.handleFiles(fl); e.target.value = ''; },
       colorsByLightness, sizes, zones, themeClass, selectedColorNote, heroImageSrc,
       cuoreChecked, cuoreWidth, cuoreHeight, setCuoreWidth, setCuoreHeight,
       davantiChecked, retroChecked,
@@ -515,6 +612,8 @@ class Component extends DCLogic {
       checkout: () => {
         if (!hasColor) { alert('Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert('Inserisci la quantità per almeno una taglia.'); return; }
+        if (designLinkError) { alert('Il link al file non è valido: deve iniziare con http:// o https://'); return; }
+        if (uploadingCount > 0 && !confirm('Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneList = [];
         if (st.zones.cuore) zoneList.push('Cuore/manica');
         if (st.zones.davanti) zoneList.push('Davanti');
@@ -526,7 +625,11 @@ class Component extends DCLogic {
             'Taglie': sizeBreakdown,
             'Quantità': totalQty,
             'Stampa': zoneList.length ? zoneList.join(' + ') : 'Nessuna stampa',
+            ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
+            ...(designLinkOk ? { 'Link file': designLink } : {}),
           },
+          ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
+          ...(designLinkOk ? { designLink } : {}),
           formula: {
             qty: totalQty,
             isWhite,
