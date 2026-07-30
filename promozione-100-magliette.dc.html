@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4XJG8VZY6S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (!window.__gaInit) { window.__gaInit = 1; gtag('js', new Date()); gtag('config', 'G-4XJG8VZY6S'); }
+  </script>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
+  <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
+  <title>Promozione 100 Magliette + Stampa da €2,13 cad | Tshirt Shop Online</title>
+  <meta name="description" content="100 magliette 100% cotone 155 g/m² con stampa personalizzata da €2,13 cad + IVA (€2,60 IVA inclusa). Spedizione inclusa, consegna in 1 settimana.">
+  <style>
+    html, body { height: auto !important; min-height: 100%; overflow: visible !important; }
+    body { background: var(--color-bg);
+      --color-accent: #46433f; --color-accent-100: #ececeb; --color-accent-200: #d6d5d4; --color-accent-300: #b7b5b3;
+      --color-accent-400: #8f8c8a; --color-accent-500: #605d5b; --color-accent-600: #46433f; --color-accent-700: #302d2b;
+      --color-accent-800: #201e1c; --color-accent-900: #131211;
+    }
+    a { color: var(--color-accent-700); }
+    a:hover { color: var(--color-accent); }
+    .swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--color-divider); cursor: pointer; padding: 0; }
+    .swatch:hover { border-color: var(--color-text); }
+    .swatch-selected { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent); }
+    .prod-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 620px; align-items: start; }
+    .prod-head, .prod-visual, .prod-config { min-width: 0; }
+    @media (min-width: 900px) {
+      .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6);
+        grid-template-areas: "head head" "left right"; }
+      .prod-head { grid-area: head; }
+      .col-left { grid-area: left; display: flex; flex-direction: column; }
+      .col-right { grid-area: right; }
+    }
+    @media (max-width: 899px) {
+      .col-left, .col-right { display: contents; }
+      .prod-grid { grid-template-areas: "head" "visual" "cfgtop" "qty" "cfgrest"; }
+      .prod-head { grid-area: head; }
+      .prod-visual { grid-area: visual; }
+      .cfg-top { grid-area: cfgtop; }
+      .prod-qty { grid-area: qty; }
+      .cfg-rest { grid-area: cfgrest; }
+    }
+    .size-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .size-row:last-child { border-bottom: none; }
+    .qty-group { display: flex; align-items: center; }
+    .qty-input { width: 56px; height: 36px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+    .qty-btn { width: 36px; height: 36px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+    .opt-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-divider); cursor: pointer; }
+    .opt-row:last-child { border-bottom: none; }
+    .opt-dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-divider); flex: none; display: flex; align-items: center; justify-content: center; }
+    .opt-dot-on { border-color: var(--color-accent); }
+    .opt-dot-on::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--color-accent); }
+    .qty-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--color-divider); }
+    .qty-opt { padding: 12px 8px; text-align: center; font-family: var(--font-heading); font-weight: 800; font-size: 15px; background: var(--color-surface); border: none; cursor: pointer; color: var(--color-text); }
+    .qty-opt + .qty-opt { border-left: 1px solid var(--color-divider); }
+    .qty-opt-on { background: var(--color-accent); color: var(--color-bg); }
+    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+    nav.nav .nav-brand { flex: 0 0 100%; }
+    nav.nav > a:not(.nav-brand) { font-size: 14px; }
+    nav.nav .btn-primary { margin-left: auto; font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }
+    nav.nav .btn-primary:hover { color: var(--color-bg); }
+    a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
+    @media (max-width: 700px) {
+      nav.nav { justify-content: flex-start; }
+      nav.nav .btn-primary { margin-left: 0; flex: 0 0 100%; }
+      h1 { font-size: clamp(26px, 7vw, 34px) !important; }
+    }
+  </style>
+</helmet>
+
+<div style="max-width: 100%; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);">
+
+  <nav class="nav" style="margin: 0 0 var(--space-6); padding-inline: 0;">
+    <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-family:var(--font-heading);font-weight:800;">TSHIRT SHOP ONLINE <span style="opacity:.55;font-weight:400;">by Printing Italy</span></a>
+    <a href="promozione-100-magliette.dc.html" data-en="Promo" style="color:#ec3013;font-weight:800;">PROMO</a>
+  <a href="index.html#uomo">Uomo</a>
+    <a href="index.html#donna">Donna</a>
+    <a href="index.html#bambino">Bambino</a>
+    <a href="index.html#perche">Perché Noi</a>
+    <a href="blog.dc.html">Blog</a>
+    <a href="contattateci.dc.html">Contatti</a>
+    <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;">Preventivo WhatsApp</a>
+  </nav>
+
+  <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
+    <span class="tag tag-accent">Promozione</span>
+    <span class="tag tag-neutral">1 settimana</span>
+    <span class="tag tag-neutral">100% cotone 155 g/m²</span>
+    <span class="tag tag-neutral">Spedizione inclusa</span>
+  </div>
+
+  <div class="prod-grid">
+
+    <div class="prod-head">
+      <h1 style="margin-bottom: 4px;">Promozione 100 Magliette + Stampa</h1>
+      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);">Da €2,13 cad + IVA (€2,60 IVA inclusa, 100 pz stampa 8×8 su bianco) — 100% cotone 155 g/m², fino a esaurimento scorte.</p>
+    </div>
+
+    <div class="col-left">
+      <div class="prod-visual">
+        <div style="max-width: 480px; margin-bottom: var(--space-3);">
+          <div style="aspect-ratio: 1;">
+            <sc-if value="{{ hasColor }}" hint-placeholder-val="{{ false }}">
+              <img alt="Maglietta nel colore scelto" src="{{ heroImageSrc }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </sc-if>
+            <sc-if value="{{ noColor }}" hint-placeholder-val="{{ true }}">
+              <img alt="Promozione 100 magliette con stampa" src="https://www.printeurope.pro/wp-content/uploads/2025/04/100-t-shirt-copia600-1.avif" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </sc-if>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-qty" style="margin-bottom: var(--space-4);">
+        <div class="field"><label>Distribuzione taglie — {{ assignedLabel }}</label></div>
+        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-2);">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="8">
+            <div class="size-row">
+              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 58px;">{{ s.label }}</span>
+              <div class="qty-group">
+                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci">–</button>
+                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
+                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta">+</button>
+              </div>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size: 12.5px; color: {{ assignedColor }};">{{ assignedNote }}</div>
+        <table class="table" style="font-size: 12.5px; margin-top: var(--space-3);">
+          <thead>
+            <tr><th></th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th><th>XXXXL</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A: Lar.</td><td>46</td><td>48</td><td>50</td><td>54</td><td>58</td><td>62</td><td>66</td><td>70</td></tr>
+            <tr><td>B: Alt.</td><td>67</td><td>69</td><td>71</td><td>73</td><td>75</td><td>77</td><td>79</td><td>81</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="prod-config col-right">
+      <div class="cfg-top" style="margin-bottom: var(--space-4);">
+        <div class="field"><label style="font-weight: 800; color: #000;">Quantità</label></div>
+        <div class="qty-seg" style="margin-bottom: var(--space-4);">
+          <button type="button" class="{{ qty50Class }}" onClick="{{ setQty50 }}">50 pezzi</button>
+          <button type="button" class="{{ qty100Class }}" onClick="{{ setQty100 }}">100 pezzi</button>
+        </div>
+
+        <div class="field"><label style="font-weight: 800; color: #000;">Colore — {{ selectedColorName }}</label></div>
+        <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
+        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+          <sc-for list="{{ colors }}" as="c" hint-placeholder-count="11">
+            <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.name }}" aria-label="{{ c.name }}" onClick="{{ c.select }}"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div class="cfg-rest">
+        <div style="margin-bottom: var(--space-4);">
+          <div class="field"><label>Stampa su</label></div>
+          <div style="border: 1px solid var(--color-divider);">
+            <sc-for list="{{ prints }}" as="p" hint-placeholder-count="7">
+              <div class="opt-row" onClick="{{ p.select }}">
+                <div style="display:flex; align-items:center; gap: var(--space-2);">
+                  <div class="{{ p.dotClass }}"></div>
+                  <span style="font-size: 14px;">{{ p.label }}</span>
+                </div>
+                <span class="text-muted" style="font-size: 13px; white-space: nowrap;">{{ p.priceLabel }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <hr class="hr">
+
+        <div class="field" style="margin-bottom: var(--space-4);">
+          <label>File Upload</label>
+          <label class="btn btn-secondary btn-block" style="cursor: pointer; flex-wrap: nowrap; white-space: nowrap;">
+            Carica il tuo design
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <input type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.svg,.pdf,.ai,.eps,.psd,.tif,.tiff,.zip" multiple="{{ true }}" onChange="{{ pickFiles }}" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;">
+          </label>
+          <sc-for list="{{ designFiles }}" as="f" hint-placeholder-count="0">
+            <div style="display:flex; align-items:center; gap:8px; padding:6px 4px 6px 8px; margin-top:6px; border:1px solid var(--color-divider); font-size:12px;">
+              <span style="flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ f.name }}</span>
+              <span class="text-muted" style="white-space:nowrap;">{{ f.sizeLabel }}</span>
+              <span style="white-space:nowrap; font-weight:600; font-size:11px; letter-spacing:.04em; text-transform:uppercase;">{{ f.statusLabel }}</span>
+              <button type="button" class="btn btn-ghost" style="padding:0 6px; min-height:0; line-height:1.4;" title="Rimuovi" onClick="{{ f.remove }}">×</button>
+            </div>
+          </sc-for>
+          <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;">JPG, PNG, PDF, AI, EPS, ZIP — max 4 MB per file. File più grandi: inviaceli via email dopo l'ordine.</div>
+          <sc-if value="{{ hasDesignRef }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:11.5px; margin-top:4px;">Riferimento file: <strong>{{ designRef }}</strong></div>
+          </sc-if>
+        </div>
+
+        <div class="field" style="margin-bottom: var(--space-4);">
+          <label for="design-link">Oppure incolla un link al file</label>
+          <input class="input" id="design-link" type="url" inputmode="url" placeholder="Canva, SwissTransfer, WeTransfer, Drive…" value="{{ designLink }}" onChange="{{ setDesignLink }}">
+          <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;">Canva e Drive: condividi il link già sbloccato, senza password.</div>
+          <sc-if value="{{ designLinkError }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:11.5px; margin-top:4px; color:#ec3013;">Il link deve iniziare con http:// o https://</div>
+          </sc-if>
+        </div>
+
+        <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
+          <div style="display:flex; justify-content:space-between;"><span class="text-muted">Magliette + stampa ({{ quantity }} pz)</span><span>{{ basePriceLabel }}</span></div>
+          <div style="display:flex; justify-content:space-between;"><span class="text-muted">Maggiorazione colore</span><span>{{ surchargeLabel }}</span></div>
+          <div style="display:flex; justify-content:space-between;"><span class="text-muted">Spedizione</span><span>Inclusa</span></div>
+          <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span>Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+          <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
+          <div class="text-muted" style="text-align: right; font-size: 11.5px;">IVA compresa</div>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">Aggiungi al carrello<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg></button>
+
+        <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}">Richiedi un preventivo ufficiale<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
+
+        <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
+          <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Consegna in 1 settimana</div>
+          <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg>Prodotto a Roma</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width: 760px; margin: var(--space-8) auto 0; font-size: 14px; line-height: 1.65;">
+    <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 22px; margin: 0 0 var(--space-3);">Come funziona la promozione</h2>
+    <p style="margin: 0 0 var(--space-3);">Prezzi per magliette bianche, IVA e spedizione incluse. Le magliette colorate hanno una maggiorazione del 10%. Puoi distribuire i pezzi su tutte le taglie senza costi aggiuntivi.</p>
+    <table class="table" style="font-size: 13px;">
+      <thead>
+        <tr><th>IVA compresa</th><th>8×8</th><th>25×10</th><th>25×32</th><th>8×8 + 25×10</th><th>8×8 + 25×32</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>50 pz</td><td>€145</td><td>€186</td><td>€290</td><td>€216</td><td>€365</td></tr>
+        <tr><td>100 pz</td><td>€260</td><td>€343</td><td>€570</td><td>€393</td><td>€620</td></tr>
+      </tbody>
+    </table>
+    <p class="text-muted" style="margin: var(--space-3) 0 0; font-size: 13px;">Le bozze vengono inviate entro 1-2 giorni lavorativi dal pagamento; la produzione parte dopo la tua approvazione.</p>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const COLORS = [
+  { name: '01 Bianco', hex: '#eeeeee' },
+  { name: '03 Giallo', hex: '#fee233' },
+  { name: '31 Arancione', hex: '#ee8936' },
+  { name: '60 Rosso', hex: '#da0b34' },
+  { name: '78 Rosa', hex: '#d9106c' },
+  { name: '05 Blue Royal', hex: '#0c62a7' },
+  { name: '12 Turchese Chiaro', hex: '#1aa1cf' },
+  { name: '55 Blue Navy', hex: '#011e42' },
+  { name: '20 Verde Kelly', hex: '#138e51' },
+  { name: '58 Grigio', hex: '#c4c4c4' },
+  { name: '02 Nero', hex: '#000000' },
+];
+const IMAGE_BY_COLOR = {
+  '01 Bianco': 'img/01 bianco.jpeg',
+  '02 Nero': 'img/02 nero.png',
+  '03 Giallo': 'img/03 giallo.png',
+  '05 Blue Royal': 'img/05 royal.png',
+  '12 Turchese Chiaro': 'img/12 turchese.png',
+  '20 Verde Kelly': 'img/20 verde kelly.png',
+  '31 Arancione': 'img/31 arancione.png',
+  '55 Blue Navy': 'img/55 blue navy.png',
+  '58 Grigio': 'img/58 grigio.png',
+  '60 Rosso': 'img/60 rosso.jpeg',
+  '78 Rosa': 'img/78 rosa.png',
+};
+const DEFAULT_HERO_IMG = 'https://www.printeurope.pro/wp-content/uploads/2025/04/100-t-shirt-copia600-1.avif';
+const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'];
+const SIZE_MEASURE = { XS: '46 × 67', S: '48 × 69', M: '50 × 71', L: '54 × 73', XL: '58 × 75', XXL: '62 × 77', XXXL: '66 × 79', XXXXL: '70 × 81' };
+// Prezzi IVA inclusa per magliette bianche; colorate +10%. Colonne: 8×8 / 25×10 / 25×32 / 8×8+25×10 / 8×8+25×32.
+const MATRIX = {
+  50:  { c8: 145, s10: 186, s32: 290, cr10: 216, cr32: 365 },
+  100: { c8: 260, s10: 343, s32: 570, cr10: 393, cr32: 620 },
+};
+const PRINTS = [
+  { key: 'cuore_8x8', label: 'Cuore/manica 8×8 cm', col: 'c8' },
+  { key: 'davanti_25x10', label: 'Davanti 25×10 cm', col: 's10' },
+  { key: 'retro_25x10', label: 'Retro 25×10 cm', col: 's10' },
+  { key: 'davanti_25x32', label: 'Davanti 25×32 cm', col: 's32' },
+  { key: 'retro_25x32', label: 'Retro 25×32 cm', col: 's32' },
+  { key: 'cuore_retro_25x10', label: 'Cuore + retro 25×10 cm', col: 'cr10' },
+  { key: 'cuore_retro_25x32', label: 'Cuore + retro 25×32 cm', col: 'cr32' },
+];
+const SURCHARGE = 1.1;
+
+class Component extends DCLogic {
+  state = {
+    qty: 100,
+    colorIndex: null,
+    printKey: 'cuore_8x8',
+    sizeQty: {},
+    designFiles: [],
+    designRef: null,
+    designLink: '',
+  };
+
+  fmt(n) { return '€' + n.toFixed(2).replace('.', ','); }
+
+  makeDesignRef() {
+    const alpha = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let s = '';
+    for (let i = 0; i < 6; i++) s += alpha[Math.floor(Math.random() * alpha.length)];
+    return 'DES-' + s;
+  }
+
+  patchFile(id, fields) {
+    this.setState(s => ({ designFiles: s.designFiles.map(f => (f.id === id ? { ...f, ...fields } : f)) }));
+  }
+
+  handleFiles(fileList) {
+    const MAX = 4 * 1024 * 1024;
+    const OK = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'pdf', 'ai', 'eps', 'psd', 'tif', 'tiff', 'zip'];
+    const ref = this.state.designRef || this.makeDesignRef();
+    if (!this.state.designRef) this.setState({ designRef: ref });
+    Array.from(fileList).forEach((file, i) => {
+      const id = 'f' + Date.now() + '_' + i + Math.random().toString(36).slice(2, 6);
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      const entry = { id, name: file.name, size: file.size, status: 'uploading', message: '' };
+      if (!OK.includes(ext)) { entry.status = 'error'; entry.message = 'formato non supportato'; }
+      else if (file.size > MAX) { entry.status = 'error'; entry.message = 'oltre 4 MB'; }
+      this.setState(s => ({ designFiles: [...s.designFiles, entry] }));
+      if (entry.status !== 'error') this.uploadFile(file, id, ref);
+    });
+  }
+
+  async uploadFile(file, id, ref) {
+    try {
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Promozione 100 Magliette + Stampa' });
+      const res = await fetch('/api/upload-design?' + qs.toString(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/octet-stream' },
+        body: file,
+      });
+      let data = {};
+      try { data = await res.json(); } catch (_) {}
+      if (!res.ok) throw new Error(data.error || ('errore ' + res.status));
+      this.patchFile(id, { status: 'done' });
+    } catch (ex) {
+      this.patchFile(id, { status: 'error', message: (ex.message || 'invio non riuscito').slice(0, 60) });
+    }
+  }
+
+  renderVals() {
+    const st = this.state;
+    const qty = st.qty === 50 ? 50 : 100;
+    const hasColor = st.colorIndex != null;
+    const activeColor = hasColor ? COLORS[st.colorIndex] : null;
+    const isWhite = hasColor && activeColor.name === '01 Bianco';
+    const colors = COLORS.map((c, i) => ({
+      ...c,
+      swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
+      select: () => this.setState({ colorIndex: i }),
+    }));
+    const priceFor = (key) => {
+      const p = PRINTS.find(x => x.key === key) || PRINTS[0];
+      const base = MATRIX[qty][p.col];
+      return isWhite || !hasColor ? base : base * SURCHARGE;
+    };
+    const prints = PRINTS.map(p => ({
+      label: p.label,
+      dotClass: 'opt-dot' + (p.key === st.printKey ? ' opt-dot-on' : ''),
+      priceLabel: this.fmt(priceFor(p.key)),
+      select: () => this.setState({ printKey: p.key }),
+    }));
+
+    const sizeQty = st.sizeQty || {};
+    const assigned = SIZES.reduce((n, s) => n + (sizeQty[s] || 0), 0);
+    const setQtyFor = (s, v) => this.setState(prev => ({
+      sizeQty: { ...prev.sizeQty, [s]: Math.max(0, Math.min(999, v)) },
+    }));
+    const sizes = SIZES.map(s => ({
+      label: s,
+      qty: sizeQty[s] || 0,
+      measure: SIZE_MEASURE[s] + ' cm',
+      inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
+      dec: () => setQtyFor(s, (this.state.sizeQty[s] || 0) - 1),
+      setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
+    }));
+    const sizesOk = assigned === qty;
+    const assignedNote = sizesOk
+      ? 'Distribuzione completa: ' + qty + ' pezzi assegnati.'
+      : (assigned < qty ? 'Mancano ' + (qty - assigned) + ' pezzi da assegnare (totale richiesto: ' + qty + ').'
+                        : 'Hai assegnato ' + (assigned - qty) + ' pezzi in più del totale (' + qty + ').');
+
+    const base = MATRIX[qty][(PRINTS.find(p => p.key === st.printKey) || PRINTS[0]).col];
+    const total = isWhite || !hasColor ? base : base * SURCHARGE;
+    const surcharge = total - base;
+    const sizeBreakdown = SIZES.filter(s => sizeQty[s] > 0).map(s => s + '×' + sizeQty[s]).join(', ') || 'nessuna';
+    const printLabel = (PRINTS.find(p => p.key === st.printKey) || PRINTS[0]).label;
+
+    const fileSizeLabel = (b) => (b < 1024 * 1024 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1).replace('.', ',') + ' MB');
+    const statusText = { uploading: 'invio…', done: 'caricato', error: 'errore' };
+    const designFiles = (st.designFiles || []).map(f => ({
+      name: f.name,
+      sizeLabel: fileSizeLabel(f.size),
+      statusLabel: f.status === 'error' ? (f.message || 'errore') : statusText[f.status],
+      remove: () => this.setState(s => ({ designFiles: s.designFiles.filter(x => x.id !== f.id) })),
+    }));
+    const uploadedFiles = (st.designFiles || []).filter(f => f.status === 'done').map(f => f.name);
+    const uploadingCount = (st.designFiles || []).filter(f => f.status === 'uploading').length;
+    const hasDesignRef = uploadedFiles.length > 0;
+    const designLink = (st.designLink || '').trim();
+    const designLinkOk = /^https?:\/\/\S+\.\S+/i.test(designLink);
+    const designLinkError = designLink.length > 0 && !designLinkOk;
+
+    return {
+      colors, prints, sizes,
+      quantity: qty,
+      qty50Class: 'qty-opt' + (qty === 50 ? ' qty-opt-on' : ''),
+      qty100Class: 'qty-opt' + (qty === 100 ? ' qty-opt-on' : ''),
+      setQty50: () => this.setState({ qty: 50 }),
+      setQty100: () => this.setState({ qty: 100 }),
+      selectedColorName: hasColor ? activeColor.name : '—',
+      selectedColorNote: !hasColor ? 'Scegli un colore' : (isWhite ? 'Prezzo promozione, senza maggiorazione' : 'Colorata — maggiorazione 10%'),
+      hasColor, noColor: !hasColor,
+      heroImageSrc: hasColor ? (IMAGE_BY_COLOR[activeColor.name] ?? DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG,
+      assignedLabel: assigned + ' / ' + qty + ' pz assegnati',
+      assignedNote,
+      assignedColor: sizesOk ? 'var(--color-neutral-700)' : '#ec3013',
+      basePriceLabel: this.fmt(base),
+      surchargeLabel: surcharge > 0 ? '+' + this.fmt(surcharge) : '—',
+      totalPriceLabel: this.fmt(total),
+      unitPriceLabel: this.fmt(total / qty) + ' / pezzo',
+      designFiles, hasDesignRef, designRef: st.designRef || '',
+      designLink: st.designLink || '', designLinkError,
+      setDesignLink: (e) => this.setState({ designLink: e.target.value }),
+      pickFiles: (e) => { const fl = e.target.files; if (fl && fl.length) this.handleFiles(fl); e.target.value = ''; },
+      checkout: () => {
+        if (!hasColor) { alert('Scegli un colore prima di procedere.'); return; }
+        if (!sizesOk) { alert(assignedNote); return; }
+        if (designLinkError) { alert('Il link al file non è valido: deve iniziare con http:// o https://'); return; }
+        if (uploadingCount > 0 && !confirm('Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
+        const orderBody = {
+          productId: 'promo100',
+          human: {
+            'Quantità': qty + ' pz',
+            'Colore': activeColor.name,
+            'Taglie': sizeBreakdown,
+            'Stampa': printLabel,
+            ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
+            ...(designLinkOk ? { 'Link file': designLink } : {}),
+          },
+          formula: {
+            qty,
+            isWhite,
+            colorName: activeColor.name,
+            sizes: sizeQty,
+            printKey: st.printKey,
+          },
+          ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
+          ...(designLinkOk ? { designLink } : {}),
+        };
+        const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
+        const params = new URLSearchParams({
+          id: 'promo100',
+          name: 'Promozione 100 Magliette + Stampa',
+          price: total.toFixed(2),
+          col: 'misura',
+          cfg,
+        });
+        window.location.href = './checkout.dc.html?' + params.toString();
+      },
+      preventivo: () => {
+        const config = 'Quantità: ' + qty + ' pz, Colore: ' + (hasColor ? activeColor.name : 'da definire') + ', Taglie: ' + sizeBreakdown + ', Stampa: ' + printLabel;
+        const params = new URLSearchParams({
+          prodotto: 'Promozione 100 Magliette + Stampa',
+          config,
+          quantita: String(qty),
+          prezzo: total.toFixed(2),
+        });
+        window.location.href = './preventivo.dc.html?' + params.toString();
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
