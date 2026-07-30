@@ -262,6 +262,31 @@ function orderEmailHtml(order, total, md) {
     </tr>`;
   }).join('');
 
+  const senderRows = md.sender_use === '1' ? [
+    ['Ragione sociale', md.sender_company || '—'],
+    ['Indirizzo', [md.sender_address, md.sender_cap, md.sender_city].filter(Boolean).join(', ') || '—'],
+    ['Telefono', md.sender_phone || '—'],
+  ] : [];
+  const senderBlock = senderRows.length
+    ? `<tr><td style="padding:26px 32px 0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:2px solid ${STEEL};border-collapse:separate;">
+          <tr><td style="padding:14px 16px 4px;">
+            <div style="font:700 11px/1 ${BODY_FONT};letter-spacing:.16em;text-transform:uppercase;color:${STEEL};">Dati del mittente</div>
+            <div style="font:800 20px/1.2 ${HEAD_FONT};color:${INK};padding-top:6px;">Il pacco parte a nome tuo</div>
+          </td></tr>
+          <tr><td style="padding:8px 16px 16px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+              ${senderRows.map(([k, v]) => `<tr>
+                <td style="padding:7px 0;border-bottom:1px solid ${RULE};font:600 12px/1.4 ${BODY_FONT};letter-spacing:.06em;text-transform:uppercase;color:${MUTED};width:140px;">${k}</td>
+                <td style="padding:7px 0;border-bottom:1px solid ${RULE};font:400 14px/1.4 ${BODY_FONT};color:${INK};">${v}</td>
+              </tr>`).join('')}
+            </table>
+            <div style="padding-top:10px;font:400 13px/1.6 ${BODY_FONT};color:${MUTED};">Nessun nostro riferimento comparirà sul pacco: mittente e documento di trasporto riportano questi dati.</div>
+          </td></tr>
+        </table>
+      </td></tr>`
+    : '';
+
   return `<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:${BG};">
@@ -303,6 +328,7 @@ function orderEmailHtml(order, total, md) {
         </table>
       </td></tr>
 
+      ${senderBlock}
       ${designBlock}
       <tr><td style="padding:28px 32px 0;">
         <div style="border-top:1px solid ${RULE};padding-top:18px;font:400 14px/1.6 ${BODY_FONT};color:${MUTED};">
@@ -337,10 +363,6 @@ function ownerBlockHtml(order, buyerEmail, session) {
       ? [md.ship_name, md.ship_address, md.ship_cap, md.ship_city].filter(Boolean).join(', ')
       : 'Come fatturazione'],
   ];
-  if (md.sender_use === '1') {
-    rowsData.push(['Mittente pacco', [md.sender_company, md.sender_address, md.sender_cap, md.sender_city].filter(Boolean).join(', ') || '—']);
-    if (md.sender_phone) rowsData.push(['Tel. mittente', md.sender_phone]);
-  }
   if (md.design_ref) {
     rowsData.push(['File design', `${md.design_ref}${md.design_files ? ' — ' + md.design_files : ''} (arrivati per email separata)`]);
   }
