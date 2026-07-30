@@ -321,11 +321,10 @@ module.exports = async (req, res) => {
     }];
     const shipFee = Math.max(0, Number(shippingFee) || 0);
     if (shipFee > 0) {
-      const zoneLabels = { roma_centro: 'Roma Sud/EUR/Centro', roma_resto: 'Resto di Roma', italia: 'Italia (+1 giorno)' };
       lineItems.push({
         price_data: {
           currency: 'eur',
-          product_data: { name: `Spedizione — ${zoneLabels[shippingZone] || shippingZone || ''}` },
+          product_data: { name: 'Spedizione Italia' },
           unit_amount: Math.round(shipFee * 100),
         },
         quantity: 1,
