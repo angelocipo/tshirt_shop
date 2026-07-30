@@ -346,6 +346,15 @@ class Component extends DCLogic {
       localStorage.setItem('ts_pending_order', JSON.stringify({
         value, currency: 'EUR', name: this.state.productName, id: this.state.productId,
       }));
+      // Full recap for the thank-you page (kept after the purchase event fires).
+      localStorage.setItem('ts_last_order', JSON.stringify({
+        name: this.state.productName,
+        subtotal: +(parseFloat(this.state.productPrice) || 0).toFixed(2),
+        shippingFee: +shippingFee.toFixed(2),
+        total: value,
+        email: (this.state.inv || {}).email || '',
+        details: this.buildOrderDetails(this.state.orderBody),
+      }));
     } catch (_) {}
     if (window.fbq) fbq('track', 'InitiateCheckout', { value, currency: 'EUR' });
     if (window.gtag) gtag('event', 'begin_checkout', { currency: 'EUR', value });

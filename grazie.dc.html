@@ -86,6 +86,33 @@
     <div style="padding:var(--space-8) var(--space-6);">
       <p style="font-size:16px;color:var(--color-text);max-width:52ch;margin:0 auto var(--space-8);text-align:center;text-wrap:pretty;">Il pagamento è andato a buon fine. Riceverai subito un'email con il riepilogo dell'ordine. La fattura arriva separatamente, entro un giorno lavorativo.</p>
 
+      <sc-if value="{{ hasRecap }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid var(--color-divider);margin-bottom:var(--space-8);">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3);padding:var(--space-4);border-bottom:1px solid var(--color-divider);">
+            <div style="font-family:var(--font-heading);font-weight:800;font-size:15px;">{{ recapName }}</div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-neutral-700);">Il tuo ordine</div>
+          </div>
+          <sc-for list="{{ recapDetails }}" as="d" hint-placeholder-count="3">
+            <div style="display:flex;justify-content:space-between;gap:var(--space-4);padding:9px var(--space-4);border-bottom:1px solid var(--color-divider);font-size:13.5px;">
+              <span style="color:var(--color-neutral-700);">{{ d.label }}</span>
+              <span style="text-align:right;">{{ d.value }}</span>
+            </div>
+          </sc-for>
+          <div style="display:flex;justify-content:space-between;gap:var(--space-4);padding:9px var(--space-4);font-size:13.5px;">
+            <span style="color:var(--color-neutral-700);">Prodotto</span><span>{{ recapSubtotal }}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;gap:var(--space-4);padding:0 var(--space-4) 9px;font-size:13.5px;">
+            <span style="color:var(--color-neutral-700);">Spedizione</span><span>{{ recapShipping }}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;gap:var(--space-4);padding:var(--space-3) var(--space-4);border-top:1px solid var(--color-divider);font-family:var(--font-heading);font-weight:800;font-size:17px;">
+            <span>Totale pagato</span><span>{{ recapTotal }}</span>
+          </div>
+          <sc-if value="{{ hasRecapEmail }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 var(--space-4) var(--space-4);font-size:12.5px;color:var(--color-neutral-700);">Conferma inviata a {{ recapEmail }}</div>
+          </sc-if>
+        </div>
+      </sc-if>
+
       <div class="steps-grid" style="margin-bottom:var(--space-8);">
         <div style="padding:var(--space-4);border-right:1px solid var(--color-divider);">
           <div style="font-family:var(--font-heading);font-weight:800;font-size:13px;color:var(--color-accent-700);margin-bottom:var(--space-2);">01 — Conferma</div>
@@ -117,7 +144,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { orderRef: '' };
+  state = { orderRef: '', recap: null };
   componentDidMount() {
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get('session_id');
@@ -142,9 +169,13 @@ class Component extends DCLogic {
       return out;
     };
     const orderRef = sessionId ? makeRef(sessionId) : (params.get('token') || '');
-    this.setState({ orderRef });
+    let recap = null;
+    try { recap = JSON.parse(localStorage.getItem('ts_last_order') || 'null'); } catch (_) {}
+    this.setState({ orderRef, recap });
     this.trackPurchase(orderRef);
   }
+
+  fmt(n) { return '€ ' + (Number(n) || 0).toFixed(2).replace('.', ','); }
 
   /* fire the sale once per order (survives refresh / back-button) */
   trackPurchase(orderRef) {
@@ -161,7 +192,20 @@ class Component extends DCLogic {
     try { localStorage.removeItem('ts_pending_order'); } catch (_) {}
   }
   renderVals() {
-    return { hasOrderRef: !!this.state.orderRef, orderRef: this.state.orderRef };
+    const r = this.state.recap;
+    const details = r && Array.isArray(r.details) ? r.details : [];
+    return {
+      hasOrderRef: !!this.state.orderRef,
+      orderRef: this.state.orderRef,
+      hasRecap: !!(r && r.total),
+      recapName: r ? (r.name || 'Ordine') : '',
+      recapDetails: details,
+      recapSubtotal: r ? this.fmt(r.subtotal) : '',
+      recapShipping: r ? (r.shippingFee > 0 ? this.fmt(r.shippingFee) : 'Gratuita') : '',
+      recapTotal: r ? this.fmt(r.total) : '',
+      hasRecapEmail: !!(r && r.email),
+      recapEmail: r ? (r.email || '') : '',
+    };
   }
 }
 </script>
