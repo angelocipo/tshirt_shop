@@ -67,13 +67,16 @@ async function rawBody(req) {
 //
 // IMPORTANT: grazie.dc.html contains a character-for-character copy of this function. Change one,
 // change the other, or the code on screen stops matching the code in the email.
+// Math.imul is required, not a plain `*`: 32-bit values times these primes exceed 2^53, so the
+// low bits get rounded away before >>>0 reads them. That collapsed one character position to 5
+// possible values and produced duplicate codes.
 const REF_ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 function orderRef(session) {
   const src = String(session.id || '');
   let h1 = 0x811c9dc5, h2 = 0x01000193;
   for (let i = 0; i < src.length; i++) {
-    h1 = ((h1 ^ src.charCodeAt(i)) * 16777619) >>> 0;
-    h2 = ((h2 + src.charCodeAt(i) * (i + 7)) * 2654435761) >>> 0;
+    h1 = Math.imul(h1 ^ src.charCodeAt(i), 16777619) >>> 0;
+    h2 = Math.imul(h2 + src.charCodeAt(i) * (i + 7), 2654435761) >>> 0;
   }
   let out = '';
   for (let i = 0; i < 6; i++) {
@@ -284,7 +287,7 @@ function orderEmailHtml(order, total) {
 
       <tr><td style="padding:28px 32px 0;">
         <div style="border-top:1px solid ${RULE};padding-top:18px;font:400 14px/1.6 ${BODY_FONT};color:${MUTED};">
-          Riceverai a breve la fattura elettronica e le istruzioni per l'invio del materiale da stampare.
+          Riceverai la fattura entro un giorno lavorativo, insieme alle istruzioni per l'invio del materiale da stampare.
         </div>
       </td></tr>
 
