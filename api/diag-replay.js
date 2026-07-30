@@ -100,9 +100,21 @@ module.exports = async (req, res) => {
   } catch (err) {
     step('require stripe-webhook', false, String(err && err.stack || err));
   }
+  let sendEmail;
   try {
-    const { sendEmail } = require('./_email-client');
-    step('require _email-client', true, 'ok');
+    // Inlined sender — deliberately no local require, so a missing helper cannot break this.
+    const RESEND_FROM = process.env.RESEND_FROM || 'Tshirt Shop Online <ordini@tshirt-shop.online>';
+    sendEmail = async ({ to, subject, html }) => {
+      const r = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+        body: JSON.stringify({ from: RESEND_FROM, to, subject, html }),
+      });
+      const text = await r.text();
+      if (!r.ok) throw new Error(`Resend ${r.status}: ${text}`);
+      return text;
+    };
+    step('email sender', true, `from=${RESEND_FROM}`);
 
     const buyerEmail = session.metadata?.inv_email || session.customer_details?.email || session.customer_email;
     step('resolve buyer email', !!buyerEmail, buyerEmail || 'NONE — cannot address the confirmation');
@@ -135,7 +147,7 @@ module.exports = async (req, res) => {
       }
     }
   } catch (err) {
-    step('require _email-client', false, String(err && err.stack || err));
+    step('email sender', false, String(err && err.stack || err));
   }
 
   // 4. Invoicing — opt-in, because it produces a real fiscal document.

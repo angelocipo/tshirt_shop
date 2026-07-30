@@ -7,8 +7,29 @@
 
 const Stripe = require('stripe');
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const { createInvoiceForOrder } = require('./create-invoice');
-const { sendEmail } = require('./_email-client');
+// NOTE: create-invoice is NOT required at the top level — it pulls in _fattura-xml and
+// _aruba-client, and any one of those missing would crash this function on import, which is
+// exactly the failure that silently killed every order confirmation. It is loaded lazily below.
+
+// Email sending is INLINED here on purpose. It used to live in ./_email-client, but that helper
+// went missing from a deployment and the top-level require crashed the whole function — the
+// webhook never returned 200, so Stripe retried forever and no confirmation was ever sent.
+// Keeping it inline means this endpoint has no local dependency that can go missing.
+const RESEND_FROM = process.env.RESEND_FROM || 'Tshirt Shop Online <ordini@tshirt-shop.online>';
+
+async function sendEmail({ to, subject, html }) {
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+    body: JSON.stringify({ from: RESEND_FROM, to, subject, html }),
+  });
+  const text = await r.text();
+  if (!r.ok) {
+    console.error(`Resend send failed → to=${to} from=${RESEND_FROM} status=${r.status} body=${text}`);
+    throw new Error(`Resend send failed: ${r.status} ${text}`);
+  }
+  return text;
+}
 
 const OWNER_EMAIL = process.env.OWNER_NOTIFICATION_EMAIL || 'info@tshirt-shop.online';
 
@@ -129,8 +150,10 @@ module.exports = async (req, res) => {
       }
 
       // Invoicing runs after the emails and in its own try — an Aruba failure must never
-      // suppress the customer's order confirmation.
+      // suppress the customer's order confirmation. The require is LAZY (inside the try) so a
+      // missing invoice helper can no longer crash the whole webhook at import time.
       try {
+        const { createInvoiceForOrder } = require('./create-invoice');
         await createInvoiceForOrder(order);
       } catch (invErr) {
         console.error('Invoice creation failed for session', session.id, invErr);
