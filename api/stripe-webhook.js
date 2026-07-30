@@ -58,12 +58,15 @@ async function rawBody(req) {
   throw new Error('Body della richiesta vuoto.');
 }
 
-// Sequential invoice numbering. Swap for a persistent counter (KV/DB) before going live —
-// this in-memory counter resets on every cold start.
-let invoiceCounter = 0;
-function nextInvoiceNumber() {
-  invoiceCounter += 1;
-  return String(invoiceCounter).padStart(5, '0');
+// Order reference. This is NOT a fiscal invoice number: invoices are issued by hand for now,
+// and the previous in-memory counter restarted from 00001 on every cold start, so it handed the
+// same number to different orders. Deriving it from the Stripe session id makes it unique and
+// stable — the same order always shows the same reference, and it is searchable in Stripe.
+function orderRef(session) {
+  const tail = String(session.id || '').replace(/[^a-zA-Z0-9]/g, '').slice(-6).toUpperCase();
+  const d = new Date((session.created || Date.now() / 1000) * 1000);
+  const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+  return `${ymd}-${tail}`;
 }
 
 // NOTE: the config assignment lives at the BOTTOM of this file — assigning it before
@@ -109,7 +112,7 @@ module.exports = async (req, res) => {
       const md = session.metadata || {};
       const isCompany = md.inv_type === 'azienda';
       const order = {
-        number: nextInvoiceNumber(),
+        number: orderRef(session),
         date: new Date(),
         total,
         customer: {
@@ -136,27 +139,39 @@ module.exports = async (req, res) => {
       const buyerEmail = md.inv_email || session.customer_details?.email || session.customer_email;
       console.log('Order', order.number, 'session', session.id, 'buyerEmail:', buyerEmail || 'NONE', '— owner:', OWNER_EMAIL);
       const summaryHtml = orderEmailHtml(order, total);
-      try {
-        if (buyerEmail) {
+      // Each send gets its OWN try. They used to share one: if the buyer send threw, the owner
+      // notification was skipped entirely and the shop never learned about the order.
+      if (buyerEmail) {
+        try {
           await sendEmail({ to: buyerEmail, subject: `Conferma ordine #${order.number} — Tshirt Shop Online`, html: summaryHtml });
+          console.log('Buyer confirmation sent to', buyerEmail);
+        } catch (mailErr) {
+          console.error('Buyer confirmation FAILED for session', session.id, mailErr);
         }
+      }
+      try {
         await sendEmail({
           to: OWNER_EMAIL,
           subject: `Nuovo ordine #${order.number} — € ${total.toFixed(2)}`,
           html: summaryHtml.replace('</body></html>', ownerBlockHtml(order, buyerEmail, session) + '</body></html>'),
         });
+        console.log('Owner notification sent to', OWNER_EMAIL);
       } catch (mailErr) {
-        console.error('Confirmation email failed for session', session.id, mailErr);
+        console.error('Owner notification FAILED to', OWNER_EMAIL, mailErr);
       }
 
-      // Invoicing runs after the emails and in its own try — an Aruba failure must never
-      // suppress the customer's order confirmation. The require is LAZY (inside the try) so a
-      // missing invoice helper can no longer crash the whole webhook at import time.
-      try {
-        const { createInvoiceForOrder } = require('./create-invoice');
-        await createInvoiceForOrder(order);
-      } catch (invErr) {
-        console.error('Invoice creation failed for session', session.id, invErr);
+      // Aruba is NOT connected yet (it needs a professional account) — invoices are issued by
+      // hand for now. Set ARUBA_ENABLED=1 in the environment to switch the automatic submission
+      // back on; until then we skip it instead of failing on every order.
+      if (process.env.ARUBA_ENABLED === '1') {
+        try {
+          const { createInvoiceForOrder } = require('./create-invoice');
+          await createInvoiceForOrder(order);
+        } catch (invErr) {
+          console.error('Invoice creation failed for session', session.id, invErr);
+        }
+      } else {
+        console.log('Aruba disabled — invoice for order', order.number, 'must be issued manually. Total €', total.toFixed(2));
       }
 
       // Shipping/sender details aren't part of the invoice — they drive the packing slip
