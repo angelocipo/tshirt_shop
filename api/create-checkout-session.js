@@ -285,8 +285,20 @@ module.exports = async (req, res) => {
       const unit = product.garmentUnitPrice(qty, isWhite) + printTotal;
       unitAmountCents = Math.round(unit * qty * 100);
       const color = (f.colorName || '').toString().slice(0, 40);
-      const size = (f.size || '').toString().slice(0, 8);
-      description = `${product.nome} — ${color || 'colore'}, ${size || 'taglia'}, ${qty}pz${parts.length ? ', stampa: ' + parts.join('+') : ''}`;
+      // The configurator sends `sizes` as a per-size quantity map ({S:1, M:2}), not a single
+      // `size` string — reading f.size always came back empty and printed the literal word
+      // "taglia" on the confirmation and the invoice. Build the real breakdown from the map,
+      // and keep f.size as a fallback in case a simpler caller sends one.
+      const sizeMap = f.sizes && typeof f.sizes === 'object' ? f.sizes : null;
+      let sizeLabel = '';
+      if (sizeMap) {
+        sizeLabel = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+          .filter((s) => (parseInt(sizeMap[s], 10) || 0) > 0)
+          .map((s) => `${s}×${parseInt(sizeMap[s], 10)}`)
+          .join(' ');
+      }
+      if (!sizeLabel) sizeLabel = (f.size || '').toString().slice(0, 40);
+      description = `${product.nome} — ${color || 'colore'}, ${sizeLabel || 'taglia non indicata'}, ${qty}pz${parts.length ? ', stampa: ' + parts.join('+') : ''}`;
     } else if (product.type === 'size') {
       const idx = Number.isInteger(sizeIndex) ? sizeIndex : 0;
       const variant = product.variants[Math.min(Math.max(idx, 0), product.variants.length - 1)];

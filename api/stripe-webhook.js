@@ -58,15 +58,29 @@ async function rawBody(req) {
   throw new Error('Body della richiesta vuoto.');
 }
 
-// Order reference. This is NOT a fiscal invoice number: invoices are issued by hand for now,
-// and the previous in-memory counter restarted from 00001 on every cold start, so it handed the
-// same number to different orders. Deriving it from the Stripe session id makes it unique and
-// stable — the same order always shows the same reference, and it is searchable in Stripe.
+// Order reference in airline-booking style: a 6-character code like "K7QF2M".
+//
+// Derived deterministically from the Stripe session id — no counter, no storage, and the same
+// order always produces the same code (a cold start cannot repeat or reset it, which is what the
+// old in-memory 00001 counter did). The alphabet omits I, O, 0 and 1 so the code can be read out
+// over the phone without ambiguity.
+//
+// IMPORTANT: grazie.dc.html contains a character-for-character copy of this function. Change one,
+// change the other, or the code on screen stops matching the code in the email.
+const REF_ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 function orderRef(session) {
-  const tail = String(session.id || '').replace(/[^a-zA-Z0-9]/g, '').slice(-6).toUpperCase();
-  const d = new Date((session.created || Date.now() / 1000) * 1000);
-  const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
-  return `${ymd}-${tail}`;
+  const src = String(session.id || '');
+  let h1 = 0x811c9dc5, h2 = 0x01000193;
+  for (let i = 0; i < src.length; i++) {
+    h1 = ((h1 ^ src.charCodeAt(i)) * 16777619) >>> 0;
+    h2 = ((h2 + src.charCodeAt(i) * (i + 7)) * 2654435761) >>> 0;
+  }
+  let out = '';
+  for (let i = 0; i < 6; i++) {
+    const mix = i < 3 ? (h1 >>> (i * 5)) : (h2 >>> ((i - 3) * 5));
+    out += REF_ALPHABET[mix % 32];
+  }
+  return out;
 }
 
 // NOTE: the config assignment lives at the BOTTOM of this file — assigning it before
