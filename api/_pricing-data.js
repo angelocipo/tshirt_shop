@@ -44,6 +44,26 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
+  // Promozione 100 Magliette + Stampa — prezzi a matrice (IVA inclusa, magliette bianche;
+  // colorate +10%, spedizione inclusa). Fonte: scheda prodotto printeurope.pro.
+  'promo100': { nome: 'Promozione 100 Magliette + Stampa', type: 'promo100',
+    qtyChoices: [50, 100],
+    // colonne: c8 = 8×8cm · s10 = 25×10cm · s32 = 25×32cm · cr10 = 8×8 + 25×10 · cr32 = 8×8 + 25×32
+    matrix: {
+      50:  { c8: 145, s10: 186, s32: 290, cr10: 216, cr32: 365 },
+      100: { c8: 260, s10: 343, s32: 570, cr10: 393, cr32: 620 },
+    },
+    printChoices: [
+      { key: 'cuore_8x8', label: 'Cuore/manica 8×8 cm', col: 'c8' },
+      { key: 'davanti_25x10', label: 'Davanti 25×10 cm', col: 's10' },
+      { key: 'retro_25x10', label: 'Retro 25×10 cm', col: 's10' },
+      { key: 'davanti_25x32', label: 'Davanti 25×32 cm', col: 's32' },
+      { key: 'retro_25x32', label: 'Retro 25×32 cm', col: 's32' },
+      { key: 'cuore_retro_25x10', label: 'Cuore + retro 25×10 cm', col: 'cr10' },
+      { key: 'cuore_retro_25x32', label: 'Cuore + retro 25×32 cm', col: 'cr32' },
+    ],
+    coloredSurcharge: 1.1 },
+
   // Reconstructed 1:1 from the real Advanced Product Fields (Studio Wombat) config for this product.
   '197': { nome: 'Stampa Roll-Up 80/85 × 200 cm', type: 'formula',
     rollupRate: (qty) => (qty > 6 ? 20 : qty > 4 ? 25 : 30),

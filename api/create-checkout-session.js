@@ -299,6 +299,24 @@ module.exports = async (req, res) => {
       }
       if (!sizeLabel) sizeLabel = (f.size || '').toString().slice(0, 40);
       description = `${product.nome} — ${color || 'colore'}, ${sizeLabel || 'taglia non indicata'}, ${qty}pz${parts.length ? ', stampa: ' + parts.join('+') : ''}`;
+    } else if (product.type === 'promo100') {
+      const f = formula || {};
+      const qty = product.qtyChoices.includes(parseInt(f.qty, 10)) ? parseInt(f.qty, 10) : product.qtyChoices[0];
+      const choice = product.printChoices.find((c) => c.key === f.printKey) || product.printChoices[0];
+      const isWhite = !!f.isWhite;
+      const base = product.matrix[qty][choice.col];
+      const total = isWhite ? base : base * product.coloredSurcharge;
+      unitAmountCents = Math.round(total * 100);
+      const color = (f.colorName || '').toString().slice(0, 40);
+      const sizeMap = f.sizes && typeof f.sizes === 'object' ? f.sizes : null;
+      let sizeLabel = '';
+      if (sizeMap) {
+        sizeLabel = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL']
+          .filter((s) => (parseInt(sizeMap[s], 10) || 0) > 0)
+          .map((s) => `${s}×${parseInt(sizeMap[s], 10)}`)
+          .join(' ');
+      }
+      description = `${product.nome} — ${qty}pz, ${color || 'colore'}, ${sizeLabel || 'taglie da definire'}, stampa: ${choice.label}`;
     } else if (product.type === 'size') {
       const idx = Number.isInteger(sizeIndex) ? sizeIndex : 0;
       const variant = product.variants[Math.min(Math.max(idx, 0), product.variants.length - 1)];
