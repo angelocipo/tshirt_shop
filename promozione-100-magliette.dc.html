@@ -111,12 +111,7 @@
       <div class="prod-visual">
         <div style="max-width: 480px; margin-bottom: var(--space-3);">
           <div style="aspect-ratio: 1;">
-            <sc-if value="{{ hasColor }}" hint-placeholder-val="{{ false }}">
-              <img alt="Maglietta nel colore scelto" src="{{ heroImageSrc }}" style="width:100%;height:100%;object-fit:cover;display:block;">
-            </sc-if>
-            <sc-if value="{{ noColor }}" hint-placeholder-val="{{ true }}">
-              <img alt="Promozione 100 magliette con stampa" src="https://www.printeurope.pro/wp-content/uploads/2025/04/100-t-shirt-copia600-1.avif" style="width:100%;height:100%;object-fit:cover;display:block;">
-            </sc-if>
+            <img id="promo-hero" alt="Promozione 100 magliette con stampa" src="https://www.printeurope.pro/wp-content/uploads/2025/04/100-t-shirt-copia600-1.avif" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
         </div>
       </div>
@@ -311,6 +306,22 @@ class Component extends DCLogic {
 
   fmt(n) { return '€' + n.toFixed(2).replace('.', ','); }
 
+  // The hero <img> keeps a literal src in the template: a {{ hole }} in src makes the browser
+  // request the unresolved placeholder string once on every load. Swap it imperatively instead.
+  syncHero() {
+    const el = document.getElementById('promo-hero');
+    if (!el) return;
+    const i = this.state.colorIndex;
+    const src = i != null ? (IMAGE_BY_COLOR[COLORS[i].name] || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
+    const want = new URL(src, window.location.href).href;
+    if (el.src !== want) {
+      el.src = src;
+      el.alt = i != null ? ('Maglietta ' + COLORS[i].name) : 'Promozione 100 magliette con stampa';
+    }
+  }
+  componentDidMount() { this.syncHero(); }
+  componentDidUpdate() { this.syncHero(); }
+
   makeDesignRef() {
     const alpha = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     let s = '';
@@ -427,8 +438,7 @@ class Component extends DCLogic {
       setQty100: () => this.setState({ qty: 100 }),
       selectedColorName: hasColor ? activeColor.name : '—',
       selectedColorNote: !hasColor ? 'Scegli un colore' : (isWhite ? 'Prezzo promozione, senza maggiorazione' : 'Colorata — maggiorazione 10%'),
-      hasColor, noColor: !hasColor,
-      heroImageSrc: hasColor ? (IMAGE_BY_COLOR[activeColor.name] ?? DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG,
+      hasColor,
       assignedLabel: assigned + ' / ' + qty + ' pz assegnati',
       assignedNote,
       assignedColor: sizesOk ? 'var(--color-neutral-700)' : '#ec3013',
