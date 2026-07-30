@@ -357,6 +357,7 @@ class Component extends DCLogic {
         shippingFee: +shippingFee.toFixed(2),
         total: value,
         email: (this.state.inv || {}).email || '',
+        sender: this.state.useSender ? { ...(this.state.sender || {}) } : null,
         details: this.buildOrderDetails(this.state.orderBody),
       }));
     } catch (_) {}
