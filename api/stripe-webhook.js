@@ -337,6 +337,10 @@ function ownerBlockHtml(order, buyerEmail, session) {
       ? [md.ship_name, md.ship_address, md.ship_cap, md.ship_city].filter(Boolean).join(', ')
       : 'Come fatturazione'],
   ];
+  if (md.sender_use === '1') {
+    rowsData.push(['Mittente pacco', [md.sender_company, md.sender_address, md.sender_cap, md.sender_city].filter(Boolean).join(', ') || '—']);
+    if (md.sender_phone) rowsData.push(['Tel. mittente', md.sender_phone]);
+  }
   if (md.design_ref) {
     rowsData.push(['File design', `${md.design_ref}${md.design_files ? ' — ' + md.design_files : ''} (arrivati per email separata)`]);
   }
