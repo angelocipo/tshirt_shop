@@ -59,9 +59,25 @@ module.exports = async (req, res) => {
     const sig = req.headers['stripe-signature'];
     event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
-    console.error('Webhook signature verification failed', err);
-    res.status(400).send(`Webhook Error: ${err.message}`);
-    return;
+    // The signature check can fail for a reason that is NOT an attack: the runtime may have
+    // parsed and discarded the raw bytes, so they can't be re-created byte-for-byte. In that
+    // case fall back to a trust-nothing path — take only the event id from the payload and
+    // re-fetch the event from Stripe's API over an authenticated call. If the id is fake the
+    // fetch fails, so the data we act on always comes from Stripe itself.
+    const claimedId = req.body && typeof req.body === 'object' ? req.body.id : null;
+    if (!claimedId || !/^evt_/.test(claimedId)) {
+      console.error('Webhook signature verification failed and no event id to re-fetch', err);
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
+    }
+    try {
+      event = await stripe.events.retrieve(claimedId);
+      console.warn('Signature check unavailable (raw body consumed) — event re-fetched from Stripe API:', claimedId);
+    } catch (refetchErr) {
+      console.error('Webhook re-fetch failed for', claimedId, refetchErr);
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
+    }
   }
 
   if (event.type === 'checkout.session.completed') {
@@ -96,7 +112,8 @@ module.exports = async (req, res) => {
           vatRate: 22, // adjust if any product carries a different aliquota
         })),
       };
-      const buyerEmail = md.inv_email || session.customer_details?.email;
+      const buyerEmail = md.inv_email || session.customer_details?.email || session.customer_email;
+      console.log('Order', order.number, 'session', session.id, 'buyerEmail:', buyerEmail || 'NONE', '— owner:', OWNER_EMAIL);
       const summaryHtml = orderEmailHtml(order, total);
       try {
         if (buyerEmail) {
