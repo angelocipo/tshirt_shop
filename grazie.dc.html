@@ -121,7 +121,24 @@ class Component extends DCLogic {
   componentDidMount() {
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get('session_id');
-    const orderRef = sessionId ? sessionId.replace(/^cs_(test_|live_)?/, '').slice(0, 12).toUpperCase() : (params.get('token') || '');
+    // Airline-style 6-character booking code. This is a character-for-character copy of
+    // orderRef() in api/stripe-webhook.js — if one changes, the reference shown here stops
+    // matching the one in the confirmation email. Alphabet omits I, O, 0, 1.
+    const REF_ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const makeRef = (id) => {
+      let h1 = 0x811c9dc5, h2 = 0x01000193;
+      for (let i = 0; i < id.length; i++) {
+        h1 = ((h1 ^ id.charCodeAt(i)) * 16777619) >>> 0;
+        h2 = ((h2 + id.charCodeAt(i) * (i + 7)) * 2654435761) >>> 0;
+      }
+      let out = '';
+      for (let i = 0; i < 6; i++) {
+        const mix = i < 3 ? (h1 >>> (i * 5)) : (h2 >>> ((i - 3) * 5));
+        out += REF_ALPHABET[mix % 32];
+      }
+      return out;
+    };
+    const orderRef = sessionId ? makeRef(sessionId) : (params.get('token') || '');
     this.setState({ orderRef });
     this.trackPurchase(orderRef);
   }
