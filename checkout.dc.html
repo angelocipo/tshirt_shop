@@ -336,6 +336,10 @@ class Component extends DCLogic {
     if (invType === 'azienda' && (!inv.company || !inv.vat)) return 'Inserisci Ragione Sociale e Partita IVA.';
     if (invType === 'azienda' && !inv.pec && !inv.sdi) return 'Inserisci PEC o Codice SDI.';
     if (!this.state.productId) return 'Nessun prodotto selezionato.';
+    if (this.state.useSender) {
+      const sn = this.state.sender || {};
+      if (!sn.company || !sn.address || !sn.city || !sn.cap) return 'Completa i dati del mittente: ragione sociale, indirizzo, città e CAP.';
+    }
     return null;
   }
 
