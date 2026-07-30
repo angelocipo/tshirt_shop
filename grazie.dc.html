@@ -84,12 +84,12 @@
     </div>
 
     <div style="padding:var(--space-8) var(--space-6);">
-      <p style="font-size:16px;color:var(--color-text);max-width:52ch;margin:0 auto var(--space-8);text-align:center;text-wrap:pretty;">Il pagamento è andato a buon fine. A breve riceverai un'email di conferma con il riepilogo dell'ordine e la fattura elettronica.</p>
+      <p style="font-size:16px;color:var(--color-text);max-width:52ch;margin:0 auto var(--space-8);text-align:center;text-wrap:pretty;">Il pagamento è andato a buon fine. Riceverai subito un'email con il riepilogo dell'ordine. La fattura arriva separatamente, entro un giorno lavorativo.</p>
 
       <div class="steps-grid" style="margin-bottom:var(--space-8);">
         <div style="padding:var(--space-4);border-right:1px solid var(--color-divider);">
           <div style="font-family:var(--font-heading);font-weight:800;font-size:13px;color:var(--color-accent-700);margin-bottom:var(--space-2);">01 — Conferma</div>
-          <p style="margin:0;font-size:13.5px;color:var(--color-neutral-700);">Ricevi l'email con riepilogo e fattura elettronica via SDI.</p>
+          <p style="margin:0;font-size:13.5px;color:var(--color-neutral-700);">Ricevi subito l'email con il riepilogo. La fattura segue entro un giorno lavorativo.</p>
         </div>
         <div style="padding:var(--space-4);border-right:1px solid var(--color-divider);">
           <div style="font-family:var(--font-heading);font-weight:800;font-size:13px;color:var(--color-accent-700);margin-bottom:var(--space-2);">02 — Grafica</div>
@@ -128,8 +128,11 @@ class Component extends DCLogic {
     const makeRef = (id) => {
       let h1 = 0x811c9dc5, h2 = 0x01000193;
       for (let i = 0; i < id.length; i++) {
-        h1 = ((h1 ^ id.charCodeAt(i)) * 16777619) >>> 0;
-        h2 = ((h2 + id.charCodeAt(i) * (i + 7)) * 2654435761) >>> 0;
+        // Math.imul, not `*`: a plain 32-bit multiply overflows the float53 mantissa and the
+        // low bits are rounded away before >>>0 reads them, which collapsed one character
+        // position to 5 possible values and caused duplicate booking codes.
+        h1 = Math.imul(h1 ^ id.charCodeAt(i), 16777619) >>> 0;
+        h2 = Math.imul(h2 + id.charCodeAt(i) * (i + 7), 2654435761) >>> 0;
       }
       let out = '';
       for (let i = 0; i < 6; i++) {
