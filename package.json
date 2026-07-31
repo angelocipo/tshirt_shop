@@ -2,6 +2,7 @@
   "name": "tipografia-online",
   "private": true,
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "stripe": "^17.7.0"
   }
 }
