@@ -48,6 +48,8 @@ const PRICING = {
   // colorate +10%, spedizione inclusa). Fonte: scheda prodotto printeurope.pro.
   'promo100': { nome: 'Promozione 100 Magliette + Stampa', type: 'promo100',
     qtyChoices: [50, 100],
+    // Oltre i 100 pz il prezzo è lineare al prezzo unitario della fascia 100 (nessuno scaglione).
+    maxQty: 1000,
     // colonne: c8 = 8×8cm · s10 = 25×10cm · s32 = 25×32cm · cr10 = 8×8 + 25×10 · cr32 = 8×8 + 25×32
     matrix: {
       50:  { c8: 145, s10: 186, s32: 290, cr10: 216, cr32: 365 },

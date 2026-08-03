@@ -277,11 +277,13 @@ module.exports = async (req, res) => {
       const isWhite = !!f.isWhite;
       const z = f.zones || {};
       const clampIdx = (v) => Math.min(Math.max(parseInt(v, 10) || 0, 0), 11);
+      // Area massima stampabile 38×48 cm: la larghezza si ferma all'indice 9.
+      const clampW = (v) => Math.min(clampIdx(v), 9);
       let printTotal = 0;
       const parts = [];
       if (z.cuore) { printTotal += product.cuoreUnitPrice(qty); parts.push('cuore/manica'); }
-      if (z.davanti) { printTotal += product.areaUnitPrice(clampIdx(f.davantiWidthIdx), clampIdx(f.davantiHeightIdx)) * product.discount(qty); parts.push('davanti'); }
-      if (z.retro) { printTotal += product.areaUnitPrice(clampIdx(f.retroWidthIdx), clampIdx(f.retroHeightIdx)) * product.discount(qty); parts.push('retro'); }
+      if (z.davanti) { printTotal += product.areaUnitPrice(clampW(f.davantiWidthIdx), clampIdx(f.davantiHeightIdx)) * product.discount(qty); parts.push('davanti'); }
+      if (z.retro) { printTotal += product.areaUnitPrice(clampW(f.retroWidthIdx), clampIdx(f.retroHeightIdx)) * product.discount(qty); parts.push('retro'); }
       const unit = product.garmentUnitPrice(qty, isWhite) + printTotal;
       unitAmountCents = Math.round(unit * qty * 100);
       const color = (f.colorName || '').toString().slice(0, 40);
@@ -301,10 +303,18 @@ module.exports = async (req, res) => {
       description = `${product.nome} — ${color || 'colore'}, ${sizeLabel || 'taglia non indicata'}, ${qty}pz${parts.length ? ', stampa: ' + parts.join('+') : ''}`;
     } else if (product.type === 'promo100') {
       const f = formula || {};
-      const qty = product.qtyChoices.includes(parseInt(f.qty, 10)) ? parseInt(f.qty, 10) : product.qtyChoices[0];
+      const rawQty = parseInt(f.qty, 10);
+      const qty = Number.isFinite(rawQty) && rawQty >= 50 && rawQty <= product.maxQty
+        ? rawQty
+        : product.qtyChoices[0];
       const choice = product.printChoices.find((c) => c.key === f.printKey) || product.printChoices[0];
       const isWhite = !!f.isWhite;
-      const base = product.matrix[qty][choice.col];
+      // Fino a 50 e fino a 100 usano la matrice; oltre 100 il prezzo unitario resta quello della fascia 100.
+      const base = qty <= 50
+        ? product.matrix[50][choice.col]
+        : qty <= 100
+          ? product.matrix[100][choice.col]
+          : (product.matrix[100][choice.col] / 100) * qty;
       const total = isWhite ? base : base * product.coloredSurcharge;
       unitAmountCents = Math.round(total * 100);
       const color = (f.colorName || '').toString().slice(0, 40);

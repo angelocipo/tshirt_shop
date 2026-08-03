@@ -226,7 +226,8 @@ const HEAD_FONT = "Archivo,'Helvetica Neue',Helvetica,Arial,sans-serif";
 const BODY_FONT = "Archivo,'Helvetica Neue',Helvetica,Arial,sans-serif";
 
 function eur(n) {
-  return '€ ' + n.toFixed(2).replace('.', ',');
+  const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true });
+  return '€ ' + s;
 }
 
 function cornerRow() {
