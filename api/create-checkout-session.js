@@ -281,9 +281,20 @@ module.exports = async (req, res) => {
       const clampW = (v) => Math.min(clampIdx(v), 9);
       let printTotal = 0;
       const parts = [];
+      // Breakpoints delle misure stampabili, allineati a Beagle.dc.html (max 38×48 cm).
+      const W_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 38];
+      const H_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 48];
       if (z.cuore) { printTotal += product.cuoreUnitPrice(qty); parts.push('cuore/manica'); }
-      if (z.davanti) { printTotal += product.areaUnitPrice(clampW(f.davantiWidthIdx), clampIdx(f.davantiHeightIdx)) * product.discount(qty); parts.push('davanti'); }
-      if (z.retro) { printTotal += product.areaUnitPrice(clampW(f.retroWidthIdx), clampIdx(f.retroHeightIdx)) * product.discount(qty); parts.push('retro'); }
+      if (z.davanti) {
+        const wI = clampW(f.davantiWidthIdx), hI = clampIdx(f.davantiHeightIdx);
+        printTotal += product.areaUnitPrice(wI, hI) * product.discount(qty);
+        parts.push(`davanti ${W_BREAKS[wI]}×${H_BREAKS[hI]} cm`);
+      }
+      if (z.retro) {
+        const wI = clampW(f.retroWidthIdx), hI = clampIdx(f.retroHeightIdx);
+        printTotal += product.areaUnitPrice(wI, hI) * product.discount(qty);
+        parts.push(`retro ${W_BREAKS[wI]}×${H_BREAKS[hI]} cm`);
+      }
       const unit = product.garmentUnitPrice(qty, isWhite) + printTotal;
       unitAmountCents = Math.round(unit * qty * 100);
       const color = (f.colorName || '').toString().slice(0, 40);
