@@ -12,6 +12,10 @@
   <script defer src="i18n.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Maglietta Unisex 24H Personalizzata | Tshirt Shop Online</title>
+  <meta name="description" content="T-shirt personalizzata in cotone premium con stampa DTF: preventivo in 30 secondi, spedizione pronta in 24 ore, prodotto a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/beagle.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/beagle.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -702,10 +706,11 @@ class Component extends DCLogic {
         const params = new URLSearchParams({
           prodotto: 'Maglietta Unisex 24H',
           config,
+          url: window.location.origin + window.location.pathname,
           quantita: String(totalQty),
           prezzo: grandTotal.toFixed(2),
         });
-        window.location.href = './preventivo.dc.html?' + params.toString();
+        window.open('./preventivo.dc.html?' + params.toString(), '_blank', 'noopener');
       },
     };
   }

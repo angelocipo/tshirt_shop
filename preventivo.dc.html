@@ -16,6 +16,9 @@
   <link rel="icon" type="image/png" href="img/favicon.png">
 <meta charset="utf-8">
 
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.tshirt-shop.online/preventivo.html">
+<meta property="og:url" content="https://www.tshirt-shop.online/preventivo.html">
 <title>Preventivo Ufficiale | Tshirt Shop Online</title>
 <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
 <script src="./doc-page.js"></script>
@@ -75,7 +78,12 @@
       <tbody>
         <tr style="border-bottom:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);">
           <td style="padding:14px 6px;vertical-align:top;">
-            <div style="font-weight:600;">{{ prodotto }}</div>
+            <sc-if value="{{ hasUrl }}" hint-placeholder-val="{{ false }}">
+              <div style="font-weight:600;"><a href="{{ prodottoUrl }}" target="_blank" rel="noopener" style="color:var(--color-accent-700);text-decoration:underline;">{{ prodotto }}</a></div>
+            </sc-if>
+            <sc-if value="{{ noUrl }}" hint-placeholder-val="{{ true }}">
+              <div style="font-weight:600;">{{ prodotto }}</div>
+            </sc-if>
             <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ configurazione }}</div>
             <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ unitPriceLine }}</div>
           </td>
@@ -100,7 +108,7 @@
     </div>
 
     <div style="font-size:12px;color:color-mix(in srgb, var(--color-text) 60%, transparent);line-height:1.6;margin-top:auto;border-top:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);padding-top:16px;">
-      <span data-en="Quote generated automatically from the configuration selected on the website. Prices include VAT unless stated otherwise. To confirm the order or request changes, contact us at info@tipografia.online or through the form on the website.">Preventivo generato automaticamente in base alla configurazione selezionata sul sito. Prezzi IVA inclusa, salvo diversa indicazione. Per confermare l'ordine o richiedere modifiche, contattateci a info@tipografia.online o tramite il modulo sul sito.</span>
+      <span data-en="Quote generated automatically from the configuration selected on the website. Prices include VAT unless stated otherwise. To confirm the order or request changes, contact us at info@tshirt-shop.online or through the form on the website.">Preventivo generato automaticamente in base alla configurazione selezionata sul sito. Prezzi IVA inclusa, salvo diversa indicazione. Per confermare l'ordine o richiedere modifiche, contattateci a info@tshirt-shop.online o tramite il modulo sul sito.</span>
     </div>
   </section>
 </doc-page>
@@ -117,13 +125,15 @@ class Component extends DCLogic {
   state = {};
   componentDidMount() {
     const params = new URLSearchParams(window.location.search);
-    const prodotto = params.get('prodotto') || (isEn() ? 'Tipografia Online product' : 'Prodotto Tipografia Online');
+    const prodotto = params.get('prodotto') || (isEn() ? 'Tshirt Shop Online product' : 'Prodotto Tshirt Shop Online');
     const configurazione = params.get('config') || '';
     const quantita = params.get('quantita') || '-';
+    const rawUrl = params.get('url') || '';
+    const prodottoUrl = /^https?:\/\//i.test(rawUrl) ? rawUrl : '';
     const prezzo = parseFloat(params.get('prezzo')) || 0;
     const now = new Date();
     this.setState({
-      prodotto, configurazione, quantita, prezzo,
+      prodotto, configurazione, quantita, prezzo, prodottoUrl,
       quoteNumber: `PRT-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`,
       dateStr: now.toLocaleDateString(isEn() ? 'en-GB' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' }),
       issuedAt: now.toISOString(),
@@ -144,6 +154,9 @@ class Component extends DCLogic {
     const unitPrice = Number.isFinite(pezzi) && pezzi > 0 && prezzo > 0 ? prezzo / pezzi : null;
     return {
       prodotto: this.state.prodotto || '',
+      prodottoUrl: this.state.prodottoUrl || '',
+      hasUrl: !!this.state.prodottoUrl,
+      noUrl: !this.state.prodottoUrl,
       configurazione: this.state.configurazione || '',
       quantita: this.state.quantita || '-',
       quoteNumber: this.state.quoteNumber || '',

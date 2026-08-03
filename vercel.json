@@ -1,84 +1,72 @@
 {
   "rewrites": [
     {
-      "source": "/tipografia-roma-eur.html",
-      "destination": "/tipografia-roma-eur.dc.html"
-    },
-    {
-      "source": "/centro-stampa-tipografia-roma-eur.html",
-      "destination": "/centro-stampa-tipografia-roma-eur.dc.html"
-    },
-    {
-      "source": "/contattateci.html",
-      "destination": "/contattateci.dc.html"
-    },
-    {
-      "source": "/stampa-rollup-roma-eur-24h.html",
-      "destination": "/stampa-rollup-roma-eur-24h.dc.html"
-    },
-    {
-      "source": "/stampa-rollup-banner-espositore-roma-eur.html",
-      "destination": "/stampa-rollup-banner-espositore-roma-eur.dc.html"
-    },
-    {
-      "source": "/roll-up-in-24-ore-roma.html",
-      "destination": "/roll-up-in-24-ore-roma.dc.html"
-    },
-    {
-      "source": "/roll-up-express-consegna-roma-eur.html",
-      "destination": "/roll-up-express-consegna-roma-eur.dc.html"
-    },
-    {
-      "source": "/rollup-landing-2025.html",
-      "destination": "/rollup-landing-2025.dc.html"
-    },
-    {
-      "source": "/rollup-economico.html",
-      "destination": "/rollup-economico.dc.html"
+      "source": "/abbigliamento-lavoro-personalizzato.html",
+      "destination": "/abbigliamento-lavoro-personalizzato.dc.html"
     },
     {
       "source": "/abbigliamento-personalizzato-roma.html",
       "destination": "/abbigliamento-personalizzato-roma.dc.html"
     },
     {
-      "source": "/stampa-su-magliette-centro-stampa-roma-eur.html",
-      "destination": "/stampa-su-magliette-centro-stampa-roma-eur.dc.html"
+      "source": "/beagle.html",
+      "destination": "/Beagle.dc.html"
+    },
+    {
+      "source": "/blog-addio-al-celibato-magliette-personalizzate.html",
+      "destination": "/blog-addio-al-celibato-magliette-personalizzate.dc.html"
+    },
+    {
+      "source": "/blog-maglietta-personalizzata-in-tempi-record.html",
+      "destination": "/blog-maglietta-personalizzata-in-tempi-record.dc.html"
+    },
+    {
+      "source": "/blog-printing-services-in-italy.html",
+      "destination": "/blog-printing-services-in-italy.dc.html"
+    },
+    {
+      "source": "/blog-rivoluzione-stampa-tshirt-24-ore.html",
+      "destination": "/blog-rivoluzione-stampa-tshirt-24-ore.dc.html"
+    },
+    {
+      "source": "/blog.html",
+      "destination": "/blog.dc.html"
+    },
+    {
+      "source": "/checkout.html",
+      "destination": "/checkout.dc.html"
+    },
+    {
+      "source": "/contattateci.html",
+      "destination": "/contattateci.dc.html"
+    },
+    {
+      "source": "/custom-t-shirt-printing-rome.html",
+      "destination": "/custom-t-shirt-printing-rome.dc.html"
     },
     {
       "source": "/felpe-personalizzate.html",
       "destination": "/felpe-personalizzate.dc.html"
     },
     {
+      "source": "/grazie.html",
+      "destination": "/grazie.dc.html"
+    },
+    {
       "source": "/magliette-con-frasi-romani-roma-eur.html",
       "destination": "/magliette-con-frasi-romani-roma-eur.dc.html"
     },
     {
-      "source": "/realizzazione-foto-quadri-roma-eur.html",
-      "destination": "/realizzazione-foto-quadri-roma-eur.dc.html"
+      "source": "/magliette-personalizzate-eventi.html",
+      "destination": "/magliette-personalizzate-eventi.dc.html"
     },
     {
-      "source": "/canvas-con-foto-effetto-pittura-ad-olio.html",
-      "destination": "/canvas-con-foto-effetto-pittura-ad-olio.dc.html"
+      "source": "/preparare-file-stampa-t-shirt.html",
+      "destination": "/preparare-file-stampa-t-shirt.dc.html"
     },
     {
-      "source": "/stampa-poster-a-roma-in-24-ore.html",
-      "destination": "/stampa-poster-a-roma-in-24-ore.dc.html"
-    },
-    {
-      "source": "/preparare-lesecutivo-per-la-stampa.html",
-      "destination": "/preparare-lesecutivo-per-la-stampa.dc.html"
-    },
-    {
-      "source": "/prezzi-strategici-qualita-professionale-risultati-concreti.html",
-      "destination": "/prezzi-strategici-qualita-professionale-risultati-concreti.dc.html"
-    },
-    {
-      "source": "/noleggio-stand-fieristici-leggeri-roma.html",
-      "destination": "/noleggio-stand-fieristici-leggeri-roma.dc.html"
-    },
-    {
-      "source": "/termini-di-servizio-terms-of-service.html",
-      "destination": "/termini-di-servizio-terms-of-service.dc.html"
+      "source": "/preventivo.html",
+      "destination": "/preventivo.dc.html"
     },
     {
       "source": "/privacy-gdpr.html",
@@ -89,8 +77,12 @@
       "destination": "/privacy-policy.dc.html"
     },
     {
-      "source": "/checkout.html",
-      "destination": "/checkout.dc.html"
+      "source": "/promozione-100-magliette.html",
+      "destination": "/promozione-100-magliette.dc.html"
+    },
+    {
+      "source": "/servizio-express-stampa-roma-sud.html",
+      "destination": "/servizio-express-stampa-roma-sud.dc.html"
     },
     {
       "source": "/stampa-dtf-roma.html",
@@ -105,6 +97,10 @@
       "destination": "/stampa-oro-argento-olografica.dc.html"
     },
     {
+      "source": "/stampa-su-magliette-centro-stampa-roma-eur.html",
+      "destination": "/stampa-su-magliette-centro-stampa-roma-eur.dc.html"
+    },
+    {
       "source": "/stampa-t-shirt-grandi-quantita.html",
       "destination": "/stampa-t-shirt-grandi-quantita.dc.html"
     },
@@ -113,36 +109,8 @@
       "destination": "/stampa-t-shirt-roma-eur-guida.dc.html"
     },
     {
-      "source": "/preparare-file-stampa-t-shirt.html",
-      "destination": "/preparare-file-stampa-t-shirt.dc.html"
-    },
-    {
-      "source": "/abbigliamento-lavoro-personalizzato.html",
-      "destination": "/abbigliamento-lavoro-personalizzato.dc.html"
-    },
-    {
-      "source": "/magliette-personalizzate-eventi.html",
-      "destination": "/magliette-personalizzate-eventi.dc.html"
-    },
-    {
-      "source": "/servizio-express-stampa-roma-sud.html",
-      "destination": "/servizio-express-stampa-roma-sud.dc.html"
-    },
-    {
-      "source": "/custom-t-shirt-printing-rome.html",
-      "destination": "/custom-t-shirt-printing-rome.dc.html"
-    },
-    {
-      "source": "/blog.html",
-      "destination": "/blog.dc.html"
-    },
-    {
-      "source": "/grazie.html",
-      "destination": "/grazie.dc.html"
-    },
-    {
-      "source": "/preventivo.html",
-      "destination": "/preventivo.dc.html"
+      "source": "/termini-di-servizio-terms-of-service.html",
+      "destination": "/termini-di-servizio-terms-of-service.dc.html"
     }
   ]
 }

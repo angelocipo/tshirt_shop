@@ -14,7 +14,9 @@
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
-  <title>Promozione 100 Magliette + Stampa da €2,13 cad | Tshirt Shop Online</title>
+  <link rel="canonical" href="https://www.tshirt-shop.online/promozione-100-magliette.html">
+<meta property="og:url" content="https://www.tshirt-shop.online/promozione-100-magliette.html">
+<title>Promozione 100 Magliette + Stampa da €2,13 cad | Tshirt Shop Online</title>
   <meta name="description" content="100 magliette 100% cotone 155 g/m² con stampa personalizzata da €2,13 cad + IVA (€2,60 IVA inclusa). Spedizione inclusa, consegna in 1 settimana.">
   <style>
     html, body { height: auto !important; min-height: 100%; overflow: visible !important; }
@@ -519,10 +521,11 @@ class Component extends DCLogic {
         const params = new URLSearchParams({
           prodotto: 'Promozione 100 Magliette + Stampa',
           config,
+          url: window.location.origin + window.location.pathname,
           quantita: String(qty),
           prezzo: total.toFixed(2),
         });
-        window.location.href = './preventivo.dc.html?' + params.toString();
+        window.open('./preventivo.dc.html?' + params.toString(), '_blank', 'noopener');
       },
     };
   }
