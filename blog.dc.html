@@ -52,13 +52,25 @@
       nav.nav { justify-content: flex-start; }
       nav.nav .btn-primary { margin-left: 0; flex: 0 0 100%; }
     }
+  
+    .nav-drop { position: relative; display: inline-flex; align-items: center; }
+    .nav-sub { position: absolute; top: 100%; left: 0; min-width: 186px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 60; }
+    .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: flex; }
+    .nav-sub > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
+    .nav-sub > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+    .nav-sub > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
+    @media (max-width: 700px) {
+      .nav-drop { display: block; }
+      .nav-sub { position: static; display: flex; border: none; background: transparent; padding-left: 12px; }
+      .nav-sub > a, .nav-sub > span { padding: 3px 0; }
+    }
   </style>
 </helmet>
 
 <nav class="nav">
   <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-family:var(--font-heading);font-weight:800;">TSHIRT SHOP ONLINE <span style="opacity:.55;font-weight:400;">by Printing Italy</span></a>
   <a href="promozione-100-magliette.dc.html" data-en="Promo" style="color:#ec3013;font-weight:800;">PROMO</a>
-  <a href="index.html#uomo">Uomo</a>
+  <span class="nav-drop"><a href="index.html#uomo">Uomo</a><span class="nav-sub"><a href="Austral-Polo.dc.html">Polo Austral</a><a href="Beagle.dc.html" data-en="Beagle T-Shirt">Maglietta Beagle</a><span style="color: var(--color-neutral-700);" data-en="Atomic — coming soon">Atomic — in arrivo</span></span></span>
   <a href="index.html#donna">Donna</a>
   <a href="index.html#bambino">Bambino</a>
   <a href="index.html#perche">Perché Noi</a>
