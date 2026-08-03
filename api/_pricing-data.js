@@ -35,11 +35,33 @@ const TSHIRT_DISCOUNT_TIERS = [
   { min: 1, mult: 1 }, { min: 2, mult: 0.67 }, { min: 5, mult: 0.61 },
   { min: 10, mult: 0.56 }, { min: 20, mult: 0.44 }, { min: 50, mult: 0.39 }, { min: 100, mult: 0.33 },
 ];
+const POLO_PRICE_TIERS = [
+  { min: 1, price: 8 }, { min: 2, price: 7.5 }, { min: 5, price: 7 },
+  { min: 10, price: 6.5 }, { min: 20, price: 6 }, { min: 50, price: 5.5 }, { min: 100, price: 5.2 },
+];
+const STAR_POLO_PRICE_TIERS = [
+  { min: 1, price: 9 }, { min: 2, price: 8.5 }, { min: 5, price: 8 },
+  { min: 10, price: 7.5 }, { min: 20, price: 7 }, { min: 50, price: 6.5 }, { min: 100, price: 5.95 },
+];
 function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
 
 const PRICING = {
   'tshirt': { nome: 'Maglietta Unisex 24H', type: 'tshirt',
     garmentUnitPrice: (qty, isWhite) => { const t = pickTier(TSHIRT_PRICE_TIERS, qty); return isWhite ? t.white : t.other; },
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Polo Austral — listino capi Austral (unico per tutti i colori); stampa = tariffe DTF t-shirt.
+  // Polo Star — listino capi Star (tabella 1-1, unico per tutti i colori); stampa = tariffe DTF t-shirt.
+  'star-polo': { nome: 'Polo Star', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(STAR_POLO_PRICE_TIERS, qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'austral-polo': { nome: 'Polo Austral', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(POLO_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
