@@ -11,6 +11,7 @@
 
 <helmet>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="i18n.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
 <meta charset="utf-8">
@@ -31,8 +32,12 @@
 </style>
 </helmet>
 
-<div class="no-print" style="max-width:900px;margin:16px auto 0;padding:0 16px;display:flex;justify-content:flex-end;gap:10px;">
-  <button onClick="{{ handlePrint }}" style="border:none;background:oklch(0.42 0.12 255);color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:8px;cursor:pointer;">Salva come PDF</button>
+<div class="no-print" style="max-width:900px;margin:16px auto 0;padding:0 16px;display:flex;justify-content:flex-end;align-items:center;gap:10px;">
+  <span style="display:flex;align-items:center;border:1px solid color-mix(in srgb, var(--color-text) 20%, transparent);border-radius:8px;overflow:hidden;">
+    <button type="button" data-lang="it" aria-pressed="true" style="font-family:var(--font-heading);font-size:12px;letter-spacing:.06em;padding:9px 12px;border:none;background:var(--color-accent);color:#fff;font-weight:800;cursor:pointer;">IT</button>
+    <button type="button" data-lang="en" aria-pressed="false" style="font-family:var(--font-heading);font-size:12px;letter-spacing:.06em;padding:9px 12px;border:none;background:transparent;color:color-mix(in srgb, var(--color-text) 65%, transparent);font-weight:600;cursor:pointer;">EN</button>
+  </span>
+  <button onClick="{{ handlePrint }}" style="border:none;background:oklch(0.42 0.12 255);color:#fff;font-size:14px;font-weight:700;padding:12px 22px;border-radius:8px;cursor:pointer;" data-en="Save as PDF">Salva come PDF</button>
 </div>
 
 <doc-page size="a4">
@@ -45,26 +50,26 @@
       <div style="text-align:right;font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);line-height:1.5;">
         Via Lorenzo Bonincontri, 26 – 00147 Roma<br>
         P.IVA 02452700590<br>
-        Lun–Ven 8–12/15–18, Sab. chiuso
+        <span data-en="Mon–Fri 8–12/15–18, closed Sat">Lun–Ven 8–12/15–18, Sab. chiuso</span>
       </div>
     </div>
 
     <div style="display:flex;justify-content:space-between;margin-bottom:28px;">
       <div>
-        <div style="font-family:var(--font-heading);font-size:22px;font-weight:700;">Preventivo Ufficiale</div>
+        <div style="font-family:var(--font-heading);font-size:22px;font-weight:700;" data-en="Formal Quote">Preventivo Ufficiale</div>
         <div style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:4px;">N. {{ quoteNumber }} · {{ dateStr }}</div>
       </div>
       <div style="font-size:13px;text-align:right;color:color-mix(in srgb, var(--color-text) 65%, transparent);">
-        Validità preventivo: 30 giorni
+        <span data-en="Quote valid for 30 days">Validità preventivo: 30 giorni</span>
       </div>
     </div>
 
     <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:24px;">
       <thead>
         <tr style="border-bottom:1.5px solid var(--color-text);">
-          <th style="text-align:left;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);">Descrizione</th>
-          <th style="text-align:right;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);">Quantità</th>
-          <th style="text-align:right;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);">Totale</th>
+          <th style="text-align:left;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);" data-en="Description">Descrizione</th>
+          <th style="text-align:right;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);" data-en="Quantity">Quantità</th>
+          <th style="text-align:right;padding:10px 6px;font-size:12px;letter-spacing:0.02em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 65%, transparent);" data-en="Total">Totale</th>
         </tr>
       </thead>
       <tbody>
@@ -82,25 +87,28 @@
     <div style="display:flex;justify-content:flex-end;margin-bottom:32px;">
       <div style="width:260px;">
         <div style="display:flex;justify-content:space-between;padding:8px 6px;font-size:14px;">
-          <span>Imponibile</span><span style="font-family:ui-monospace,monospace;">€ {{ imponibileFmt }}</span>
+          <span data-en="Net amount">Imponibile</span><span style="font-family:ui-monospace,monospace;">€ {{ imponibileFmt }}</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:8px 6px;font-size:14px;">
-          <span>IVA (22%)</span><span style="font-family:ui-monospace,monospace;">€ {{ ivaFmt }}</span>
+          <span data-en="VAT (22%)">IVA (22%)</span><span style="font-family:ui-monospace,monospace;">€ {{ ivaFmt }}</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:10px 6px;font-size:16px;font-weight:700;border-top:1.5px solid var(--color-text);margin-top:4px;">
-          <span>Totale</span><span style="font-family:ui-monospace,monospace;">€ {{ prezzoFmt }}</span>
+          <span data-en="Total">Totale</span><span style="font-family:ui-monospace,monospace;">€ {{ prezzoFmt }}</span>
         </div>
       </div>
     </div>
 
     <div style="font-size:12px;color:color-mix(in srgb, var(--color-text) 60%, transparent);line-height:1.6;margin-top:auto;border-top:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);padding-top:16px;">
-      Preventivo generato automaticamente in base alla configurazione selezionata sul sito. Prezzi IVA inclusa, salvo diversa indicazione. Per confermare l'ordine o richiedere modifiche, contattateci a info@tipografia.online o tramite il modulo sul sito.
+      <span data-en="Quote generated automatically from the configuration selected on the website. Prices include VAT unless stated otherwise. To confirm the order or request changes, contact us at info@tipografia.online or through the form on the website.">Preventivo generato automaticamente in base alla configurazione selezionata sul sito. Prezzi IVA inclusa, salvo diversa indicazione. Per confermare l'ordine o richiedere modifiche, contattateci a info@tipografia.online o tramite il modulo sul sito.</span>
     </div>
   </section>
 </doc-page>
 
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+function isEn() {
+  try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; }
+}
 function eurIt(n) {
   return (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true });
 }
@@ -108,7 +116,7 @@ class Component extends DCLogic {
   state = {};
   componentDidMount() {
     const params = new URLSearchParams(window.location.search);
-    const prodotto = params.get('prodotto') || 'Prodotto Tipografia Online';
+    const prodotto = params.get('prodotto') || (isEn() ? 'Tipografia Online product' : 'Prodotto Tipografia Online');
     const configurazione = params.get('config') || '';
     const quantita = params.get('quantita') || '-';
     const prezzo = parseFloat(params.get('prezzo')) || 0;
@@ -116,10 +124,17 @@ class Component extends DCLogic {
     this.setState({
       prodotto, configurazione, quantita, prezzo,
       quoteNumber: `PRT-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`,
-      dateStr: now.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' }),
+      dateStr: now.toLocaleDateString(isEn() ? 'en-GB' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' }),
+      issuedAt: now.toISOString(),
     });
+    this.onLang = () => {
+      const d = this.state.issuedAt ? new Date(this.state.issuedAt) : new Date();
+      this.setState({ dateStr: d.toLocaleDateString(isEn() ? 'en-GB' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' }) });
+    };
+    window.addEventListener('ts:langchange', this.onLang);
     setTimeout(() => window.print(), 400);
   }
+  componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
   renderVals() {
     const prezzo = this.state.prezzo || 0;
     const imponibile = prezzo / 1.22;
