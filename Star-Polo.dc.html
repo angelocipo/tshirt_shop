@@ -12,10 +12,10 @@
   <script defer src="i18n.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Polo Austral Personalizzata | Tshirt Shop Online</title>
-  <meta name="description" content="Polo Austral personalizzata in 100% cotone piqué 180 g/m² con stampa DTF: 8 colori, etichetta rimovibile, spedizione pronta in 24 ore.">
-  <link rel="canonical" href="https://www.tshirt-shop.online/austral-polo.html">
-  <meta property="og:url" content="https://www.tshirt-shop.online/austral-polo.html">
+  <title>Polo Star Personalizzata | Tshirt Shop Online</title>
+  <meta name="description" content="Polo Star personalizzata con stampa DTF: 34 colori disponibili, preventivo in 30 secondi, spedizione pronta in 24 ore, prodotta a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/star-polo.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/star-polo.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -147,7 +147,7 @@
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Austral Polo">Polo Austral</h1>
+      <h1 style="margin-bottom: 4px;" data-en="Star Polo">Polo Star</h1>
       <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="Custom polo shirt, fast delivery — DTF printing made in Rome">Polo personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
       <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
         <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% cotton, piqué, 180 g/m².">100% cotone, piqué, 180 g/m².</span></div>
@@ -159,7 +159,11 @@
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1; background: var(--color-bg);">
-          <img id="polo-hero" alt="Polo Austral — vista frontale" src="img/polo-austral-hero.png" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          <img id="polo-hero" alt="Polo Star — vista frontale" src="img/star-polo-hero.png" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+        </div>
+        <div id="photo-missing-note" style="display:none;align-items:center;gap:8px;border:1px solid var(--color-divider);border-top:none;padding:8px 10px;font-size:13px;color:var(--color-neutral-700);">
+          <span style="width:14px;height:14px;border:1px solid var(--color-neutral-500);flex:none;"></span>
+          <span data-en="No photo yet for this colour — see the swatch. The garment is produced in the selected colour.">Foto non ancora disponibile per questo colore — fai riferimento al campione. Il capo viene prodotto nel colore selezionato.</span>
         </div>
       </div>
     </div>
@@ -319,36 +323,64 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;forest&quot;,&quot;ochre&quot;,&quot;ink&quot;],&quot;section&quot;:&quot;Color&quot;}}">
 const COLORS = [
-  { name: '01 Bianco', hex: '#eeeeee', group: '24h' },
-  { name: '03 Giallo', hex: '#fee233', group: '24h' },
-  { name: '60 Rosso', hex: '#da0b34', group: '24h' },
-  { name: '05 Blue Royal', hex: '#0c62a7', group: '24h' },
-  { name: '12 Turchese Chiaro', hex: '#1aa1cf', group: '24h' },
-  { name: '55 Blue Navy', hex: '#011e42', group: '24h' },
-  { name: '20 Verde Kelly', hex: '#138e51', group: '24h' },
+  { name: '01 Bianco', hex: '#ffffff', group: '24h' },
+  { name: '07 Sabbia', hex: '#c09f80', group: '24h' },
+  { name: '87 Marrone', hex: '#683c2e', group: '24h' },
+  { name: '03 Giallo', hex: '#ffe403', group: '24h' },
+  { name: '266 Rosa Antico', hex: '#cf8577', group: '24h' },
+  { name: '31 Arancio', hex: '#f08927', group: '24h' },
+  { name: '60 Rosso', hex: '#dc012e', group: '24h' },
+  { name: '262 Rosso Mattone', hex: '#be454f', group: '24h' },
+  { name: '168 Malva', hex: '#a4777f', group: '24h' },
+  { name: '169 Prugna', hex: '#865560', group: '24h' },
+  { name: '57 Bordeaux', hex: '#8d1613', group: '24h' },
+  { name: '78 Fucsia', hex: '#dc016b', group: '24h' },
+  { name: '48 Rosa Chiaro', hex: '#f8ccd5', group: '24h' },
+  { name: '71 Viola', hex: '#750d68', group: '24h' },
+  { name: '?? Grigio Viola', hex: '#696277', group: '24h' },
+  { name: '?? Blu Polvere', hex: '#5975a5', group: '24h' },
+  { name: '05 Blue Royal', hex: '#015fa7', group: '24h' },
+  { name: '10 Celeste', hex: '#c4ddf1', group: '24h' },
+  { name: '12 Turchese', hex: '#049fd1', group: '24h' },
+  { name: '86 Blu Ardesia', hex: '#4b6781', group: '24h' },
+  { name: '55 Blue Navy', hex: '#001d43', group: '24h' },
+  { name: '263 Grigio Blu', hex: '#a0a9be', group: '24h' },
+  { name: '170 Petrolio', hex: '#587284', group: '24h' },
+  { name: '171 Grigio Perla', hex: '#879ba3', group: '24h' },
+  { name: '164 Verde Salvia', hex: '#70a290', group: '24h' },
+  { name: '98 Acquamarina', hex: '#9fd9d7', group: '24h' },
+  { name: '264 Verde Pallido', hex: '#d4ddc4', group: '24h' },
+  { name: '83 Verde Mela', hex: '#509f26', group: '24h' },
+  { name: '216 Verde', hex: '#038b14', group: '24h' },
+  { name: '56 Verde Bottiglia', hex: '#004237', group: '24h' },
+  { name: '152 Verde Militare', hex: '#535f49', group: '24h' },
+  { name: '58 Grigio', hex: '#c4c4c4', group: '24h' },
+  { name: '46 Grigio Scuro', hex: '#484e41', group: '24h' },
   { name: '02 Nero', hex: '#000000', group: '24h' },
 ];
-const DEFAULT_HERO_IMG = 'img/polo-austral-hero.png';
+const DEFAULT_HERO_IMG = 'img/star-polo-hero.png';
 const IMAGE_BY_COLOR = {
-  '01 Bianco': 'img/polo-01-bianco.png',
-  '03 Giallo': 'img/polo-03-giallo.png',
-  '60 Rosso': 'img/polo-60-rosso.png',
-  '05 Blue Royal': 'img/polo-05-royal.png',
-  '12 Turchese Chiaro': 'img/polo-12-turchese.png',
-  '55 Blue Navy': 'img/polo-55-navy.png',
-  '20 Verde Kelly': 'img/polo-20-verde-kelly.png',
-  '02 Nero': 'img/polo-02-nero.png',
+  '01 Bianco': 'img/star-01-bianco.png',
+  '02 Nero': 'img/star-02-nero.png',
+  '03 Giallo': 'img/star-03-giallo.png',
+  '05 Blue Royal': 'img/star-05-royal.png',
+  '07 Sabbia': 'img/star-07-sabbia.png',
+  '10 Celeste': 'img/star-10-celeste.png',
+  '12 Turchese': 'img/star-12-turchese.png',
+  '31 Arancio': 'img/star-31-arancio.png',
+  '46 Grigio Scuro': 'img/star-46-grigio-scuro.png',
+  '48 Rosa Chiaro': 'img/star-48-rosa-chiaro.png',
 };
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 const SIZE_STOCK = { S: 19520, M: 10677, L: 18581, XL: 9532, XXL: 2368, XXXL: 969 };
 const PRICE_TIERS = [
-  { min: 1, white: 8, other: 8 },
-  { min: 2, white: 7.5, other: 7.5 },
-  { min: 5, white: 7, other: 7 },
-  { min: 10, white: 6.5, other: 6.5 },
-  { min: 20, white: 6, other: 6 },
-  { min: 50, white: 5.5, other: 5.5 },
-  { min: 100, white: 5.2, other: 5.2 },
+  { min: 1, white: 9, other: 9 },
+  { min: 2, white: 8.5, other: 8.5 },
+  { min: 5, white: 8, other: 8 },
+  { min: 10, white: 7.5, other: 7.5 },
+  { min: 20, white: 7, other: 7 },
+  { min: 50, white: 6.5, other: 6.5 },
+  { min: 100, white: 5.95, other: 5.95 },
 ];
 function garmentUnitPrice(qty, isWhite) {
   let tier = PRICE_TIERS[0];
@@ -430,11 +462,16 @@ class Component extends DCLogic {
     const el = document.getElementById('polo-hero');
     if (!el) return;
     const i = this.state.colorIndex;
-    const src = i != null ? (IMAGE_BY_COLOR[COLORS[i].name] || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
+    const own = i != null ? IMAGE_BY_COLOR[COLORS[i].name] : null;
+    const missing = i != null && !own;
+    const note = document.getElementById('photo-missing-note');
+    if (note) note.style.display = missing ? 'flex' : 'none';
+    el.style.filter = missing ? 'grayscale(1) opacity(.6)' : '';
+    const src = own || DEFAULT_HERO_IMG;
     const want = new URL(src, window.location.href).href;
     if (el.src !== want) {
       el.src = src;
-      el.alt = i != null ? ('Polo Austral ' + COLORS[i].name) : 'Polo Austral — vista frontale';
+      el.alt = i != null ? ('Polo Star ' + COLORS[i].name) : 'Polo Star — vista frontale';
     }
   }
   componentDidMount() {
@@ -474,7 +511,7 @@ class Component extends DCLogic {
 
   async uploadFile(file, id, ref) {
     try {
-      const qs = new URLSearchParams({ ref, name: file.name, product: 'Polo Austral' });
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Polo Star' });
       const res = await fetch('/api/upload-design?' + qs.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -621,7 +658,7 @@ class Component extends DCLogic {
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const orderBody = {
-          productId: 'austral-polo',
+          productId: 'star-polo',
           human: {
             'Colore': activeColor.name,
             'Taglie': sizeBreakdown,
@@ -644,8 +681,8 @@ class Component extends DCLogic {
         };
         const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
         const params = new URLSearchParams({
-          id: 'austral-polo',
-          name: 'Polo Austral',
+          id: 'star-polo',
+          name: 'Polo Star',
           price: grandTotal.toFixed(2),
           col: 'misura',
           cfg,
@@ -665,7 +702,7 @@ class Component extends DCLogic {
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
         const params = new URLSearchParams({
-          prodotto: 'Polo Austral',
+          prodotto: 'Polo Star',
           config,
           url: window.location.origin + window.location.pathname,
           quantita: String(totalQty),
