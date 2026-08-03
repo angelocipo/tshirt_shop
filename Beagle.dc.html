@@ -646,10 +646,15 @@ class Component extends DCLogic {
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
+        const zoneNames = {
+          cuore: 'Cuore/manica ' + cuoreWidth + '×' + cuoreHeight + ' cm',
+          davanti: 'Davanti ' + davantiWidthCm + '×' + davantiHeightCm + ' cm',
+          retro: 'Retro ' + retroWidthCm + '×' + retroHeightCm + ' cm',
+        };
         const zoneList = [];
-        if (st.zones.cuore) zoneList.push('Cuore/manica');
-        if (st.zones.davanti) zoneList.push('Davanti');
-        if (st.zones.retro) zoneList.push('Retro');
+        if (st.zones.cuore) zoneList.push(zoneNames.cuore);
+        if (st.zones.davanti) zoneList.push(zoneNames.davanti);
+        if (st.zones.retro) zoneList.push(zoneNames.retro);
         const orderBody = {
           productId: 'tshirt',
           human: {
@@ -684,10 +689,15 @@ class Component extends DCLogic {
       },
       preventivo: () => {
         const cName = hasColor ? activeColor.name : 'da definire';
+        const zoneNames = {
+          cuore: 'Cuore/manica ' + cuoreWidth + '×' + cuoreHeight + ' cm',
+          davanti: 'Davanti ' + davantiWidthCm + '×' + davantiHeightCm + ' cm',
+          retro: 'Retro ' + retroWidthCm + '×' + retroHeightCm + ' cm',
+        };
         const zoneList = [];
-        if (st.zones.cuore) zoneList.push('cuore/manica');
-        if (st.zones.davanti) zoneList.push('davanti');
-        if (st.zones.retro) zoneList.push('retro');
+        if (st.zones.cuore) zoneList.push(zoneNames.cuore);
+        if (st.zones.davanti) zoneList.push(zoneNames.davanti);
+        if (st.zones.retro) zoneList.push(zoneNames.retro);
         const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
         const params = new URLSearchParams({
           prodotto: 'Maglietta Unisex 24H',
