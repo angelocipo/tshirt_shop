@@ -184,7 +184,7 @@ class Component extends DCLogic {
     this.trackPurchase(orderRef);
   }
 
-  fmt(n) { return '€ ' + (Number(n) || 0).toFixed(2).replace('.', ','); }
+  fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€ ' + s; }
 
   /* fire the sale once per order (survives refresh / back-button) */
   trackPurchase(orderRef) {

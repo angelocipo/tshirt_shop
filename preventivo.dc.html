@@ -101,6 +101,9 @@
 
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+function eurIt(n) {
+  return (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true });
+}
 class Component extends DCLogic {
   state = {};
   componentDidMount() {
@@ -127,9 +130,9 @@ class Component extends DCLogic {
       quantita: this.state.quantita || '-',
       quoteNumber: this.state.quoteNumber || '',
       dateStr: this.state.dateStr || '',
-      prezzoFmt: prezzo.toFixed(2),
-      imponibileFmt: imponibile.toFixed(2),
-      ivaFmt: iva.toFixed(2),
+      prezzoFmt: eurIt(prezzo),
+      imponibileFmt: eurIt(imponibile),
+      ivaFmt: eurIt(iva),
       handlePrint: () => window.print(),
     };
   }

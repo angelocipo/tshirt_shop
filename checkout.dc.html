@@ -405,7 +405,7 @@ class Component extends DCLogic {
       detailsMarginBottom: orderDetails.length > 0 ? 'var(--space-4)' : '0',
       productName: s.productName,
       productPrice: s.productPrice,
-      orderTotal: orderTotal.toFixed(2).replace(/\.00$/, ''),
+      orderTotal: orderTotal.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }).replace(/,00$/, ''),
       shippingLabel: shippingFee === 0 ? 'gratuita' : ('€ ' + shippingFee),
       isZoneGratuita: s.shipZone === 'gratuita' || shippingFee === 0,
       freeByThreshold: (parseFloat(s.productPrice) || 0) >= 50,

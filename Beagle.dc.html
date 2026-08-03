@@ -9,6 +9,7 @@
 <x-dc>
 <helmet>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="i18n.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
@@ -93,7 +94,7 @@
     nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
     nav.nav .nav-brand { flex: 0 0 100%; }
     nav.nav > a:not(.nav-brand) { font-size: 14px; }
-    nav.nav .btn-primary { margin-left: auto; font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }
+    nav.nav .btn-primary { font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }
     nav.nav .btn-primary:hover { color: var(--color-bg); }
     a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
     @media (max-width: 700px) {
@@ -108,46 +109,50 @@
   <nav class="nav" style="margin: 0 0 var(--space-6); padding-inline: 0;">
   <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-family:var(--font-heading);font-weight:800;">TSHIRT SHOP ONLINE <span style="opacity:.55;font-weight:400;">by Printing Italy</span></a>
   <a href="promozione-100-magliette.dc.html" data-en="Promo" style="color:#ec3013;font-weight:800;">PROMO</a>
-  <a href="index.html#uomo">Uomo</a>
-  <a href="index.html#donna">Donna</a>
-  <a href="index.html#bambino">Bambino</a>
-  <a href="index.html#perche">Perché Noi</a>
+  <a href="index.html#uomo" data-en="Men">Uomo</a>
+  <a href="index.html#donna" data-en="Women">Donna</a>
+  <a href="index.html#bambino" data-en="Kids">Bambino</a>
+  <a href="index.html#perche" data-en="Why Us">Perché Noi</a>
   <a href="blog.dc.html">Blog</a>
-  <a href="contattateci.dc.html">Contatti</a>
-  <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;">Preventivo WhatsApp</a>
+  <a href="contattateci.dc.html" data-en="Contact">Contatti</a>
+  <span style="display:flex; align-items:center; border:1px solid var(--color-divider); margin-left:auto;">
+    <button type="button" data-lang="it" aria-pressed="true" style="font-family:var(--font-heading); font-size:12px; letter-spacing:.06em; padding:7px 10px; border:none; background:var(--color-accent); color:var(--color-bg); font-weight:800; cursor:pointer;">IT</button>
+    <button type="button" data-lang="en" aria-pressed="false" style="font-family:var(--font-heading); font-size:12px; letter-spacing:.06em; padding:7px 10px; border:none; border-left:1px solid var(--color-divider); background:transparent; color:var(--color-neutral-700); font-weight:600; cursor:pointer;">EN</button>
+  </span>
+  <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;" data-en="Quote on WhatsApp">Preventivo WhatsApp</a>
 </nav>
 
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
     <span class="tag tag-accent">24H</span>
     <span class="tag tag-neutral">Made in Italy</span>
-    <span class="tag tag-neutral">Cotone Premium</span>
+    <span class="tag tag-neutral" data-en="Premium Cotton">Cotone Premium</span>
   </div>
 
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;">Maglietta Unisex 24H</h1>
-      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);">T-shirt personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
+      <h1 style="margin-bottom: 4px;" data-en="Unisex T-Shirt 24H">Maglietta Unisex 24H</h1>
+      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="Custom t-shirt, fast delivery — DTF printing made in Rome">T-shirt personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
     </div>
 
     <div class="col-left">
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1;">
-          <img id="beagle-hero" alt="Maglietta — vista frontale" src="img/tshirt-dic-copia.avif" style="width:100%;height:100%;object-fit:cover;display:block;touch-action:pan-y;">
+          <img id="beagle-hero" alt="Maglietta — vista frontale" src="img/tshirt-dic-copia.jpg" style="width:100%;height:100%;object-fit:cover;display:block;touch-action:pan-y;">
         </div>
       </div>
     </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
-        <div class="field"><label>Quantità per taglia — {{ quantity }} pz totali</label></div>
+        <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
         <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
           <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
             <div class="size-row">
               <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
               <div class="qty-group">
-                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci">–</button>
+                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
                 <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
-                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta">+</button>
+                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
               </div>
               <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
             </div>
@@ -158,8 +163,8 @@
             <tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th></tr>
           </thead>
           <tbody>
-            <tr><td>A: Lar.</td><td>49</td><td>52</td><td>55</td><td>58</td><td>62</td><td>66</td></tr>
-            <tr><td>B: Alt.</td><td>69</td><td>71</td><td>73</td><td>75</td><td>77</td><td>79</td></tr>
+            <tr><td data-en="A: Width">A: Lar.</td><td>49</td><td>52</td><td>55</td><td>58</td><td>62</td><td>66</td></tr>
+            <tr><td data-en="B: Height">B: Alt.</td><td>69</td><td>71</td><td>73</td><td>75</td><td>77</td><td>79</td></tr>
           </tbody>
         </table>
       </div>
@@ -168,7 +173,7 @@
     <div class="prod-config col-right">
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
         <hr class="hr" style="margin-top:0;">
-        <div class="field"><label style="font-weight: 800; color: #000;">Colore — {{ selectedColorName }}</label></div>
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Colour">Colore</span> — {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
         <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
           <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="36">
@@ -179,7 +184,7 @@
 
       <div class="cfg-rest">
       <div style="margin-bottom: var(--space-4);">
-        <div class="field"><label>Stampa su</label></div>
+        <div class="field"><label data-en="Print on">Stampa su</label></div>
         <div>
           <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
             <div>
@@ -198,11 +203,11 @@
                 <sc-if value="{{ z.isCuore }}" hint-placeholder-val="{{ false }}">
                   <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
-                      <label>Larghezza — {{ cuoreWidth }}cm</label>
+                      <label><span data-en="Width">Larghezza</span> — {{ cuoreWidth }}cm</label>
                       <input type="range" min="3" max="8" step="1" value="{{ cuoreWidth }}" onChange="{{ setCuoreWidth }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                     <div class="field">
-                      <label>Altezza — {{ cuoreHeight }}cm</label>
+                      <label><span data-en="Height">Altezza</span> — {{ cuoreHeight }}cm</label>
                       <input type="range" min="3" max="8" step="1" value="{{ cuoreHeight }}" onChange="{{ setCuoreHeight }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                   </div>
@@ -210,11 +215,11 @@
                 <sc-if value="{{ z.isDavanti }}" hint-placeholder-val="{{ false }}">
                   <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
-                      <label>Larghezza davanti — {{ davantiWidthCm }}cm</label>
-                      <input type="range" min="0" max="11" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <label><span data-en="Front width">Larghezza davanti</span> — {{ davantiWidthCm }}cm</label>
+                      <input type="range" min="0" max="9" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                     <div class="field">
-                      <label>Altezza davanti — {{ davantiHeightCm }}cm</label>
+                      <label><span data-en="Front height">Altezza davanti</span> — {{ davantiHeightCm }}cm</label>
                       <input type="range" min="0" max="11" step="1" value="{{ davantiHeightIdx }}" onChange="{{ setDavantiHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                   </div>
@@ -222,11 +227,11 @@
                 <sc-if value="{{ z.isRetro }}" hint-placeholder-val="{{ false }}">
                   <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
-                      <label>Larghezza retro — {{ retroWidthCm }}cm</label>
-                      <input type="range" min="0" max="11" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <label><span data-en="Back width">Larghezza retro</span> — {{ retroWidthCm }}cm</label>
+                      <input type="range" min="0" max="9" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                     <div class="field">
-                      <label>Altezza retro — {{ retroHeightCm }}cm</label>
+                      <label><span data-en="Back height">Altezza retro</span> — {{ retroHeightCm }}cm</label>
                       <input type="range" min="0" max="11" step="1" value="{{ retroHeightIdx }}" onChange="{{ setRetroHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                   </div>
@@ -240,9 +245,9 @@
       <hr class="hr">
 
       <div class="field" style="margin-bottom: var(--space-4);">
-        <label>File Upload</label>
+        <label data-en="File Upload">File Upload</label>
         <label class="btn btn-secondary btn-block" style="cursor: pointer; flex-wrap: nowrap; white-space: nowrap;">
-          Carica il tuo design
+          <span data-en="Upload your design">Carica il tuo design</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           <input type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.svg,.pdf,.ai,.eps,.psd,.tif,.tiff,.zip" multiple="{{ true }}" onChange="{{ pickFiles }}" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;">
         </label>
@@ -251,40 +256,40 @@
             <span style="flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ f.name }}</span>
             <span class="text-muted" style="white-space:nowrap;">{{ f.sizeLabel }}</span>
             <span style="white-space:nowrap; font-weight:600; font-size:11px; letter-spacing:.04em; text-transform:uppercase;">{{ f.statusLabel }}</span>
-            <button type="button" class="btn btn-ghost" style="padding:0 6px; min-height:0; line-height:1.4;" title="Rimuovi" onClick="{{ f.remove }}">×</button>
+            <button type="button" class="btn btn-ghost" style="padding:0 6px; min-height:0; line-height:1.4;" title="Rimuovi" data-en-title="Remove" onClick="{{ f.remove }}">×</button>
           </div>
         </sc-for>
-        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;">JPG, PNG, PDF, AI, EPS, ZIP — max 4 MB per file. File più grandi: inviaceli via email dopo l'ordine.</div>
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="JPG, PNG, PDF, AI, EPS, ZIP — max 4 MB per file. Larger files: email them to us after ordering.">JPG, PNG, PDF, AI, EPS, ZIP — max 4 MB per file. File più grandi: inviaceli via email dopo l'ordine.</div>
         <sc-if value="{{ hasDesignRef }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size:11.5px; margin-top:4px;">Riferimento file: <strong>{{ designRef }}</strong></div>
+          <div style="font-size:11.5px; margin-top:4px;"><span data-en="File reference:">Riferimento file:</span> <strong>{{ designRef }}</strong></div>
         </sc-if>
       </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
-        <label for="design-link">Oppure incolla un link al file</label>
-        <input class="input" id="design-link" type="url" inputmode="url" placeholder="Canva, SwissTransfer, WeTransfer, Drive…" value="{{ designLink }}" onChange="{{ setDesignLink }}">
-        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;">Canva e Drive: condividi il link già sbloccato, senza password.</div>
+        <label for="design-link" data-en="Or paste a link to your file">Oppure incolla un link al file</label>
+        <input class="input" id="design-link" type="url" inputmode="url" placeholder="Canva, SwissTransfer, WeTransfer, Drive…" data-en-placeholder="Canva, SwissTransfer, WeTransfer, Drive…" value="{{ designLink }}" onChange="{{ setDesignLink }}">
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="Canva and Drive: share an unlocked link, no password.">Canva e Drive: condividi il link già sbloccato, senza password.</div>
         <sc-if value="{{ designLinkError }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size:11.5px; margin-top:4px; color:#ec3013;">Il link deve iniziare con http:// o https://</div>
+          <div style="font-size:11.5px; margin-top:4px; color:#ec3013;" data-en="The link must start with http:// or https://">Il link deve iniziare con http:// o https://</div>
         </sc-if>
       </div>
 
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted">Quantità</span><span>× {{ quantity }}</span></div>
-        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span>Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
+        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
         <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
-        <div class="text-muted" style="text-align: right; font-size: 11.5px;">IVA compresa</div>
+        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
       </div>
 
       <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg></button>
 
-      <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}">Richiedi un preventivo ufficiale<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
+      <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
-        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Spedizione pronta in 24 ore</div>
-        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg>Prodotto a Roma</div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Ships within 24 hours">Spedizione pronta in 24 ore</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
       </div>
       </div>
     </div>
@@ -331,7 +336,7 @@ const COLORS = [
   { name: '711 Iris Purple', hex: '#5a5d9d', group: 'order' },
   { name: '101 Sweet Blue', hex: '#b6cede', group: 'order' },
 ];
-const DEFAULT_HERO_IMG = 'img/tshirt-dic-copia.avif';
+const DEFAULT_HERO_IMG = 'img/tshirt-dic-copia.jpg';
 const IMAGE_BY_COLOR = {
   '01 Bianco': 'img/01 bianco.jpeg',
   '02 Nero': 'img/02 nero.png',
@@ -395,7 +400,11 @@ function cuoreUnitPrice(qty) {
   for (const t of CUORE_PRICE_TIERS) if (qty >= t.min) tier = t;
   return tier.price;
 }
-const WH_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 50];
+// Area massima stampabile: 38 cm di larghezza × 48 cm di altezza.
+const W_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 38];
+const H_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 48];
+const W_MAX_IDX = W_BREAKS.length - 1;
+const H_MAX_IDX = H_BREAKS.length - 1;
 const AREA_TABLE = [
   [12, 12, 12, 13, 14, 14, 14, 16, 16, 16, 17, 18],
   [12, 12, 13, 14, 14, 14, 16, 16, 16, 17, 18, 18],
@@ -424,10 +433,13 @@ function davantiDiscount(qty) {
   return tier.mult;
 }
 const ZONE_DEFS = [
-  { key: 'cuore', label: 'Cuore / Manica (max 8×8cm)', price: (qty) => cuoreUnitPrice(qty) },
-  { key: 'davanti', label: 'Davanti (fino a 50×50cm)' },
-  { key: 'retro', label: 'Retro (fino a 50×50cm)' },
+  { key: 'cuore', label: 'Cuore / Manica (max 8×8cm)', labelEn: 'Chest / Sleeve (max 8×8cm)', price: (qty) => cuoreUnitPrice(qty) },
+  { key: 'davanti', label: 'Davanti (fino a 38×48cm)', labelEn: 'Front (up to 38×48cm)' },
+  { key: 'retro', label: 'Retro (fino a 38×48cm)', labelEn: 'Back (up to 38×48cm)' },
 ];
+function isEn() {
+  try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; }
+}
 
 class Component extends DCLogic {
   state = {
@@ -445,7 +457,7 @@ class Component extends DCLogic {
     designLink: '',
   };
 
-  fmt(n) { return '€' + n.toFixed(2).replace('.', ','); }
+  fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€' + s; }
 
   // The hero <img> keeps a literal src in the template: a {{ hole }} in src makes the browser
   // request the unresolved placeholder string once on every load. Swap it imperatively instead.
@@ -460,7 +472,12 @@ class Component extends DCLogic {
       el.alt = i != null ? ('Maglietta ' + COLORS[i].name) : 'Maglietta — vista frontale';
     }
   }
-  componentDidMount() { this.syncHero(); }
+  componentDidMount() {
+    this.syncHero();
+    this.onLang = () => this.forceUpdate();
+    window.addEventListener('ts:langchange', this.onLang);
+  }
+  componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
   componentDidUpdate() { this.syncHero(); }
 
   makeDesignRef() {
@@ -509,6 +526,7 @@ class Component extends DCLogic {
 
   renderVals() {
     const st = this.state;
+    const en = isEn();
     const colorsAll = COLORS.map((c, i) => ({
       ...c,
       swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
@@ -531,7 +549,7 @@ class Component extends DCLogic {
     const sizes = SIZES.map(s => ({
       label: s,
       qty: sizeQty[s] || 0,
-      stockLabel: (SIZE_STOCK[s] ?? 0).toLocaleString('it-IT') + ' disp.',
+      stockLabel: (SIZE_STOCK[s] ?? 0).toLocaleString('it-IT') + (en ? ' avail.' : ' disp.'),
       inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
       dec: () => setQtyFor(s, (this.state.sizeQty[s] || 0) - 1),
       setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
@@ -546,7 +564,7 @@ class Component extends DCLogic {
       const checked = !!st.zones[z.key];
       const price = zonePrice(z.key);
       return {
-        label: z.label,
+        label: en && z.labelEn ? z.labelEn : z.label,
         checked,
         isCuore: z.key === 'cuore',
         isDavanti: z.key === 'davanti',
@@ -563,20 +581,24 @@ class Component extends DCLogic {
     const setCuoreHeight = (e) => this.setState({ cuoreHeight: Number(e.target.value) });
     const davantiChecked = !!st.zones.davanti;
     const retroChecked = !!st.zones.retro;
-    const davantiWidthCm = WH_BREAKS[st.davantiWidthIdx];
-    const davantiHeightCm = WH_BREAKS[st.davantiHeightIdx];
-    const retroWidthCm = WH_BREAKS[st.retroWidthIdx];
-    const retroHeightCm = WH_BREAKS[st.retroHeightIdx];
-    const setDavantiWidthIdx = (e) => this.setState({ davantiWidthIdx: Number(e.target.value) });
+    const davantiWidthCm = W_BREAKS[Math.min(st.davantiWidthIdx, W_MAX_IDX)];
+    const davantiHeightCm = H_BREAKS[Math.min(st.davantiHeightIdx, H_MAX_IDX)];
+    const retroWidthCm = W_BREAKS[Math.min(st.retroWidthIdx, W_MAX_IDX)];
+    const retroHeightCm = H_BREAKS[Math.min(st.retroHeightIdx, H_MAX_IDX)];
+    const setDavantiWidthIdx = (e) => this.setState({ davantiWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) });
     const setDavantiHeightIdx = (e) => this.setState({ davantiHeightIdx: Number(e.target.value) });
-    const setRetroWidthIdx = (e) => this.setState({ retroWidthIdx: Number(e.target.value) });
+    const setRetroWidthIdx = (e) => this.setState({ retroWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) });
     const setRetroHeightIdx = (e) => this.setState({ retroHeightIdx: Number(e.target.value) });
     const printTotal = ZONE_DEFS.reduce((sum, z) => sum + (st.zones[z.key] ? zonePrice(z.key) : 0), 0);
     const hasColor = st.colorIndex != null;
     const activeColor = hasColor ? COLORS[st.colorIndex] : null;
     const isWhite = hasColor && activeColor.name === '01 Bianco';
     const selectedColorGroup = hasColor ? activeColor.group : null;
-    const selectedColorNote = !hasColor ? 'Scegli un colore' : (selectedColorGroup === 'order' ? 'Su ordinazione — richiede 1 settimana' : 'Colore 24H — disponibile subito');
+    const selectedColorNote = !hasColor
+      ? (en ? 'Pick a colour' : 'Scegli un colore')
+      : (selectedColorGroup === 'order'
+          ? (en ? 'Made to order — takes 1 week' : 'Su ordinazione — richiede 1 settimana')
+          : (en ? '24H colour — in stock now' : 'Colore 24H — disponibile subito'));
     const garmentPrice = garmentUnitPrice(totalQty, isWhite);
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;
@@ -608,20 +630,22 @@ class Component extends DCLogic {
       colorsByLightness, sizes, zones, themeClass, selectedColorNote,
       cuoreChecked, cuoreWidth, cuoreHeight, setCuoreWidth, setCuoreHeight,
       davantiChecked, retroChecked,
-      davantiWidthCm, davantiHeightCm, setDavantiWidthIdx, setDavantiHeightIdx, davantiWidthIdx: st.davantiWidthIdx, davantiHeightIdx: st.davantiHeightIdx,
-      retroWidthCm, retroHeightCm, setRetroWidthIdx, setRetroHeightIdx, retroWidthIdx: st.retroWidthIdx, retroHeightIdx: st.retroHeightIdx,
+      davantiWidthCm, davantiHeightCm, setDavantiWidthIdx, setDavantiHeightIdx,
+      davantiWidthIdx: Math.min(st.davantiWidthIdx, W_MAX_IDX), davantiHeightIdx: Math.min(st.davantiHeightIdx, H_MAX_IDX),
+      retroWidthCm, retroHeightCm, setRetroWidthIdx, setRetroHeightIdx,
+      retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
       selectedColorName: hasColor ? activeColor.name : '—',
       quantity: totalQty,
-      unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + ' / pezzo' : '',
+      unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(garmentPrice),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
       totalPriceLabel: this.fmt(grandTotal),
-      checkoutLabel: 'Aggiungi al carrello',
+      checkoutLabel: en ? 'Add to cart' : 'Aggiungi al carrello',
       checkout: () => {
-        if (!hasColor) { alert('Scegli un colore prima di procedere.'); return; }
-        if (totalQty < 1) { alert('Inserisci la quantità per almeno una taglia.'); return; }
-        if (designLinkError) { alert('Il link al file non è valido: deve iniziare con http:// o https://'); return; }
-        if (uploadingCount > 0 && !confirm('Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
+        if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
+        if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
+        if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
+        if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneList = [];
         if (st.zones.cuore) zoneList.push('Cuore/manica');
         if (st.zones.davanti) zoneList.push('Davanti');
@@ -644,8 +668,8 @@ class Component extends DCLogic {
             colorName: activeColor.name,
             sizes: sizeQty,
             zones: { cuore: !!st.zones.cuore, davanti: !!st.zones.davanti, retro: !!st.zones.retro },
-            davantiWidthIdx: st.davantiWidthIdx, davantiHeightIdx: st.davantiHeightIdx,
-            retroWidthIdx: st.retroWidthIdx, retroHeightIdx: st.retroHeightIdx,
+            davantiWidthIdx: Math.min(st.davantiWidthIdx, W_MAX_IDX), davantiHeightIdx: Math.min(st.davantiHeightIdx, H_MAX_IDX),
+            retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
           },
         };
         const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
