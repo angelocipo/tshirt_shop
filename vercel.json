@@ -73,6 +73,10 @@
       "destination": "/preparare-file-stampa-t-shirt.dc.html"
     },
     {
+      "source": "/uomo.html",
+      "destination": "/uomo.dc.html"
+    },
+    {
       "source": "/tshirt-uomo.html",
       "destination": "/tshirt-uomo.dc.html"
     },
