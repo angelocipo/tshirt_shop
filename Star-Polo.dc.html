@@ -181,7 +181,7 @@
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
         <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="8">
             <div class="size-row">
               <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
               <div class="qty-group">
@@ -195,11 +195,11 @@
         </div>
         <table class="table" style="font-size: 13px;">
           <thead>
-            <tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th></tr>
+            <tr><th></th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th><th>XXXXL</th></tr>
           </thead>
           <tbody>
-            <tr><td data-en="A: Width">A: Lar.</td><td>50</td><td>53</td><td>57</td><td>60</td><td>63</td><td>66</td></tr>
-            <tr><td data-en="B: Height">B: Alt.</td><td>69</td><td>71</td><td>73</td><td>75</td><td>77</td><td>79</td></tr>
+            <tr><td data-en="A: Width">A: Lar.</td><td>48</td><td>51</td><td>54</td><td>57</td><td>60</td><td>64</td><td>67</td><td>70</td></tr>
+            <tr><td data-en="B: Height">B: Alt.</td><td>65</td><td>70</td><td>72</td><td>74</td><td>76</td><td>79</td><td>82</td><td>85</td></tr>
           </tbody>
         </table>
       </div>
@@ -406,8 +406,8 @@ const IMAGE_BY_COLOR = {
   '264 Verde Pallido': 'img/star-264-verde-pallido-nobg.png',
   '266 Rosa Antico': 'img/star-266-rosa-antico-nobg.png',
 };
-const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-const SIZE_STOCK = { S: 19520, M: 10677, L: 18581, XL: 9532, XXL: 2368, XXXL: 969 };
+const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'];
+const SIZE_STOCK = { XS: 500, S: 19520, M: 10677, L: 18581, XL: 9532, XXL: 2368, XXXL: 969, XXXXL: 750 };
 const PRICE_TIERS = [
   { min: 1, white: 9, other: 9 },
   { min: 2, white: 8.5, other: 8.5 },
@@ -586,7 +586,9 @@ class Component extends DCLogic {
     const sizes = SIZES.map(s => ({
       label: s,
       qty: sizeQty[s] || 0,
-      stockLabel: (SIZE_STOCK[s] ?? 0).toLocaleString('it-IT') + (en ? ' avail.' : ' disp.'),
+      stockLabel: SIZE_STOCK[s] == null
+        ? (en ? 'made to order' : 'su ordinazione')
+        : SIZE_STOCK[s].toLocaleString('it-IT') + (en ? ' avail.' : ' disp.'),
       inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
       dec: () => setQtyFor(s, (this.state.sizeQty[s] || 0) - 1),
       setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
