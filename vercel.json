@@ -9,6 +9,10 @@
       "destination": "/abbigliamento-personalizzato-roma.dc.html"
     },
     {
+      "source": "/star-polo.html",
+      "destination": "/Star-Polo.dc.html"
+    },
+    {
       "source": "/austral-polo.html",
       "destination": "/Austral-Polo.dc.html"
     },
@@ -69,6 +73,30 @@
       "destination": "/preparare-file-stampa-t-shirt.dc.html"
     },
     {
+      "source": "/tshirt-uomo.html",
+      "destination": "/tshirt-uomo.dc.html"
+    },
+    {
+      "source": "/tshirt-donna.html",
+      "destination": "/tshirt-donna.dc.html"
+    },
+    {
+      "source": "/tshirt-bambino.html",
+      "destination": "/tshirt-bambino.dc.html"
+    },
+    {
+      "source": "/polo-uomo.html",
+      "destination": "/polo-uomo.dc.html"
+    },
+    {
+      "source": "/polo-donna.html",
+      "destination": "/polo-donna.dc.html"
+    },
+    {
+      "source": "/polo-bambino.html",
+      "destination": "/polo-bambino.dc.html"
+    },
+    {
       "source": "/preventivo.html",
       "destination": "/preventivo.dc.html"
     },
@@ -79,6 +107,10 @@
     {
       "source": "/privacy-policy.html",
       "destination": "/privacy-policy.dc.html"
+    },
+    {
+      "source": "/promozioni.html",
+      "destination": "/promozioni.dc.html"
     },
     {
       "source": "/promozione-100-magliette.html",

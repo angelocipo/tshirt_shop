@@ -117,6 +117,17 @@
       .nav-sub { position: static; display: flex; border: none; background: transparent; padding-left: 12px; }
       .nav-sub > a, .nav-sub > span { padding: 3px 0; }
     }
+  .nav-sub .nav-drop { display: block; position: relative; }
+    .nav-sub-2 { position: absolute; top: -1px; left: 100%; min-width: 170px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 61; }
+    .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: flex; }
+    .nav-sub-2 > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
+    .nav-sub-2 > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+    .nav-sub-2 > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
+    @media (max-width: 700px) {
+      .nav-sub-2 { position: static; display: flex; border: none; background: transparent; padding-left: 12px; }
+      .nav-sub-2 > a, .nav-sub-2 > span { padding: 3px 0; }
+    }
+  
   </style>
 </helmet>
 
@@ -124,10 +135,10 @@
 
   <nav class="nav" style="margin: 0 0 var(--space-6); padding-inline: 0;">
   <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-family:var(--font-heading);font-weight:800;">TSHIRT SHOP ONLINE <span style="opacity:.55;font-weight:400;">by Printing Italy</span></a>
-  <a href="promozione-100-magliette.dc.html" data-en="Promo" style="color:#ec3013;font-weight:800;">PROMO</a>
-  <span class="nav-drop"><a href="index.html#uomo" data-en="Men">Uomo</a><span class="nav-sub"><a href="Austral-Polo.dc.html">Polo Austral</a><a href="Star-Polo.dc.html">Polo Star</a><a href="Beagle.dc.html" data-en="Beagle T-Shirt">Maglietta Beagle</a><span style="color: var(--color-neutral-700);" data-en="Atomic — coming soon">Atomic — in arrivo</span></span></span>
-  <a href="index.html#donna" data-en="Women">Donna</a>
-  <a href="index.html#bambino" data-en="Kids">Bambino</a>
+  <span class="nav-drop"><a href="promozioni.dc.html" data-en="Promo" style="color:#ec3013;font-weight:800;">PROMO</a><span class="nav-sub"><a href="promozioni.dc.html" data-en="All promotions">Tutte le promozioni</a><a href="promozione-100-magliette.dc.html" data-en="100 T-Shirts + Printing">100 Magliette + Stampa</a><span style="color: var(--color-neutral-700);" data-en="More offers coming soon">Altre offerte in arrivo</span></span></span>
+  <span class="nav-drop"><a href="index.html#uomo" data-en="Men">Uomo</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-uomo.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><a href="Beagle.dc.html" data-en="Beagle T-Shirt">Maglietta Beagle</a><span style="color: var(--color-neutral-700);" data-en="Atomic — coming soon">Atomic — in arrivo</span></span></span><span class="nav-drop"><a href="polo-uomo.dc.html">Polo</a><span class="nav-sub-2"><a href="Austral-Polo.dc.html">Polo Austral</a><a href="Star-Polo.dc.html">Polo Star</a></span></span></span></span>
+  <span class="nav-drop"><a href="index.html#donna" data-en="Women">Donna</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-donna.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span><span class="nav-drop"><a href="polo-donna.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
+  <span class="nav-drop"><a href="index.html#bambino" data-en="Kids">Bambino</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-bambino.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span><span class="nav-drop"><a href="polo-bambino.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
   <a href="index.html#perche" data-en="Why Us">Perché Noi</a>
   <a href="blog.dc.html">Blog</a>
   <a href="contattateci.dc.html" data-en="Contact">Contatti</a>
@@ -325,35 +336,35 @@
 const COLORS = [
   { name: '01 Bianco', hex: '#ffffff', group: '24h' },
   { name: '07 Sabbia', hex: '#c09f80', group: '24h' },
-  { name: '87 Marrone', hex: '#683c2e', group: '24h' },
+  { name: '87 Cioccolato', hex: '#341912', group: '24h' },
   { name: '03 Giallo', hex: '#ffe403', group: '24h' },
   { name: '266 Rosa Antico', hex: '#cf8577', group: '24h' },
   { name: '31 Arancio', hex: '#f08927', group: '24h' },
   { name: '60 Rosso', hex: '#dc012e', group: '24h' },
   { name: '262 Rosso Mattone', hex: '#be454f', group: '24h' },
   { name: '168 Malva', hex: '#a4777f', group: '24h' },
-  { name: '169 Prugna', hex: '#865560', group: '24h' },
-  { name: '57 Bordeaux', hex: '#8d1613', group: '24h' },
+  { name: '169 Berry Red', hex: '#703b45', group: '24h' },
+  { name: '57 Granata', hex: '#870120', group: '24h' },
   { name: '78 Fucsia', hex: '#dc016b', group: '24h' },
   { name: '48 Rosa Chiaro', hex: '#f8ccd5', group: '24h' },
   { name: '71 Viola', hex: '#750d68', group: '24h' },
-  { name: '?? Grigio Viola', hex: '#696277', group: '24h' },
-  { name: '?? Blu Polvere', hex: '#5975a5', group: '24h' },
+  { name: '121 Lilla', hex: '#4c4358', group: '24h' },
+  { name: '261 Azzurro Riviera', hex: '#6884ac', group: '24h' },
   { name: '05 Blue Royal', hex: '#015fa7', group: '24h' },
   { name: '10 Celeste', hex: '#c4ddf1', group: '24h' },
   { name: '12 Turchese', hex: '#049fd1', group: '24h' },
-  { name: '86 Blu Ardesia', hex: '#4b6781', group: '24h' },
+  { name: '86 Blue Denim', hex: '#4a4c72', group: '24h' },
   { name: '55 Blue Navy', hex: '#001d43', group: '24h' },
   { name: '263 Grigio Blu', hex: '#a0a9be', group: '24h' },
-  { name: '170 Petrolio', hex: '#587284', group: '24h' },
+  { name: '170 Petrolio', hex: '#3d6173', group: '24h' },
   { name: '171 Grigio Perla', hex: '#879ba3', group: '24h' },
   { name: '164 Verde Salvia', hex: '#70a290', group: '24h' },
   { name: '98 Acquamarina', hex: '#9fd9d7', group: '24h' },
   { name: '264 Verde Pallido', hex: '#d4ddc4', group: '24h' },
   { name: '83 Verde Mela', hex: '#509f26', group: '24h' },
-  { name: '216 Verde', hex: '#038b14', group: '24h' },
+  { name: '216 Verde Tropicale', hex: '#038b14', group: '24h' },
   { name: '56 Verde Bottiglia', hex: '#004237', group: '24h' },
-  { name: '152 Verde Militare', hex: '#535f49', group: '24h' },
+  { name: '152 Verde Avventura', hex: '#444838', group: '24h' },
   { name: '58 Grigio', hex: '#c4c4c4', group: '24h' },
   { name: '46 Grigio Scuro', hex: '#484e41', group: '24h' },
   { name: '02 Nero', hex: '#000000', group: '24h' },
@@ -361,15 +372,39 @@ const COLORS = [
 const DEFAULT_HERO_IMG = 'img/star-polo-hero.png';
 const IMAGE_BY_COLOR = {
   '01 Bianco': 'img/star-01-bianco.png',
-  '02 Nero': 'img/star-02-nero.png',
-  '03 Giallo': 'img/star-03-giallo.png',
-  '05 Blue Royal': 'img/star-05-royal.png',
-  '07 Sabbia': 'img/star-07-sabbia.png',
-  '10 Celeste': 'img/star-10-celeste.png',
-  '12 Turchese': 'img/star-12-turchese.png',
-  '31 Arancio': 'img/star-31-arancio.png',
-  '46 Grigio Scuro': 'img/star-46-grigio-scuro.png',
-  '48 Rosa Chiaro': 'img/star-48-rosa-chiaro.png',
+  '02 Nero': 'img/star-02-nero-nobg.png',
+  '03 Giallo': 'img/star-03-giallo-nobg.png',
+  '05 Blue Royal': 'img/star-05-royal-nobg.png',
+  '07 Sabbia': 'img/star-07-sabbia-nobg.png',
+  '10 Celeste': 'img/star-10-celeste-nobg.png',
+  '12 Turchese': 'img/star-12-turchese-nobg.png',
+  '31 Arancio': 'img/star-31-arancio-nobg.png',
+  '46 Grigio Scuro': 'img/star-46-grigio-scuro-nobg.png',
+  '48 Rosa Chiaro': 'img/star-48-rosa-chiaro-nobg.png',
+  '58 Grigio': 'img/star-58-grigio-nobg.png',
+  '98 Acquamarina': 'img/star-98-acquamarina-nobg.png',
+  '164 Verde Salvia': 'img/star-164-verde-salvia-nobg.png',
+  '55 Blue Navy': 'img/star-55-navy-nobg.png',
+  '83 Verde Mela': 'img/star-83-verde-mela-nobg.png',
+  '171 Grigio Perla': 'img/star-171-grigio-perla-nobg.png',
+  '168 Malva': 'img/star-168-malva-nobg.png',
+  '216 Verde Tropicale': 'img/star-216-verde-nobg.png',
+  '261 Azzurro Riviera': 'img/star-261-azzurro-riviera-nobg.png',
+  '78 Fucsia': 'img/star-78-fucsia-nobg.png',
+  '170 Petrolio': 'img/star-170-petrolio-nobg.png',
+  '262 Rosso Mattone': 'img/star-262-rosso-mattone-nobg.png',
+  '60 Rosso': 'img/star-60-rosso-nobg.png',
+  '121 Lilla': 'img/star-121-lilla-nobg.png',
+  '86 Blue Denim': 'img/star-86-blue-denim-nobg.png',
+  '169 Berry Red': 'img/star-169-berry-red-nobg.png',
+  '152 Verde Avventura': 'img/star-152-verde-militare-nobg.png',
+  '87 Cioccolato': 'img/star-87-cioccolato-nobg.png',
+  '57 Granata': 'img/star-57-granata-nobg.png',
+  '71 Viola': 'img/star-71-viola-nobg.png',
+  '56 Verde Bottiglia': 'img/star-56-verde-bottiglia-nobg.png',
+  '263 Grigio Blu': 'img/star-263-grigio-blu-nobg.png',
+  '264 Verde Pallido': 'img/star-264-verde-pallido-nobg.png',
+  '266 Rosa Antico': 'img/star-266-rosa-antico-nobg.png',
 };
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 const SIZE_STOCK = { S: 19520, M: 10677, L: 18581, XL: 9532, XXL: 2368, XXXL: 969 };
