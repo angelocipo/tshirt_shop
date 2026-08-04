@@ -305,7 +305,7 @@ module.exports = async (req, res) => {
       const sizeMap = f.sizes && typeof f.sizes === 'object' ? f.sizes : null;
       let sizeLabel = '';
       if (sizeMap) {
-        sizeLabel = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+        sizeLabel = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL']
           .filter((s) => (parseInt(sizeMap[s], 10) || 0) > 0)
           .map((s) => `${s}×${parseInt(sizeMap[s], 10)}`)
           .join(' ');
