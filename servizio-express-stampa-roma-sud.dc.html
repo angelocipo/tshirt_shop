@@ -61,9 +61,8 @@
     .nav-sub > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
     .nav-sub > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
     @media (max-width: 700px) {
-      .nav-drop { display: block; }
-      .nav-sub { position: static; display: flex; border: none; background: transparent; padding-left: 12px; }
-      .nav-sub > a, .nav-sub > span { padding: 3px 0; }
+      .nav-drop { display: inline-flex; }
+      .nav-sub, .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: none; }
     }
   .nav-sub .nav-drop { display: block; position: relative; }
     .nav-sub-2 { position: absolute; top: -1px; left: 100%; min-width: 170px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 61; }
@@ -72,8 +71,7 @@
     .nav-sub-2 > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
     .nav-sub-2 > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
     @media (max-width: 700px) {
-      .nav-sub-2 { position: static; display: flex; border: none; background: transparent; padding-left: 12px; }
-      .nav-sub-2 > a, .nav-sub-2 > span { padding: 3px 0; }
+      .nav-sub-2, .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: none; }
     }
   
   </style>
@@ -85,7 +83,6 @@
   <span class="nav-drop"><a href="uomo.dc.html" data-en="Men">Uomo</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-uomo.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><a href="Beagle.dc.html" data-en="Beagle T-Shirt">Maglietta Beagle</a><span style="color: var(--color-neutral-700);" data-en="Atomic — coming soon">Atomic — in arrivo</span></span></span><span class="nav-drop"><a href="polo-uomo.dc.html">Polo</a><span class="nav-sub-2"><a href="Austral-Polo.dc.html">Polo Austral</a><a href="Star-Polo.dc.html">Polo Star</a></span></span></span></span>
   <span class="nav-drop"><a href="index.html#donna" data-en="Women">Donna</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-donna.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span><span class="nav-drop"><a href="polo-donna.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
   <span class="nav-drop"><a href="index.html#bambino" data-en="Kids">Bambino</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-bambino.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span><span class="nav-drop"><a href="polo-bambino.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
-  <a href="index.html#perche">Perché Noi</a>
   <a href="blog.dc.html">Blog</a>
   <a href="contattateci.dc.html">Contatti</a>
   <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;">Preventivo WhatsApp</a>
