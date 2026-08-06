@@ -49,6 +49,10 @@
       "destination": "/custom-t-shirt-printing-rome.dc.html"
     },
     {
+      "source": "/esempi.html",
+      "destination": "/esempi.dc.html"
+    },
+    {
       "source": "/felpe-personalizzate.html",
       "destination": "/felpe-personalizzate.dc.html"
     },
