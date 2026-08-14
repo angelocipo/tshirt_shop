@@ -73,6 +73,10 @@
       "destination": "/preparare-file-stampa-t-shirt.dc.html"
     },
     {
+      "source": "/come-creare-file-dtf.html",
+      "destination": "/come-creare-file-dtf.dc.html"
+    },
+    {
       "source": "/uomo.html",
       "destination": "/uomo.dc.html"
     },
