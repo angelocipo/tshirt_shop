@@ -10,6 +10,7 @@
 <helmet>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="i18n.js"></script>
+  <script defer src="nav-mobile.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <title>Maglietta Unisex 24H Personalizzata | Tshirt Shop Online</title>
@@ -136,7 +137,7 @@
   <span class="nav-drop"><a href="promozioni.dc.html" data-en="Promo" style="color:#ec3013;font-weight:800;">PROMO</a><span class="nav-sub"><a href="promozioni.dc.html" data-en="All promotions">Tutte le promozioni</a><a href="promozione-100-magliette.dc.html" data-en="100 T-Shirts + Printing">100 Magliette + Stampa</a><span style="color: var(--color-neutral-700);" data-en="More offers coming soon">Altre offerte in arrivo</span></span></span>
   <span class="nav-drop"><a href="uomo.dc.html" data-en="Men">Uomo</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-uomo.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><a href="Beagle.dc.html" data-en="Beagle T-Shirt">Maglietta Beagle</a><span style="color: var(--color-neutral-700);" data-en="Atomic — coming soon">Atomic — in arrivo</span></span></span><span class="nav-drop"><a href="polo-uomo.dc.html">Polo</a><span class="nav-sub-2"><a href="Austral-Polo.dc.html">Polo Austral</a><a href="Star-Polo.dc.html">Polo Star</a></span></span></span></span>
   <span class="nav-drop"><a href="index.html#donna" data-en="Women">Donna</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-donna.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span><span class="nav-drop"><a href="polo-donna.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
-  <span class="nav-drop"><a href="index.html#bambino" data-en="Kids">Bambino</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-bambino.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span><span class="nav-drop"><a href="polo-bambino.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
+  <span class="nav-drop"><a href="index.html#bambino" data-en="Kids">Bambino</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-bambino.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><a href="beagle-kids.dc.html" data-en="Beagle Kids T-Shirt">Maglietta Beagle Bimbo</a></span></span><span class="nav-drop"><a href="polo-bambino.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
   <a href="esempi.dc.html" data-en="Examples">Esempi</a>
   <a href="contattateci.dc.html" data-en="Contact">Contatti</a>
   <span style="display:flex; align-items:center; border:1px solid var(--color-divider); margin-left:auto;">
@@ -157,6 +158,7 @@
     <div class="prod-head">
       <h1 style="margin-bottom: 4px;" data-en="Unisex T-Shirt 24H">Maglietta Unisex 24H</h1>
       <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="Custom t-shirt, fast delivery — DTF printing made in Rome">T-shirt personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
+      <p class="text-muted" style="font-size:12px;letter-spacing:.04em;margin:-6px 0 var(--space-3);">EAN 0652026570892</p>
     </div>
 
     <div class="col-left">
@@ -197,7 +199,7 @@
     <div class="prod-config col-right">
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
         <hr class="hr" style="margin-top:0;">
-        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Colour">Colore</span> — {{ selectedColorName }}</label></div>
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colour:">Colore Maglietta:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
         <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
           <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="36">
@@ -296,6 +298,12 @@
         <sc-if value="{{ designLinkError }}" hint-placeholder-val="{{ false }}">
           <div style="font-size:11.5px; margin-top:4px; color:#ec3013;" data-en="The link must start with http:// or https://">Il link deve iniziare con http:// o https://</div>
         </sc-if>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label for="order-note" data-en="Deadline or other useful information (optional)">Data di consegna richiesta o altre informazioni utili (opzionale)</label>
+        <textarea class="input" id="order-note" rows="3" style="resize:vertical;font-family:inherit;" placeholder="Es. mi servono entro venerdì 12, evento sabato mattina — colore Pantone, posizione stampa…" data-en-placeholder="E.g. needed by Friday 12th, event on Saturday morning — Pantone colour, print position…" value="{{ orderNote }}" onChange="{{ setOrderNote }}"></textarea>
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="We read every note before printing. Tell us your deadline and we confirm feasibility by email.">Leggiamo ogni nota prima della stampa. Indica la data che ti serve: confermiamo la fattibilità per email.</div>
       </div>
 
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
@@ -541,6 +549,7 @@ class Component extends DCLogic {
     designFiles: [],
     designRef: null,
     designLink: '',
+    orderNote: '',
   };
 
   fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€' + s; }
@@ -703,6 +712,7 @@ class Component extends DCLogic {
     const designLink = (st.designLink || '').trim();
     const designLinkOk = /^https?:\/\/\S+\.\S+/i.test(designLink);
     const designLinkError = designLink.length > 0 && !designLinkOk;
+    const orderNote = (st.orderNote || '').trim().slice(0, 480);
 
     const sizeBreakdown = SIZES.filter(s => sizeQty[s] > 0).map(s => `${s}×${sizeQty[s]}`).join(', ') || 'nessuna';
     const themeMap = { indigo: 'theme-indigo', forest: 'theme-forest', ochre: 'theme-ochre', ink: 'theme-ink' };
@@ -712,6 +722,8 @@ class Component extends DCLogic {
       designFiles, hasDesignRef, designRef: st.designRef || '',
       designLink: st.designLink || '', designLinkError,
       setDesignLink: (e) => this.setState({ designLink: e.target.value }),
+      orderNote: st.orderNote || '',
+      setOrderNote: (e) => this.setState({ orderNote: e.target.value }),
       pickFiles: (e) => { const fl = e.target.files; if (fl && fl.length) this.handleFiles(fl); e.target.value = ''; },
       colorsByLightness, sizes, zones, themeClass, selectedColorNote,
       cuoreChecked, cuoreWidth, cuoreHeight, setCuoreWidth, setCuoreHeight,
@@ -720,7 +732,7 @@ class Component extends DCLogic {
       davantiWidthIdx: Math.min(st.davantiWidthIdx, W_MAX_IDX), davantiHeightIdx: Math.min(st.davantiHeightIdx, H_MAX_IDX),
       retroWidthCm, retroHeightCm, setRetroWidthIdx, setRetroHeightIdx,
       retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
-      selectedColorName: hasColor ? activeColor.name : '—',
+      selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(garmentPrice),
@@ -750,9 +762,11 @@ class Component extends DCLogic {
             'Stampa': zoneList.length ? zoneList.join(' + ') : 'Nessuna stampa',
             ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
             ...(designLinkOk ? { 'Link file': designLink } : {}),
+            ...(orderNote ? { 'Consegna richiesta / note': orderNote } : {}),
           },
           ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
           ...(designLinkOk ? { designLink } : {}),
+          ...(orderNote ? { customerNote: orderNote } : {}),
           formula: {
             qty: totalQty,
             isWhite,
@@ -787,7 +801,7 @@ class Component extends DCLogic {
         const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
         const params = new URLSearchParams({
           prodotto: 'Maglietta Unisex 24H',
-          config,
+          config: orderNote ? config + ' — Note: ' + orderNote : config,
           url: window.location.origin + window.location.pathname,
           quantita: String(totalQty),
           prezzo: grandTotal.toFixed(2),
