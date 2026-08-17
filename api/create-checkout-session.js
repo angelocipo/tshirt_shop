@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { productId, tierIndex, sizeIndex, formula, deliveryIndex, customer, shipping, sender, shippingFee, shippingZone, designRef, designFiles, designLink } = req.body || {};
+    const { productId, tierIndex, sizeIndex, formula, deliveryIndex, customer, shipping, sender, shippingFee, shippingZone, designRef, designFiles, designLink, customerNote } = req.body || {};
     const product = PRICING[productId];
     if (!product) {
       res.status(400).json({ error: 'Prodotto sconosciuto' });
@@ -426,6 +426,7 @@ module.exports = async (req, res) => {
     if (designRef) metadata.design_ref = String(designRef).slice(0, 40);
     if (Array.isArray(designFiles) && designFiles.length) metadata.design_files = designFiles.join(', ').slice(0, 490);
     if (designLink && /^https?:\/\//i.test(String(designLink))) metadata.design_link = String(designLink).slice(0, 490);
+    if (customerNote) metadata.customer_note = String(customerNote).slice(0, 490);
     metadata.shipping_fee = String(shipFee);
     metadata.shipping_zone = shippingZone || '';
 

@@ -236,6 +236,12 @@ function cornerRow() {
   </tr>`;
 }
 
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/\n/g, '<br>');
+}
+
 function orderEmailHtml(order, total, md) {
   md = md || {};
   const designRows = [];
@@ -245,6 +251,15 @@ function orderEmailHtml(order, total, md) {
   if (md.design_link) {
     designRows.push(`Link file: <a href="${md.design_link}" style="color:${STEEL};">${md.design_link}</a>`);
   }
+  const noteBlock = md.customer_note
+    ? `<tr><td style="padding:22px 32px 0;">
+        <div style="border:1px solid ${RULE};padding:14px 16px;font:400 13px/1.7 ${BODY_FONT};color:${MUTED};">
+          <div style="font:600 11px/1 ${BODY_FONT};letter-spacing:.14em;text-transform:uppercase;color:${STEEL};padding-bottom:8px;">Consegna richiesta / note</div>
+          <div style="color:${INK};">${esc(md.customer_note)}</div>
+          <div style="padding-top:8px;">Se la data richiesta non fosse compatibile con la produzione ti contattiamo subito.</div>
+        </div>
+      </td></tr>`
+    : '';
   const designBlock = designRows.length
     ? `<tr><td style="padding:22px 32px 0;">
         <div style="border:1px solid ${RULE};padding:14px 16px;font:400 13px/1.7 ${BODY_FONT};color:${MUTED};">
@@ -360,6 +375,7 @@ function orderEmailHtml(order, total, md) {
       ${billingBlock}
       ${senderBlock}
       ${designBlock}
+      ${noteBlock}
       <tr><td style="padding:28px 32px 0;">
         <div style="border-top:1px solid ${RULE};padding-top:18px;font:400 14px/1.6 ${BODY_FONT};color:${MUTED};">
           Riceverai la fattura entro un giorno lavorativo, insieme alle istruzioni per l'invio del materiale da stampare.
@@ -393,6 +409,9 @@ function ownerBlockHtml(order, buyerEmail, session) {
       ? [md.ship_name, md.ship_address, md.ship_cap, md.ship_city].filter(Boolean).join(', ')
       : 'Come fatturazione'],
   ];
+  if (md.customer_note) {
+    rowsData.push(['Consegna / note', esc(md.customer_note)]);
+  }
   if (md.design_ref) {
     rowsData.push(['File design', `${md.design_ref}${md.design_files ? ' — ' + md.design_files : ''} (arrivati per email separata)`]);
   }
