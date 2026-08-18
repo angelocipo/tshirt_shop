@@ -30,21 +30,21 @@
           { it: 'Polo Star', en: 'Star Polo', href: 'Star-Polo.dc.html' },
         ] },
       ] },
-      { it: 'Donna', en: 'Women', href: 'index.html#donna', sub: [
+      { it: 'Donna', en: 'Women', href: 'donna.dc.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.dc.html', sub: [
           { it: 'Maglietta Jamaica Donna', en: "Jamaica Women's T-Shirt", href: 'jamaica.dc.html' },
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-donna.dc.html', sub: [
-          { it: 'In arrivo', en: 'Coming soon' },
+          { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'Star-Polo-donna.dc.html' },
         ] },
       ] },
-      { it: 'Bambino', en: 'Kids', href: 'index.html#bambino', sub: [
+      { it: 'Bambino', en: 'Kids', href: 'bambino.dc.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-bambino.dc.html', sub: [
           { it: 'Maglietta Beagle Bimbo', en: 'Beagle Kids T-Shirt', href: 'beagle-kids.dc.html' },
           { it: 'Maglietta Jamaica Bambina', en: 'Jamaica Kids T-Shirt', href: 'Jamaica.kids.dc.html' },
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-bambino.dc.html', sub: [
-          { it: 'In arrivo', en: 'Coming soon' },
+          { it: 'Polo Star Bambino', en: 'Star Kids Polo', href: 'Star-Polo-kids.dc.html' },
         ] },
       ] },
       { it: 'Esempi', en: 'Examples', href: 'esempi.dc.html' },

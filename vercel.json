@@ -25,6 +25,22 @@
       "destination": "/beagle-kids.dc.html"
     },
     {
+      "source": "/donna.html",
+      "destination": "/donna.dc.html"
+    },
+    {
+      "source": "/bambino.html",
+      "destination": "/bambino.dc.html"
+    },
+    {
+      "source": "/star-polo-donna.html",
+      "destination": "/Star-Polo-donna.dc.html"
+    },
+    {
+      "source": "/star-polo-kids.html",
+      "destination": "/Star-Polo-kids.dc.html"
+    },
+    {
       "source": "/jamaica.html",
       "destination": "/jamaica.dc.html"
     },
