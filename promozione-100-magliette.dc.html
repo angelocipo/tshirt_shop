@@ -10,6 +10,7 @@
 <helmet>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="i18n.js"></script>
+  <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
@@ -102,20 +103,7 @@
 
 <div style="max-width: 100%; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);">
 
-  <nav class="nav" style="margin: 0 0 var(--space-6); padding-inline: 0;">
-    <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-family:var(--font-heading);font-weight:800;display:flex;align-items:center;gap:10px;"><img src="img/logo-tshirt-shop.webp" alt="Tshirt Shop Online" style="height:34px;width:auto;display:block;flex:none;"><span>TSHIRT SHOP ONLINE <span style="opacity:.55;font-weight:400;">by Printing Italy</span></span></a>
-    <span class="nav-drop"><a href="promozioni.dc.html" data-en="Promo" style="color:#ec3013;font-weight:800;">PROMO</a><span class="nav-sub"><a href="promozioni.dc.html" data-en="All promotions">Tutte le promozioni</a><a href="promozione-100-magliette.dc.html" data-en="100 T-Shirts + Printing">100 Magliette + Stampa</a><span style="color: var(--color-neutral-700);" data-en="More offers coming soon">Altre offerte in arrivo</span></span></span>
-    <span class="nav-drop"><a href="uomo.dc.html" data-en="Men">Uomo</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-uomo.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><a href="Beagle.dc.html" data-en="Beagle T-Shirt">Maglietta Beagle</a><span style="color: var(--color-neutral-700);" data-en="Atomic — coming soon">Atomic — in arrivo</span></span></span><span class="nav-drop"><a href="polo-uomo.dc.html">Polo</a><span class="nav-sub-2"><a href="Austral-Polo.dc.html">Polo Austral</a><a href="Star-Polo.dc.html">Polo Star</a></span></span></span></span>
-    <span class="nav-drop"><a href="index.html#donna" data-en="Women">Donna</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-donna.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span><span class="nav-drop"><a href="polo-donna.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
-    <span class="nav-drop"><a href="index.html#bambino" data-en="Kids">Bambino</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-bambino.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><a href="beagle-kids.dc.html" data-en="Beagle Kids T-Shirt">Maglietta Beagle Bimbo</a></span></span><span class="nav-drop"><a href="polo-bambino.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
-        <a href="esempi.dc.html" data-en="Examples">Esempi</a>
-    <a href="contattateci.dc.html" data-en="Contact">Contatti</a>
-    <span style="display:flex; align-items:center; border:1px solid var(--color-divider); margin-left:auto;">
-    <button type="button" data-lang="it" aria-pressed="true" style="font-family:var(--font-heading); font-size:12px; letter-spacing:.06em; padding:7px 10px; border:none; background:var(--color-accent); color:var(--color-bg); font-weight:800; cursor:pointer;">IT</button>
-    <button type="button" data-lang="en" aria-pressed="false" style="font-family:var(--font-heading); font-size:12px; letter-spacing:.06em; padding:7px 10px; border:none; border-left:1px solid var(--color-divider); background:transparent; color:var(--color-neutral-700); font-weight:600; cursor:pointer;">EN</button>
-  </span>
-  <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;" data-en="Quote on WhatsApp">Preventivo WhatsApp</a>
-  </nav>
+  <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
     <a href="promozioni.dc.html" class="tag" style="background:#ec3013;color:#fff;border-color:#ec3013;text-decoration:none;font-weight:800;letter-spacing:.08em;" data-en="Promo">PROMO</a>

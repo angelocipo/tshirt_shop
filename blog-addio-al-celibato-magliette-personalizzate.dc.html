@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="i18n.js"></script>
+  <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
 
@@ -14,6 +16,8 @@
 <helmet data-dc-atomics>
 <meta charset="utf-8">
 <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="i18n.js"></script>
+  <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
 
@@ -32,10 +36,7 @@
 </style>
 </helmet>
 
-<nav class="nav">
-  <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-size:18px;font-family:var(--font-heading);font-weight:var(--font-heading-weight);display:flex;align-items:center;gap:10px;"><img src="img/logo-tshirt-shop.webp" alt="Tshirt Shop Online" style="height:34px;width:auto;display:block;flex:none;"><span>Tshirt Shop Online <span style="opacity:.55;font-weight:400;">by Printing Italy</span></span></a>
-  <a href="contattateci.dc.html" class="btn btn-primary blueprint"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Richiedi preventivo</a>
-</nav>
+<nav class="nav" data-site-nav></nav>
 
 <main class="idx-wrap" style="padding-top:var(--space-8);padding-bottom:calc(var(--space-8) * 2);">
   <nav aria-label="Breadcrumb" style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-6);">

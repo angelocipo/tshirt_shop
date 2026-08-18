@@ -11,6 +11,7 @@
 <helmet data-dc-atomics>
 <meta charset="utf-8">
 <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
@@ -72,16 +73,7 @@
 
 <div style="background:var(--color-accent);color:var(--color-bg);text-align:center;padding:8px 16px;font-family:var(--font-heading);font-weight:700;font-size:13px;letter-spacing:0.02em;">Spedizione gratuita per ordini da € 50.</div>
 
-<nav class="nav">
-  <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit;white-space:nowrap;font-family:var(--font-heading);font-weight:800;display:flex;align-items:center;gap:10px;"><img src="img/logo-tshirt-shop.webp" alt="Tshirt Shop Online" style="height:34px;width:auto;display:block;flex:none;"><span>TSHIRT SHOP ONLINE <span style="opacity:.55;font-weight:400;">by Printing Italy</span></span></a>
-  <span class="nav-drop"><a href="promozioni.dc.html" data-en="Promo" style="color:#ec3013;font-weight:800;">PROMO</a><span class="nav-sub"><a href="promozioni.dc.html" data-en="All promotions">Tutte le promozioni</a><a href="promozione-100-magliette.dc.html" data-en="100 T-Shirts + Printing">100 Magliette + Stampa</a><span style="color: var(--color-neutral-700);" data-en="More offers coming soon">Altre offerte in arrivo</span></span></span>
-  <span class="nav-drop"><a href="uomo.dc.html" data-en="Men">Uomo</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-uomo.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><a href="Beagle.dc.html" data-en="Beagle T-Shirt">Maglietta Beagle</a><span style="color: var(--color-neutral-700);" data-en="Atomic — coming soon">Atomic — in arrivo</span></span></span><span class="nav-drop"><a href="polo-uomo.dc.html">Polo</a><span class="nav-sub-2"><a href="Austral-Polo.dc.html">Polo Austral</a><a href="Star-Polo.dc.html">Polo Star</a></span></span></span></span>
-  <span class="nav-drop"><a href="index.html#donna" data-en="Women">Donna</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-donna.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span><span class="nav-drop"><a href="polo-donna.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
-  <span class="nav-drop"><a href="index.html#bambino" data-en="Kids">Bambino</a><span class="nav-sub"><span class="nav-drop"><a href="tshirt-bambino.dc.html" data-en="T-shirts">T-shirt</a><span class="nav-sub-2"><a href="beagle-kids.dc.html" data-en="Beagle Kids T-Shirt">Maglietta Beagle Bimbo</a></span></span><span class="nav-drop"><a href="polo-bambino.dc.html">Polo</a><span class="nav-sub-2"><span data-en="Coming soon">In arrivo</span></span></span></span></span>
-  <a href="esempi.dc.html" data-en="Examples">Esempi</a>
-  <a href="contattateci.dc.html">Contatti</a>
-  <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=393396021366" style="text-decoration:none;">Preventivo WhatsApp</a>
-</nav>
+<nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
 <main class="idx-wrap" style="padding-top:var(--space-8);padding-bottom:calc(var(--space-8) * 2);">
   <a href="Beagle.dc.html" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--space-4);">
@@ -96,6 +88,9 @@
         <div>
           <div class="card-kicker">Il tuo ordine</div>
           <div class="card-title">{{ productName }}</div>
+          <sc-if value="{{ hasEan }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12px;letter-spacing:.04em;color:color-mix(in srgb, var(--color-text) 60%, transparent);margin-top:2px;">EAN {{ productEan }}</div>
+          </sc-if>
         </div>
         <div style="text-align:right;">
           <div style="font-family:var(--font-heading);font-size:28px;">€{{ orderTotal }}</div>
@@ -309,6 +304,21 @@
 
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+const EAN_BY_NAME = {
+  'Maglietta Donna Jamaica': '0652026570090',
+  'Jamaica Women\'s T-Shirt': '0652026570090',
+  'Maglietta Bambina Jamaica': '0652026570069',
+  'Jamaica Kids T-Shirt': '0652026570069',
+  'Maglietta Unisex 24H': '0652026570892',
+  'Unisex T-Shirt 24H': '0652026570892',
+  'Maglietta Bambino Beagle': '0652026573022',
+  'Kids T-Shirt Beagle': '0652026573022',
+  'Polo Austral': '0652026573015',
+  'Austral Polo': '0652026573015',
+  'Polo Star': '0652026573008',
+  'Star Polo': '0652026573008',
+};
+
 class Component extends DCLogic {
   state = {
     productId: null, productName: '', productPrice: null, productCollection: 'misura', orderBody: null,
@@ -485,6 +495,8 @@ class Component extends DCLogic {
       orderDetails,
       detailsMarginBottom: orderDetails.length > 0 ? 'var(--space-4)' : '0',
       productName: s.productName,
+      productEan: EAN_BY_NAME[s.productName] || '',
+      hasEan: !!EAN_BY_NAME[s.productName],
       productPrice: s.productPrice,
       orderTotal: orderTotal.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }).replace(/,00$/, ''),
       shippingLabel: shippingFee === 0 ? 'gratuita' : ('€ ' + shippingFee),

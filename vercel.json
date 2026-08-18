@@ -21,6 +21,18 @@
       "destination": "/Beagle.dc.html"
     },
     {
+      "source": "/beagle-kids.html",
+      "destination": "/beagle-kids.dc.html"
+    },
+    {
+      "source": "/jamaica.html",
+      "destination": "/jamaica.dc.html"
+    },
+    {
+      "source": "/jamaica-kids.html",
+      "destination": "/Jamaica.kids.dc.html"
+    },
+    {
       "source": "/blog-addio-al-celibato-magliette-personalizzate.html",
       "destination": "/blog-addio-al-celibato-magliette-personalizzate.dc.html"
     },

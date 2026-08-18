@@ -85,6 +85,9 @@
             <sc-if value="{{ noUrl }}" hint-placeholder-val="{{ true }}">
               <div style="font-weight:600;">{{ prodotto }}</div>
             </sc-if>
+            <sc-if value="{{ hasEan }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12px;letter-spacing:.04em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-top:2px;">EAN {{ productEan }}</div>
+            </sc-if>
             <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ configurazione }}</div>
             <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ unitPriceLine }}</div>
           </td>
@@ -184,6 +187,21 @@ function isEn() {
 function eurIt(n) {
   return (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true });
 }
+const EAN_BY_NAME = {
+  'Maglietta Donna Jamaica': '0652026570090',
+  'Jamaica Women\'s T-Shirt': '0652026570090',
+  'Maglietta Bambina Jamaica': '0652026570069',
+  'Jamaica Kids T-Shirt': '0652026570069',
+  'Maglietta Unisex 24H': '0652026570892',
+  'Unisex T-Shirt 24H': '0652026570892',
+  'Maglietta Bambino Beagle': '0652026573022',
+  'Kids T-Shirt Beagle': '0652026573022',
+  'Polo Austral': '0652026573015',
+  'Austral Polo': '0652026573015',
+  'Polo Star': '0652026573008',
+  'Star Polo': '0652026573008',
+};
+
 class Component extends DCLogic {
   state = {};
   componentDidMount() {
@@ -217,6 +235,8 @@ class Component extends DCLogic {
     const unitPrice = Number.isFinite(pezzi) && pezzi > 0 && prezzo > 0 ? prezzo / pezzi : null;
     return {
       prodotto: this.state.prodotto || '',
+      productEan: EAN_BY_NAME[this.state.prodotto] || '',
+      hasEan: !!EAN_BY_NAME[this.state.prodotto],
       prodottoUrl: this.state.prodottoUrl || '',
       hasUrl: !!this.state.prodottoUrl,
       noUrl: !this.state.prodottoUrl,
