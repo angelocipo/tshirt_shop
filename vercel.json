@@ -9,6 +9,22 @@
       "destination": "/abbigliamento-personalizzato-roma.dc.html"
     },
     {
+      "source": "/nebraska.html",
+      "destination": "/nebraska.dc.html"
+    },
+    {
+      "source": "/rudolph.html",
+      "destination": "/rudolph.dc.html"
+    },
+    {
+      "source": "/nebraska-donna.html",
+      "destination": "/nebraska-donna.dc.html"
+    },
+    {
+      "source": "/nebraska-kids.html",
+      "destination": "/nebraska-kids.dc.html"
+    },
+    {
       "source": "/star-polo.html",
       "destination": "/Star-Polo.dc.html"
     },

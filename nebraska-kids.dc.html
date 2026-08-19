@@ -180,6 +180,10 @@
             </div>
           </sc-for>
         </div>
+        <figure style="margin: 0 0 var(--space-3); border: 1px solid var(--color-divider); background: var(--color-surface); padding: var(--space-3); display: grid; gap: var(--space-2); justify-items: center;">
+          <img src="img/misure-giubbotto-ab.webp" alt="Schema misure giubbotto: A larghezza torace, B altezza dal collo al fondo" data-en-alt="Jacket measurement diagram: A chest width, B length from collar to hem" style="width: 100%; max-width: 260px; height: auto; display: block;">
+          <figcaption class="text-muted" style="font-size: 12.5px; text-align: center;" data-en="A = chest width, B = length from collar to hem. Measurements in cm, garment laid flat.">A = larghezza torace, B = altezza dal collo al fondo. Misure in cm, capo steso.</figcaption>
+        </figure>
         <table class="table" style="font-size: 13px;">
           <thead>
             <tr><th></th><th>4</th><th>6</th><th>8</th><th>10</th><th>12</th><th>14</th><th>16</th></tr>
@@ -433,13 +437,13 @@ const SIZES = ['4', '6', '8', '10', '12', '14', '16'];
 const SIZE_STOCK = {};
 // Listino capo Nebraska (prezzo unico per tutti i colori).
 const PRICE_TIERS = [
-  { min: 1, white: 29, other: 29 },
-  { min: 2, white: 28, other: 28 },
-  { min: 5, white: 27, other: 27 },
-  { min: 10, white: 26, other: 26 },
-  { min: 20, white: 25, other: 25 },
-  { min: 50, white: 24, other: 24 },
-  { min: 100, white: 23, other: 23 },
+  { min: 1, white: 23, other: 23 },
+  { min: 2, white: 22.5, other: 22.5 },
+  { min: 5, white: 22, other: 22 },
+  { min: 10, white: 21.5, other: 21.5 },
+  { min: 20, white: 21, other: 21 },
+  { min: 50, white: 20.5, other: 20.5 },
+  { min: 100, white: 20, other: 20 },
 ];
 function garmentUnitPrice(qty, isWhite) {
   let tier = PRICE_TIERS[0];

@@ -31,6 +31,7 @@
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'nebraska.dc.html', sub: [
           { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.dc.html' },
+          { it: 'Giubbotto Rudolph', en: 'Rudolph Softshell', href: 'rudolph.dc.html' },
         ] },
       ] },
       { it: 'Donna', en: 'Women', href: 'donna.dc.html', sub: [
