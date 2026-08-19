@@ -29,6 +29,9 @@
           { it: 'Polo Austral', en: 'Austral Polo', href: 'Austral-Polo.dc.html' },
           { it: 'Polo Star', en: 'Star Polo', href: 'Star-Polo.dc.html' },
         ] },
+        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska.dc.html', sub: [
+          { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.dc.html' },
+        ] },
       ] },
       { it: 'Donna', en: 'Women', href: 'donna.dc.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.dc.html', sub: [
@@ -36,6 +39,9 @@
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-donna.dc.html', sub: [
           { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'Star-Polo-donna.dc.html' },
+        ] },
+        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-donna.dc.html', sub: [
+          { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.dc.html' },
         ] },
       ] },
       { it: 'Bambino', en: 'Kids', href: 'bambino.dc.html', sub: [
@@ -45,6 +51,9 @@
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-bambino.dc.html', sub: [
           { it: 'Polo Star Bambino', en: 'Star Kids Polo', href: 'Star-Polo-kids.dc.html' },
+        ] },
+        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-kids.dc.html', sub: [
+          { it: 'Giubbotto Nebraska Bambino', en: 'Nebraska Kids Softshell', href: 'nebraska-kids.dc.html' },
         ] },
       ] },
       { it: 'Esempi', en: 'Examples', href: 'esempi.dc.html' },
@@ -74,7 +83,7 @@
     'nav.nav[data-site-nav] .nav-lang button { font-family: var(--font-heading); font-size: 12px; letter-spacing: .06em; padding: 7px 10px; border: none; background: transparent; color: var(--color-neutral-700); font-weight: 600; cursor: pointer; }',
     'nav.nav[data-site-nav] .nav-lang button + button { border-left: 1px solid var(--color-divider); }',
     '@media (max-width: 700px) {',
-    '  nav.nav[data-site-nav] { justify-content: flex-start; }',
+    '  nav.nav[data-site-nav] { justify-content: flex-start; padding-left: 18px; padding-right: 18px; box-sizing: border-box; }',
     '  nav.nav[data-site-nav] .btn-primary { margin-left: 0; flex: 0 0 100%; }',
     '  nav.nav[data-site-nav] .nav-sub, nav.nav[data-site-nav] .nav-sub-2 { display: none; }',
     '}',
