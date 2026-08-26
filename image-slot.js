@@ -283,10 +283,16 @@
     // resolves to auto there, and the ratio then derives height from
     // width instead of letting the slot collapse to zero height.
     // Explicit width/height on the element override all of this.
+    // color:inherit (not a fixed near-black): the placeholder chrome —
+    // empty-state icon/caption (currentColor) and the dashed ring — must
+    // read on dark decks too, and the slide's own text color is the one
+    // color guaranteed to contrast with the slide background. The soft
+    // look comes from opacity on those parts, not from a baked-in alpha.
     ':host{display:block;position:relative;' +
-    '  font:13px/1.3 system-ui,-apple-system,sans-serif;color:rgba(0,0,0,.55);' +
+    '  font:13px/1.3 system-ui,-apple-system,sans-serif;' +
     '  width:100%;height:100%;aspect-ratio:3/2}' +
-    '.frame{position:absolute;inset:0;overflow:hidden;background:rgba(0,0,0,.04)}' +
+    '.empty .cap,.empty .sub{opacity:.75}' +
+    '.frame{position:absolute;inset:0;overflow:hidden;background:rgba(127,127,127,.08)}' +
     // .frame img (clipped) and .spill (unclipped ghost + handles) share the
     // same left/top/width/height in frame-%, computed by _applyView(), so the
     // inside-mask crop and the outside-mask spill stay pixel-aligned.
@@ -321,13 +327,13 @@
     '.empty svg{opacity:.45}' +
     '.empty .cap{max-width:90%;font-weight:500;letter-spacing:.01em}' +
     '.empty .sub{font-size:11px}' +
-    '.empty .sub u{text-underline-offset:2px;text-decoration-color:rgba(0,0,0,.25)}' +
-    '.empty:hover .sub u{color:rgba(0,0,0,.75);text-decoration-color:currentColor}' +
+    '.empty .sub u{text-underline-offset:2px}' +
+    '.empty:hover .sub{opacity:1}' +
     ':host([data-over]) .frame{outline:2px solid #c96442;outline-offset:-2px;' +
     '  background:rgba(201,100,66,.10)}' +
-    '.ring{position:absolute;inset:0;pointer-events:none;border:1.5px dashed rgba(0,0,0,.25);' +
-    '  transition:border-color .12s}' +
-    ':host([data-over]) .ring{border-color:#c96442}' +
+    '.ring{position:absolute;inset:0;pointer-events:none;border:1.5px dashed currentColor;' +
+    '  opacity:.35;transition:border-color .12s,opacity .12s}' +
+    ':host([data-over]) .ring{border-color:#c96442;opacity:1}' +
     ':host([data-filled]) .ring{display:none}' +
     // Controls overlay INSIDE the frame, pinned to the top-right corner, so
     // a full-bleed slot in an overflow:hidden container still shows them
@@ -369,7 +375,7 @@
     '  justify-content:center;pointer-events:none}' +
     ':host([data-swapping]) .loading{display:flex}' +
     '.loading::after{content:"";width:22px;height:22px;border-radius:50%;' +
-    '  border:2px solid rgba(0,0,0,.12);border-top-color:rgba(0,0,0,.45);' +
+    '  border:2px solid rgba(127,127,127,.25);border-top-color:currentColor;' +
     '  animation:om-slot-spin .7s linear infinite}' +
     '@keyframes om-slot-spin{to{transform:rotate(360deg)}}' +
     // Reduced motion: the static two-tone ring still reads as "working".
@@ -389,6 +395,11 @@
     // page-level hide script can't reach shadow DOM, this rule can).
     ':host-context([data-om-exporting]) .ctl,' +
     ':host-context([data-om-exporting]) .credit{display:none !important}' +
+    // Print must ship just the image too: the hover-gated controls can be
+    // mid-hover when print() fires, and the credit chip is screen chrome —
+    // the same rule the capture window gets, keyed on print media instead
+    // of the host's data-om-exporting mark (the print path sets no mark).
+    '@media print{.ctl,.credit{display:none !important}}' +
     // No export-window mask rules here on purpose: the export capture
     // releases the replacement mask by REMOVING data-swapping (the
     // shadow-root pass in pages/export/shared.ts HIDE_EXPORT_CHROME_SCRIPT)
@@ -822,7 +833,24 @@
     // Public: host's "Import from computer" calls this to run local browse.
     openFilePicker() { this._exitReframe(true); this._input.click(); }
 
-    attributeChangedCallback() { if (this.shadowRoot) this._render(); }
+    // A src write is a newer intent for this slot's content — the host
+    // pick path (setImageSlotImage) or an agent edit — so it must win
+    // over any encode still in flight from an earlier drop: left live,
+    // that encode lands later, passes _ingest's gen guard, and its
+    // setSlot silently overwrites the pick (the stored value shadows
+    // src in _render). Bumping _gen kills the encode before its own
+    // _swapGen clear runs, so clear the dead claim here too — otherwise
+    // _releaseMask (gated on !_swapGen) never fires and the pick's
+    // spinner is stranded. src ONLY: the pick sets credit/credit-href
+    // in the same task, and clearing _swapGen on those would let the
+    // same-src branch unmask the old image mid-encode.
+    attributeChangedCallback(name, oldVal, newVal) {
+      if (name === 'src' && oldVal !== newVal) {
+        this._gen++;
+        this._swapGen = 0;
+      }
+      if (this.shadowRoot) this._render();
+    }
 
     // handleEvent — one listener object for all four drag events keeps the
     // add/remove symmetric and the depth counter correct.

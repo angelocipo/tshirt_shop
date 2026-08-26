@@ -33,6 +33,14 @@
       "destination": "/Austral-Polo.dc.html"
     },
     {
+      "source": "/bahrain-kids.html",
+      "destination": "/bahrain-kids.dc.html"
+    },
+    {
+      "source": "/bahrain.html",
+      "destination": "/bahrain.dc.html"
+    },
+    {
       "source": "/beagle.html",
       "destination": "/Beagle.dc.html"
     },

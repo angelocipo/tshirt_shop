@@ -23,6 +23,7 @@
       { it: 'Uomo', en: 'Men', href: 'uomo.dc.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-uomo.dc.html', sub: [
           { it: 'Maglietta Beagle', en: 'Beagle T-Shirt', href: 'Beagle.dc.html' },
+          { it: 'Maglietta Tecnica Bahrain', en: 'Bahrain Technical T-Shirt', href: 'bahrain.dc.html' },
           { it: 'Atomic — in arrivo', en: 'Atomic — coming soon' },
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-uomo.dc.html', sub: [
@@ -49,6 +50,7 @@
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-bambino.dc.html', sub: [
           { it: 'Maglietta Beagle Bimbo', en: 'Beagle Kids T-Shirt', href: 'beagle-kids.dc.html' },
           { it: 'Maglietta Jamaica Bambina', en: 'Jamaica Kids T-Shirt', href: 'Jamaica.kids.dc.html' },
+          { it: 'Maglietta Tecnica Bahrain Bambino', en: 'Bahrain Kids Technical T-Shirt', href: 'bahrain-kids.dc.html' },
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-bambino.dc.html', sub: [
           { it: 'Polo Star Bambino', en: 'Star Kids Polo', href: 'Star-Polo-kids.dc.html' },

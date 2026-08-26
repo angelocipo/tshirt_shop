@@ -14,10 +14,10 @@
   <script defer src="nav-mobile.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Maglietta Bambino Beagle Personalizzata 24H | Tshirt Shop Online</title>
-  <meta name="description" content="T-shirt Beagle per bambino in cotone premium con stampa DTF: 24 colori, preventivo in 30 secondi, spedizione pronta in 24 ore, prodotta a Roma.">
-  <link rel="canonical" href="https://www.tshirt-shop.online/beagle-kids.html">
-  <meta property="og:url" content="https://www.tshirt-shop.online/beagle-kids.html">
+  <title>Maglietta Tecnica Bahrain Bambino Personalizzata | Tshirt Shop Online</title>
+  <meta name="description" content="Maglietta tecnica Bahrain bambino personalizzata: 100% poliestere waffle interlock 135 g/m², certificata UV801, 21 colori, taglie 4-16. Stampa DTF a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/bahrain-kids.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/bahrain-kids.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -62,8 +62,16 @@
     .size-btn { min-width: 46px; height: 40px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .size-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
     .size-selected { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
-    .size-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-divider); }
-    .size-row:last-child { border-bottom: none; }
+    .size-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .size-row-off { opacity: .38; pointer-events: none; }
+    .size-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+    .size-grid .size-row:last-child { border-bottom: none; }
+    @media (max-width: 480px) {
+      .size-grid { grid-template-columns: minmax(0, 1fr); }
+      .size-grid .size-row:nth-child(even) { border-left: none; }
+      .size-grid .size-row:nth-last-child(-n+2) { border-bottom: 1px solid var(--color-divider); }
+      .size-grid .size-row:last-child { border-bottom: none; }
+    }
     .qty-group { display: flex; align-items: center; }
     .qty-input { width: 52px; height: 36px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
     .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
@@ -136,39 +144,42 @@
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
-    <span class="tag tag-accent">24H</span>
-    <span class="tag tag-neutral">Made in Italy</span>
-    <span class="tag tag-neutral" data-en="Premium Cotton">Cotone Premium</span>
+    <span class="tag tag-accent" data-en="Technical fabric">Tessuto tecnico</span>
+    <span class="tag tag-neutral">UV801</span>
+    <span class="tag tag-neutral" data-en="Kids sizes 4-16">Taglie 4-16</span>
   </div>
 
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Kids Beagle T-Shirt 24H">Maglietta Bambino Beagle 24H</h1>
-      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="Custom t-shirt, fast delivery — DTF printing made in Rome">T-shirt personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
-      <p class="text-muted" style="font-size:12px;letter-spacing:.04em;margin:-6px 0 var(--space-3);">EAN 0652026573022</p>
+      <h1 style="margin-bottom: 4px;" data-en="Bahrain Kids Technical T-Shirt">Maglietta Tecnica Bahrain Bambino</h1>
+      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="100% polyester waffle interlock, 135 g/m² — UV801 certified, DTF printing made in Rome">100% poliestere waffle interlock, 135 g/m² — certificata UV801, stampa DTF prodotta a Roma</p>
+      <p class="text-muted" style="font-size:12px;letter-spacing:.04em;margin:-6px 0 var(--space-3);">EAN 0652026570007</p>
     </div>
 
     <div class="col-left">
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1;">
-          <img id="beagle-hero" alt="Maglietta bambino Beagle — vista frontale" src="img/beagle-kids-hero.webp" style="width:100%;height:100%;object-fit:cover;display:block;touch-action:pan-y;">
+          <img id="bahrain-hero" alt="Maglietta tecnica Bahrain bambino — vista frontale" src="img/bahrain-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
         </div>
       </div>
     </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
-            <div class="size-row">
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 20 pcs, sizes can be mixed.">Ordine minimo: 20 pz, taglie miste ammesse.</p>
+        <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 20-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 20.</p>
+        </sc-if>
+        <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="4">
+            <div class="{{ s.rowClass }}">
               <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
               <div class="qty-group">
                 <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
                 <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
                 <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
               </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
             </div>
           </sc-for>
         </div>
@@ -176,11 +187,11 @@
           <div style="flex:1 1 auto;min-width:0;">
           <table class="table" style="font-size: 13px;">
             <thead>
-              <tr><th></th><th>1/2</th><th>3/4</th><th>5/6</th><th>7/8</th><th>9/10</th><th>11/12</th></tr>
+              <tr><th></th><th>4</th><th>8</th><th>12</th><th>16</th></tr>
             </thead>
             <tbody>
-              <tr><td data-en="A: Width">A: Lar.</td><td>29</td><td>32</td><td>35</td><td>38</td><td>41</td><td>44</td></tr>
-              <tr><td data-en="B: Height">B: Alt.</td><td>39</td><td>43</td><td>47</td><td>51</td><td>55</td><td>59</td></tr>
+              <tr><td data-en="A: Width">A: Lar.</td><td>34</td><td>38</td><td>42</td><td>46</td></tr>
+              <tr><td data-en="B: Height">B: Alt.</td><td>50</td><td>55</td><td>60</td><td>65</td></tr>
             </tbody>
           </table>
           </div>
@@ -192,12 +203,11 @@
     <div class="prod-config col-right">
       <div style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Beagle &amp; Jamaica family">Famiglia Beagle e Jamaica</div>
-          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Beagle and Jamaica share the same 100% cotton jersey and the same dye baths: the colour codes match across the four models, so a mixed order — men, women and kids — comes out in one uniform shade.">Beagle e Jamaica condividono lo stesso jersey 100% cotone e gli stessi bagni di tintura: i codici colore corrispondono su tutti e quattro i modelli, quindi un ordine misto tra uomo, donna e bambino esce in una tinta uniforme.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
-          <a href="Beagle.dc.html" style="font-size:13px;font-weight:600;" data-en="Beagle unisex t-shirt">Maglietta Beagle unisex</a>
-          <a href="jamaica.dc.html" style="font-size:13px;font-weight:600;" data-en="Jamaica women’s t-shirt">Maglietta Jamaica donna</a>
-          <a href="Jamaica.kids.dc.html" style="font-size:13px;font-weight:600;" data-en="Jamaica kids t-shirt">Maglietta Jamaica bambina</a>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+          <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
+            <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% polyester, waffle interlock, 135 g/m².">100% poliestere, waffle interlock, 135 g/m².</span></div>
+            <div data-en="UV801 certified. Removable label. Technical fabric. Dry clean only. Also available in kids sizes.">Certificato UV801. Etichetta rimovibile. Tessuto tecnico. Lavaggio a secco. Disponibile anche in taglie per bambini.</div>
+            <div data-en="Model height 185 cm.">Modello: altezza 185 cm.</div>
           </div>
         </div>
       </div>
@@ -206,7 +216,7 @@
         <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colour:">Colore Maglietta:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
         <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
-          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="24">
+          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="21">
             <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
           </sc-for>
         </div>
@@ -246,11 +256,11 @@
                   <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
                       <label><span data-en="Front width">Larghezza davanti</span> — {{ davantiWidthCm }}cm</label>
-                      <input type="range" min="0" max="9" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <input type="range" min="0" max="5" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                     <div class="field">
                       <label><span data-en="Front height">Altezza davanti</span> — {{ davantiHeightCm }}cm</label>
-                      <input type="range" min="0" max="11" step="1" value="{{ davantiHeightIdx }}" onChange="{{ setDavantiHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <input type="range" min="0" max="7" step="1" value="{{ davantiHeightIdx }}" onChange="{{ setDavantiHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                   </div>
                 </sc-if>
@@ -258,11 +268,11 @@
                   <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
                       <label><span data-en="Back width">Larghezza retro</span> — {{ retroWidthCm }}cm</label>
-                      <input type="range" min="0" max="9" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <input type="range" min="0" max="5" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                     <div class="field">
                       <label><span data-en="Back height">Altezza retro</span> — {{ retroHeightCm }}cm</label>
-                      <input type="range" min="0" max="11" step="1" value="{{ retroHeightIdx }}" onChange="{{ setRetroHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <input type="range" min="0" max="7" step="1" value="{{ retroHeightIdx }}" onChange="{{ setRetroHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                   </div>
                 </sc-if>
@@ -372,6 +382,8 @@
         <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Catalogo</div>
         <div style="display:flex;flex-direction:column;gap:var(--space-2);">
           <a href="tshirt-uomo.dc.html" style="font-size:13.5px;">T-shirt uomo</a>
+          <a href="bahrain.dc.html" style="font-size:13.5px;">Maglietta tecnica Bahrain</a>
+          <a href="bahrain-kids.dc.html" style="font-size:13.5px;">Maglietta tecnica Bahrain bambino</a>
           <a href="polo-uomo.dc.html" style="font-size:13.5px;">Polo uomo</a>
           <a href="tshirt-donna.dc.html" style="font-size:13.5px;">T-shirt donna</a>
           <a href="polo-donna.dc.html" style="font-size:13.5px;">Polo donna</a>
@@ -396,68 +408,48 @@
 </footer>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;forest&quot;,&quot;ochre&quot;,&quot;ink&quot;],&quot;section&quot;:&quot;Color&quot;}}">
-const COLORS = [
-  { name: '01 Bianco', hex: '#eeeeee', group: '24h' },
-  { name: '02 Nero', hex: '#000000', group: '24h' },
-  { name: '03 Giallo', hex: '#fee233', group: '24h' },
-  { name: '05 Blue Royal', hex: '#0c62a7', group: '24h' },
-  { name: '10 Celeste', hex: '#c5def1', group: '24h' },
-  { name: '12 Turchese Chiaro', hex: '#1aa1cf', group: '24h' },
-  { name: '31 Arancione', hex: '#ee8936', group: '24h' },
-  { name: '43 Turchese Scuro', hex: '#1690bf', group: '24h' },
-  { name: '57 Granata', hex: '#8a1918', group: '24h' },
-  { name: '58 Grigio', hex: '#c4c4c4', group: '24h' },
-  { name: '60 Rosso', hex: '#da0b34', group: '24h' },
-  { name: '71 Viola', hex: '#741467', group: '24h' },
-  { name: '114 Verde Oasis', hex: '#c2d689', group: '24h' },
-  { name: '45 Blue Luna', hex: '#134f66', group: 'order' },
-  { name: '48 Rosa Chiaro', hex: '#f7cdd5', group: 'order' },
-  { name: '73 Sweet Yellow', hex: '#efe1aa', group: 'order' },
-  { name: '78 Rosa', hex: '#d9106c', group: 'order' },
-  { name: '120 Corallo', hex: '#fc6e6d', group: 'order' },
-  { name: '132 Bianco Vintage', hex: '#efe6e5', group: 'order' },
-  { name: '229 Angora', hex: '#d9b8a9', group: 'order' },
-  { name: '276 Ocra', hex: '#c4a157', group: 'order' },
-  { name: '277 Mattone Rosso', hex: '#a56f69', group: 'order' },
-  { name: '481 Silk Pink', hex: '#e783a0', group: 'order' },
-  { name: '711 Iris Purple', hex: '#5a5d9d', group: 'order' },
+const COLORS_ALL = [
+  { name: '01 Bianco', hex: '#f7f7f7', kids: true },
+  { name: '02 Nero', hex: '#2b2b2b', kids: true },
+  { name: '03 Giallo', hex: '#f5d908', kids: true },
+  { name: '05 Blue Royal', hex: '#0e79c4', kids: true },
+  { name: '10 Celeste', hex: '#87d3f0', kids: true },
+  { name: '12 Turchese', hex: '#12a8bd', kids: true },
+  { name: '15 Verde Militare', hex: '#5b6349', kids: false },
+  { name: '45 Blue Petrolio', hex: '#116a91', kids: true },
+  { name: '46 Antracite', hex: '#4a4a4d', kids: true },
+  { name: '47 Grigio Chiaro', hex: '#c8c9cb', kids: false },
+  { name: '55 Blue Navy', hex: '#12304c', kids: true },
+  { name: '60 Rosso', hex: '#e12b26', kids: true },
+  { name: '63 Viola', hex: '#4d1e94', kids: true },
+  { name: '78 Fucsia', hex: '#d62273', kids: true },
+  { name: '98 Menta', hex: '#96dfd0', kids: true },
+  { name: '125 Rosa Fluo', hex: '#fb7ba0', kids: true },
+  { name: '219 Sabbia', hex: '#c3ab86', kids: false },
+  { name: '221 Giallo Fluo', hex: '#f4ee1a', kids: true },
+  { name: '222 Verde Fluo', hex: '#3ad424', kids: true },
+  { name: '223 Arancione Fluo', hex: '#fb7c07', kids: true },
+  { name: '225 Verde Lime', hex: '#8dcf2c', kids: true },
+  { name: '226 Verde Prato', hex: '#19a94a', kids: true },
+  { name: '228 Fucsia Fluo', hex: '#f5359a', kids: true },
+  { name: '234 Corallo Fluo', hex: '#fb5d4a', kids: true },
 ];
-const DEFAULT_HERO_IMG = 'img/beagle-kids-hero.webp';
-const IMAGE_BY_COLOR = {
-  '01 Bianco': 'img/beagle-01-bianco.webp',
-  '02 Nero': 'img/beagle-02-nero.webp',
-  '03 Giallo': 'img/beagle-03-giallo.webp',
-  '05 Blue Royal': 'img/beagle-05-royal.webp',
-  '10 Celeste': 'img/beagle-10-celeste.webp',
-  '12 Turchese Chiaro': 'img/beagle-kids-hero.webp',
-  '31 Arancione': 'img/beagle-31-arancione.webp',
-  '43 Turchese Scuro': 'img/beagle-43-turchese-scuro.webp',
-  '57 Granata': 'img/beagle-57-bordeaux.webp',
-  '58 Grigio': 'img/beagle-58-grigio.webp',
-  '60 Rosso': 'img/beagle-60-rosso.webp',
-  '71 Viola': 'img/beagle-71-viola.webp',
-  '114 Verde Oasis': 'img/beagle-114-verde-oasi.webp',
-  '45 Blue Luna': 'img/beagle-45-blue-chiaro-luna.webp',
-  '48 Rosa Chiaro': 'img/beagle-48-rosa-chiaro.webp',
-  '73 Sweet Yellow': 'img/p_6554_73_1_1.webp',
-  '78 Rosa': 'img/beagle-78-rosa.webp',
-  '120 Corallo': 'img/p_6554_120_1_1.webp',
-  '132 Bianco Vintage': 'img/p_6554_132_1_1.webp',
-  '229 Angora': 'img/p_6554_229_1_1.webp',
-  '276 Ocra': 'img/beagle-276-ochre.webp',
-  '277 Mattone Rosso': 'img/beagle-277-brick-red.webp',
-  '481 Silk Pink': 'img/p_6554_481_1_1.webp',
-  '711 Iris Purple': 'img/p_6554_711_1_1.webp',
-};
-const SIZES = ['1/2', '3/4', '5/6', '7/8', '9/10', '11/12'];
-const SIZE_STOCK = { '1/2': 100, '3/4': 100, '5/6': 100, '7/8': 100, '9/10': 100, '11/12': 100 };
+const COLORS = COLORS_ALL.filter(c => c.kids);
+const IMAGE_BY_COLOR = {};
+COLORS.forEach(c => { IMAGE_BY_COLOR[c.name] = 'img/bahrain-' + c.name.split(' ')[0] + '.webp'; });
+const DEFAULT_HERO_IMG = 'img/bahrain-hero.webp';
+const MIN_QTY = 20;
+const SIZES = ['4', '8', '12', '16'];
+const SIZE_STOCK = {};
+// Costo capo Bahrain: 1,30 € cad. Listino di vendita: 5,00 / 4,00 / 3,10 / 2,20 / 1,80 / 1,60 € cad + IVA -> +22% IVA compresa.
+// Prezzo unico per tutti i colori e tutte le taglie.
 const PRICE_TIERS = [
-  { min: 1, white: 8, other: 8.8 },
-  { min: 5, white: 6.5, other: 7.15 },
-  { min: 10, white: 5, other: 5.5 },
-  { min: 20, white: 3.5, other: 3.85 },
-  { min: 50, white: 2.9, other: 3.2 },
-  { min: 100, white: 2.5, other: 2.75 },
+  { min: 1, white: 6.1, other: 6.1 },
+  { min: 5, white: 4.88, other: 4.88 },
+  { min: 10, white: 3.78, other: 3.78 },
+  { min: 20, white: 2.68, other: 2.68 },
+  { min: 50, white: 2.2, other: 2.2 },
+  { min: 100, white: 1.95, other: 1.95 },
 ];
 function garmentUnitPrice(qty, isWhite) {
   let tier = PRICE_TIERS[0];
@@ -474,11 +466,12 @@ function cuoreUnitPrice(qty) {
   for (const t of CUORE_PRICE_TIERS) if (qty >= t.min) tier = t;
   return tier.price;
 }
-// Area massima stampabile: 38 cm di larghezza × 48 cm di altezza.
+// Area massima stampabile sul capo adulto: 38 × 48 cm.
 const W_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 38];
 const H_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 48];
-const W_MAX_IDX = W_BREAKS.length - 1;
-const H_MAX_IDX = H_BREAKS.length - 1;
+// Capo bambino: area massima stampabile 25 × 32 cm (taglia 4 = 34 × 50 cm).
+const W_MAX_IDX = 5;
+const H_MAX_IDX = 7;
 const AREA_TABLE = [
   [12, 12, 12, 13, 14, 14, 14, 16, 16, 16, 17, 18],
   [12, 12, 13, 14, 14, 14, 16, 16, 16, 17, 18, 18],
@@ -508,8 +501,8 @@ function davantiDiscount(qty) {
 }
 const ZONE_DEFS = [
   { key: 'cuore', label: 'Cuore / Manica (max 8×8cm)', labelEn: 'Chest / Sleeve (max 8×8cm)', price: (qty) => cuoreUnitPrice(qty) },
-  { key: 'davanti', label: 'Davanti (fino a 38×48cm)', labelEn: 'Front (up to 38×48cm)' },
-  { key: 'retro', label: 'Retro (fino a 38×48cm)', labelEn: 'Back (up to 38×48cm)' },
+  { key: 'davanti', label: 'Davanti (fino a 25×32cm)', labelEn: 'Front (up to 25×32cm)' },
+  { key: 'retro', label: 'Retro (fino a 25×32cm)', labelEn: 'Back (up to 25×32cm)' },
 ];
 function isEn() {
   try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; }
@@ -522,10 +515,10 @@ class Component extends DCLogic {
     zones: {},
     cuoreWidth: 8,
     cuoreHeight: 8,
-    davantiWidthIdx: 4,
-    davantiHeightIdx: 7,
-    retroWidthIdx: 4,
-    retroHeightIdx: 7,
+    davantiWidthIdx: 3,
+    davantiHeightIdx: 5,
+    retroWidthIdx: 3,
+    retroHeightIdx: 5,
     designFiles: [],
     designRef: null,
     designLink: '',
@@ -537,14 +530,14 @@ class Component extends DCLogic {
   // The hero <img> keeps a literal src in the template: a {{ hole }} in src makes the browser
   // request the unresolved placeholder string once on every load. Swap it imperatively instead.
   syncHero() {
-    const el = document.getElementById('beagle-hero');
+    const el = document.getElementById('bahrain-hero');
     if (!el) return;
     const i = this.state.colorIndex;
     const src = i != null ? (IMAGE_BY_COLOR[COLORS[i].name] || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
     const want = new URL(src, window.location.href).href;
     if (el.src !== want) {
       el.src = src;
-      el.alt = i != null ? ('Maglietta bambino Beagle ' + COLORS[i].name) : 'Maglietta bambino Beagle — vista frontale';
+      el.alt = i != null ? ('Maglietta tecnica Bahrain bambino ' + COLORS[i].name) : 'Maglietta tecnica Bahrain bambino — vista frontale';
     }
   }
   componentDidMount() {
@@ -584,7 +577,7 @@ class Component extends DCLogic {
 
   async uploadFile(file, id, ref) {
     try {
-      const qs = new URLSearchParams({ ref, name: file.name, product: 'Maglietta Bambino Beagle' });
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Maglietta Tecnica Bahrain Bambino' });
       const res = await fetch('/api/upload-design?' + qs.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -605,7 +598,12 @@ class Component extends DCLogic {
     const colorsAll = COLORS.map((c, i) => ({
       ...c,
       swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
-      select: () => this.setState({ colorIndex: i }),
+      select: () => this.setState(prev => {
+        if (c.kids) return { colorIndex: i };
+        const cleaned = { ...prev.sizeQty };
+        ['4', '8', '12', '16'].forEach(k => { delete cleaned[k]; });
+        return { colorIndex: i, sizeQty: cleaned };
+      }),
     }));
     const lum = (hex) => {
       const h = hex.replace('#', '');
@@ -614,21 +612,28 @@ class Component extends DCLogic {
       return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     };
     const colorsByLightness = colorsAll
-      .map(c => ({ ...c, title: c.name + (c.group === 'order' ? ' — su ordinazione (1 settimana)' : ' — 24H') }))
+      .map(c => ({ ...c, title: c.name + (c.kids ? (en ? ' — adult + kids sizes' : ' — taglie adulto e bambino') : (en ? ' — adult sizes only' : ' — solo taglie adulto')) }))
       .sort((a, b) => lum(b.hex) - lum(a.hex));
+    const hasColorSel = st.colorIndex != null;
     const sizeQty = st.sizeQty || {};
-    const totalQty = SIZES.reduce((n, s) => n + (sizeQty[s] || 0), 0);
     const setQtyFor = (s, v) => this.setState(prev => ({
       sizeQty: { ...prev.sizeQty, [s]: Math.max(0, Math.min(9999, v)) },
     }));
-    const sizes = SIZES.map(s => ({
+    const KIDS_SIZES = ['4', '8', '12', '16'];
+    const kidsBlocked = hasColorSel && !COLORS[st.colorIndex].kids;
+    const sizes = SIZES.map(s => {
+      const blocked = kidsBlocked && KIDS_SIZES.includes(s);
+      return {
       label: s,
-      qty: sizeQty[s] || 0,
-      stockLabel: (SIZE_STOCK[s] ?? 0).toLocaleString('it-IT') + (en ? ' avail.' : ' disp.'),
-      inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
-      dec: () => setQtyFor(s, (this.state.sizeQty[s] || 0) - 1),
-      setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
-    }));
+      blocked,
+      rowClass: 'size-row' + (blocked ? ' size-row-off' : ''),
+      qty: blocked ? 0 : (sizeQty[s] || 0),
+      inc: () => { if (!blocked) setQtyFor(s, (this.state.sizeQty[s] || 0) + 1); },
+      dec: () => { if (!blocked) setQtyFor(s, (this.state.sizeQty[s] || 0) - 1); },
+      setQty: (e) => { if (!blocked) setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0); },
+      };
+    });
+    const totalQty = sizes.reduce((n, x) => n + x.qty, 0);
     const zonePrice = (key) => {
       if (key === 'cuore') return cuoreUnitPrice(totalQty);
       if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty);
@@ -661,19 +666,18 @@ class Component extends DCLogic {
     const retroWidthCm = W_BREAKS[Math.min(st.retroWidthIdx, W_MAX_IDX)];
     const retroHeightCm = H_BREAKS[Math.min(st.retroHeightIdx, H_MAX_IDX)];
     const setDavantiWidthIdx = (e) => this.setState({ davantiWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) });
-    const setDavantiHeightIdx = (e) => this.setState({ davantiHeightIdx: Number(e.target.value) });
+    const setDavantiHeightIdx = (e) => this.setState({ davantiHeightIdx: Math.min(Number(e.target.value), H_MAX_IDX) });
     const setRetroWidthIdx = (e) => this.setState({ retroWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) });
-    const setRetroHeightIdx = (e) => this.setState({ retroHeightIdx: Number(e.target.value) });
+    const setRetroHeightIdx = (e) => this.setState({ retroHeightIdx: Math.min(Number(e.target.value), H_MAX_IDX) });
     const printTotal = ZONE_DEFS.reduce((sum, z) => sum + (st.zones[z.key] ? zonePrice(z.key) : 0), 0);
     const hasColor = st.colorIndex != null;
     const activeColor = hasColor ? COLORS[st.colorIndex] : null;
     const isWhite = hasColor && activeColor.name === '01 Bianco';
-    const selectedColorGroup = hasColor ? activeColor.group : null;
     const selectedColorNote = !hasColor
       ? (en ? 'Pick a colour' : 'Scegli un colore')
-      : (selectedColorGroup === 'order'
-          ? (en ? 'Made to order — takes 1 week' : 'Su ordinazione — richiede 1 settimana')
-          : (en ? '24H colour — in stock now' : 'Colore 24H — disponibile subito'));
+      : (activeColor.kids
+          ? (en ? 'Available in adult and kids sizes' : 'Disponibile in taglie adulto e bambino')
+          : (en ? 'Adult sizes only' : 'Disponibile solo in taglie adulto'));
     const garmentPrice = garmentUnitPrice(totalQty, isWhite);
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;
@@ -714,6 +718,8 @@ class Component extends DCLogic {
       retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
       selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
+      belowMin: totalQty > 0 && totalQty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - totalQty),
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(garmentPrice),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
@@ -722,6 +728,7 @@ class Component extends DCLogic {
       checkout: () => {
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
+        if (totalQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces, sizes can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi, anche in taglie miste.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneNames = {
@@ -734,7 +741,7 @@ class Component extends DCLogic {
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const orderBody = {
-          productId: 'tshirt',
+          productId: 'bahrain-kids',
           human: {
             'Colore': activeColor.name,
             'Taglie': sizeBreakdown,
@@ -759,8 +766,8 @@ class Component extends DCLogic {
         };
         const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
         const params = new URLSearchParams({
-          id: 'tshirt',
-          name: 'Maglietta Bambino Beagle',
+          id: 'bahrain-kids',
+          name: 'Maglietta Tecnica Bahrain Bambino',
           price: grandTotal.toFixed(2),
           col: 'misura',
           cfg,
@@ -780,7 +787,7 @@ class Component extends DCLogic {
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
         const params = new URLSearchParams({
-          prodotto: 'Maglietta Bambino Beagle',
+          prodotto: 'Maglietta Tecnica Bahrain Bambino',
           config: orderNote ? config + ' — Note: ' + orderNote : config,
           url: window.location.origin + window.location.pathname,
           quantita: String(totalQty),
