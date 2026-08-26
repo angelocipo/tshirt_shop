@@ -35,6 +35,10 @@ const TSHIRT_DISCOUNT_TIERS = [
   { min: 1, mult: 1 }, { min: 2, mult: 0.67 }, { min: 5, mult: 0.61 },
   { min: 10, mult: 0.56 }, { min: 20, mult: 0.44 }, { min: 50, mult: 0.39 }, { min: 100, mult: 0.33 },
 ];
+const BAHRAIN_PRICE_TIERS = [
+  { min: 1, price: 6.1 }, { min: 5, price: 4.88 }, { min: 10, price: 3.78 },
+  { min: 20, price: 2.68 }, { min: 50, price: 2.2 }, { min: 100, price: 1.95 },
+];
 const POLO_PRICE_TIERS = [
   { min: 1, price: 8 }, { min: 2, price: 7.5 }, { min: 5, price: 7 },
   { min: 10, price: 6.5 }, { min: 20, price: 6 }, { min: 50, price: 5.5 }, { min: 100, price: 5.2 },
@@ -42,6 +46,10 @@ const POLO_PRICE_TIERS = [
 const STAR_POLO_PRICE_TIERS = [
   { min: 1, price: 9 }, { min: 2, price: 8.5 }, { min: 5, price: 8 },
   { min: 10, price: 7.5 }, { min: 20, price: 7 }, { min: 50, price: 6.5 }, { min: 100, price: 5.95 },
+];
+const NEBRASKA_PRICE_TIERS = [
+  { min: 1, price: 29 }, { min: 2, price: 28 }, { min: 5, price: 27 },
+  { min: 10, price: 26 }, { min: 20, price: 25 }, { min: 50, price: 24 }, { min: 100, price: 23 },
 ];
 function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
 
@@ -56,6 +64,38 @@ const PRICING = {
   // Polo Star — listino capi Star (tabella 1-1, unico per tutti i colori); stampa = tariffe DTF t-shirt.
   'star-polo': { nome: 'Polo Star', type: 'tshirt',
     garmentUnitPrice: (qty) => pickTier(STAR_POLO_PRICE_TIERS, qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Giubbotto Nebraska — listino capi (tabella 1-2, unico per tutti i colori); stampa = tariffe DTF t-shirt.
+  'nebraska': { nome: 'Giubbotto Nebraska', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(NEBRASKA_PRICE_TIERS, qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'nebraska-kids': { nome: 'Giubbotto Nebraska Bambino', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(NEBRASKA_PRICE_TIERS, qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'nebraska-donna': { nome: 'Giubbotto Nebraska Donna', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(NEBRASKA_PRICE_TIERS, qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Maglietta Tecnica Bahrain — listino capi (unico per colore e taglia); stampa = tariffe DTF t-shirt.
+  'bahrain': { nome: 'Maglietta Tecnica Bahrain', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(BAHRAIN_PRICE_TIERS, qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'bahrain-kids': { nome: 'Maglietta Tecnica Bahrain Bambino', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(BAHRAIN_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
