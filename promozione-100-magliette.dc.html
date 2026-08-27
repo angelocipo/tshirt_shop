@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
@@ -37,14 +36,27 @@
     .prod-head, .prod-visual, .prod-config { min-width: 0; }
     @media (min-width: 900px) {
       .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6);
-        grid-template-areas: "head head" "left right"; }
+        grid-template-rows: auto min-content 1fr;
+        grid-template-areas: "head head" "left mid" "left right"; align-content: start; }
       .prod-head { grid-area: head; }
       .col-left { grid-area: left; display: flex; flex-direction: column; }
+      .col-mid { grid-area: mid; }
       .col-right { grid-area: right; }
+      .col-left, .col-mid, .col-right { align-self: stretch; border: 1px solid var(--color-divider); padding: var(--space-4); }
+      .col-left { align-self: start; }
+    }
+    @media (min-width: 1200px) {
+      .prod-grid { grid-template-columns: minmax(0, 400px) minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        grid-template-areas: "head head head" "left mid right"; }
+      .col-left { align-self: stretch; }
     }
     @media (max-width: 899px) {
-      .col-left, .col-right { display: contents; }
-      .prod-grid { grid-template-areas: "head" "visual" "cfgtop" "qty" "cfgrest"; }
+      .col-left, .col-mid, .col-right { display: contents; }
+      .prod-grid { grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "comp" "cfgrest"; }
+      .cfg-zones { grid-area: zones; }
+      .cfg-misure { grid-area: misure; }
+      .cfg-comp { grid-area: comp; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
@@ -102,7 +114,7 @@
   </style>
 </helmet>
 
-<div style="max-width: 100%; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);">
+<div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);">
 
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
@@ -129,35 +141,6 @@
         </div>
       </div>
 
-      <div class="prod-qty" style="margin-bottom: var(--space-4);">
-        <div class="field"><label><span data-en="Size split">Distribuzione taglie</span> — {{ assignedLabel }}</label></div>
-        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-2);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="8">
-            <div class="size-row">
-              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 58px;">{{ s.label }}</span>
-              <div class="qty-group">
-                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
-                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
-                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
-              </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
-            </div>
-          </sc-for>
-        </div>
-        <div style="font-size: 12.5px; color: {{ assignedColor }};">{{ assignedNote }}</div>
-        <table class="table" style="font-size: 12.5px; margin-top: var(--space-3);">
-          <thead>
-            <tr><th></th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th><th>XXXXL</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>A: Lar.</td><td>46</td><td>48</td><td>50</td><td>54</td><td>58</td><td>62</td><td>66</td><td>70</td></tr>
-            <tr><td>B: Alt.</td><td>67</td><td>69</td><td>71</td><td>73</td><td>75</td><td>77</td><td>79</td><td>81</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="prod-config col-right">
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
         <div class="field"><label style="font-weight: 800; color: #000;" data-en="Quantity">Quantità</label></div>
         <div class="qty-seg" style="margin-bottom: 6px;">
@@ -175,8 +158,7 @@
         </div>
       </div>
 
-      <div class="cfg-rest">
-        <div style="margin-bottom: var(--space-4);">
+      <div class="cfg-zones" style="margin-bottom: var(--space-4);">
           <div class="field"><label data-en="Print on">Stampa su</label></div>
           <div style="border: 1px solid var(--color-divider);">
             <sc-for list="{{ prints }}" as="p" hint-placeholder-count="7">
@@ -189,9 +171,41 @@
               </div>
             </sc-for>
           </div>
-        </div>
+        </div>    </div>
 
-        <hr class="hr">
+    <div class="col-mid">
+      <div class="cfg-misure" style="margin-bottom: var(--space-4);">
+        <table class="table" style="font-size: 12.5px; margin-top: var(--space-3);">
+          <thead>
+            <tr><th></th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th><th>XXXXL</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A: Lar.</td><td>46</td><td>48</td><td>50</td><td>54</td><td>58</td><td>62</td><td>66</td><td>70</td></tr>
+            <tr><td>B: Alt.</td><td>67</td><td>69</td><td>71</td><td>73</td><td>75</td><td>77</td><td>79</td><td>81</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prod-qty" style="margin-bottom: var(--space-4);">
+        <div class="field"><label><span data-en="Size split">Distribuzione taglie</span> — {{ assignedLabel }}</label></div>
+        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-2);">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="8">
+            <div class="size-row">
+              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 58px;">{{ s.label }}</span>
+              <div class="qty-group">
+                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
+                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
+                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
+              </div>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size: 12.5px; color: {{ assignedColor }};">{{ assignedNote }}</div>
+      </div>
+    </div>
+
+    <div class="prod-config col-right">
+      <div class="cfg-rest">
 
         <div class="field" style="margin-bottom: var(--space-4);">
           <label data-en="File Upload">File Upload</label>

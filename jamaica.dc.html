@@ -9,7 +9,6 @@
 <x-dc>
 <helmet>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
@@ -31,20 +30,34 @@
     /* landscape / wide: image + price beside the configurator */
     @media (min-width: 900px) {
       .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6); align-items: start;
-        grid-template-areas: "head head" "left right"; }
+        grid-template-rows: auto min-content 1fr;
+        grid-template-areas: "head head" "left mid" "left right"; align-content: start; }
       .prod-head { grid-area: head; }
       .col-left { grid-area: left; display: flex; flex-direction: column; }
+      .col-mid { grid-area: mid; }
       .col-right { grid-area: right; }
+      .col-left, .col-mid, .col-right { align-self: stretch; border: 1px solid var(--color-divider); padding: var(--space-4); }
+      .col-left, .col-mid { align-self: start; }
       .prod-media { max-width: 100% !important; }
     }
+    @media (min-width: 1200px) {
+      .prod-grid { grid-template-columns: minmax(0, 400px) minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        grid-template-areas: "head head head" "left mid right"; }
+      .col-left { align-self: stretch; }
+      .col-mid { align-self: start; }
+    }
     @media (max-width: 899px) {
-      .col-left, .col-right { display: contents; }
+      .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "qty" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
+      .cfg-zones { grid-area: zones; }
+      .cfg-misure { grid-area: misure; }
       .prod-qty { grid-area: qty; }
+      .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
     }
@@ -63,16 +76,16 @@
     .size-btn { min-width: 46px; height: 40px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .size-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
     .size-selected { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
-    .size-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .size-row { display: flex; align-items: center; gap: var(--space-3); padding: 2px var(--space-3); border-bottom: 1px solid var(--color-divider); }
     .size-row:last-child { border-bottom: none; }
     .qty-group { display: flex; align-items: center; }
-    .qty-input { width: 52px; height: 36px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .qty-input { width: 52px; height: 30px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
     .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
     .zone-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider); cursor: pointer; }
     .zone-row:last-child { border-bottom: none; }
     .zone-check { width: 18px; height: 18px; border: 1.5px solid var(--color-divider); flex: none; display: flex; align-items: center; justify-content: center; }
     .zone-check-on { background: var(--color-accent); border-color: var(--color-accent); }
-    .qty-btn { width: 36px; height: 36px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .qty-btn { width: 32px; height: 30px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
     .thumb { width: 100%; aspect-ratio: 1; background: var(--color-surface); border: 1px solid var(--color-divider); cursor: pointer; padding: 0; }
     .thumb-selected { border-color: var(--color-accent); border-width: 2px; }
@@ -132,7 +145,7 @@
   </style>
 </helmet>
 
-<div style="max-width: 100%; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
+<div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
 
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
@@ -169,50 +182,17 @@
         <div id="jamaica-hero-note" style="display:none;border:1px solid var(--color-divider);border-top:none;padding:8px 10px;font-size:12px;line-height:1.45;color:var(--color-neutral-700);"></div>
       </div>
     </div>
-      <div class="prod-qty" style="margin-bottom: var(--space-4);">
-        <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
-            <div class="size-row">
-              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
-              <div class="qty-group">
-                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
-                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
-                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
-              </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
-            </div>
-          </sc-for>
-        </div>
-        <p class="text-muted" style="font-size:12.5px;line-height:1.5;margin:0;" data-en="Fitted women's cut: one size smaller than our unisex t-shirts. Write to us for the exact measurements of a size.">Vestibilità sfiancata: una taglia in meno rispetto alle t-shirt unisex. Scrivici per le misure esatte di una taglia.</p>
-      </div>
-    </div>
-
-    <div class="prod-config col-right">
-      <div style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
-        <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Beagle &amp; Jamaica family">Famiglia Beagle e Jamaica</div>
-          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Beagle and Jamaica share the same 100% cotton jersey and the same dye baths: the colour codes match across the four models, so a mixed order — men, women and kids — comes out in one uniform shade.">Beagle e Jamaica condividono lo stesso jersey 100% cotone e gli stessi bagni di tintura: i codici colore corrispondono su tutti e quattro i modelli, quindi un ordine misto tra uomo, donna e bambino esce in una tinta uniforme.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
-          <a href="Beagle.dc.html" style="font-size:13px;font-weight:600;" data-en="Beagle unisex t-shirt">Maglietta Beagle unisex</a>
-          <a href="beagle-kids.dc.html" style="font-size:13px;font-weight:600;" data-en="Beagle kids t-shirt">Maglietta Beagle bambino</a>
-          <a href="Jamaica.kids.dc.html" style="font-size:13px;font-weight:600;" data-en="Jamaica kids t-shirt">Maglietta Jamaica bambina</a>
-          </div>
-        </div>
-      </div>
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
-        <hr class="hr" style="margin-top:0;">
         <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colour:">Colore Maglietta:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
-        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+        <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
           <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="36">
             <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
           </sc-for>
         </div>
       </div>
 
-      <div class="cfg-rest">
-      <div style="margin-bottom: var(--space-4);">
+      <div class="cfg-zones" style="margin-bottom: var(--space-4);">
         <div class="field"><label data-en="Print on">Stampa su</label></div>
         <div>
           <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
@@ -270,8 +250,41 @@
           </sc-for>
         </div>
       </div>
+    </div>
 
-      <hr class="hr">
+    <div class="col-mid">
+      <div class="prod-qty" style="margin-bottom: var(--space-4);">
+        <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
+        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
+            <div class="size-row">
+              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
+              <div class="qty-group">
+                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
+                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
+                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
+              </div>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p class="text-muted" style="font-size:12.5px;line-height:1.5;margin:0;" data-en="Fitted women's cut: one size smaller than our unisex t-shirts. Write to us for the exact measurements of a size.">Vestibilità sfiancata: una taglia in meno rispetto alle t-shirt unisex. Scrivici per le misure esatte di una taglia.</p>
+      </div>
+    </div>
+
+    <div class="prod-config col-right">
+      <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+        <div style="padding: var(--space-4);">
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Beagle &amp; Jamaica family">Famiglia Beagle e Jamaica</div>
+          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Beagle and Jamaica share the same 100% cotton jersey and the same dye baths: the colour codes match across the four models, so a mixed order — men, women and kids — comes out in one uniform shade.">Beagle e Jamaica condividono lo stesso jersey 100% cotone e gli stessi bagni di tintura: i codici colore corrispondono su tutti e quattro i modelli, quindi un ordine misto tra uomo, donna e bambino esce in una tinta uniforme.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
+          <a href="Beagle.dc.html" style="font-size:13px;font-weight:600;" data-en="Beagle unisex t-shirt">Maglietta Beagle unisex</a>
+          <a href="beagle-kids.dc.html" style="font-size:13px;font-weight:600;" data-en="Beagle kids t-shirt">Maglietta Beagle bambino</a>
+          <a href="Jamaica.kids.dc.html" style="font-size:13px;font-weight:600;" data-en="Jamaica kids t-shirt">Maglietta Jamaica bambina</a>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-rest">
 
       <div class="field" style="margin-bottom: var(--space-4);">
         <label data-en="File Upload">File Upload</label>

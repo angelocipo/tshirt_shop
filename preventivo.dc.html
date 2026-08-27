@@ -11,7 +11,6 @@
 
 <helmet>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
   <script defer src="i18n.js"></script>
   <script defer src="nav-mobile.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
@@ -93,7 +92,7 @@
             <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ unitPriceLine }}</div>
           </td>
           <td style="padding:14px 6px;text-align:right;vertical-align:top;">{{ quantita }}</td>
-          <td style="padding:14px 6px;text-align:right;vertical-align:top;font-weight:600;font-family:ui-monospace,monospace;">€ {{ prezzoFmt }}</td>
+          <td style="padding:14px 6px;text-align:right;vertical-align:top;font-weight:600;font-family:ui-monospace,monospace;">{{ prezzoLabel }}</td>
         </tr>
       </tbody>
     </table>
@@ -107,7 +106,7 @@
           <span data-en="VAT (22%)">IVA (22%)</span><span style="font-family:ui-monospace,monospace;">€ {{ ivaFmt }}</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:10px 6px;font-size:16px;font-weight:700;border-top:1.5px solid var(--color-text);margin-top:4px;">
-          <span data-en="Total">Totale</span><span style="font-family:ui-monospace,monospace;">€ {{ prezzoFmt }}</span>
+          <span data-en="Total">Totale</span><span style="font-family:ui-monospace,monospace;">{{ prezzoLabel }}</span>
         </div>
       </div>
     </div>
@@ -213,9 +212,10 @@ class Component extends DCLogic {
     const rawUrl = params.get('url') || '';
     const prodottoUrl = /^https?:\/\//i.test(rawUrl) ? rawUrl : '';
     const prezzo = parseFloat(params.get('prezzo')) || 0;
+    const daQuotare = params.get('daquotare') === '1';
     const now = new Date();
     this.setState({
-      prodotto, configurazione, quantita, prezzo, prodottoUrl,
+      prodotto, configurazione, quantita, prezzo, prodottoUrl, daQuotare,
       quoteNumber: `PRT-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`,
       dateStr: now.toLocaleDateString(isEn() ? 'en-GB' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' }),
       issuedAt: now.toISOString(),
@@ -233,7 +233,9 @@ class Component extends DCLogic {
     const imponibile = prezzo / 1.22;
     const iva = prezzo - imponibile;
     const pezzi = parseInt(String(this.state.quantita || '').replace(/\D/g, ''), 10);
-    const unitPrice = Number.isFinite(pezzi) && pezzi > 0 && prezzo > 0 ? prezzo / pezzi : null;
+    const daQuotare = !!this.state.daQuotare;
+    const unitPrice = !daQuotare && Number.isFinite(pezzi) && pezzi > 0 && prezzo > 0 ? prezzo / pezzi : null;
+    const dash = isEn() ? 'To be quoted' : 'Da quotare';
     return {
       prodotto: this.state.prodotto || '',
       productEan: EAN_BY_NAME[this.state.prodotto] || '',
@@ -246,9 +248,10 @@ class Component extends DCLogic {
       quoteNumber: this.state.quoteNumber || '',
       dateStr: this.state.dateStr || '',
       unitPriceLine: unitPrice != null ? (isEn() ? 'Price per piece: € ' + eurIt(unitPrice) : 'Prezzo al pezzo: € ' + eurIt(unitPrice)) : '',
+      prezzoLabel: daQuotare ? dash : '€ ' + eurIt(prezzo),
       prezzoFmt: eurIt(prezzo),
-      imponibileFmt: eurIt(imponibile),
-      ivaFmt: eurIt(iva),
+      imponibileFmt: daQuotare ? '—' : eurIt(imponibile),
+      ivaFmt: daQuotare ? '—' : eurIt(iva),
       handlePrint: () => window.print(),
     };
   }

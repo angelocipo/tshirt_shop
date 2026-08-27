@@ -2,7 +2,6 @@
   "name": "tipografia-online",
   "private": true,
   "dependencies": {
-    "@vercel/speed-insights": "^2.0.0",
     "stripe": "^17.7.0"
   }
 }
