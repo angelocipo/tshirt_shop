@@ -30,20 +30,32 @@
     /* landscape / wide: image + price beside the configurator */
     @media (min-width: 900px) {
       .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6); align-items: start;
-        grid-template-areas: "head head" "left right"; }
+        grid-template-areas: "head head" "left mid" "left right"; grid-template-rows: auto min-content 1fr; align-content: start; }
       .prod-head { grid-area: head; }
       .col-left { grid-area: left; display: flex; flex-direction: column; }
+      .col-mid { grid-area: mid; }
       .col-right { grid-area: right; }
+      .col-left, .col-mid, .col-right { align-self: stretch; border: 1px solid var(--color-divider); padding: var(--space-4); }
+      .col-left { align-self: start; }
       .prod-media { max-width: 100% !important; }
     }
+    @media (min-width: 1200px) {
+      .prod-grid { grid-template-columns: minmax(0, 400px) minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        grid-template-areas: "head head head" "left mid right"; }
+      .col-left { align-self: stretch; }
+    }
     @media (max-width: 899px) {
-      .col-left, .col-right { display: contents; }
+      .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "qty" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
       .prod-qty { grid-area: qty; }
+      .cfg-zones { grid-area: zones; }
+      .cfg-misure { grid-area: misure; }
+      .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
     }
@@ -62,7 +74,7 @@
     .size-btn { min-width: 46px; height: 40px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .size-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
     .size-selected { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
-    .size-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .size-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: 2px var(--space-3); border-bottom: 1px solid var(--color-divider); }
     .size-row-off { opacity: .38; pointer-events: none; }
     .size-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
     .size-grid .size-row:last-child { border-bottom: none; }
@@ -73,13 +85,13 @@
       .size-grid .size-row:last-child { border-bottom: none; }
     }
     .qty-group { display: flex; align-items: center; }
-    .qty-input { width: 52px; height: 36px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .qty-input { width: 52px; height: 30px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
     .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
     .zone-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider); cursor: pointer; }
     .zone-row:last-child { border-bottom: none; }
     .zone-check { width: 18px; height: 18px; border: 1.5px solid var(--color-divider); flex: none; display: flex; align-items: center; justify-content: center; }
     .zone-check-on { background: var(--color-accent); border-color: var(--color-accent); }
-    .qty-btn { width: 36px; height: 36px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .qty-btn { width: 32px; height: 30px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
     .thumb { width: 100%; aspect-ratio: 1; background: var(--color-surface); border: 1px solid var(--color-divider); cursor: pointer; padding: 0; }
     .thumb-selected { border-color: var(--color-accent); border-width: 2px; }
@@ -139,7 +151,7 @@
   </style>
 </helmet>
 
-<div style="max-width: 100%; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
+<div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
 
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
@@ -154,7 +166,6 @@
     <div class="prod-head">
       <h1 style="margin-bottom: 4px;" data-en="Bahrain Technical T-Shirt">Maglietta Tecnica Bahrain</h1>
       <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="100% polyester waffle interlock, 135 g/m² — UV801 certified, DTF printing made in Rome">100% poliestere waffle interlock, 135 g/m² — certificata UV801, stampa DTF prodotta a Roma</p>
-      <p class="text-muted" style="font-size:12px;letter-spacing:.04em;margin:-6px 0 var(--space-3);">EAN 0652026572926</p>
     </div>
 
     <div class="col-left">
@@ -165,66 +176,17 @@
         </div>
       </div>
     </div>
-      <div class="prod-qty" style="margin-bottom: var(--space-4);">
-        <p class="text-muted" style="font-size:12px;margin:0 0 var(--space-2);"><span data-en="Kids sizes 4-16:">Taglie bambino 4-16:</span> <a href="bahrain-kids.dc.html" style="font-weight:600;" data-en="Bahrain kids t-shirt">Maglietta tecnica Bahrain bambino</a></p>
-        <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 20 pcs, sizes can be mixed.">Ordine minimo: 20 pz, taglie miste ammesse.</p>
-        <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 20-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 20.</p>
-        </sc-if>
-        <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
-            <div class="{{ s.rowClass }}">
-              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
-              <div class="qty-group">
-                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
-                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
-                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
-              </div>
-            </div>
-          </sc-for>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:var(--space-3);margin-bottom:var(--space-3);">
-          <div style="flex:1 1 auto;min-width:0;">
-          <table class="table" style="font-size: 13px;">
-            <thead>
-              <tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th></tr>
-            </thead>
-            <tbody>
-              <tr><td data-en="A: Width">A: Lar.</td><td>48</td><td>51</td><td>54</td><td>57</td><td>60</td><td>63</td></tr>
-              <tr><td data-en="B: Height">B: Alt.</td><td>69</td><td>71</td><td>72</td><td>73</td><td>74</td><td>75</td></tr>
-            </tbody>
-          </table>
-          </div>
-          <img src="img/misure-tshirt.webp" alt="Come misurare: A = larghezza, B = altezza" style="width:92px;flex:none;">
-        </div>
-      </div>
-    </div>
-
-    <div class="prod-config col-right">
-      <div style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
-        <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
-          <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
-            <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% polyester, waffle interlock, 135 g/m².">100% poliestere, waffle interlock, 135 g/m².</span></div>
-            <div data-en="UV801 certified. Removable label. Technical fabric. Dry clean only. Also available in kids sizes.">Certificato UV801. Etichetta rimovibile. Tessuto tecnico. Lavaggio a secco. Disponibile anche in taglie per bambini.</div>
-            <div data-en="Model height 185 cm.">Modello: altezza 185 cm.</div>
-          </div>
-        </div>
-      </div>
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
-        <hr class="hr" style="margin-top:0;">
         <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colour:">Colore Maglietta:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
-        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+        <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
           <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="24">
             <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
           </sc-for>
         </div>
       </div>
 
-      <div class="cfg-rest">
-      <div style="margin-bottom: var(--space-4);">
+      <div class="cfg-zones" style="margin-bottom: var(--space-4);">
         <div class="field"><label data-en="Print on">Stampa su</label></div>
         <div>
           <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
@@ -282,9 +244,53 @@
           </sc-for>
         </div>
       </div>
+    </div>
 
-      <hr class="hr">
+    <div class="col-mid">
+      <div class="cfg-misure" style="margin-bottom: var(--space-4);">
+        <img src="img/misure-tshirt.webp" alt="Come misurare: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
+        <table class="table" style="font-size: 13px;">
+          <thead>
+            <tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-en="A: Width">A: Lar.</td><td>48</td><td>51</td><td>54</td><td>57</td><td>60</td><td>63</td></tr>
+            <tr><td data-en="B: Height">B: Alt.</td><td>69</td><td>71</td><td>72</td><td>73</td><td>74</td><td>75</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prod-qty" style="margin-bottom: var(--space-4);">
+        <p class="text-muted" style="font-size:12px;margin:0 0 var(--space-2);"><span data-en="Kids sizes 4-16:">Taglie bambino 4-16:</span> <a href="bahrain-kids.dc.html" style="font-weight:600;" data-en="Bahrain kids t-shirt">Maglietta tecnica Bahrain bambino</a></p>
+        <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 20 pcs, sizes can be mixed.">Ordine minimo: 20 pz, taglie miste ammesse.</p>
+        <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 20-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 20.</p>
+        </sc-if>
+        <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
+            <div class="{{ s.rowClass }}">
+              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
+              <div class="qty-group">
+                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
+                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
+                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
 
+    <div class="prod-config col-right">
+      <div class="cfg-comp" style="border-bottom: 1px solid var(--color-divider); margin-bottom: var(--space-4); padding-bottom: var(--space-4);">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+        <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700);">
+          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% polyester, waffle interlock, 135 g/m².">100% poliestere, waffle interlock, 135 g/m².</span></div>
+          <div data-en="UV801 certified. Removable label. Technical fabric. Dry clean only. Also available in kids sizes.">Certificato UV801. Etichetta rimovibile. Tessuto tecnico. Lavaggio a secco. Disponibile anche in taglie per bambini.</div>
+          <div style="font-weight: 700; color: var(--color-text);">EAN 0652026572926</div>
+        </div>
+      </div>
+      <div class="cfg-rest">
       <div class="field" style="margin-bottom: var(--space-4);">
         <label data-en="File Upload">File Upload</label>
         <label class="btn btn-secondary btn-block" style="cursor: pointer; flex-wrap: nowrap; white-space: nowrap;">
@@ -335,10 +341,11 @@
       <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
-        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Ships within 24 hours">Spedizione pronta in 24 ore</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Ships within the week">Spedizione pronta in settimana</span></div>
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
       </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -440,13 +447,14 @@ COLORS.forEach(c => { IMAGE_BY_COLOR[c.name] = 'img/bahrain-' + c.name.split(' '
 const DEFAULT_HERO_IMG = 'img/bahrain-hero.webp';
 const MIN_QTY = 20;
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-// Costo capo Bahrain: 1,30 € cad. Listino di vendita: 5,00 / 4,00 / 3,10 / 2,20 / 1,80 / 1,60 € cad + IVA -> +22% IVA compresa.
+// Costo capo Bahrain: 1,30 € cad. Prezzi IVA compresa, minimo ordine 20 pz.
+// Tarato perché a 20 pz capo + stampa cuore facciano 6,00 € / pezzo (2,50 + 3,50).
 // Prezzo unico per tutti i colori e tutte le taglie.
 const PRICE_TIERS = [
   { min: 1, white: 6.1, other: 6.1 },
   { min: 5, white: 4.88, other: 4.88 },
   { min: 10, white: 3.78, other: 3.78 },
-  { min: 20, white: 2.68, other: 2.68 },
+  { min: 20, white: 2.5, other: 2.5 },
   { min: 50, white: 2.2, other: 2.2 },
   { min: 100, white: 1.95, other: 1.95 },
 ];
