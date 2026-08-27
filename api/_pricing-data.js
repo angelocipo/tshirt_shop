@@ -37,6 +37,10 @@ const TSHIRT_DISCOUNT_TIERS = [
 ];
 const BAHRAIN_PRICE_TIERS = [
   { min: 1, price: 6.1 }, { min: 5, price: 4.88 }, { min: 10, price: 3.78 },
+  { min: 20, price: 2.5 }, { min: 50, price: 2.2 }, { min: 100, price: 1.95 },
+];
+const BAHRAIN_KIDS_PRICE_TIERS = [
+  { min: 1, price: 6.1 }, { min: 5, price: 4.88 }, { min: 10, price: 3.78 },
   { min: 20, price: 2.68 }, { min: 50, price: 2.2 }, { min: 100, price: 1.95 },
 ];
 const POLO_PRICE_TIERS = [
@@ -95,7 +99,7 @@ const PRICING = {
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'bahrain-kids': { nome: 'Maglietta Tecnica Bahrain Bambino', type: 'tshirt',
-    garmentUnitPrice: (qty) => pickTier(BAHRAIN_PRICE_TIERS, qty).price,
+    garmentUnitPrice: (qty) => pickTier(BAHRAIN_KIDS_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
