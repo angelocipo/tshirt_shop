@@ -767,7 +767,7 @@ class Component extends DCLogic {
       selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
-      garmentPriceLabel: this.fmt(garmentPrice),
+      garmentPriceLabel: this.fmt(totalQty > 0 ? garmentPrice : 0),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
       totalPriceLabel: this.fmt(grandTotal),
       checkoutLabel: en ? 'Add to cart' : 'Aggiungi al carrello',
