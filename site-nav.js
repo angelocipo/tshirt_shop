@@ -30,7 +30,7 @@
           { it: 'Polo Austral', en: 'Austral Polo', href: 'Austral-Polo.dc.html' },
           { it: 'Polo Star', en: 'Star Polo', href: 'Star-Polo.dc.html' },
         ] },
-        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska.dc.html', sub: [
+        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.dc.html', sub: [
           { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.dc.html' },
           { it: 'Giubbotto Rudolph', en: 'Rudolph Softshell', href: 'rudolph.dc.html' },
         ] },
@@ -42,7 +42,7 @@
         { it: 'Polo', en: 'Polo', href: 'polo-donna.dc.html', sub: [
           { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'Star-Polo-donna.dc.html' },
         ] },
-        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-donna.dc.html', sub: [
+        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.dc.html', sub: [
           { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.dc.html' },
         ] },
       ] },

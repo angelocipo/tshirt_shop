@@ -158,12 +158,6 @@
 
     <div class="prod-head">
       <h1 style="margin-bottom: 4px;" data-en="Rudolph Softshell Jacket">Giubbotto Rudolph</h1>
-      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="Three-layer softshell, water-repellent and windproof, personalised in Rome">Softshell a 3 strati, idrorepellente e antivento, personalizzato a Roma</p>
-      <p class="text-muted" style="font-size:12px;letter-spacing:.04em;margin:-6px 0 var(--space-3);">EAN 0652026572971</p>
-      <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
-        <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="Three layers. Outer: 95% polyester / 5% elastane. Lining: 100% extra-warm micro-fleece polyester, 300 g/m². Water resistant, hydrostatic pressure test &gt; 3000 mm H2O.">Tre strati. Esterno: 95% poliestere / 5% elastan. Interno: 100% poliestere micropile extra caldo, 300 g/m². Resistente all’acqua, test di pressione idrostatica &gt; 3000 mm H2O.</span></div>
-        <div data-en="Front zip, chin guard in matching fabric, two side pockets and one on the right chest, all zipped and trimmed in matching fabric, inner side adjusters.">Cerniera frontale, protezione per il mento in tessuto uguale, due tasche laterali e una tasca sul petto a destra con cerniere e rifinite in tessuto uguale, regolatori laterali interni.</div>
-      </div>
     </div>
 
     <div class="col-left">
@@ -249,17 +243,21 @@
     </div>
 
     <div class="col-mid">
-      <div class="cfg-misure" style="margin-bottom: var(--space-4);">
-        <img src="img/misure-tshirt.webp" alt="Come misurare: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
-        <table class="table" style="font-size: 13px;">
-          <thead>
-            <tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th></tr>
-          </thead>
-          <tbody>
-            <tr><td data-en="A: Width">A: Lar.</td><td>53</td><td>55</td><td>58</td><td>62</td><td>65</td><td>67</td></tr>
-            <tr><td data-en="B: Height">B: Alt.</td><td>74</td><td>75</td><td>76</td><td>77</td><td>78</td><td>79</td></tr>
-          </tbody>
-        </table>
+      <div class="cfg-misure" style="margin-bottom: var(--space-3);">
+        <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
+          <div style="padding: var(--space-4);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the measurements first">Controlla prima le misure</div>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Sizing on this jacket does not follow t-shirt sizing: measure the garment you wear (A = width, B = height) and compare it with the measurements shown next to each size before choosing. Between two sizes, take the larger one — the jacket is worn over other layers.">Le taglie di questo giubbotto non seguono quelle delle t-shirt: misura il capo che indossi (A = larghezza, B = altezza) e confrontalo con le misure indicate accanto a ogni taglia prima di scegliere. Tra due taglie prendi la più grande: il giubbotto si porta sopra altri strati.</p>
+          </div>
+        </div>
+        <img src="img/misure-giubbotto-ab.webp" alt="Come misurare il giubbotto: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
+        <p class="text-muted" style="font-size: 12.5px; text-align: center; margin: 0 0 var(--space-2);" data-en="A = chest width, B = length from collar to hem. Measurements in cm, garment laid flat.">A = larghezza torace, B = altezza dal collo al fondo. Misure in cm, capo steso.</p>
+        <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
+          <div data-en="Three-layer softshell, water-repellent and windproof, personalised in Rome">Softshell a 3 strati, idrorepellente e antivento, personalizzato a Roma</div>
+          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="Three layers. Outer: 95% polyester / 5% elastane. Lining: 100% extra-warm micro-fleece polyester, 300 g/m². Water resistant, hydrostatic pressure test &gt; 3000 mm H2O.">Tre strati. Esterno: 95% poliestere / 5% elastan. Interno: 100% poliestere micropile extra caldo, 300 g/m². Resistente all’acqua, test di pressione idrostatica &gt; 3000 mm H2O.</span></div>
+          <div data-en="Front zip, chin guard in matching fabric, two side pockets and one on the right chest, all zipped and trimmed in matching fabric, inner side adjusters.">Cerniera frontale, protezione per il mento in tessuto uguale, due tasche laterali e una tasca sul petto a destra con cerniere e rifinite in tessuto uguale, regolatori laterali interni.</div>
+          <div style="font-weight: 700; color: var(--color-text);">EAN 0652026572971</div>
+        </div>
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
@@ -272,24 +270,14 @@
                 <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
                 <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
               </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
             </div>
           </sc-for>
         </div>
-        <figure style="margin: 0 0 var(--space-3); border: 1px solid var(--color-divider); background: var(--color-surface); padding: var(--space-3); display: grid; gap: var(--space-2); justify-items: center;">
-          <img src="img/misure-giubbotto-ab.webp" alt="Schema misure giubbotto: A larghezza torace, B altezza dal collo al fondo" data-en-alt="Jacket measurement diagram: A chest width, B length from collar to hem" style="width: 100%; max-width: 260px; height: auto; display: block;">
-          <figcaption class="text-muted" style="font-size: 12.5px; text-align: center;" data-en="A = chest width, B = length from collar to hem. Measurements in cm, garment laid flat.">A = larghezza torace, B = altezza dal collo al fondo. Misure in cm, capo steso.</figcaption>
-        </figure>
       </div>
     </div>
 
     <div class="prod-config col-right">
-      <div class="cfg-comp" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
-        <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the size chart first">Controlla prima la tabella misure</div>
-          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Sizing on this jacket does not follow t-shirt sizing: measure the garment you wear (A = width, B = height) and compare it with the chart beside the photo before choosing. Between two sizes, take the larger one — the jacket is worn over other layers.">Le taglie di questo giubbotto non seguono quelle delle t-shirt: misura il capo che indossi (A = larghezza, B = altezza) e confrontalo con la tabella accanto alla foto prima di scegliere. Tra due taglie prendi la più grande: il giubbotto si porta sopra altri strati.</p>
-        </div>
-      </div>
       <div style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
           <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Printing on softshell">Stampa su softshell</div>
@@ -346,6 +334,11 @@
       <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
 
       <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
+
+      <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Shipping ready within the week">Spedizione pronta in settimana</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
+      </div>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Made to order — lead time confirmed by email">Su ordinazione — tempi confermati per email</span></div>
@@ -440,6 +433,7 @@ const IMAGE_BY_COLOR = {
   '02 Nero': 'img/rudolph-02.webp',
 };
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+const SIZE_MEASURE = { 'S': 'A 53 × B 74', 'M': 'A 55 × B 75', 'L': 'A 58 × B 76', 'XL': 'A 62 × B 77', 'XXL': 'A 65 × B 78', 'XXXL': 'A 67 × B 79' };
 const SIZE_STOCK = {};
 // Listino capo Rudolph (prezzo unico per tutti i colori).
 const PRICE_TIERS = [
@@ -620,6 +614,7 @@ class Component extends DCLogic {
     }));
     const sizes = SIZES.map(s => ({
       label: s,
+      measure: SIZE_MEASURE[s] ? SIZE_MEASURE[s] + ' cm' : '',
       qty: sizeQty[s] || 0,
       stockLabel: SIZE_STOCK[s] == null
         ? (en ? 'made to order' : 'su ordinazione')

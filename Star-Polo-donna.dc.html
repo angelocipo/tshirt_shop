@@ -15,7 +15,7 @@
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <title>Polo Star Donna Personalizzata | Tshirt Shop Online</title>
-  <meta name="description" content="Polo Star donna personalizzata con stampa DTF: 34 colori, taglie S-XXL, preventivo in 30 secondi, prodotta a Roma.">
+  <meta name="description" content="Polo Star donna personalizzata con stampa DTF: 34 colori, taglie S-XXXL, preventivo in 30 secondi, prodotta a Roma.">
   <link rel="canonical" href="https://www.tshirt-shop.online/star-polo-donna.html">
   <meta property="og:url" content="https://www.tshirt-shop.online/star-polo-donna.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
@@ -49,13 +49,14 @@
     @media (max-width: 899px) {
       .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "comp" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
       .cfg-zones { grid-area: zones; }
       .cfg-misure { grid-area: misure; }
       .prod-qty { grid-area: qty; }
+      .cfg-family { grid-area: family; }
       .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
@@ -158,21 +159,14 @@
 
     <div class="prod-head">
       <h1 style="margin-bottom: 4px;" data-en="Star Women's Polo">Polo Star Donna</h1>
-      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="Custom polo shirt, fast delivery — DTF printing made in Rome">Polo personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
-            <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
-        <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% cotton, piqué, 200 g/m².">100% cotone, piqué, 200 g/m².</span></div>
-        <div data-en="Heather grey 58: 85% cotton / 15% viscose.">Grigio vigorè 58: 85% cotone / 15% viscosa.</div>
-        <div style="font-style: italic;" data-en="Removable label.">Etichetta rimovibile.</div>
-      </div>
     </div>
 
     <div class="col-left">
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1; background: var(--color-bg);">
-          <img id="polo-hero" alt="Polo Star — foto del capo uomo, taglio donna" src="img/star-donna-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          <img id="polo-hero" alt="Polo Star donna — vista frontale" src="img/star-donna-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
         </div>
-        <div style="border:1px solid var(--color-divider);border-top:none;padding:8px 10px;font-size:12.5px;line-height:1.45;color:var(--color-neutral-700);" data-en="Photos show the men's garment: the women's cut has the same colours and the same piqué.">Le foto mostrano il capo uomo: il taglio donna ha gli stessi colori e lo stesso piqué.</div>
         <div id="photo-missing-note" style="display:none;align-items:center;gap:8px;border:1px solid var(--color-divider);border-top:none;padding:8px 10px;font-size:13px;color:var(--color-neutral-700);">
           <span style="width:14px;height:14px;border:1px solid var(--color-neutral-500);flex:none;"></span>
           <span data-en="No photo yet for this colour — see the swatch. The garment is produced in the selected colour.">Foto non ancora disponibile per questo colore — fai riferimento al campione. Il capo viene prodotto nel colore selezionato.</span>
@@ -250,16 +244,9 @@
     </div>
 
     <div class="col-mid">
-      <div class="cfg-misure" style="margin-bottom: var(--space-4);">
-        <table class="table" style="font-size: 13px;">
-          <thead>
-            <tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr>
-          </thead>
-          <tbody>
-            <tr><td data-en="A: Width">A: Lar.</td><td>42</td><td>45</td><td>48</td><td>51</td><td>54</td></tr>
-            <tr><td data-en="B: Height">B: Alt.</td><td>61</td><td>63</td><td>65</td><td>67</td><td>69</td></tr>
-          </tbody>
-        </table>
+      
+      <div class="cfg-misure" style="margin-bottom: var(--space-3);">
+        <img src="img/misure-tshirt.webp" alt="Come misurare: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
@@ -272,15 +259,18 @@
                 <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
                 <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
               </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
             </div>
           </sc-for>
         </div>
+        <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
+          <div style="padding: var(--space-4);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the measurements first">Controlla prima le misure</div>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Measure a polo you already wear — A = width, B = height, garment laid flat — and compare it with the measurements shown next to each size before choosing.">Misura una polo che indossi già — A = larghezza, B = altezza, capo steso — e confrontala con le misure indicate accanto a ogni taglia prima di scegliere.</p>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="prod-config col-right">
-      <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+      <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
           <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Star family">Famiglia Star</div>
           <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The Star polo shirts share the same 100% cotton piqué and the same dye baths across men's, women's and kids' cuts: the colour codes match, so a mixed order comes out in one uniform shade.">Le polo Star condividono lo stesso piqué 100% cotone e gli stessi bagni di tintura tra taglio uomo, donna e bambino: i codici colore corrispondono, quindi un ordine misto esce in una tinta uniforme.</p>
@@ -290,7 +280,30 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="prod-config col-right">
+      <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+        <div style="padding: var(--space-4);">
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+          <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
+            <div data-en="Custom polo shirt, fast delivery — DTF printing made in Rome">Polo personalizzata, consegna rapida — stampa DTF prodotta a Roma</div>
+            <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% cotton, piqué, 200 g/m².">100% cotone, piqué, 200 g/m².</span></div>
+            <div data-en="Heather grey 58: 85% cotton / 15% viscose.">Grigio vigorè 58: 85% cotone / 15% viscosa.</div>
+            <div style="font-weight: 700; color: var(--color-text);">EAN 0652026572940</div>
+          </div>
+        </div>
+      </div>
       <div class="cfg-rest">
+
+      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
+        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
+        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
         <label data-en="File Upload">File Upload</label>
@@ -328,21 +341,12 @@
         <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="We read every note before printing. Tell us your deadline and we confirm feasibility by email.">Leggiamo ogni nota prima della stampa. Indica la data che ti serve: confermiamo la fattibilità per email.</div>
       </div>
 
-      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
-        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
-        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
-        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
-      </div>
-
       <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg></button>
 
       <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
-        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Ships within 24 hours">Spedizione pronta in 24 ore</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Shipping ready within the week">Spedizione pronta in settimana</span></div>
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
       </div>
       </div>
@@ -452,42 +456,43 @@ const COLORS = [
 ];
 const DEFAULT_HERO_IMG = 'img/star-donna-hero.webp';
 const IMAGE_BY_COLOR = {
-  '01 Bianco': 'img/star-01-bianco.webp',
-  '02 Nero': 'img/star-02-nero-nobg.webp',
-  '03 Giallo': 'img/star-03-giallo-nobg.webp',
-  '05 Blue Royal': 'img/star-05-royal-nobg.webp',
-  '07 Sabbia': 'img/star-07-sabbia-nobg.webp',
-  '10 Celeste': 'img/star-10-celeste-nobg.webp',
-  '12 Turchese': 'img/star-12-turchese-nobg.webp',
-  '31 Arancio': 'img/star-31-arancio-nobg.webp',
-  '46 Grigio Scuro': 'img/star-46-grigio-scuro-nobg.webp',
-  '48 Rosa Chiaro': 'img/star-48-rosa-chiaro-nobg.webp',
-  '58 Grigio': 'img/star-58-grigio-nobg.webp',
-  '98 Acquamarina': 'img/star-98-acquamarina-nobg.webp',
-  '164 Verde Salvia': 'img/star-164-verde-salvia-nobg.webp',
-  '55 Blue Navy': 'img/star-55-navy-nobg.webp',
-  '83 Verde Mela': 'img/star-83-verde-mela-nobg.webp',
-  '171 Grigio Perla': 'img/star-171-grigio-perla-nobg.webp',
-  '168 Malva': 'img/star-168-malva-nobg.webp',
-  '216 Verde Tropicale': 'img/star-216-verde-nobg.webp',
-  '261 Azzurro Riviera': 'img/star-261-azzurro-riviera-nobg.webp',
-  '78 Fucsia': 'img/star-78-fucsia-nobg.webp',
-  '170 Petrolio': 'img/star-170-petrolio-nobg.webp',
-  '262 Rosso Mattone': 'img/star-262-rosso-mattone-nobg.webp',
-  '60 Rosso': 'img/star-60-rosso-nobg.webp',
-  '121 Lilla': 'img/star-121-lilla-nobg.webp',
-  '86 Blue Denim': 'img/star-86-blue-denim-nobg.webp',
-  '169 Berry Red': 'img/star-169-berry-red-nobg.webp',
-  '152 Verde Avventura': 'img/star-152-verde-militare-nobg.webp',
-  '87 Cioccolato': 'img/star-87-cioccolato-nobg.webp',
-  '57 Granata': 'img/star-57-granata-nobg.webp',
-  '71 Viola': 'img/star-71-viola-nobg.webp',
-  '56 Verde Bottiglia': 'img/star-56-verde-bottiglia-nobg.webp',
-  '263 Grigio Blu': 'img/star-263-grigio-blu-nobg.webp',
-  '264 Verde Pallido': 'img/star-264-verde-pallido-nobg.webp',
-  '266 Rosa Antico': 'img/star-266-rosa-antico-nobg.webp',
+  '01 Bianco': 'img/star-donna-01-bianco.webp',
+  '07 Sabbia': 'img/star-donna-07-sabbia.webp',
+  '87 Cioccolato': 'img/star-donna-87-cioccolato.webp',
+  '03 Giallo': 'img/star-donna-03-giallo.webp',
+  '266 Rosa Antico': 'img/star-donna-266-rosa-antico.webp',
+  '31 Arancio': 'img/star-donna-31-arancio.webp',
+  '60 Rosso': 'img/star-donna-60-rosso.webp',
+  '262 Rosso Mattone': 'img/star-donna-262-rosso-mattone.webp',
+  '168 Malva': 'img/star-donna-168-malva.webp',
+  '169 Berry Red': 'img/star-donna-169-berry-red.webp',
+  '57 Granata': 'img/star-donna-57-granata.webp',
+  '78 Fucsia': 'img/star-donna-78-fucsia.webp',
+  '48 Rosa Chiaro': 'img/star-donna-48-rosa-chiaro.webp',
+  '71 Viola': 'img/star-donna-71-viola.webp',
+  '121 Lilla': 'img/star-donna-121-lilla.webp',
+  '261 Azzurro Riviera': 'img/star-donna-261-azzurro-riviera.webp',
+  '05 Blue Royal': 'img/star-donna-05-blue-royal.webp',
+  '10 Celeste': 'img/star-donna-10-celeste.webp',
+  '12 Turchese': 'img/star-donna-12-turchese.webp',
+  '86 Blue Denim': 'img/star-donna-86-blue-denim.webp',
+  '55 Blue Navy': 'img/star-donna-55-blue-navy.webp',
+  '263 Grigio Blu': 'img/star-donna-263-grigio-blu.webp',
+  '170 Petrolio': 'img/star-donna-170-petrolio.webp',
+  '171 Grigio Perla': 'img/star-donna-171-grigio-perla.webp',
+  '164 Verde Salvia': 'img/star-donna-164-verde-salvia.webp',
+  '98 Acquamarina': 'img/star-donna-98-acquamarina.webp',
+  '264 Verde Pallido': 'img/star-donna-264-verde-pallido.webp',
+  '83 Verde Mela': 'img/star-donna-83-verde-mela.webp',
+  '216 Verde Tropicale': 'img/star-donna-216-verde-tropicale.webp',
+  '56 Verde Bottiglia': 'img/star-donna-56-verde-bottiglia.webp',
+  '152 Verde Avventura': 'img/star-donna-152-verde-avventura.webp',
+  '58 Grigio': 'img/star-donna-58-grigio.webp',
+  '46 Grigio Scuro': 'img/star-donna-46-grigio-scuro.webp',
+  '02 Nero': 'img/star-donna-02-nero.webp',
 };
-const SIZES = ['S', 'M', 'L', 'XL', 'XXL'];
+const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+const SIZE_MEASURE = { 'S': 'A 42 × B 61', 'M': 'A 45 × B 63', 'L': 'A 48 × B 65', 'XL': 'A 51 × B 67', 'XXL': 'A 54 × B 69', 'XXXL': 'A 57 × B 70' };
 const SIZE_STOCK = {};
 const PRICE_TIERS = [
   { min: 1, white: 9, other: 9 },
@@ -588,7 +593,7 @@ class Component extends DCLogic {
     const want = new URL(src, window.location.href).href;
     if (el.src !== want) {
       el.src = src;
-      el.alt = i != null ? ('Polo Star ' + COLORS[i].name + ' — foto del capo uomo, taglio donna') : 'Polo Star — foto del capo uomo, taglio donna';
+      el.alt = i != null ? ('Polo Star ' + COLORS[i].name + ' — foto del capo') : 'Polo Star donna';
     }
   }
   componentDidMount() {
@@ -667,6 +672,7 @@ class Component extends DCLogic {
     }));
     const sizes = SIZES.map(s => ({
       label: s,
+      measure: SIZE_MEASURE[s] ? SIZE_MEASURE[s] + ' cm' : '',
       qty: sizeQty[s] || 0,
       stockLabel: '',
       inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
@@ -714,10 +720,10 @@ class Component extends DCLogic {
     const isWhite = hasColor && activeColor.name === '01 Bianco';
     const selectedColorGroup = hasColor ? activeColor.group : null;
     const selectedColorNote = !hasColor
-      ? (en ? 'Pick a colour' : 'Scegli un colore')
+      ? ''
       : (selectedColorGroup === 'order'
           ? (en ? 'Made to order — takes 1 week' : 'Su ordinazione — richiede 1 settimana')
-          : (en ? '24H colour — in stock now' : 'Colore 24H — disponibile subito'));
+          : '');
     const garmentPrice = garmentUnitPrice(totalQty, isWhite);
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;

@@ -49,13 +49,14 @@
     @media (max-width: 899px) {
       .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "comp" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
       .cfg-zones { grid-area: zones; }
       .cfg-misure { grid-area: misure; }
       .prod-qty { grid-area: qty; }
+      .cfg-family { grid-area: family; }
       .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
@@ -158,12 +159,6 @@
 
     <div class="prod-head">
       <h1 style="margin-bottom: 4px;" data-en="Nebraska Softshell Jacket">Giubbotto Nebraska</h1>
-      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="Two-layer softshell, water-repellent and windproof, personalised in Rome">Softshell a 2 strati, idrorepellente e antivento, personalizzato a Roma</p>
-      <p class="text-muted" style="font-size:12px;letter-spacing:.04em;margin:-6px 0 var(--space-3);">EAN 0652026572995</p>
-      <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
-        <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="Two layers. Outer: 100% polyester. Lining: 100% extra-warm micro-fleece polyester. 300 g/m².">Due strati. Esterno: 100% poliestere. Interno: 100% poliestere micropile extra-caldo. 300 g/m².</span></div>
-        <div data-en="Inverted front zip with chin guard, two side pockets and one on the right chest, velcro cuff adjusters, elastic drawcord hem, inner side adjusters on adult sizes.">Zip frontale invertita con protezione per il mento, due tasche laterali e una sul petto destro, polsini regolabili con velcro, fondo con cordoncino elastico, regolatori laterali interni nelle taglie adulto.</div>
-      </div>
     </div>
 
     <div class="col-left">
@@ -245,24 +240,18 @@
             </div>
           </sc-for>
         </div>
+        <div style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+          <div style="padding: var(--space-4);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Printing on softshell">Stampa su softshell</div>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The manufacturer does not recommend DTF on this fabric: the technical surface can let the ink migrate. We assess every design before printing and confirm the technique by email — on this jacket we usually advise embroidery or a heat-transfer patch.">Il produttore non consiglia il DTF su questo tessuto: la superficie tecnica può far migrare l'inchiostro. Valutiamo ogni file prima di stampare e confermiamo la tecnica per email — su questo giubbotto consigliamo di norma il ricamo o la toppa a trasferimento.</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="col-mid">
-      <div class="cfg-misure" style="margin-bottom: var(--space-4);">
-        <figure style="margin: 0 0 var(--space-3); border: 1px solid var(--color-divider); background: var(--color-surface); padding: var(--space-3); display: grid; gap: var(--space-2); justify-items: center;">
-          <img src="img/misure-giubbotto-ab.webp" alt="Schema misure giubbotto: A larghezza torace, B altezza dal collo al fondo" data-en-alt="Jacket measurement diagram: A chest width, B length from collar to hem" style="width: 100%; height: auto; display: block;>
-          <figcaption class="text-muted" style="font-size: 12.5px; text-align: center;" data-en="A = chest width, B = length from collar to hem. Measurements in cm, garment laid flat.">A = larghezza torace, B = altezza dal collo al fondo. Misure in cm, capo steso.</figcaption>
-          </figure>
-        <table class="table" style="font-size: 13px;">
-          <thead>
-            <tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th><th>XXXXL</th></tr>
-          </thead>
-          <tbody>
-            <tr><td data-en="A: Width">A: Lar.</td><td>53</td><td>55</td><td>58</td><td>62</td><td>65</td><td>67</td><td>69</td></tr>
-            <tr><td data-en="B: Height">B: Alt.</td><td>74</td><td>75</td><td>76</td><td>77</td><td>78</td><td>79</td><td>80</td></tr>
-          </tbody>
-        </table>
+      <div class="cfg-misure" style="margin-bottom: var(--space-3);">
+        <img src="img/misure-giubbotto-ab.webp" alt="Schema misure giubbotto: A larghezza torace, B altezza dal collo al fondo" data-en-alt="Jacket measurement diagram: A chest width, B length from collar to hem" style="width: 100%; height: auto; display: block;">
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
@@ -275,27 +264,18 @@
                 <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
                 <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
               </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
             </div>
           </sc-for>
         </div>
-      </div>
-    </div>
-
-    <div class="prod-config col-right">
-      <div class="cfg-comp" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
-        <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the size chart first">Controlla prima la tabella misure</div>
-          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Sizing on this jacket does not follow t-shirt sizing: measure the garment you wear (A = width, B = height) and compare it with the chart beside the photo before choosing. Between two sizes, take the larger one — the jacket is worn over other layers.">Le taglie di questo giubbotto non seguono quelle delle t-shirt: misura il capo che indossi (A = larghezza, B = altezza) e confrontalo con la tabella accanto alla foto prima di scegliere. Tra due taglie prendi la più grande: il giubbotto si porta sopra altri strati.</p>
+        <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
+          <div style="padding: var(--space-4);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the measurements first">Controlla prima le misure</div>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Sizing on this jacket does not follow t-shirt sizing: measure the garment you wear (A = width, B = height) and compare it with the measurements shown next to each size before choosing. Between two sizes, take the larger one — the jacket is worn over other layers.">Le taglie di questo giubbotto non seguono quelle delle t-shirt: misura il capo che indossi (A = larghezza, B = altezza) e confrontalo con le misure indicate accanto a ogni taglia prima di scegliere. Tra due taglie prendi la più grande: il giubbotto si porta sopra altri strati.</p>
+          </div>
         </div>
       </div>
-      <div style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
-        <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Printing on softshell">Stampa su softshell</div>
-          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The manufacturer does not recommend DTF on this fabric: the technical surface can let the ink migrate. We assess every design before printing and confirm the technique by email — on this jacket we usually advise embroidery or a heat-transfer patch.">Il produttore non consiglia il DTF su questo tessuto: la superficie tecnica può far migrare l'inchiostro. Valutiamo ogni file prima di stampare e confermiamo la tecnica per email — su questo giubbotto consigliamo di norma il ricamo o la toppa a trasferimento.</p>
-        </div>
-      </div>
-      <div style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+      <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
           <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Nebraska family">Famiglia Nebraska</div>
           <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The Nebraska jackets share the same two-layer softshell and the same dye baths across men's, women's and kids' cuts: the colour codes match, so a mixed order comes out in one uniform shade. The kids' range carries seven of the ten colours.">I giubbotti Nebraska condividono lo stesso softshell a 2 strati e gli stessi bagni di tintura tra taglio uomo, donna e bambino: i codici colore corrispondono, quindi un ordine misto esce in una tinta uniforme. La versione bambino ha sette dei dieci colori.</p>
@@ -305,7 +285,32 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="prod-config col-right">
+      <div class="cfg-comp">
+        <div style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+          <div style="padding: var(--space-4);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+          <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
+            <div data-en="Two-layer softshell, water-repellent and windproof, personalised in Rome">Softshell a 2 strati, idrorepellente e antivento, personalizzato a Roma</div>
+            <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="Two layers. Outer: 100% polyester. Lining: 100% extra-warm micro-fleece polyester. 300 g/m².">Due strati. Esterno: 100% poliestere. Interno: 100% poliestere micropile extra-caldo. 300 g/m².</span></div>
+            <div data-en="Inverted front zip with chin guard, two side pockets and one on the right chest, velcro cuff adjusters, elastic drawcord hem, inner side adjusters on adult sizes.">Zip frontale invertita con protezione per il mento, due tasche laterali e una sul petto destro, polsini regolabili con velcro, fondo con cordoncino elastico, regolatori laterali interni nelle taglie adulto.</div>
+            <div style="font-weight: 700; color: var(--color-text);">EAN 0652026572995</div>
+          </div>
+          </div>
+        </div>
+      </div>
       <div class="cfg-rest">
+
+      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Giubbotto</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
+        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
+        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
         <label data-en="File Upload">File Upload</label>
@@ -343,18 +348,14 @@
         <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="We read every note before printing. Tell us your deadline and we confirm feasibility by email.">Leggiamo ogni nota prima della stampa. Indica la data che ti serve: confermiamo la fattibilità per email.</div>
       </div>
 
-      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Giubbotto</span><span>{{ garmentPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
-        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
-        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
-        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
-      </div>
-
       <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
 
       <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
+
+      <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Shipping ready within the week">Spedizione pronta in settimana</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
+      </div>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Made to order — lead time confirmed by email">Su ordinazione — tempi confermati per email</span></div>
@@ -457,6 +458,7 @@ const IMAGE_BY_COLOR = {
   '02 Nero': 'img/nebraska-02.webp',
 };
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'];
+const SIZE_MEASURE = { 'S': 'A 53 × B 74', 'M': 'A 55 × B 75', 'L': 'A 58 × B 76', 'XL': 'A 62 × B 77', 'XXL': 'A 65 × B 78', 'XXXL': 'A 67 × B 79', 'XXXXL': 'A 69 × B 80' };
 const SIZE_STOCK = {};
 // Listino capo Nebraska (prezzo unico per tutti i colori).
 const PRICE_TIERS = [
@@ -637,6 +639,7 @@ class Component extends DCLogic {
     }));
     const sizes = SIZES.map(s => ({
       label: s,
+      measure: SIZE_MEASURE[s] ? SIZE_MEASURE[s] + ' cm' : '',
       qty: sizeQty[s] || 0,
       stockLabel: SIZE_STOCK[s] == null
         ? (en ? 'made to order' : 'su ordinazione')
@@ -686,7 +689,7 @@ class Component extends DCLogic {
     const isWhite = hasColor && activeColor.name === '01 Bianco';
     const selectedColorGroup = hasColor ? activeColor.group : null;
     const selectedColorNote = !hasColor
-      ? (en ? 'Pick a colour' : 'Scegli un colore')
+      ? ''
       : (selectedColorGroup === 'order'
           ? (en ? 'Made to order — takes 1 week' : 'Su ordinazione — richiede 1 settimana')
           : (en ? '24H colour — in stock now' : 'Colore 24H — disponibile subito'));

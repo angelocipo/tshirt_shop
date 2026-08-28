@@ -49,13 +49,14 @@
     @media (max-width: 899px) {
       .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "comp" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
       .cfg-zones { grid-area: zones; }
       .cfg-misure { grid-area: misure; }
       .prod-qty { grid-area: qty; }
+      .cfg-family { grid-area: family; }
       .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
@@ -166,15 +167,13 @@
 
     <div class="prod-head">
       <h1 style="margin-bottom: 4px;" data-en="Bahrain Kids Technical T-Shirt">Maglietta Tecnica Bahrain Bambino</h1>
-      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="100% polyester waffle interlock, 135 g/m² — UV801 certified, DTF printing made in Rome">100% poliestere waffle interlock, 135 g/m² — certificata UV801, stampa DTF prodotta a Roma</p>
-      <p class="text-muted" style="font-size:12px;letter-spacing:.04em;margin:-6px 0 var(--space-3);">EAN 0652026570007</p>
     </div>
 
     <div class="col-left">
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1;">
-          <img id="bahrain-hero" alt="Maglietta tecnica Bahrain bambino — vista frontale" src="img/bahrain-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          <img id="bahrain-hero" alt="Maglietta tecnica Bahrain bambino — vista frontale" src="img/bahrain-kids-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
         </div>
       </div>
     </div>
@@ -249,17 +248,8 @@
     </div>
 
     <div class="col-mid">
-      <div class="cfg-misure" style="margin-bottom: var(--space-4);">
+      <div class="cfg-misure" style="margin-bottom: var(--space-3);">
         <img src="img/misure-tshirt.webp" alt="Come misurare: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
-        <table class="table" style="font-size: 13px;">
-          <thead>
-            <tr><th></th><th>4</th><th>8</th><th>12</th><th>16</th></tr>
-          </thead>
-          <tbody>
-            <tr><td data-en="A: Width">A: Lar.</td><td>34</td><td>38</td><td>42</td><td>46</td></tr>
-            <tr><td data-en="B: Height">B: Alt.</td><td>50</td><td>55</td><td>60</td><td>65</td></tr>
-          </tbody>
-        </table>
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
@@ -276,8 +266,24 @@
                 <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
                 <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
               </div>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
             </div>
           </sc-for>
+        </div>
+        <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
+          <div style="padding: var(--space-4);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the measurements first">Controlla prima le misure</div>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Kids sizes follow age, but children of the same age differ: measure a t-shirt the child already wears — A = width, B = height, garment laid flat — and compare it with the measurements shown next to each size.">Le taglie bambino seguono l'età, ma bambini della stessa età hanno misure diverse: misura una maglietta che il bambino indossa già — A = larghezza, B = altezza, capo steso — e confrontala con le misure indicate accanto a ogni taglia.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+        <div style="padding: var(--space-4);">
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Bahrain family">Famiglia Bahrain</div>
+          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The technical Bahrain t-shirt is also made in adult sizes, in the same waffle interlock fabric.">La maglietta tecnica Bahrain esiste anche in taglie adulto, nello stesso tessuto waffle interlock.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
+          <a href="bahrain.dc.html" style="font-size:13px;font-weight:600;" data-en="Bahrain technical t-shirt">Maglietta tecnica Bahrain</a>
+          </div>
         </div>
       </div>
     </div>
@@ -287,13 +293,23 @@
         <div style="padding: var(--space-4);">
           <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
           <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
+            <div data-en="100% polyester waffle interlock, 135 g/m² — UV801 certified, DTF printing made in Rome">100% poliestere waffle interlock, 135 g/m² — certificata UV801, stampa DTF prodotta a Roma</div>
             <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% polyester, waffle interlock, 135 g/m².">100% poliestere, waffle interlock, 135 g/m².</span></div>
-            <div data-en="UV801 certified. Removable label. Technical fabric. Dry clean only. Also available in kids sizes.">Certificato UV801. Etichetta rimovibile. Tessuto tecnico. Lavaggio a secco. Disponibile anche in taglie per bambini.</div>
-            <div data-en="Model height 185 cm.">Modello: altezza 185 cm.</div>
+            <div data-en="UV801 certified. Technical fabric. Dry clean only. Also available in adult sizes.">Certificato UV801. Tessuto tecnico. Lavaggio a secco. Disponibile anche in taglie adulto.</div>
+            <div style="font-weight: 700; color: var(--color-text);">EAN 0652026570007</div>
           </div>
         </div>
       </div>
       <div class="cfg-rest">
+
+      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
+        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
+        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
         <label data-en="File Upload">File Upload</label>
@@ -331,21 +347,12 @@
         <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="We read every note before printing. Tell us your deadline and we confirm feasibility by email.">Leggiamo ogni nota prima della stampa. Indica la data che ti serve: confermiamo la fattibilità per email.</div>
       </div>
 
-      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
-        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
-        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
-        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
-      </div>
-
       <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg></button>
 
       <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
-        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Ships within 24 hours">Spedizione pronta in 24 ore</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Shipping ready within the week">Spedizione pronta in settimana</span></div>
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
       </div>
       </div>
@@ -448,9 +455,10 @@ const COLORS_ALL = [
 const COLORS = COLORS_ALL.filter(c => c.kids);
 const IMAGE_BY_COLOR = {};
 COLORS.forEach(c => { IMAGE_BY_COLOR[c.name] = 'img/bahrain-' + c.name.split(' ')[0] + '.webp'; });
-const DEFAULT_HERO_IMG = 'img/bahrain-hero.webp';
+const DEFAULT_HERO_IMG = 'img/bahrain-kids-hero.webp';
 const MIN_QTY = 20;
 const SIZES = ['4', '8', '12', '16'];
+const SIZE_MEASURE = { '4': 'A 34 × B 50', '8': 'A 38 × B 55', '12': 'A 42 × B 60', '16': 'A 46 × B 65' };
 const SIZE_STOCK = {};
 // Costo capo Bahrain: 1,30 € cad. Listino di vendita: 5,00 / 4,00 / 3,10 / 2,20 / 1,80 / 1,60 € cad + IVA -> +22% IVA compresa.
 // Prezzo unico per tutti i colori e tutte le taglie.
@@ -458,7 +466,7 @@ const PRICE_TIERS = [
   { min: 1, white: 6.1, other: 6.1 },
   { min: 5, white: 4.88, other: 4.88 },
   { min: 10, white: 3.78, other: 3.78 },
-  { min: 20, white: 2.68, other: 2.68 },
+  { min: 20, white: 2.5, other: 2.5 },
   { min: 50, white: 2.2, other: 2.2 },
   { min: 100, white: 1.95, other: 1.95 },
 ];
@@ -636,6 +644,7 @@ class Component extends DCLogic {
       const blocked = kidsBlocked && KIDS_SIZES.includes(s);
       return {
       label: s,
+      measure: SIZE_MEASURE[s] ? SIZE_MEASURE[s] + ' cm' : '',
       blocked,
       rowClass: 'size-row' + (blocked ? ' size-row-off' : ''),
       qty: blocked ? 0 : (sizeQty[s] || 0),
@@ -685,7 +694,7 @@ class Component extends DCLogic {
     const activeColor = hasColor ? COLORS[st.colorIndex] : null;
     const isWhite = hasColor && activeColor.name === '01 Bianco';
     const selectedColorNote = !hasColor
-      ? (en ? 'Pick a colour' : 'Scegli un colore')
+      ? ''
       : (activeColor.kids
           ? (en ? 'Available in adult and kids sizes' : 'Disponibile in taglie adulto e bambino')
           : (en ? 'Adult sizes only' : 'Disponibile solo in taglie adulto'));

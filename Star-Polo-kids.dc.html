@@ -49,13 +49,14 @@
     @media (max-width: 899px) {
       .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "comp" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
       .cfg-zones { grid-area: zones; }
       .cfg-misure { grid-area: misure; }
       .prod-qty { grid-area: qty; }
+      .cfg-family { grid-area: family; }
       .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
@@ -158,12 +159,6 @@
 
     <div class="prod-head">
       <h1 style="margin-bottom: 4px;" data-en="Star Kids Polo">Polo Star Bambino</h1>
-      <p class="text-muted" style="font-size: 14px; margin-bottom: var(--space-3);" data-en="Custom polo shirt, fast delivery — DTF printing made in Rome">Polo personalizzata, consegna rapida — stampa DTF prodotta a Roma</p>
-            <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
-        <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% cotton, piqué, 200 g/m².">100% cotone, piqué, 200 g/m².</span></div>
-        <div data-en="Heather grey 58: 85% cotton / 15% viscose.">Grigio vigorè 58: 85% cotone / 15% viscosa.</div>
-        <div style="font-style: italic;" data-en="Removable label.">Etichetta rimovibile.</div>
-      </div>
     </div>
 
     <div class="col-left">
@@ -250,16 +245,9 @@
     </div>
 
     <div class="col-mid">
-      <div class="cfg-misure" style="margin-bottom: var(--space-4);">
-        <table class="table" style="font-size: 13px;">
-          <thead>
-            <tr><th></th><th>1/2</th><th>3/4</th><th>5/6</th><th>7/8</th><th>9/10</th><th>11/12</th></tr>
-          </thead>
-          <tbody>
-            <tr><td data-en="A: Width">A: Lar.</td><td>30</td><td>33</td><td>37</td><td>39</td><td>42</td><td>45</td></tr>
-            <tr><td data-en="B: Height">B: Alt.</td><td>40</td><td>44</td><td>48</td><td>52</td><td>56</td><td>60</td></tr>
-          </tbody>
-        </table>
+      
+      <div class="cfg-misure" style="margin-bottom: var(--space-3);">
+        <img src="img/misure-tshirt.webp" alt="Come misurare: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
@@ -272,15 +260,18 @@
                 <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
                 <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
               </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.stockLabel }}</span>
+              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
             </div>
           </sc-for>
         </div>
+        <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
+          <div style="padding: var(--space-4);">
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the measurements first">Controlla prima le misure</div>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Kids sizes follow age, but children of the same age differ: measure a polo the child already wears — A = width, B = height, garment laid flat — and compare it with the measurements shown next to each size.">Le taglie bambino seguono l'età, ma bambini della stessa età hanno misure diverse: misura una polo che il bambino indossa già — A = larghezza, B = altezza, capo steso — e confrontala con le misure indicate accanto a ogni taglia.</p>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="prod-config col-right">
-      <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+      <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
           <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Star family">Famiglia Star</div>
           <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The Star polo shirts share the same 100% cotton piqué and the same dye baths across men's, women's and kids' cuts: the colour codes match, so a mixed order comes out in one uniform shade.">Le polo Star condividono lo stesso piqué 100% cotone e gli stessi bagni di tintura tra taglio uomo, donna e bambino: i codici colore corrispondono, quindi un ordine misto esce in una tinta uniforme.</p>
@@ -290,7 +281,29 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="prod-config col-right">
+      <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+        <div style="padding: var(--space-4);">
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+          <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
+            <div data-en="Custom polo shirt, fast delivery — DTF printing made in Rome">Polo personalizzata, consegna rapida — stampa DTF prodotta a Roma</div>
+            <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% cotton, piqué, 200 g/m².">100% cotone, piqué, 200 g/m².</span></div>
+            <div style="font-weight: 700; color: var(--color-text);">EAN 0652026572957</div>
+          </div>
+        </div>
+      </div>
       <div class="cfg-rest">
+
+      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
+        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
+        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
         <label data-en="File Upload">File Upload</label>
@@ -328,21 +341,12 @@
         <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="We read every note before printing. Tell us your deadline and we confirm feasibility by email.">Leggiamo ogni nota prima della stampa. Indica la data che ti serve: confermiamo la fattibilità per email.</div>
       </div>
 
-      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
-        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
-        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
-        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
-      </div>
-
       <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg></button>
 
       <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
-        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Ships within 24 hours">Spedizione pronta in 24 ore</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Shipping ready within the week">Spedizione pronta in settimana</span></div>
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
       </div>
       </div>
@@ -436,6 +440,7 @@ const IMAGE_BY_COLOR = {
   '02 Nero': 'img/star-02-nero-nobg.webp',
 };
 const SIZES = ['1/2', '3/4', '5/6', '7/8', '9/10', '11/12'];
+const SIZE_MEASURE = { '1/2': 'A 30 × B 40', '3/4': 'A 33 × B 44', '5/6': 'A 37 × B 48', '7/8': 'A 39 × B 52', '9/10': 'A 42 × B 56', '11/12': 'A 45 × B 60' };
 const SIZE_STOCK = {};
 const PRICE_TIERS = [
   { min: 1, white: 9, other: 9 },
@@ -615,6 +620,7 @@ class Component extends DCLogic {
     }));
     const sizes = SIZES.map(s => ({
       label: s,
+      measure: SIZE_MEASURE[s] ? SIZE_MEASURE[s] + ' cm' : '',
       qty: sizeQty[s] || 0,
       stockLabel: '',
       inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
@@ -662,7 +668,7 @@ class Component extends DCLogic {
     const isWhite = hasColor && activeColor.name === '01 Bianco';
     const selectedColorGroup = hasColor ? activeColor.group : null;
     const selectedColorNote = !hasColor
-      ? (en ? 'Pick a colour' : 'Scegli un colore')
+      ? ''
       : (selectedColorGroup === 'order'
           ? (en ? 'Made to order — takes 1 week' : 'Su ordinazione — richiede 1 settimana')
           : (en ? '24H colour — in stock now' : 'Colore 24H — disponibile subito'));
