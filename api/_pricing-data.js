@@ -41,7 +41,7 @@ const BAHRAIN_PRICE_TIERS = [
 ];
 const BAHRAIN_KIDS_PRICE_TIERS = [
   { min: 1, price: 6.1 }, { min: 5, price: 4.88 }, { min: 10, price: 3.78 },
-  { min: 20, price: 2.68 }, { min: 50, price: 2.2 }, { min: 100, price: 1.95 },
+  { min: 20, price: 2.5 }, { min: 50, price: 2.2 }, { min: 100, price: 1.95 },
 ];
 const POLO_PRICE_TIERS = [
   { min: 1, price: 8 }, { min: 2, price: 7.5 }, { min: 5, price: 7 },
