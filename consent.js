@@ -86,7 +86,7 @@
     var txt = document.createElement('div');
     txt.style.cssText = 'font:400 12.5px/1.5 Archivo,system-ui,sans-serif;color:#201e1d;flex:1 1 200px;';
     txt.innerHTML = 'Cookie di statistica e marketing, attivi solo col tuo consenso. ' +
-      '<a href="privacy-policy.dc.html" style="color:#ec3013;">Informativa</a>';
+      '<a href="privacy-policy.html" style="color:#ec3013;">Informativa</a>';
 
     var actions = document.createElement('div');
     actions.style.cssText = 'display:flex;gap:6px;flex-wrap:nowrap;';

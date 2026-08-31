@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
+  <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
+  <style>
+    html, body { height: auto !important; min-height: 100%; overflow: visible !important; }
+    .prow { display: grid; grid-template-columns: 34px 64px 1fr auto; gap: 14px; align-items: start; padding: 12px 14px; border-bottom: 1px solid var(--color-divider); }
+    .prow:hover { background: var(--color-neutral-100); }
+    .prow.on { background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
+    .pchip { border: 1px solid var(--color-divider); background: transparent; padding: 5px 11px; font-size: 12.5px; cursor: pointer; font-family: inherit; color: var(--color-neutral-700); }
+    .pchip:hover { background: var(--color-neutral-100); }
+    .pchip.on { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+    .pchip:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  </style>
+</helmet>
+
+<div style="max-width: 1100px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);">
+
+  <h1 style="margin: 0 0 4px; font-size: 30px;">Prodotti da importare</h1>
+  <p class="text-muted" style="margin: 0 0 var(--space-6); font-size: 14px;">Export WooCommerce del 24/7/2026. Esclusi Austral, Promozione 100 Magliette e Atomic, già presenti sul nuovo sito. Spunta quelli da rifare e passami la lista.</p>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-3);">
+    <input class="input" type="search" placeholder="Cerca…" value="{{ q }}" onInput="{{ onSearch }}" style="flex: 1 1 220px; min-width: 180px;">
+    <button class="pchip" onClick="{{ toggleOnlyPub }}" style="{{ pubStyle }}">Solo pubblicati</button>
+    <button class="pchip" onClick="{{ selectAll }}">Seleziona tutti</button>
+    <button class="pchip" onClick="{{ clearAll }}">Azzera</button>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--space-6);">
+    <sc-for list="{{ cats }}" as="c" hint-placeholder-count="8">
+      <button class="pchip" onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+    </sc-for>
+  </div>
+
+  <div style="border: 1px solid var(--color-divider); background: var(--color-surface);">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--color-divider); font-size: 13px;">
+      <span class="text-muted">{{ countLabel }}</span>
+      <span style="font-weight: 700;">{{ selLabel }}</span>
+    </div>
+    <sc-for list="{{ rows }}" as="p" hint-placeholder-count="10">
+      <label class="prow" style="{{ p.rowStyle }}">
+        <input type="checkbox" checked="{{ p.checked }}" onChange="{{ p.onToggle }}" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--color-text);">
+        <img src="{{ p.img }}" alt="" loading="lazy" style="width: 64px; height: 64px; object-fit: contain; background: var(--color-neutral-100); border: 1px solid var(--color-divider);">
+        <div style="min-width: 0;">
+          <div style="font-weight: 650; font-size: 14.5px; line-height: 1.3;">{{ p.name }}</div>
+          <div class="text-muted" style="font-size: 12px; margin-top: 3px;">{{ p.cat }}</div>
+          <div class="text-muted" style="font-size: 12.5px; margin-top: 5px; line-height: 1.45;">{{ p.short }}</div>
+        </div>
+        <div style="text-align: right; white-space: nowrap; display: grid; gap: 4px; justify-items: end;">
+          <span style="font-weight: 700; font-size: 14px;">{{ p.price }}</span>
+          <span style="font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--color-neutral-700);">{{ p.state }}</span>
+          <span style="font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: #b23c2e;">{{ p.warn }}</span>
+        </div>
+      </label>
+    </sc-for>
+  </div>
+
+  <div style="margin-top: var(--space-4); border: 1px solid var(--color-divider); background: var(--color-surface); padding: var(--space-4);">
+    <div style="font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px;">Selezione</div>
+    <textarea readonly value="{{ selText }}" style="width: 100%; min-height: 130px; font-family: ui-monospace, monospace; font-size: 12.5px; padding: 10px; border: 1px solid var(--color-divider); background: var(--color-bg); color: var(--color-text); resize: vertical;"></textarea>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { items: [], sel: {}, q: '', cat: '', onlyPub: false };
+
+  componentDidMount() {
+    fetch('prodotti-import.json').then(r => r.json()).then(items => this.setState({ items }));
+  }
+
+  visible() {
+    const { items, q, cat, onlyPub } = this.state;
+    const s = q.trim().toLowerCase();
+    return items.filter(p =>
+      (!onlyPub || p.pub) &&
+      (!cat || p.cat.split(',').map(x => x.trim()).includes(cat)) &&
+      (!s || (p.name + ' ' + p.cat + ' ' + p.short).toLowerCase().includes(s)));
+  }
+
+  renderVals() {
+    const { items, sel, q, cat, onlyPub } = this.state;
+    const vis = this.visible();
+    const catCounts = {};
+    items.forEach(p => p.cat.split(',').map(x => x.trim()).filter(Boolean).forEach(c => { catCounts[c] = (catCounts[c] || 0) + 1; }));
+    const catList = Object.keys(catCounts).sort((a, b) => catCounts[b] - catCounts[a]).slice(0, 16);
+    const chipOn = 'background: var(--color-text); color: var(--color-bg); border-color: var(--color-text);';
+
+    const selNames = items.filter(p => sel[p.id]).map(p => p.name);
+
+    return {
+      q,
+      onSearch: e => this.setState({ q: e.target.value }),
+      toggleOnlyPub: () => this.setState({ onlyPub: !onlyPub }),
+      pubStyle: onlyPub ? chipOn : '',
+      selectAll: () => { const s = { ...sel }; vis.forEach(p => { s[p.id] = true; }); this.setState({ sel: s }); },
+      clearAll: () => this.setState({ sel: {} }),
+      cats: [{ label: 'Tutte', onClick: () => this.setState({ cat: '' }), style: cat === '' ? chipOn : '' }]
+        .concat(catList.map(c => ({
+          label: c + ' (' + catCounts[c] + ')',
+          onClick: () => this.setState({ cat: cat === c ? '' : c }),
+          style: cat === c ? chipOn : ''
+        }))),
+      countLabel: vis.length + ' di ' + items.length + ' prodotti',
+      selLabel: selNames.length + ' selezionati',
+      selText: selNames.length ? selNames.map((n, i) => (i + 1) + '. ' + n).join('\n') : 'Nessun prodotto selezionato.',
+      rows: vis.map(p => ({
+        name: p.name,
+        cat: p.cat,
+        short: (p.short || p.desc || '').slice(0, 190),
+        img: p.img || 'img/favicon.png',
+        price: p.price ? '€' + p.price : '—',
+        state: p.pub ? 'pubblicato' : 'bozza',
+        warn: p.dup ? 'doppione' : '',
+        checked: !!sel[p.id],
+        rowStyle: sel[p.id] ? 'background: color-mix(in srgb, var(--color-accent) 8%, transparent);' : '',
+        onToggle: () => this.setState(st => ({ sel: { ...st.sel, [p.id]: !st.sel[p.id] } }))
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -15,52 +15,52 @@
     brand: { href: 'index.html', logo: 'img/logo-tshirt-shop.webp', name: 'TSHIRT SHOP ONLINE', suffix: 'by Printing Italy' },
     whatsapp: { href: 'https://api.whatsapp.com/send/?phone=393396021366', it: 'Preventivo WhatsApp', en: 'Quote on WhatsApp' },
     items: [
-      { it: 'PROMO', en: 'Promo', href: 'promozioni.dc.html', accent: true, sub: [
-        { it: 'Tutte le promozioni', en: 'All promotions', href: 'promozioni.dc.html' },
-        { it: '100 Magliette + Stampa', en: '100 T-Shirts + Printing', href: 'promozione-100-magliette.dc.html' },
+      { it: 'PROMO', en: 'Promo', href: 'promozioni.html', accent: true, sub: [
+        { it: 'Tutte le promozioni', en: 'All promotions', href: 'promozioni.html' },
+        { it: '100 Magliette + Stampa', en: '100 T-Shirts + Printing', href: 'promozione-100-magliette.html' },
         { it: 'Altre offerte in arrivo', en: 'More offers coming soon' },
       ] },
-      { it: 'Uomo', en: 'Men', href: 'uomo.dc.html', sub: [
-        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-uomo.dc.html', sub: [
-          { it: 'Maglietta Beagle', en: 'Beagle T-Shirt', href: 'Beagle.dc.html' },
-          { it: 'Maglietta Tecnica Bahrain', en: 'Bahrain Technical T-Shirt', href: 'bahrain.dc.html' },
+      { it: 'Uomo', en: 'Men', href: 'uomo.html', sub: [
+        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-uomo.html', sub: [
+          { it: 'Maglietta Beagle', en: 'Beagle T-Shirt', href: 'beagle.html' },
+          { it: 'Maglietta Tecnica Bahrain', en: 'Bahrain Technical T-Shirt', href: 'bahrain.html' },
           { it: 'Atomic — in arrivo', en: 'Atomic — coming soon' },
         ] },
-        { it: 'Polo', en: 'Polo', href: 'polo-uomo.dc.html', sub: [
-          { it: 'Polo Austral', en: 'Austral Polo', href: 'Austral-Polo.dc.html' },
-          { it: 'Polo Star', en: 'Star Polo', href: 'Star-Polo.dc.html' },
+        { it: 'Polo', en: 'Polo', href: 'polo-uomo.html', sub: [
+          { it: 'Polo Austral', en: 'Austral Polo', href: 'austral-polo.html' },
+          { it: 'Polo Star', en: 'Star Polo', href: 'star-polo.html' },
         ] },
-        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.dc.html', sub: [
-          { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.dc.html' },
-          { it: 'Giubbotto Rudolph', en: 'Rudolph Softshell', href: 'rudolph.dc.html' },
-        ] },
-      ] },
-      { it: 'Donna', en: 'Women', href: 'donna.dc.html', sub: [
-        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.dc.html', sub: [
-          { it: 'Maglietta Jamaica Donna', en: "Jamaica Women's T-Shirt", href: 'jamaica.dc.html' },
-        ] },
-        { it: 'Polo', en: 'Polo', href: 'polo-donna.dc.html', sub: [
-          { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'Star-Polo-donna.dc.html' },
-        ] },
-        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.dc.html', sub: [
-          { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.dc.html' },
+        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html', sub: [
+          { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.html' },
+          { it: 'Giubbotto Rudolph', en: 'Rudolph Softshell', href: 'rudolph.html' },
         ] },
       ] },
-      { it: 'Bambino', en: 'Kids', href: 'bambino.dc.html', sub: [
-        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-bambino.dc.html', sub: [
-          { it: 'Maglietta Beagle Bimbo', en: 'Beagle Kids T-Shirt', href: 'beagle-kids.dc.html' },
-          { it: 'Maglietta Jamaica Bambina', en: 'Jamaica Kids T-Shirt', href: 'Jamaica.kids.dc.html' },
-          { it: 'Maglietta Tecnica Bahrain Bambino', en: 'Bahrain Kids Technical T-Shirt', href: 'bahrain-kids.dc.html' },
+      { it: 'Donna', en: 'Women', href: 'donna.html', sub: [
+        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.html', sub: [
+          { it: 'Maglietta Jamaica Donna', en: "Jamaica Women's T-Shirt", href: 'jamaica.html' },
         ] },
-        { it: 'Polo', en: 'Polo', href: 'polo-bambino.dc.html', sub: [
-          { it: 'Polo Star Bambino', en: 'Star Kids Polo', href: 'Star-Polo-kids.dc.html' },
+        { it: 'Polo', en: 'Polo', href: 'polo-donna.html', sub: [
+          { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'star-polo-donna.html' },
         ] },
-        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-kids.dc.html', sub: [
-          { it: 'Giubbotto Nebraska Bambino', en: 'Nebraska Kids Softshell', href: 'nebraska-kids.dc.html' },
+        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html', sub: [
+          { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.html' },
         ] },
       ] },
-      { it: 'Esempi', en: 'Examples', href: 'esempi.dc.html' },
-      { it: 'Contatti', en: 'Contact', href: 'contattateci.dc.html' },
+      { it: 'Bambino', en: 'Kids', href: 'bambino.html', sub: [
+        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-bambino.html', sub: [
+          { it: 'Maglietta Beagle Bimbo', en: 'Beagle Kids T-Shirt', href: 'beagle-kids.html' },
+          { it: 'Maglietta Jamaica Bambina', en: 'Jamaica Kids T-Shirt', href: 'jamaica-kids.html' },
+          { it: 'Maglietta Tecnica Bahrain Bambino', en: 'Bahrain Kids Technical T-Shirt', href: 'bahrain-kids.html' },
+        ] },
+        { it: 'Polo', en: 'Polo', href: 'polo-bambino.html', sub: [
+          { it: 'Polo Star Bambino', en: 'Star Kids Polo', href: 'star-polo-kids.html' },
+        ] },
+        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-kids.html', sub: [
+          { it: 'Giubbotto Nebraska Bambino', en: 'Nebraska Kids Softshell', href: 'nebraska-kids.html' },
+        ] },
+      ] },
+      { it: 'Esempi', en: 'Examples', href: 'esempi.html' },
+      { it: 'Contatti', en: 'Contact', href: 'contattateci.html' },
     ],
   };
 
