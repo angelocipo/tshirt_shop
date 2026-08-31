@@ -281,7 +281,7 @@ module.exports = async (req, res) => {
       const clampW = (v) => Math.min(clampIdx(v), 9);
       let printTotal = 0;
       const parts = [];
-      // Breakpoints delle misure stampabili, allineati a Beagle.dc.html (max 38×48 cm).
+      // Breakpoints delle misure stampabili, allineati a beagle.html (max 38×48 cm).
       const W_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 38];
       const H_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 48];
       if (z.cuore) { printTotal += product.cuoreUnitPrice(qty); parts.push('cuore/manica'); }
@@ -436,7 +436,7 @@ module.exports = async (req, res) => {
       customer_email: c.email || undefined,
       line_items: lineItems,
       metadata,
-      success_url: `${origin}/grazie.dc.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${origin}/grazie.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/?checkout=cancelled`,
     });
 

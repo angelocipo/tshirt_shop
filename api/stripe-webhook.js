@@ -65,7 +65,7 @@ async function rawBody(req) {
 // old in-memory 00001 counter did). The alphabet omits I, O, 0 and 1 so the code can be read out
 // over the phone without ambiguity.
 //
-// IMPORTANT: grazie.dc.html contains a character-for-character copy of this function. Change one,
+// IMPORTANT: grazie.html contains a character-for-character copy of this function. Change one,
 // change the other, or the code on screen stops matching the code in the email.
 // Math.imul is required, not a plain `*`: 32-bit values times these primes exceed 2^53, so the
 // low bits get rounded away before >>>0 reads them. That collapsed one character position to 5
