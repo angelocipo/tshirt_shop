@@ -68,6 +68,9 @@
           { it: 'Giubbotto Nebraska Bambino', en: 'Nebraska Kids Softshell', href: 'nebraska-kids.html' },
         ] },
       ] },
+      { it: 'Gadget', en: 'Gadgets', href: 'cappellini-basica.html', sub: [
+        { it: 'Cappellino Basica', en: 'Basica Cap', href: 'cappellini-basica.html' },
+      ] },
       { it: 'Esempi', en: 'Examples', href: 'esempi.html' },
       { it: 'Contatti', en: 'Contact', href: 'contattateci.html' },
     ],
