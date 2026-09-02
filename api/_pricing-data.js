@@ -55,6 +55,14 @@ const BASICA_CAP_PRICE_TIERS = [
   { min: 1, price: 5 }, { min: 5, price: 4 }, { min: 10, price: 3.1 },
   { min: 20, price: 2.2 }, { min: 50, price: 2 }, { min: 100, price: 1.8 },
 ];
+const KARIN_CAP_PRICE_TIERS = [
+  { min: 1, price: 7.8 }, { min: 5, price: 6.24 }, { min: 10, price: 4.84 },
+  { min: 20, price: 3.43 }, { min: 50, price: 3.12 }, { min: 100, price: 2.81 },
+];
+const URANUS_CAP_PRICE_TIERS = [
+  { min: 1, price: 4.65 }, { min: 5, price: 3.72 }, { min: 10, price: 2.88 },
+  { min: 20, price: 2.05 }, { min: 50, price: 1.86 }, { min: 100, price: 1.67 },
+];
 const BASICA_CAP_PRINT_TIERS = [
   { min: 1, price: 5 }, { min: 2, price: 4.5 }, { min: 5, price: 4.2 },
   { min: 10, price: 3.8 }, { min: 20, price: 3.5 }, { min: 50, price: 3.2 }, { min: 100, price: 3 },
@@ -144,6 +152,12 @@ const PRICING = {
 
   'basica-cap': { nome: 'Cappellino Basica', type: 'cap',
     garmentUnitPrice: (qty) => pickTier(BASICA_CAP_PRICE_TIERS, qty).price,
+    printUnitPrice: (qty) => pickTier(BASICA_CAP_PRINT_TIERS, qty).price },
+  'karin-cap': { nome: 'Cappellino Karin', type: 'cap',
+    garmentUnitPrice: (qty) => pickTier(KARIN_CAP_PRICE_TIERS, qty).price,
+    printUnitPrice: (qty) => pickTier(BASICA_CAP_PRINT_TIERS, qty).price },
+  'uranus-cap': { nome: 'Cappellino Uranus', type: 'cap',
+    garmentUnitPrice: (qty) => pickTier(URANUS_CAP_PRICE_TIERS, qty).price,
     printUnitPrice: (qty) => pickTier(BASICA_CAP_PRINT_TIERS, qty).price },
 };
 
