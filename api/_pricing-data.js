@@ -98,6 +98,12 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
+  'bahrain-donna': { nome: 'Maglietta Tecnica Bahrain Donna', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(BAHRAIN_PRICE_TIERS, qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
   'bahrain-kids': { nome: 'Maglietta Tecnica Bahrain Bambino', type: 'tshirt',
     garmentUnitPrice: (qty) => pickTier(BAHRAIN_KIDS_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
