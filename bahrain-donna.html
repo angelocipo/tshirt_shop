@@ -14,10 +14,10 @@
   <script defer src="nav-mobile.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Maglietta Tecnica Bahrain Bambino Personalizzata | Tshirt Shop Online</title>
-  <meta name="description" content="Maglietta tecnica Bahrain bambino personalizzata: 100% poliestere waffle interlock 135 g/m², certificata UV801, 21 colori, taglie 4-16. Stampa DTF a Roma.">
-  <link rel="canonical" href="https://www.tshirt-shop.online/bahrain-kids.html">
-  <meta property="og:url" content="https://www.tshirt-shop.online/bahrain-kids.html">
+  <title>Maglietta Tecnica Bahrain Donna Personalizzata | Tshirt Shop Online</title>
+  <meta name="description" content="Maglietta tecnica Bahrain donna personalizzata: 100% poliestere waffle interlock 135 g/m², certificata UV801, 25 colori, taglie donna S-XXL. Stampa DTF a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/bahrain-donna.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/bahrain-donna.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -30,8 +30,7 @@
     /* landscape / wide: image + price beside the configurator */
     @media (min-width: 900px) {
       .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6); align-items: start;
-        grid-template-rows: auto min-content 1fr;
-        grid-template-areas: "head head" "left mid" "left right"; align-content: start; }
+        grid-template-areas: "head head" "left mid" "left right"; grid-template-rows: auto min-content 1fr; align-content: start; }
       .prod-head { grid-area: head; }
       .col-left { grid-area: left; display: flex; flex-direction: column; }
       .col-mid { grid-area: mid; }
@@ -53,10 +52,10 @@
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
-      .cfg-zones { grid-area: zones; }
-      .cfg-misure { grid-area: misure; }
       .prod-qty { grid-area: qty; }
       .cfg-family { grid-area: family; }
+      .cfg-zones { grid-area: zones; }
+      .cfg-misure { grid-area: misure; }
       .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
@@ -160,20 +159,20 @@
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
     <span class="tag tag-accent" data-en="Technical fabric">Tessuto tecnico</span>
     <span class="tag tag-neutral">UV801</span>
-    <span class="tag tag-neutral" data-en="Kids sizes 4-16">Taglie 4-16</span>
+    <span class="tag tag-neutral" data-en="Also in kids sizes">Anche in taglie bambino</span>
   </div>
 
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Bahrain Kids Technical T-Shirt">Maglietta Tecnica Bahrain Bambino</h1>
+      <h1 style="margin-bottom: 4px;" data-en="Bahrain Women's Technical T-Shirt">Maglietta Tecnica Bahrain Donna</h1>
     </div>
 
     <div class="col-left">
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1;">
-          <img id="bahrain-hero" alt="Maglietta tecnica Bahrain bambino — vista frontale" src="img/bahrain-kids-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          <img id="bahrain-hero" alt="Maglietta tecnica Bahrain donna — vista frontale" src="img/bahrain-donna-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
         </div>
       </div>
     </div>
@@ -181,7 +180,7 @@
         <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colour:">Colore Maglietta:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
         <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
-          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="21">
+          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="24">
             <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
           </sc-for>
         </div>
@@ -220,11 +219,11 @@
                   <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
                       <label><span data-en="Front width">Larghezza davanti</span> — {{ davantiWidthCm }}cm</label>
-                      <input type="range" min="0" max="5" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <input type="range" min="0" max="9" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                     <div class="field">
                       <label><span data-en="Front height">Altezza davanti</span> — {{ davantiHeightCm }}cm</label>
-                      <input type="range" min="0" max="7" step="1" value="{{ davantiHeightIdx }}" onChange="{{ setDavantiHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <input type="range" min="0" max="11" step="1" value="{{ davantiHeightIdx }}" onChange="{{ setDavantiHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                   </div>
                 </sc-if>
@@ -232,11 +231,11 @@
                   <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
                     <div class="field">
                       <label><span data-en="Back width">Larghezza retro</span> — {{ retroWidthCm }}cm</label>
-                      <input type="range" min="0" max="5" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <input type="range" min="0" max="9" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                     <div class="field">
                       <label><span data-en="Back height">Altezza retro</span> — {{ retroHeightCm }}cm</label>
-                      <input type="range" min="0" max="7" step="1" value="{{ retroHeightIdx }}" onChange="{{ setRetroHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                      <input type="range" min="0" max="11" step="1" value="{{ retroHeightIdx }}" onChange="{{ setRetroHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
                     </div>
                   </div>
                 </sc-if>
@@ -258,7 +257,7 @@
           <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 20-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 20.</p>
         </sc-if>
         <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="4">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
             <div class="{{ s.rowClass }}">
               <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
               <div class="qty-group">
@@ -273,36 +272,32 @@
         <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
           <div style="padding: var(--space-4);">
             <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the measurements first">Controlla prima le misure</div>
-            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Kids sizes follow age, but children of the same age differ: measure a t-shirt the child already wears — A = width, B = height, garment laid flat — and compare it with the measurements shown next to each size.">Le taglie bambino seguono l'età, ma bambini della stessa età hanno misure diverse: misura una maglietta che il bambino indossa già — A = larghezza, B = altezza, capo steso — e confrontala con le misure indicate accanto a ogni taglia.</p>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Measure a t-shirt you already wear — A = width, B = height, garment laid flat — and compare it with the measurements shown next to each size before choosing.">Misura una maglietta che indossi già — A = larghezza, B = altezza, capo steso — e confrontala con le misure indicate accanto a ogni taglia prima di scegliere.</p>
           </div>
         </div>
       </div>
       <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
           <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Bahrain family">Famiglia Bahrain</div>
-          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The technical Bahrain t-shirt is also made in adult sizes, in the same waffle interlock fabric.">La maglietta tecnica Bahrain esiste anche in taglie adulto, nello stesso tessuto waffle interlock.</p>
+          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The technical Bahrain t-shirt is also made in a men\u0027s version and in kids sizes 4-16, in the same waffle interlock fabric.">La maglietta tecnica Bahrain esiste anche in versione uomo e in taglie bambino 4-16, nello stesso tessuto waffle interlock.</p>
           <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
-          <a href="bahrain-donna.html" style="font-size:13px;font-weight:600;" data-en="Bahrain women\u0027s t-shirt">Maglietta tecnica Bahrain donna</a>
-          <a href="bahrain.html" style="font-size:13px;font-weight:600;" data-en="Bahrain technical t-shirt">Maglietta tecnica Bahrain</a>
+          <a href="bahrain.html" style="font-size:13px;font-weight:600;" data-en="Bahrain men\u0027s t-shirt">Maglietta tecnica Bahrain uomo</a>
+          <a href="bahrain-kids.html" style="font-size:13px;font-weight:600;" data-en="Bahrain kids t-shirt">Maglietta tecnica Bahrain bambino</a>
           </div>
         </div>
       </div>
     </div>
 
     <div class="prod-config col-right">
-      <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
-        <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
-          <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
-            <div data-en="100% polyester waffle interlock, 135 g/m² — UV801 certified, DTF printing made in Rome">100% poliestere waffle interlock, 135 g/m² — certificata UV801, stampa DTF prodotta a Roma</div>
-            <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% polyester, waffle interlock, 135 g/m².">100% poliestere, waffle interlock, 135 g/m².</span></div>
-            <div data-en="UV801 certified. Technical fabric. Dry clean only. Also available in adult sizes.">Certificato UV801. Tessuto tecnico. Lavaggio a secco. Disponibile anche in taglie adulto.</div>
-            <div style="font-weight: 700; color: var(--color-text);">EAN 0652026570007</div>
-          </div>
+      <div class="cfg-comp" style="border-bottom: 1px solid var(--color-divider); margin-bottom: var(--space-4); padding-bottom: var(--space-4);">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+        <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700);">
+          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% polyester, waffle interlock, 135 g/m².">100% poliestere, waffle interlock, 135 g/m².</span></div>
+          <div data-en="UV801 certified. Technical fabric. Dry clean only. Also available in kids sizes.">Certificato UV801. Tessuto tecnico. Lavaggio a secco. Disponibile anche in taglie per bambini.</div>
+          <div style="font-weight: 700; color: var(--color-text);">EAN 0652026570021</div>
         </div>
       </div>
       <div class="cfg-rest">
-
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
@@ -357,6 +352,7 @@
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
       </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -427,7 +423,7 @@
 </footer>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;forest&quot;,&quot;ochre&quot;,&quot;ink&quot;],&quot;section&quot;:&quot;Color&quot;}}">
-const COLORS_ALL = [
+const COLORS = [
   { name: '01 Bianco', hex: '#f7f7f7', kids: true },
   { name: '02 Nero', hex: '#2b2b2b', kids: true },
   { name: '03 Giallo', hex: '#f5d908', kids: true },
@@ -453,15 +449,38 @@ const COLORS_ALL = [
   { name: '228 Fucsia Fluo', hex: '#f5359a', kids: true },
   { name: '234 Corallo Fluo', hex: '#fb5d4a', kids: true },
 ];
-const COLORS = COLORS_ALL.filter(c => c.kids);
-const IMAGE_BY_COLOR = {};
-COLORS.forEach(c => { IMAGE_BY_COLOR[c.name] = 'img/bahrain-' + c.name.split(' ')[0] + '.webp'; });
-const DEFAULT_HERO_IMG = 'img/bahrain-kids-hero.webp';
+const IMAGE_BY_COLOR = {
+  '01 Bianco': 'img/bahrain-donna-01.webp',
+  '02 Nero': 'img/bahrain-donna-02.webp',
+  '03 Giallo': 'img/bahrain-donna-03.webp',
+  '05 Blue Royal': 'img/bahrain-donna-05.webp',
+  '10 Celeste': 'img/bahrain-donna-10.webp',
+  '12 Turchese': 'img/bahrain-donna-12.webp',
+  '15 Verde Militare': 'img/bahrain-donna-15.webp',
+  '45 Blue Petrolio': 'img/bahrain-donna-45.webp',
+  '46 Antracite': 'img/bahrain-donna-46.webp',
+  '47 Grigio Chiaro': 'img/bahrain-donna-47.webp',
+  '55 Blue Navy': 'img/bahrain-donna-55.webp',
+  '60 Rosso': 'img/bahrain-donna-60.webp',
+  '63 Viola': 'img/bahrain-donna-63.webp',
+  '78 Fucsia': 'img/bahrain-donna-78.webp',
+  '98 Menta': 'img/bahrain-donna-98.webp',
+  '125 Rosa Fluo': 'img/bahrain-donna-125.webp',
+  '219 Sabbia': 'img/bahrain-donna-219.webp',
+  '221 Giallo Fluo': 'img/bahrain-donna-221.webp',
+  '222 Verde Fluo': 'img/bahrain-donna-222.webp',
+  '223 Arancione Fluo': 'img/bahrain-donna-223.webp',
+  '225 Verde Lime': 'img/bahrain-donna-225.webp',
+  '226 Verde Prato': 'img/bahrain-donna-226.webp',
+  '228 Fucsia Fluo': 'img/bahrain-donna-228.webp',
+  '234 Corallo Fluo': 'img/bahrain-donna-234.webp',
+};
+const DEFAULT_HERO_IMG = 'img/bahrain-donna-hero.webp';
 const MIN_QTY = 20;
-const SIZES = ['4', '8', '12', '16'];
-const SIZE_MEASURE = { '4': 'A 34 × B 50', '8': 'A 38 × B 55', '12': 'A 42 × B 60', '16': 'A 46 × B 65' };
-const SIZE_STOCK = {};
-// Costo capo Bahrain: 1,30 € cad. Listino di vendita: 5,00 / 4,00 / 3,10 / 2,20 / 1,80 / 1,60 € cad + IVA -> +22% IVA compresa.
+const SIZES = ['S', 'M', 'L', 'XL', 'XXL'];
+const SIZE_MEASURE = { 'S': 'A 42 × B 62', 'M': 'A 45 × B 64', 'L': 'A 48 × B 66', 'XL': 'A 51 × B 68', 'XXL': 'A 54 × B 70' };
+// Costo capo Bahrain: 1,30 € cad. Prezzi IVA compresa, minimo ordine 20 pz.
+// Tarato perché a 20 pz capo + stampa cuore facciano 6,00 € / pezzo (2,50 + 3,50).
 // Prezzo unico per tutti i colori e tutte le taglie.
 const PRICE_TIERS = [
   { min: 1, white: 6.1, other: 6.1 },
@@ -486,12 +505,11 @@ function cuoreUnitPrice(qty) {
   for (const t of CUORE_PRICE_TIERS) if (qty >= t.min) tier = t;
   return tier.price;
 }
-// Area massima stampabile sul capo adulto: 38 × 48 cm.
+// Area massima stampabile: 38 cm di larghezza × 48 cm di altezza.
 const W_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 38];
 const H_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 48];
-// Capo bambino: area massima stampabile 25 × 32 cm (taglia 4 = 34 × 50 cm).
-const W_MAX_IDX = 5;
-const H_MAX_IDX = 7;
+const W_MAX_IDX = W_BREAKS.length - 1;
+const H_MAX_IDX = H_BREAKS.length - 1;
 const AREA_TABLE = [
   [12, 12, 12, 13, 14, 14, 14, 16, 16, 16, 17, 18],
   [12, 12, 13, 14, 14, 14, 16, 16, 16, 17, 18, 18],
@@ -521,8 +539,8 @@ function davantiDiscount(qty) {
 }
 const ZONE_DEFS = [
   { key: 'cuore', label: 'Cuore / Manica (max 8×8cm)', labelEn: 'Chest / Sleeve (max 8×8cm)', price: (qty) => cuoreUnitPrice(qty) },
-  { key: 'davanti', label: 'Davanti (fino a 25×32cm)', labelEn: 'Front (up to 25×32cm)' },
-  { key: 'retro', label: 'Retro (fino a 25×32cm)', labelEn: 'Back (up to 25×32cm)' },
+  { key: 'davanti', label: 'Davanti (fino a 38×48cm)', labelEn: 'Front (up to 38×48cm)' },
+  { key: 'retro', label: 'Retro (fino a 38×48cm)', labelEn: 'Back (up to 38×48cm)' },
 ];
 function isEn() {
   try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; }
@@ -535,10 +553,10 @@ class Component extends DCLogic {
     zones: {},
     cuoreWidth: 8,
     cuoreHeight: 8,
-    davantiWidthIdx: 3,
-    davantiHeightIdx: 5,
-    retroWidthIdx: 3,
-    retroHeightIdx: 5,
+    davantiWidthIdx: 4,
+    davantiHeightIdx: 7,
+    retroWidthIdx: 4,
+    retroHeightIdx: 7,
     designFiles: [],
     designRef: null,
     designLink: '',
@@ -557,7 +575,7 @@ class Component extends DCLogic {
     const want = new URL(src, window.location.href).href;
     if (el.src !== want) {
       el.src = src;
-      el.alt = i != null ? ('Maglietta tecnica Bahrain bambino ' + COLORS[i].name) : 'Maglietta tecnica Bahrain bambino — vista frontale';
+      el.alt = i != null ? ('Maglietta tecnica Bahrain ' + COLORS[i].name) : 'Maglietta tecnica Bahrain — vista frontale';
     }
   }
   componentDidMount() {
@@ -597,7 +615,7 @@ class Component extends DCLogic {
 
   async uploadFile(file, id, ref) {
     try {
-      const qs = new URLSearchParams({ ref, name: file.name, product: 'Maglietta Tecnica Bahrain Bambino' });
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Maglietta Tecnica Bahrain Donna' });
       const res = await fetch('/api/upload-design?' + qs.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -618,12 +636,7 @@ class Component extends DCLogic {
     const colorsAll = COLORS.map((c, i) => ({
       ...c,
       swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
-      select: () => this.setState(prev => {
-        if (c.kids) return { colorIndex: i };
-        const cleaned = { ...prev.sizeQty };
-        ['4', '8', '12', '16'].forEach(k => { delete cleaned[k]; });
-        return { colorIndex: i, sizeQty: cleaned };
-      }),
+      select: () => this.setState({ colorIndex: i }),
     }));
     const lum = (hex) => {
       const h = hex.replace('#', '');
@@ -639,10 +652,8 @@ class Component extends DCLogic {
     const setQtyFor = (s, v) => this.setState(prev => ({
       sizeQty: { ...prev.sizeQty, [s]: Math.max(0, Math.min(9999, v)) },
     }));
-    const KIDS_SIZES = ['4', '8', '12', '16'];
-    const kidsBlocked = hasColorSel && !COLORS[st.colorIndex].kids;
     const sizes = SIZES.map(s => {
-      const blocked = kidsBlocked && KIDS_SIZES.includes(s);
+      const blocked = false;
       return {
       label: s,
       measure: SIZE_MEASURE[s] ? SIZE_MEASURE[s] + ' cm' : '',
@@ -687,9 +698,9 @@ class Component extends DCLogic {
     const retroWidthCm = W_BREAKS[Math.min(st.retroWidthIdx, W_MAX_IDX)];
     const retroHeightCm = H_BREAKS[Math.min(st.retroHeightIdx, H_MAX_IDX)];
     const setDavantiWidthIdx = (e) => this.setState({ davantiWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) });
-    const setDavantiHeightIdx = (e) => this.setState({ davantiHeightIdx: Math.min(Number(e.target.value), H_MAX_IDX) });
+    const setDavantiHeightIdx = (e) => this.setState({ davantiHeightIdx: Number(e.target.value) });
     const setRetroWidthIdx = (e) => this.setState({ retroWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) });
-    const setRetroHeightIdx = (e) => this.setState({ retroHeightIdx: Math.min(Number(e.target.value), H_MAX_IDX) });
+    const setRetroHeightIdx = (e) => this.setState({ retroHeightIdx: Number(e.target.value) });
     const printTotal = ZONE_DEFS.reduce((sum, z) => sum + (st.zones[z.key] ? zonePrice(z.key) : 0), 0);
     const hasColor = st.colorIndex != null;
     const activeColor = hasColor ? COLORS[st.colorIndex] : null;
@@ -762,7 +773,7 @@ class Component extends DCLogic {
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const orderBody = {
-          productId: 'bahrain-kids',
+          productId: 'bahrain-donna',
           human: {
             'Colore': activeColor.name,
             'Taglie': sizeBreakdown,
@@ -787,8 +798,8 @@ class Component extends DCLogic {
         };
         const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
         const params = new URLSearchParams({
-          id: 'bahrain-kids',
-          name: 'Maglietta Tecnica Bahrain Bambino',
+          id: 'bahrain-donna',
+          name: 'Maglietta Tecnica Bahrain Donna',
           price: grandTotal.toFixed(2),
           col: 'misura',
           cfg,
@@ -808,7 +819,7 @@ class Component extends DCLogic {
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
         const params = new URLSearchParams({
-          prodotto: 'Maglietta Tecnica Bahrain Bambino',
+          prodotto: 'Maglietta Tecnica Bahrain',
           config: orderNote ? config + ' — Note: ' + orderNote : config,
           url: window.location.origin + window.location.pathname,
           quantita: String(totalQty),

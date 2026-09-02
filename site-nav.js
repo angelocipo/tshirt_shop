@@ -46,6 +46,7 @@
       { it: 'Donna', en: 'Women', href: 'donna.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.html', sub: [
           { it: 'Maglietta Jamaica Donna', en: "Jamaica Women's T-Shirt", href: 'jamaica.html' },
+          { it: 'Maglietta Tecnica Bahrain Donna', en: "Bahrain Women's Technical T-Shirt", href: 'bahrain-donna.html' },
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-donna.html', sub: [
           { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'star-polo-donna.html' },
