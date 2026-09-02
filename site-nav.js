@@ -70,6 +70,8 @@
       ] },
       { it: 'Gadget', en: 'Gadgets', href: 'cappellini-basica.html', sub: [
         { it: 'Cappellino Basica', en: 'Basica Cap', href: 'cappellini-basica.html' },
+        { it: 'Cappellino Uranus', en: 'Uranus Cap', href: 'cappellini-uranus.html' },
+        { it: 'Cappellino Karin (sportivo)', en: 'Karin Sports Cap', href: 'cappellini-karin.html' },
       ] },
       { it: 'Esempi', en: 'Examples', href: 'esempi.html' },
       { it: 'Contatti', en: 'Contact', href: 'contattateci.html' },
