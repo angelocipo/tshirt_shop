@@ -11,6 +11,14 @@
    Le etichette EN sono opzionali: se manca "en" la voce non viene tradotta. */
 (function () {
   if (window.tsSiteNav) return; // il file viene caricato sia da <head> sia da <helmet>
+  // Vercel Speed Insights (solo sul dominio live, non in anteprima locale)
+  if (/tshirt-shop\.online$/.test(location.hostname)) {
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    var siScript = document.createElement('script');
+    siScript.defer = true;
+    siScript.src = '/_vercel/speed-insights/script.js';
+    document.head.appendChild(siScript);
+  }
   var MENU = {
     brand: { href: 'index.html', logo: 'img/logo-tshirt-shop.webp', name: 'TSHIRT SHOP ONLINE', suffix: 'by Printing Italy' },
     whatsapp: { href: 'https://api.whatsapp.com/send/?phone=393396021366', it: 'Preventivo WhatsApp', en: 'Quote on WhatsApp' },
