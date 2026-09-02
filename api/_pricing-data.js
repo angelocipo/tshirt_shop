@@ -49,6 +49,16 @@ const NEBRASKA_PRICE_TIERS = [
   { min: 1, price: 29 }, { min: 2, price: 28 }, { min: 5, price: 27 },
   { min: 10, price: 26 }, { min: 20, price: 25 }, { min: 50, price: 24 }, { min: 100, price: 23 },
 ];
+// Cappellino Basica — capo e stampa fronte 12×8, prezzi IVA compresa. Minimo ordine 10 pz
+// (le fasce sotto i 10 pz restano per sicurezza ma non sono raggiungibili dal configuratore).
+const BASICA_CAP_PRICE_TIERS = [
+  { min: 1, price: 5 }, { min: 5, price: 4 }, { min: 10, price: 3.1 },
+  { min: 20, price: 2.2 }, { min: 50, price: 2 }, { min: 100, price: 1.8 },
+];
+const BASICA_CAP_PRINT_TIERS = [
+  { min: 1, price: 5 }, { min: 2, price: 4.5 }, { min: 5, price: 4.2 },
+  { min: 10, price: 3.8 }, { min: 20, price: 3.5 }, { min: 50, price: 3.2 }, { min: 100, price: 3 },
+];
 function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
 
 const PRICING = {
@@ -131,6 +141,10 @@ const PRICING = {
       { key: 'cuore_retro_25x32', label: 'Cuore + retro 25×32 cm', col: 'cr32' },
     ],
     coloredSurcharge: 1.1 },
+
+  'basica-cap': { nome: 'Cappellino Basica', type: 'cap',
+    garmentUnitPrice: (qty) => pickTier(BASICA_CAP_PRICE_TIERS, qty).price,
+    printUnitPrice: (qty) => pickTier(BASICA_CAP_PRINT_TIERS, qty).price },
 };
 
 module.exports = { PRICING, ANGOLI_ARROTONDATI_TIERS, angoliArrotondatiPrice };

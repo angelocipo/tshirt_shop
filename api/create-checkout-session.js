@@ -338,6 +338,14 @@ module.exports = async (req, res) => {
           .join(' ');
       }
       description = `${product.nome} — ${qty}pz, ${color || 'colore'}, ${sizeLabel || 'taglie da definire'}, stampa: ${choice.label}`;
+    } else if (product.type === 'cap') {
+      const f = formula || {};
+      const qty = Math.max(1, Math.min(9999, parseInt(f.qty, 10) || 1));
+      const stampa = !!f.stampa;
+      const unit = product.garmentUnitPrice(qty) + (stampa ? product.printUnitPrice(qty) : 0);
+      unitAmountCents = Math.round(unit * qty * 100);
+      const color = (f.colorName || '').toString().slice(0, 40);
+      description = `${product.nome} — ${color || 'colore'}, taglia unica, ${qty}pz${stampa ? ', stampa fronte 12×8 cm' : ''}`;
     } else if (product.type === 'size') {
       const idx = Number.isInteger(sizeIndex) ? sizeIndex : 0;
       const variant = product.variants[Math.min(Math.max(idx, 0), product.variants.length - 1)];
