@@ -68,10 +68,19 @@
           { it: 'Giubbotto Nebraska Bambino', en: 'Nebraska Kids Softshell', href: 'nebraska-kids.html' },
         ] },
       ] },
-      { it: 'Gadget', en: 'Gadgets', href: 'cappellini-basica.html', sub: [
-        { it: 'Cappellino Basica', en: 'Basica Cap', href: 'cappellini-basica.html' },
-        { it: 'Cappellino Uranus', en: 'Uranus Cap', href: 'cappellini-uranus.html' },
-        { it: 'Cappellino Karin (sportivo)', en: 'Karin Sports Cap', href: 'cappellini-karin.html' },
+      { it: 'Lavoro', en: 'Workwear', href: 'alta-visibilita.html', sub: [
+        { it: 'Alta visibilità', en: 'High visibility', href: 'alta-visibilita.html' },
+        { it: 'Camici', en: 'Lab coats', sub: [
+          { it: 'Camice Vaccine — in arrivo', en: 'Vaccine Lab Coat — coming soon' },
+        ] },
+      ] },
+      { it: 'Gadget', en: 'Gadgets', href: 'cappellini.html', sub: [
+        { it: 'Cappellini', en: 'Caps', href: 'cappellini.html', sub: [
+          { it: 'Tutti i cappellini', en: 'All caps', href: 'cappellini.html' },
+          { it: 'Cappellino Uranus', en: 'Uranus Cap', href: 'cappellini-uranus.html' },
+          { it: 'Cappellino Basica', en: 'Basica Cap', href: 'cappellini-basica.html' },
+          { it: 'Cappellino Karin (sportivo)', en: 'Karin Sports Cap', href: 'cappellini-karin.html' },
+        ] },
       ] },
       { it: 'Esempi', en: 'Examples', href: 'esempi.html' },
       { it: 'Contatti', en: 'Contact', href: 'contattateci.html' },
