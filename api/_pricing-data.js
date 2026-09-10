@@ -67,6 +67,42 @@ const BASICA_CAP_PRINT_TIERS = [
   { min: 1, price: 5 }, { min: 2, price: 4.5 }, { min: 5, price: 4.2 },
   { min: 10, price: 3.8 }, { min: 20, price: 3.5 }, { min: 50, price: 3.2 }, { min: 100, price: 3 },
 ];
+// --- Alta visibilità Roly (mirror delle pagine hv-*.html) ---
+// Prezzo capo = listino di acquisto della TAGLIA × moltiplicatore della fascia quantità.
+// Minimo ordine 10 pz; le fasce sotto i 10 restano per sicurezza ma non sono raggiungibili.
+const HV_QTY_MULT = [
+  { min: 1, mult: 5.00 }, { min: 2, mult: 4.50 }, { min: 5, mult: 4.20 },
+  { min: 10, mult: 3.80 }, { min: 20, mult: 3.50 }, { min: 50, mult: 3.20 },
+  { min: 100, mult: 3.00 },
+];
+function hvMult(qty) { let t = HV_QTY_MULT[0]; for (const x of HV_QTY_MULT) if (qty >= x.min) t = x; return t.mult; }
+const HV_BASE = {
+  'hv-delta': {"S":4.65,"M":4.65,"L":4.65,"XL":4.65,"XXL":4.65,"XXXL":4.9,"XXXXL":5.2},
+  'hv-tauri': {"S":8.95,"M":8.95,"L":8.95,"XL":8.95,"XXL":8.95,"XXXL":9.75,"XXXXL":10},
+  'hv-vega': {"S":6.5,"M":6.5,"L":6.5,"XL":6.5,"XXL":6.5,"XXXL":6.9,"XXXXL":7.25},
+  'hv-vega-ls': {"S":8.5,"M":8.5,"L":8.5,"XL":8.5,"XXL":8.5,"XXXL":8.95,"XXXXL":9.5},
+  'hv-atrio': {"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5,"XXXXL":11},
+  'hv-atrio-ls': {"S":12.5,"M":12.5,"L":12.5,"XL":12.5,"XXL":12.5,"XXXL":13.15,"XXXXL":13.8},
+  'hv-foran': {"XS":7.95,"S":7.95,"M":7.95,"L":7.95,"XL":7.95,"XXL":7.95,"XXXL":8.35},
+  'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
+};
+function hvGarmentTotal(slug, qty, sizes) {
+  const base = HV_BASE[slug];
+  const m = hvMult(qty);
+  const unit = (s) => Math.round((base[s] || 0) * m * 100) / 100;
+  const map = sizes && typeof sizes === 'object' ? sizes : {};
+  const keys = Object.keys(base);
+  let total = 0, counted = 0;
+  for (const s of keys) {
+    const n = Math.max(0, parseInt(map[s], 10) || 0);
+    if (n) { total += n * unit(s); counted += n; }
+  }
+  // Taglie non indicate: prezzo della taglia base (mai un prezzo inferiore).
+  const rest = Math.max(0, qty - counted);
+  if (rest) total += rest * unit(keys[0]);
+  return total;
+}
+
 function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
 
 const PRICING = {
@@ -149,6 +185,62 @@ const PRICING = {
       { key: 'cuore_retro_25x32', label: 'Cuore + retro 25×32 cm', col: 'cr32' },
     ],
     coloredSurcharge: 1.1 },
+
+  'hv-delta': { nome: 'T-Shirt Alta Visibilità Delta', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-delta', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('hv-delta', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'hv-tauri': { nome: 'T-Shirt Alta Visibilità Tauri', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-tauri', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('hv-tauri', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'hv-vega': { nome: 'Polo Alta Visibilità Vega', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-vega', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('hv-vega', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'hv-vega-ls': { nome: 'Polo Alta Visibilità Vega Maniche Lunghe', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-vega-ls', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('hv-vega-ls', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'hv-atrio': { nome: 'Polo Alta Visibilità Atrio', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-atrio', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('hv-atrio', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'hv-atrio-ls': { nome: 'Polo Alta Visibilità Atrio Maniche Lunghe', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-atrio-ls', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('hv-atrio-ls', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'hv-foran': { nome: 'Polo Foran Maggiore Visibilità', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-foran', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('hv-foran', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'hv-foran-ls': { nome: 'Polo Foran L/S Maggiore Visibilità', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-foran-ls', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('hv-foran-ls', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'basica-cap': { nome: 'Cappellino Basica', type: 'cap',
     garmentUnitPrice: (qty) => pickTier(BASICA_CAP_PRICE_TIERS, qty).price,

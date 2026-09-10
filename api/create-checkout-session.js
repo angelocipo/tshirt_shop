@@ -295,8 +295,12 @@ module.exports = async (req, res) => {
         printTotal += product.areaUnitPrice(wI, hI) * product.discount(qty);
         parts.push(`retro ${W_BREAKS[wI]}×${H_BREAKS[hI]} cm`);
       }
-      const unit = product.garmentUnitPrice(qty, isWhite) + printTotal;
-      unitAmountCents = Math.round(unit * qty * 100);
+      // Alcuni prodotti (alta visibilità) hanno un prezzo capo diverso per taglia:
+      // se il listino espone garmentTotal si usa quello, altrimenti prezzo unico × quantità.
+      const garmentTotal = typeof product.garmentTotal === 'function'
+        ? product.garmentTotal(qty, f.sizes)
+        : product.garmentUnitPrice(qty, isWhite) * qty;
+      unitAmountCents = Math.round((garmentTotal + printTotal * qty) * 100);
       const color = (f.colorName || '').toString().slice(0, 40);
       // The configurator sends `sizes` as a per-size quantity map ({S:1, M:2}), not a single
       // `size` string — reading f.size always came back empty and printed the literal word
