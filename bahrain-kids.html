@@ -253,9 +253,9 @@
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 20 pcs, sizes can be mixed.">Ordine minimo: 20 pz, taglie miste ammesse.</p>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 10 pcs, sizes can be mixed.">Ordine minimo: 10 pz, taglie miste ammesse.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 20-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 20.</p>
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 10-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 10.</p>
         </sc-if>
         <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
           <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="4">
@@ -457,7 +457,7 @@ const COLORS = COLORS_ALL.filter(c => c.kids);
 const IMAGE_BY_COLOR = {};
 COLORS.forEach(c => { IMAGE_BY_COLOR[c.name] = 'img/bahrain-' + c.name.split(' ')[0] + '.webp'; });
 const DEFAULT_HERO_IMG = 'img/bahrain-kids-hero.webp';
-const MIN_QTY = 20;
+const MIN_QTY = 10;
 const SIZES = ['4', '8', '12', '16'];
 const SIZE_MEASURE = { '4': 'A 34 × B 50', '8': 'A 38 × B 55', '12': 'A 42 × B 60', '16': 'A 46 × B 65' };
 const SIZE_STOCK = {};
