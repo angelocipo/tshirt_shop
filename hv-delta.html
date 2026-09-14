@@ -172,7 +172,7 @@
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1;">
-          <img id="prod-hero" alt="T-Shirt Alta Visibilità Delta — vista frontale" src="img/hv-delta-hv9310.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          <img id="prod-hero" alt="T-Shirt Alta Visibilità Delta — vista frontale" src="img/delta-221.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
         </div>
       </div>
     </div>
@@ -432,9 +432,16 @@ const COLORS = [
   { name: '223 Arancione AV', hex: '#f5821f', cls: 'Classe II' },
   { name: '55223 Blu Navy / Arancione AV', hex: 'linear-gradient(180deg, #1e3251 0 50%, #f5821f 50% 100%)', cls: 'Classe I' },
 ];
-// Le foto per colore arrivano dopo: finché mancano, ogni colore mostra la foto di catalogo.
-const IMAGE_BY_COLOR = {};
-const DEFAULT_HERO_IMG = 'img/hv-delta-hv9310.webp';
+const IMAGE_BY_COLOR = {
+  '221 Giallo AV': 'img/delta-221.webp',
+  '223 Arancione AV': 'img/delta-223.webp',
+  '23221 Grigio / Giallo AV': 'img/delta-23221.webp',
+  '52221 Verde / Giallo AV': 'img/delta-52221.webp',
+  '55221 Blu Navy / Giallo AV': 'img/delta-55221.webp',
+  '55223 Blu Navy / Arancione AV': 'img/delta-55223.webp',
+  '601221 Rosso / Giallo AV': 'img/delta-601221.webp',
+};
+const DEFAULT_HERO_IMG = 'img/delta-221.webp';
 const MIN_QTY = 10;
 const SIZES = ["S","M","L","XL","XXL","XXXL","XXXXL"];
 const SIZE_MEASURE = {"S":"A 48 × B 71","M":"A 51 × B 72","L":"A 54 × B 73","XL":"A 58 × B 75","XXL":"A 62 × B 77","XXXL":"A 66 × B 79","XXXXL":"A 70 × B 81"};
@@ -619,9 +626,7 @@ class Component extends DCLogic {
     });
     const totalQty = sizes.reduce((n, x) => n + x.qty, 0);
     sizes.forEach(x => {
-      const m = SIZE_MEASURE[x.label] ? SIZE_MEASURE[x.label] + ' cm · ' : '';
-      // A quantità 0 si mostra il prezzo del minimo ordinabile (10 pz), non quello del pezzo singolo.
-      x.measure = m + this.fmt(sizeUnitPrice(x.label, totalQty || MIN_QTY));
+      x.measure = SIZE_MEASURE[x.label] ? SIZE_MEASURE[x.label] + ' cm' : '';
     });
     const zonePrice = (key) => {
       if (key === 'cuore') return cuoreUnitPrice(totalQty);
