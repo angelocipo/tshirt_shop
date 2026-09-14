@@ -45,9 +45,13 @@ const STAR_POLO_PRICE_TIERS = [
   { min: 1, price: 9 }, { min: 2, price: 8.5 }, { min: 5, price: 8 },
   { min: 10, price: 7.5 }, { min: 20, price: 7 }, { min: 50, price: 6.5 }, { min: 100, price: 5.95 },
 ];
+const RUDOLPH_PRICE_TIERS = [
+  { min: 1, price: 25 }, { min: 2, price: 24.5 }, { min: 5, price: 24 },
+  { min: 10, price: 23.5 }, { min: 20, price: 23 }, { min: 50, price: 22.5 }, { min: 100, price: 22 },
+];
 const NEBRASKA_PRICE_TIERS = [
-  { min: 1, price: 29 }, { min: 2, price: 28 }, { min: 5, price: 27 },
-  { min: 10, price: 26 }, { min: 20, price: 25 }, { min: 50, price: 24 }, { min: 100, price: 23 },
+  { min: 1, price: 24 }, { min: 2, price: 23.5 }, { min: 5, price: 23 },
+  { min: 10, price: 22.5 }, { min: 20, price: 22 }, { min: 50, price: 21.5 }, { min: 100, price: 21 },
 ];
 // Cappellino Basica — capo e stampa fronte 12×8, prezzi IVA compresa. Minimo ordine 10 pz
 // (le fasce sotto i 10 pz restano per sicurezza ma non sono raggiungibili dal configuratore).
@@ -126,6 +130,13 @@ const PRICING = {
   // Giubbotto Nebraska — listino capi (tabella 1-2, unico per tutti i colori); stampa = tariffe DTF t-shirt.
   'nebraska': { nome: 'Giubbotto Nebraska', type: 'tshirt',
     garmentUnitPrice: (qty) => pickTier(NEBRASKA_PRICE_TIERS, qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Giubbotto Rudolph — listino capi (unico per tutti i colori); stampa = tariffe DTF t-shirt.
+  'rudolph': { nome: 'Giubbotto Rudolph', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(RUDOLPH_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
