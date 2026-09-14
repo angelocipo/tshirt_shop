@@ -35,6 +35,7 @@
           { it: 'Atomic — in arrivo', en: 'Atomic — coming soon' },
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-uomo.html', sub: [
+          { it: 'Polo Prince', en: 'Prince Polo', href: 'prince-polo.html' },
           { it: 'Polo Austral', en: 'Austral Polo', href: 'austral-polo.html' },
           { it: 'Polo Star', en: 'Star Polo', href: 'star-polo.html' },
         ] },
@@ -49,6 +50,7 @@
           { it: 'Maglietta Tecnica Bahrain Donna', en: "Bahrain Women's Technical T-Shirt", href: 'bahrain-donna.html' },
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-donna.html', sub: [
+          { it: 'Polo Prince Woman', en: "Prince Women's Polo", href: 'prince-donna.html' },
           { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'star-polo-donna.html' },
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html', sub: [
