@@ -108,8 +108,16 @@ const CAMICIE_QTY_MULT = [
   { min: 100, mult: 2.00 },
 ];
 const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna'];
+// Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
+const POLO_QTY_MULT = [
+  { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
+  { min: 10, mult: 1.85 }, { min: 20, mult: 1.70 }, { min: 50, mult: 1.57 },
+  { min: 100, mult: 1.50 },
+];
+const POLO_SLUGS = ['prince-polo', 'prince-donna'];
 function slugMult(slug, qty) {
-  const tiers = CAMICIE_SLUGS.includes(slug) ? CAMICIE_QTY_MULT : HV_QTY_MULT;
+  const tiers = CAMICIE_SLUGS.includes(slug) ? CAMICIE_QTY_MULT
+    : POLO_SLUGS.includes(slug) ? POLO_QTY_MULT : HV_QTY_MULT;
   let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t.mult;
 }
 function hvGarmentTotal(slug, qty, sizes) {
@@ -270,14 +278,14 @@ const PRICING = {
 
   'prince-donna': { nome: 'Polo da Donna Prince Woman', type: 'tshirt',
     garmentTotal: (qty, sizes) => hvGarmentTotal('prince-donna', qty, sizes),
-    garmentUnitPrice: (qty) => hvGarmentTotal('prince-donna', 1, null) * hvMult(qty) / hvMult(1),
+    garmentUnitPrice: (qty) => hvGarmentTotal('prince-donna', 1, null) * slugMult('prince-donna', qty) / slugMult('prince-donna', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'prince-polo': { nome: 'Polo da Uomo Prince', type: 'tshirt',
     garmentTotal: (qty, sizes) => hvGarmentTotal('prince-polo', qty, sizes),
-    garmentUnitPrice: (qty) => hvGarmentTotal('prince-polo', 1, null) * hvMult(qty) / hvMult(1),
+    garmentUnitPrice: (qty) => hvGarmentTotal('prince-polo', 1, null) * slugMult('prince-polo', qty) / slugMult('prince-polo', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
