@@ -99,6 +99,9 @@ const HV_BASE = {
   'moscu-donna': {"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":9.95},
   'hv-polaris': {"S":4.95,"M":4.95,"L":4.95,"XL":4.95,"XXL":4.95,"XXXL":5.5,"XXXXL":5.95},
   'hv-foran': {"XS":7.95,"S":7.95,"M":7.95,"L":7.95,"XL":7.95,"XXL":7.95,"XXXL":8.35},
+  'serena': {"S":9.25,"M":9.25,"L":9.25,"XL":9.25,"XXL":9.25},
+  'murray': {"S":8.65,"M":8.65,"L":8.65,"XL":8.65,"XXL":8.65},
+  'monzha': {"S":2.95,"M":2.95,"L":2.95,"XL":2.95,"XXL":2.95,"XXXL":3.41},
   'tormo': {"S":3.75,"M":3.75,"L":3.75,"XL":3.75,"XXL":3.75,"XXXL":3.95},
   'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
 };
@@ -108,7 +111,7 @@ const CAMICIE_QTY_MULT = [
   { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
   { min: 100, mult: 2.00 },
 ];
-const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo'];
+const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha'];
 // Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
 const POLO_QTY_MULT = [
   { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
@@ -357,6 +360,29 @@ const PRICING = {
   'hv-foran': { nome: 'Polo Foran Maggiore Visibilità', type: 'tshirt',
     garmentTotal: (qty, sizes) => hvGarmentTotal('hv-foran', qty, sizes),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-foran', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Polo sport Monzha (Roly PO0404) — moltiplicatore 3: 3,00 → 2,00.
+  'monzha': { nome: 'Polo Sport Monzha', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('monzha', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('monzha', 1, null) * slugMult('monzha', qty) / slugMult('monzha', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Gonna sport Serena (Roly PA0307) e short sport Murray (Roly PA0306) — moltiplicatore 3: 3,00 → 2,00.
+  'serena': { nome: 'Gonna Sport Serena', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('serena', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('serena', 1, null) * slugMult('serena', qty) / slugMult('serena', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'murray': { nome: 'Short Sport Murray', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('murray', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('murray', 1, null) * slugMult('murray', qty) / slugMult('murray', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
