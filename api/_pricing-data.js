@@ -132,6 +132,13 @@ function hvGarmentTotal(slug, qty, sizes) {
 function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
 
 const PRICING = {
+  // Solo stampa — il capo lo fornisce il cliente: nessun costo capo, solo tariffe DTF. Minimo 10 pz.
+  'solo-stampa': { nome: 'Solo Stampa DTF', type: 'tshirt',
+    garmentUnitPrice: () => 0,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
   'tshirt': { nome: 'Maglietta Unisex 24H', type: 'tshirt',
     garmentUnitPrice: (qty, isWhite) => { const t = pickTier(TSHIRT_PRICE_TIERS, qty); return isWhite ? t.white : t.other; },
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
