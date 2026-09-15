@@ -101,6 +101,8 @@ const HV_BASE = {
   'hv-foran': {"XS":7.95,"S":7.95,"M":7.95,"L":7.95,"XL":7.95,"XXL":7.95,"XXXL":8.35},
   'serena': {"S":9.25,"M":9.25,"L":9.25,"XL":9.25,"XXL":9.25},
   'murray': {"S":8.65,"M":8.65,"L":8.65,"XL":8.65,"XXL":8.65},
+  'slam-donna': {"S":2.6,"M":2.6,"L":2.6,"XL":2.6,"XXL":2.6},
+  'slam': {"S":2.6,"M":2.6,"L":2.6,"XL":2.6,"XXL":2.6,"XXXL":2.8},
   'monzha': {"S":2.95,"M":2.95,"L":2.95,"XL":2.95,"XXL":2.95,"XXXL":3.41},
   'tormo': {"S":3.75,"M":3.75,"L":3.75,"XL":3.75,"XXL":3.75,"XXXL":3.95},
   'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
@@ -111,7 +113,7 @@ const CAMICIE_QTY_MULT = [
   { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
   { min: 100, mult: 2.00 },
 ];
-const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha'];
+const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna'];
 // Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
 const POLO_QTY_MULT = [
   { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
@@ -360,6 +362,21 @@ const PRICING = {
   'hv-foran': { nome: 'Polo Foran Maggiore Visibilità', type: 'tshirt',
     garmentTotal: (qty, sizes) => hvGarmentTotal('hv-foran', qty, sizes),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-foran', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'slam-donna': { nome: 'T-Shirt Tecnica Slam Woman', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('slam-donna', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('slam-donna', 1, null) * slugMult('slam-donna', qty) / slugMult('slam-donna', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // T-shirt tecnica Slam (Roly CA0304) — moltiplicatore 3: 3,00 → 2,00.
+  'slam': { nome: 'T-Shirt Tecnica Slam', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('slam', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('slam', 1, null) * slugMult('slam', qty) / slugMult('slam', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
