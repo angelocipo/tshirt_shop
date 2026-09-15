@@ -53,7 +53,7 @@ const NEBRASKA_PRICE_TIERS = [
   { min: 1, price: 24 }, { min: 2, price: 23.5 }, { min: 5, price: 23 },
   { min: 10, price: 22.5 }, { min: 20, price: 22 }, { min: 50, price: 21.5 }, { min: 100, price: 21 },
 ];
-// Cappellino Basica — capo e stampa fronte 12×8, prezzi IVA compresa. Minimo ordine 10 pz
+// Cappellino Basica — capo e stampa fronte 12×8, prezzi IVA compresa. Minimo ordine 5 pz
 // (le fasce sotto i 10 pz restano per sicurezza ma non sono raggiungibili dal configuratore).
 const BASICA_CAP_PRICE_TIERS = [
   { min: 1, price: 5 }, { min: 5, price: 4 }, { min: 10, price: 3.1 },
@@ -73,7 +73,7 @@ const BASICA_CAP_PRINT_TIERS = [
 ];
 // --- Alta visibilità Roly (mirror delle pagine hv-*.html) ---
 // Prezzo capo = listino di acquisto della TAGLIA × moltiplicatore della fascia quantità.
-// Minimo ordine 10 pz; le fasce sotto i 10 restano per sicurezza ma non sono raggiungibili.
+// Minimo ordine 5 pz; le fasce sotto i 10 restano per sicurezza ma non sono raggiungibili.
 const HV_QTY_MULT = [
   { min: 1, mult: 5.00 }, { min: 2, mult: 4.50 }, { min: 5, mult: 4.20 },
   { min: 10, mult: 3.80 }, { min: 20, mult: 3.50 }, { min: 50, mult: 3.20 },
@@ -132,7 +132,7 @@ function hvGarmentTotal(slug, qty, sizes) {
 function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
 
 const PRICING = {
-  // Solo stampa — il capo lo fornisce il cliente: nessun costo capo, solo tariffe DTF. Minimo 10 pz.
+  // Solo stampa — il capo lo fornisce il cliente: nessun costo capo, solo tariffe DTF. Minimo 5 pz.
   'solo-stampa': { nome: 'Solo Stampa DTF', type: 'tshirt',
     garmentUnitPrice: () => 0,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
