@@ -110,8 +110,8 @@
           { it: 'Cappellino Karin (sportivo)', en: 'Karin Sports Cap', href: 'cappellini-karin.html' },
         ] },
       ] },
+      { it: 'Solo stampa', en: 'Print only', href: 'solo-stampa.html' },
       { it: 'Esempi', en: 'Examples', href: 'esempi.html' },
-      { it: 'Contatti', en: 'Contact', href: 'contattateci.html' },
     ],
   };
 
