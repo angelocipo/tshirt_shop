@@ -36,6 +36,7 @@
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-uomo.html', sub: [
           { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
+          { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
           { it: 'Polo Prince', en: 'Prince Polo', href: 'prince-polo.html' },
           { it: 'Polo Austral', en: 'Austral Polo', href: 'austral-polo.html' },
           { it: 'Polo Star', en: 'Star Polo', href: 'star-polo.html' },
@@ -48,6 +49,12 @@
         { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici-uomo.html', sub: [
           { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
         ] },
+        { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
+          { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
+          { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
+          { it: 'Short Sport Murray', en: 'Murray Sports Shorts', href: 'murray.html' },
+          { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
+        ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html', sub: [
           { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.html' },
           { it: 'Giubbotto Rudolph', en: 'Rudolph Softshell', href: 'rudolph.html' },
@@ -59,7 +66,6 @@
           { it: 'Maglietta Tecnica Bahrain Donna', en: "Bahrain Women's Technical T-Shirt", href: 'bahrain-donna.html' },
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-donna.html', sub: [
-          { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
           { it: 'Polo Prince Woman', en: "Prince Women's Polo", href: 'prince-donna.html' },
           { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'star-polo-donna.html' },
         ] },
@@ -71,6 +77,10 @@
         { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html', sub: [
           { it: 'Camice Vaccine donna', en: 'Vaccine Woman Lab Coat', href: 'vaccine-donna.html' },
           { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
+        ] },
+        { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
+          { it: 'Gonna Sport Serena', en: 'Serena Sports Skirt', href: 'serena.html' },
+          { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html', sub: [
           { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.html' },
@@ -90,9 +100,21 @@
         ] },
       ] },
       { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
-        { it: 'Polo', en: 'Polo', href: 'sport.html', sub: [
+        { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
+        { it: 'Polo tecniche', en: 'Technical polos', href: 'sport.html#polo', sub: [
           { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
+          { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
         ] },
+        { it: 'T-shirt tecniche', en: 'Technical T-shirts', href: 'sport.html#tshirt' },
+        { it: 'Shorts e gonne sport', en: 'Sports shorts and skirts', href: 'sport.html#shorts', sub: [
+          { it: 'Short Sport Murray', en: 'Murray Sports Shorts', href: 'murray.html' },
+          { it: 'Gonna Sport Serena', en: 'Serena Sports Skirt', href: 'serena.html' },
+        ] },
+        { it: 'Canotte e top', en: 'Vests and tops', href: 'sport.html#canotte' },
+        { it: 'Leggings', en: 'Leggings', href: 'sport.html#leggings' },
+        { it: 'Pantaloni e tute', en: 'Trousers and tracksuits', href: 'sport.html#pantaloni' },
+        { it: 'Felpe e giacche', en: 'Sweatshirts and jackets', href: 'sport.html#felpe' },
+        { it: 'Completi calcio', en: 'Football kits', href: 'sport.html#calcio' },
       ] },
       { it: 'Lavoro', en: 'Workwear', href: 'alta-visibilita.html', sub: [
         { it: 'Alta visibilità', en: 'High visibility', href: 'alta-visibilita.html' },
