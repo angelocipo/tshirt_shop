@@ -99,6 +99,7 @@ const HV_BASE = {
   'moscu-donna': {"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":9.95},
   'hv-polaris': {"S":4.95,"M":4.95,"L":4.95,"XL":4.95,"XXL":4.95,"XXXL":5.5,"XXXXL":5.95},
   'hv-foran': {"XS":7.95,"S":7.95,"M":7.95,"L":7.95,"XL":7.95,"XXL":7.95,"XXXL":8.35},
+  'tormo': {"S":3.75,"M":3.75,"L":3.75,"XL":3.75,"XXL":3.75,"XXXL":3.95},
   'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
 };
 // Le camicie hanno una scala moltiplicatore propria (più bassa): 3,00 a 1 pz → 2,00 da 100 pz.
@@ -107,7 +108,7 @@ const CAMICIE_QTY_MULT = [
   { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
   { min: 100, mult: 2.00 },
 ];
-const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna'];
+const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo'];
 // Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
 const POLO_QTY_MULT = [
   { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
@@ -356,6 +357,14 @@ const PRICING = {
   'hv-foran': { nome: 'Polo Foran Maggiore Visibilità', type: 'tshirt',
     garmentTotal: (qty, sizes) => hvGarmentTotal('hv-foran', qty, sizes),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-foran', 1, null) * hvMult(qty) / hvMult(1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Polo sport Tormo (Roly PO0400) — scala moltiplicatore 3: 3,00 a 1 pz → 2,00 da 100 pz.
+  'tormo': { nome: 'Polo Sport Tormo', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('tormo', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('tormo', 1, null) * slugMult('tormo', qty) / slugMult('tormo', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
