@@ -39,6 +39,14 @@
           { it: 'Polo Austral', en: 'Austral Polo', href: 'austral-polo.html' },
           { it: 'Polo Star', en: 'Star Polo', href: 'star-polo.html' },
         ] },
+        { it: 'Camicie', en: 'Shirts', href: 'camicie-uomo.html', sub: [
+          { it: 'Camicia Aifos manica lunga', en: 'Aifos L/S Shirt', href: 'aifos-ls.html' },
+          { it: 'Camicia Moscu cotone', en: 'Moscu Cotton Shirt', href: 'moscu.html' },
+          { it: 'Camicia Aifos manica corta', en: 'Aifos S/S Shirt', href: 'aifos.html' },
+        ] },
+        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici-uomo.html', sub: [
+          { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
+        ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html', sub: [
           { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.html' },
           { it: 'Giubbotto Rudolph', en: 'Rudolph Softshell', href: 'rudolph.html' },
@@ -52,6 +60,15 @@
         { it: 'Polo', en: 'Polo', href: 'polo-donna.html', sub: [
           { it: 'Polo Prince Woman', en: "Prince Women's Polo", href: 'prince-donna.html' },
           { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'star-polo-donna.html' },
+        ] },
+        { it: 'Camicie', en: 'Shirts', href: 'camicie-donna.html', sub: [
+          { it: 'Camicia Sofia manica corta', en: 'Sofia S/S Shirt', href: 'sofia.html' },
+          { it: 'Camicia Sofia manica lunga', en: 'Sofia L/S Shirt', href: 'sofia-ls.html' },
+          { it: 'Camicia Moscu donna manica lunga', en: 'Moscu Woman L/S Shirt', href: 'moscu-donna.html' },
+        ] },
+        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html', sub: [
+          { it: 'Camice Vaccine donna', en: 'Vaccine Woman Lab Coat', href: 'vaccine-donna.html' },
+          { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html', sub: [
           { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.html' },
@@ -72,8 +89,17 @@
       ] },
       { it: 'Lavoro', en: 'Workwear', href: 'alta-visibilita.html', sub: [
         { it: 'Alta visibilità', en: 'High visibility', href: 'alta-visibilita.html' },
-        { it: 'Camici', en: 'Lab coats', sub: [
-          { it: 'Camice Vaccine — in arrivo', en: 'Vaccine Lab Coat — coming soon' },
+        { it: 'Camicie', en: 'Shirts', href: 'camicie.html', sub: [
+          { it: 'Camicia Aifos manica lunga', en: 'Aifos L/S Shirt', href: 'aifos-ls.html' },
+          { it: 'Camicia Moscu cotone', en: 'Moscu Cotton Shirt', href: 'moscu.html' },
+          { it: 'Camicia Sofia donna manica corta', en: 'Sofia Women\'s S/S Shirt', href: 'sofia.html' },
+          { it: 'Camicia Sofia donna manica lunga', en: 'Sofia Women\'s L/S Shirt', href: 'sofia-ls.html' },
+          { it: 'Camicia Moscu donna manica lunga', en: 'Moscu Woman L/S Shirt', href: 'moscu-donna.html' },
+          { it: 'Camicia Aifos manica corta', en: 'Aifos S/S Shirt', href: 'aifos.html' },
+        ] },
+        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html', sub: [
+          { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
+          { it: 'Camice Vaccine donna', en: 'Vaccine Woman Lab Coat', href: 'vaccine-donna.html' },
         ] },
       ] },
       { it: 'Gadget', en: 'Gadgets', href: 'cappellini.html', sub: [
