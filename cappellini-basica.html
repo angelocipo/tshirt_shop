@@ -15,7 +15,7 @@
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <title>Cappellini Personalizzati Basica | Tshirt Shop Online</title>
-  <meta name="description" content="Cappellino Basica personalizzato: 5 pannelli, 95% poliestere, 10 colori, taglia unica con chiusura in velcro. Stampa fronte 12×8 cm, minimo 10 pz, prodotto a Roma.">
+  <meta name="description" content="Cappellino Basica personalizzato: 5 pannelli, 95% poliestere, 10 colori, taglia unica con chiusura in velcro. Stampa fronte 12×8 cm, minimo 5 pz, prodotto a Roma.">
   <link rel="canonical" href="https://www.tshirt-shop.online/cappellini-basica.html">
   <meta property="og:url" content="https://www.tshirt-shop.online/cappellini-basica.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
@@ -181,9 +181,9 @@
     <div class="col-mid">
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Quantity">Quantità</span> — {{ quantity }} <span data-en="pcs">pz</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 10 pcs, one size fits all.">Ordine minimo: 10 pz, taglia unica regolabile in velcro.</p>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, one size fits all.">Ordine minimo: 5 pz, taglia unica regolabile in velcro.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 10-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 10.</p>
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 10.</p>
         </sc-if>
         <div class="qty-group" style="margin-bottom: var(--space-2);">
           <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
@@ -368,7 +368,7 @@ const COLORS = [
   { name: '226 Verde Felce', hex: '#27a53a', img: 'img/basica-226-verde-felce.webp' },
 ];
 const DEFAULT_HERO_IMG = 'img/basica-hero.webp';
-const MIN_QTY = 10;
+const MIN_QTY = 5;
 // Prezzi IVA compresa (listino Basica). Ogni modifica va replicata in api/_pricing-data.js.
 const CAP_PRICE_TIERS = [
   { min: 1, price: 5 }, { min: 5, price: 4 }, { min: 10, price: 3.1 },

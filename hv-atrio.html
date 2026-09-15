@@ -252,9 +252,9 @@
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 10 pcs, sizes can be mixed.">Ordine minimo: 10 pz, taglie miste ammesse.</p>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, sizes can be mixed.">Ordine minimo: 5 pz, taglie miste ammesse.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 10-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 10.</p>
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 10.</p>
         </sc-if>
         <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
           <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
@@ -443,7 +443,7 @@ const IMAGE_BY_COLOR = {
   '601221 Rosso / Giallo AV': 'img/atrio-601221.webp',
 };
 const DEFAULT_HERO_IMG = 'img/atrio-221.webp';
-const MIN_QTY = 10;
+const MIN_QTY = 5;
 const SIZES = ["S","M","L","XL","XXL","XXXL","XXXXL"];
 const SIZE_MEASURE = {"S":"A 51 × B 69","M":"A 54 × B 71","L":"A 57 × B 73","XL":"A 60 × B 75","XXL":"A 64 × B 77","XXXL":"A 68 × B 79","XXXXL":"A 72 × B 80"};
 // Listino Roly HV9318 per taglia (prezzo di acquisto) × moltiplicatore della fascia quantità.

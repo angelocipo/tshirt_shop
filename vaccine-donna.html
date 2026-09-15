@@ -252,9 +252,9 @@
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 10 pcs, sizes can be mixed.">Ordine minimo: 10 pz, taglie miste ammesse.</p>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, sizes can be mixed.">Ordine minimo: 5 pz, taglie miste ammesse.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 10-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 10.</p>
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 10.</p>
         </sc-if>
         <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
           <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
@@ -439,7 +439,7 @@ const IMAGE_BY_COLOR = {
   '17 Verde': 'img/vaccine-donna-17.webp',
 };
 const DEFAULT_HERO_IMG = 'img/vaccine-donna-hero.webp';
-const MIN_QTY = 10;
+const MIN_QTY = 5;
 const SIZES = ["XS","S","M","L","XL","XXL"];
 const SIZE_MEASURE = {"XS":"A 48 × B 93","S":"A 51 × B 95","M":"A 54 × B 97","L":"A 57 × B 99","XL":"A 60 × B 101","XXL":"A 63 × B 103"};
 // Listino Roly BA9093 per taglia (prezzo di acquisto) × moltiplicatore della fascia quantità.
