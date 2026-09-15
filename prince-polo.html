@@ -449,12 +449,13 @@ const MIN_QTY = 5;
 const SIZES = ["S","M","L","XL","XXL","XXXL"];
 const SIZE_MEASURE = {"S":"A 51 × B 70","M":"A 54 × B 72","L":"A 57 × B 74","XL":"A 60 × B 76","XXL":"A 64 × B 79","XXXL":"A 67 × B 82"};
 // Listino Roly PO6617 per taglia (prezzo di acquisto) × moltiplicatore della fascia quantità.
+// Scala polo allineata ad Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
 // Ogni modifica va replicata in api/_pricing-data.js (validazione server).
 const BASE_PRICE = {"S":4.9,"M":4.9,"L":4.9,"XL":4.9,"XXL":4.9,"XXXL":5.9};
 const QTY_MULT = [
-  { min: 1, mult: 5.00 }, { min: 2, mult: 4.50 }, { min: 5, mult: 4.20 },
-  { min: 10, mult: 3.80 }, { min: 20, mult: 3.50 }, { min: 50, mult: 3.20 },
-  { min: 100, mult: 3.00 },
+  { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
+  { min: 10, mult: 1.85 }, { min: 20, mult: 1.70 }, { min: 50, mult: 1.57 },
+  { min: 100, mult: 1.50 },
 ];
 function qtyMult(qty) { let t = QTY_MULT[0]; for (const x of QTY_MULT) if (qty >= x.min) t = x; return t.mult; }
 function sizeUnitPrice(size, qty) { return Math.round((BASE_PRICE[size] || 0) * qtyMult(qty) * 100) / 100; }
