@@ -30,6 +30,7 @@
       ] },
       { it: 'Uomo', en: 'Men', href: 'uomo.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-uomo.html', sub: [
+          { it: 'T-Shirt Tecnica Slam', en: 'Slam Technical T-Shirt', href: 'slam.html' },
           { it: 'Maglietta Beagle', en: 'Beagle T-Shirt', href: 'beagle.html' },
           { it: 'Maglietta Tecnica Bahrain', en: 'Bahrain Technical T-Shirt', href: 'bahrain.html' },
           { it: 'Atomic — in arrivo', en: 'Atomic — coming soon' },
@@ -50,6 +51,7 @@
           { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
         ] },
         { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
+          { it: 'T-Shirt Tecnica Slam', en: 'Slam Technical T-Shirt', href: 'slam.html' },
           { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
           { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
           { it: 'Short Sport Murray', en: 'Murray Sports Shorts', href: 'murray.html' },
@@ -62,6 +64,7 @@
       ] },
       { it: 'Donna', en: 'Women', href: 'donna.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.html', sub: [
+          { it: 'T-Shirt Slam Woman', en: 'Slam Woman T-Shirt', href: 'slam-donna.html' },
           { it: 'Maglietta Jamaica Donna', en: "Jamaica Women's T-Shirt", href: 'jamaica.html' },
           { it: 'Maglietta Tecnica Bahrain Donna', en: "Bahrain Women's Technical T-Shirt", href: 'bahrain-donna.html' },
         ] },
@@ -79,6 +82,7 @@
           { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
         ] },
         { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
+          { it: 'T-Shirt Slam Woman', en: 'Slam Woman T-Shirt', href: 'slam-donna.html' },
           { it: 'Gonna Sport Serena', en: 'Serena Sports Skirt', href: 'serena.html' },
           { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
         ] },
@@ -105,7 +109,10 @@
           { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
           { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
         ] },
-        { it: 'T-shirt tecniche', en: 'Technical T-shirts', href: 'sport.html#tshirt' },
+        { it: 'T-shirt tecniche', en: 'Technical T-shirts', href: 'sport.html#tshirt', sub: [
+          { it: 'T-Shirt Tecnica Slam', en: 'Slam Technical T-Shirt', href: 'slam.html' },
+          { it: 'T-Shirt Slam Woman', en: 'Slam Woman T-Shirt', href: 'slam-donna.html' },
+        ] },
         { it: 'Shorts e gonne sport', en: 'Sports shorts and skirts', href: 'sport.html#shorts', sub: [
           { it: 'Short Sport Murray', en: 'Murray Sports Shorts', href: 'murray.html' },
           { it: 'Gonna Sport Serena', en: 'Serena Sports Skirt', href: 'serena.html' },
