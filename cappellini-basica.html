@@ -183,7 +183,7 @@
         <div class="field"><label><span data-en="Quantity">Quantità</span> — {{ quantity }} <span data-en="pcs">pz</span></label></div>
         <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, one size fits all.">Ordine minimo: 5 pz, taglia unica regolabile in velcro.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 10.</p>
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
         </sc-if>
         <div class="qty-group" style="margin-bottom: var(--space-2);">
           <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>

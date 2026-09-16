@@ -248,6 +248,10 @@
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, sizes can be mixed.">Ordine minimo: 5 pz, taglie miste ammesse.</p>
+        <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
+        </sc-if>
         <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
           <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
             <div class="size-row">
@@ -431,6 +435,7 @@ const COLORS = [
   { name: '60 Rosso', hex: '#da0b34', group: '24h' },
   { name: '78 Rosa Orchidea', hex: '#d9106c', group: '24h' },
 ];
+const MIN_QTY = 5;
 const SIZES = ['1/2', '3/4', '5/6', '7/8', '9/10', '11/12'];
 const SIZE_MEASURE = { '1/2': 'A 30 × B 39,5', '3/4': 'A 32 × B 42,5', '5/6': 'A 34 × B 45,5', '7/8': 'A 36 × B 48,5', '9/10': 'A 38 × B 51,5', '11/12': 'A 40 × B 54,5' };
 const PRICE_TIERS = [
@@ -715,6 +720,8 @@ class Component extends DCLogic {
       retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
       selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
+      belowMin: totalQty > 0 && totalQty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - totalQty),
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(totalQty > 0 ? garmentPrice : 0),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
@@ -723,6 +730,7 @@ class Component extends DCLogic {
       checkout: () => {
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
+        if (totalQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces, sizes can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi, anche in taglie miste.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneNames = {

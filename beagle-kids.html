@@ -245,6 +245,10 @@
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, sizes can be mixed.">Ordine minimo: 5 pz, taglie miste ammesse.</p>
+        <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
+        </sc-if>
         <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
           <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
             <div class="size-row">
@@ -465,6 +469,7 @@ const IMAGE_BY_COLOR = {
   '481 Silk Pink': 'img/p_6554_481_1_1.webp',
   '711 Iris Purple': 'img/p_6554_711_1_1.webp',
 };
+const MIN_QTY = 5;
 const SIZES = ['1/2', '3/4', '5/6', '7/8', '9/10', '11/12'];
 const SIZE_MEASURE = { '1/2': 'A 29 × B 39', '3/4': 'A 32 × B 43', '5/6': 'A 35 × B 47', '7/8': 'A 38 × B 51', '9/10': 'A 41 × B 55', '11/12': 'A 44 × B 59' };
 const SIZE_STOCK = { '1/2': 100, '3/4': 100, '5/6': 100, '7/8': 100, '9/10': 100, '11/12': 100 };
@@ -732,6 +737,8 @@ class Component extends DCLogic {
       retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
       selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
+      belowMin: totalQty > 0 && totalQty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - totalQty),
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(totalQty > 0 ? garmentPrice : 0),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
@@ -740,6 +747,7 @@ class Component extends DCLogic {
       checkout: () => {
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
+        if (totalQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces, sizes can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi, anche in taglie miste.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneNames = {
