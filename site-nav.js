@@ -24,8 +24,8 @@
     whatsapp: { href: 'https://api.whatsapp.com/send/?phone=393396021366', it: 'Preventivo WhatsApp', en: 'Quote on WhatsApp' },
     items: [
       { it: 'PROMO', en: 'Promo', href: 'promozioni.html', accent: true, sub: [
-        { it: 'Tutte le promozioni', en: 'All promotions', href: 'promozioni.html' },
         { it: '100 Magliette + Stampa', en: '100 T-Shirts + Printing', href: 'promozione-100-magliette.html' },
+        { it: 'Maglietta Unisex 24H', en: 'Unisex T-Shirt 24H', href: 'beagle.html' },
         { it: 'Altre offerte in arrivo', en: 'More offers coming soon' },
       ] },
       { it: 'Uomo', en: 'Men', href: 'uomo.html', sub: [
