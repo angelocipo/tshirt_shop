@@ -105,7 +105,7 @@
         { it: 'Polo', en: 'Polo', href: 'polo-bambino.html', sub: [
           { it: 'Polo Star Bambino', en: 'Star Kids Polo', href: 'star-polo-kids.html' },
         ] },
-        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
+        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe-bambino.html', sub: [
           { it: 'Felpa Badet Bambino', en: 'Badet Kids Sweatshirt', href: 'felpa-badet-kids.html' },
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-kids.html', sub: [
