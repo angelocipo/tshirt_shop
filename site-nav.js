@@ -59,6 +59,7 @@
         ] },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
           { it: 'Felpa Badet', en: 'Badet Sweatshirt', href: 'felpa-badet.html' },
+          { it: 'Felpa Urban', en: 'Urban Sweatshirt', href: 'felpa-urban.html' },
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html', sub: [
           { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.html' },
@@ -91,6 +92,7 @@
         ] },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
           { it: 'Felpa Badet', en: 'Badet Sweatshirt', href: 'felpa-badet.html' },
+          { it: 'Felpa Urban', en: 'Urban Sweatshirt', href: 'felpa-urban.html' },
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html', sub: [
           { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.html' },
@@ -107,6 +109,7 @@
         ] },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe-bambino.html', sub: [
           { it: 'Felpa Badet Bambino', en: 'Badet Kids Sweatshirt', href: 'felpa-badet-kids.html' },
+          { it: 'Felpa Urban Bambino', en: 'Urban Kids Sweatshirt', href: 'felpa-urban-kids.html' },
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-kids.html', sub: [
           { it: 'Giubbotto Nebraska Bambino', en: 'Nebraska Kids Softshell', href: 'nebraska-kids.html' },
