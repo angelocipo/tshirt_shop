@@ -22,22 +22,17 @@
       'border: 1px solid var(--color-divider); background: var(--color-surface); z-index: 70;' +
     '}' +
     'nav.nav .nav-drop:not(.nav-open) > .nav-sub { display: none !important; }' +
-    'nav.nav .nav-sub .nav-drop:not(.nav-open) > .nav-sub-2 { display: none !important; }' +
-    'nav.nav .nav-sub .nav-drop.nav-open > .nav-sub-2 {' +
-      'display: flex !important; flex-direction: column !important; position: static !important;' +
-      'top: auto !important; left: auto !important; width: auto !important; min-width: 0 !important;' +
-      'height: auto !important; margin: 0 0 3px 10px; border: 0; border-left: 2px solid var(--color-accent, #ec3013); background: transparent;' +
-    '}' +
-    'nav.nav .nav-sub, nav.nav .nav-sub-2 { padding: 1px 0; }' +
+    'nav.nav .nav-sub-2 { display: none !important; }' +
+    'nav.nav .nav-sub, nav.nav .nav-sub-2 { padding: 5px 0; }' +
     'nav.nav .nav-sub > a, nav.nav .nav-sub > span,' +
     'nav.nav .nav-sub-2 > a, nav.nav .nav-sub-2 > span {' +
       'white-space: nowrap; min-height: 0 !important; height: auto !important; display: flex; align-items: center;' +
       'justify-content: center; text-align: center;' +
-      'padding: 1px 12px !important; font-size: 13px; line-height: 1.05;' +
+      'padding: 7px 14px !important; font-size: 13px; line-height: 1.25;' +
     '}' +
     'nav.nav .btn-primary { margin-top: 18px; }' +
     'nav.nav .nav-sub .nav-drop { display: block !important; width: auto; }' +
-    'nav.nav .nav-sub .nav-drop > a { min-height: 0 !important; padding: 1px 12px !important; justify-content: center; text-align: center; }' +
+    'nav.nav .nav-sub .nav-drop > a { min-height: 0 !important; padding: 7px 14px !important; justify-content: center; text-align: center; }' +
     '}';
 
   var style = document.createElement('style');
@@ -55,7 +50,9 @@
     if (!link) return;
     var drop = link.parentElement;
     if (!drop || !drop.classList.contains('nav-drop')) return;
-    if (!drop.querySelector('.nav-sub, .nav-sub-2')) return;
+    // only top-level items expand; second-level items (Polo, Camicie…) just follow their link
+    if (!drop.parentElement || !drop.parentElement.classList.contains('nav')) return;
+    if (!drop.querySelector('.nav-sub')) return;
     if (drop.classList.contains('nav-open')) return; // second tap follows the link
 
     e.preventDefault();
