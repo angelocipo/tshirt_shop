@@ -57,6 +57,9 @@
           { it: 'Short Sport Murray', en: 'Murray Sports Shorts', href: 'murray.html' },
           { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
         ] },
+        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
+          { it: 'Felpa Badet', en: 'Badet Sweatshirt', href: 'felpa-badet.html' },
+        ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html', sub: [
           { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.html' },
           { it: 'Giubbotto Rudolph', en: 'Rudolph Softshell', href: 'rudolph.html' },
@@ -86,6 +89,9 @@
           { it: 'Gonna Sport Serena', en: 'Serena Sports Skirt', href: 'serena.html' },
           { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
         ] },
+        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
+          { it: 'Felpa Badet', en: 'Badet Sweatshirt', href: 'felpa-badet.html' },
+        ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html', sub: [
           { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.html' },
         ] },
@@ -98,6 +104,9 @@
         ] },
         { it: 'Polo', en: 'Polo', href: 'polo-bambino.html', sub: [
           { it: 'Polo Star Bambino', en: 'Star Kids Polo', href: 'star-polo-kids.html' },
+        ] },
+        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
+          { it: 'Felpa Badet Bambino', en: 'Badet Kids Sweatshirt', href: 'felpa-badet-kids.html' },
         ] },
         { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-kids.html', sub: [
           { it: 'Giubbotto Nebraska Bambino', en: 'Nebraska Kids Softshell', href: 'nebraska-kids.html' },
@@ -123,7 +132,7 @@
         { it: 'Felpe e giacche', en: 'Sweatshirts and jackets', href: 'sport.html#felpe' },
         { it: 'Completi calcio', en: 'Football kits', href: 'sport.html#calcio' },
       ] },
-      { it: 'Lavoro', en: 'Workwear', href: 'alta-visibilita.html', sub: [
+      { it: 'Lavoro', en: 'Workwear', href: 'abbigliamento-lavoro-personalizzato.html', sub: [
         { it: 'Alta visibilità', en: 'High visibility', href: 'alta-visibilita.html' },
         { it: 'Camicie', en: 'Shirts', href: 'camicie.html', sub: [
           { it: 'Camicia Aifos manica lunga', en: 'Aifos L/S Shirt', href: 'aifos-ls.html' },
@@ -162,13 +171,15 @@
     'nav.nav[data-site-nav] .nav-drop:hover > .nav-sub, nav.nav[data-site-nav] .nav-drop:focus-within > .nav-sub { display: flex; }',
     'nav.nav[data-site-nav] .nav-sub > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }',
     'nav.nav[data-site-nav] .nav-sub > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
-    'nav.nav[data-site-nav] .nav-sub > span:not(.nav-drop) { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-700); white-space: nowrap; }',
+    'nav.nav[data-site-nav] .nav-sub .nav-drop > a, nav.nav[data-site-nav] .nav-sub-2 .nav-drop > a { color: var(--color-text); }',
+    'nav.nav[data-site-nav] .nav-sub .nav-drop > a:hover, nav.nav[data-site-nav] .nav-sub-2 .nav-drop > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
+    'nav.nav[data-site-nav] .nav-sub > span:not(.nav-drop) { padding: 9px 12px; font-size: 14px; color: var(--color-text); white-space: nowrap; }',
     'nav.nav[data-site-nav] .nav-sub .nav-drop { display: block; position: relative; }',
     'nav.nav[data-site-nav] .nav-sub-2 { position: absolute; top: -1px; left: 100%; min-width: 190px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 61; }',
     'nav.nav[data-site-nav] .nav-sub .nav-drop:hover > .nav-sub-2, nav.nav[data-site-nav] .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: flex; }',
     'nav.nav[data-site-nav] .nav-sub-2 > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }',
     'nav.nav[data-site-nav] .nav-sub-2 > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
-    'nav.nav[data-site-nav] .nav-sub-2 > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-700); white-space: nowrap; }',
+    'nav.nav[data-site-nav] .nav-sub-2 > span { padding: 9px 12px; font-size: 14px; color: var(--color-text); white-space: nowrap; }',
     'nav.nav[data-site-nav] .nav-lang { display: flex; align-items: center; border: 1px solid var(--color-divider); margin-left: auto; }',
     'nav.nav[data-site-nav] .nav-lang button { font-family: var(--font-heading); font-size: 12px; letter-spacing: .06em; padding: 7px 10px; border: none; background: transparent; color: var(--color-neutral-700); font-weight: 600; cursor: pointer; }',
     'nav.nav[data-site-nav] .nav-lang button + button { border-left: 1px solid var(--color-divider); }',
