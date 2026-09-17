@@ -105,6 +105,8 @@ const HV_BASE = {
   'slam': {"S":2.6,"M":2.6,"L":2.6,"XL":2.6,"XXL":2.6,"XXXL":2.8},
   'monzha': {"S":2.95,"M":2.95,"L":2.95,"XL":2.95,"XXL":2.95,"XXXL":3.41},
   'tormo': {"S":3.75,"M":3.75,"L":3.75,"XL":3.75,"XXL":3.75,"XXXL":3.95},
+  'felpa-badet': {"XS":10.5,"S":10.5,"M":10.5,"L":10.5,"XL":10.5,"XXL":10.5,"XXXL":11},
+  'felpa-badet-kids': {"3/4":8.65,"5/6":8.65,"7/8":8.65,"9/10":8.65,"11/12":8.65},
   'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
 };
 // Le camicie hanno una scala moltiplicatore propria (più bassa): 3,00 a 1 pz → 2,00 da 100 pz.
@@ -113,7 +115,7 @@ const CAMICIE_QTY_MULT = [
   { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
   { min: 100, mult: 2.00 },
 ];
-const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna'];
+const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids'];
 // Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
 const POLO_QTY_MULT = [
   { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
@@ -408,6 +410,21 @@ const PRICING = {
   'tormo': { nome: 'Polo Sport Tormo', type: 'tshirt',
     garmentTotal: (qty, sizes) => hvGarmentTotal('tormo', qty, sizes),
     garmentUnitPrice: (qty) => hvGarmentTotal('tormo', 1, null) * slugMult('tormo', qty) / slugMult('tormo', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Felpa Badet (Roly SU1058) — moltiplicatore 3: 3,00 → 2,00.
+  'felpa-badet': { nome: 'Felpa Badet', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('felpa-badet', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('felpa-badet', 1, null) * slugMult('felpa-badet', qty) / slugMult('felpa-badet', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'felpa-badet-kids': { nome: 'Felpa Badet Bambino', type: 'tshirt',
+    garmentTotal: (qty, sizes) => hvGarmentTotal('felpa-badet-kids', qty, sizes),
+    garmentUnitPrice: (qty) => hvGarmentTotal('felpa-badet-kids', 1, null) * slugMult('felpa-badet-kids', qty) / slugMult('felpa-badet-kids', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
