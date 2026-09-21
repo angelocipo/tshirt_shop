@@ -302,6 +302,9 @@
         </div>
       </div>
       <div class="cfg-rest">
+      <sc-if value="{{ cartGroupNote }}" hint-placeholder-val="{{ null }}">
+        <div style="border:1px solid var(--color-accent);padding:10px 12px;font-size:12.5px;font-weight:600;color:var(--color-accent-700);margin-bottom:var(--space-3);">{{ cartGroupNote }}</div>
+      </sc-if>
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Felpa</span><span>{{ garmentPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
@@ -573,6 +576,7 @@ class Component extends DCLogic {
     designRef: null,
     designLink: '',
     orderNote: '',
+    cartGroupQty: 0,
   };
 
   fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€' + s; }
@@ -590,12 +594,28 @@ class Component extends DCLogic {
       el.alt = i != null ? ('Felpa Urban Bambino ' + COLORS[i].name) : 'Felpa Urban Bambino — vista frontale';
     }
   }
+  // Righe dello stesso modello già nel carrello (adulto + bambino): fanno quantità
+  // insieme, quindi la fascia di prezzo si legge sul totale cumulato.
+  syncCartQty() {
+    const q = window.tsCart ? window.tsCart.groupQty('felpa-urban-kids') : 0;
+    if (q !== this.state.cartGroupQty) this.setState({ cartGroupQty: q });
+  }
   componentDidMount() {
     this.syncHero();
     this.onLang = () => this.forceUpdate();
     window.addEventListener('ts:langchange', this.onLang);
+    this.onCart = () => this.syncCartQty();
+    document.addEventListener('ts-cart-change', this.onCart);
+    window.addEventListener('storage', this.onCart);
+    this.syncCartQty();
+    this._cartT = setTimeout(this.onCart, 500);
   }
-  componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
+  componentWillUnmount() {
+    window.removeEventListener('ts:langchange', this.onLang);
+    document.removeEventListener('ts-cart-change', this.onCart);
+    window.removeEventListener('storage', this.onCart);
+    if (this._cartT) clearTimeout(this._cartT);
+  }
   componentDidUpdate() { this.syncHero(); }
 
   makeDesignRef() {
@@ -676,13 +696,16 @@ class Component extends DCLogic {
       };
     });
     const totalQty = sizes.reduce((n, x) => n + x.qty, 0);
+    // Fascia di prezzo letta sul cumulato con quanto è già in carrello.
+    const cartQty = this.state.cartGroupQty || 0;
+    const rateQty = totalQty + cartQty;
     sizes.forEach(x => {
       x.measure = SIZE_MEASURE[x.label] ? SIZE_MEASURE[x.label] + ' cm' : '';
     });
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(totalQty);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty);
+      if (key === 'cuore') return cuoreUnitPrice(rateQty);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(rateQty);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(rateQty);
       return 0;
     };
     const zones = ZONE_DEFS.map(z => {
@@ -721,7 +744,7 @@ class Component extends DCLogic {
     const selectedColorNote = hasColor ? activeColor.cls : '';
     // Prezzo capo: somma per taglia (le taglie forti costano di più a listino),
     // mostrata come media per pezzo così il totale resta esatto.
-    const garmentSum = SIZES.reduce((sum, s) => sum + (sizeQty[s] || 0) * sizeUnitPrice(s, totalQty), 0);
+    const garmentSum = SIZES.reduce((sum, s) => sum + (sizeQty[s] || 0) * sizeUnitPrice(s, rateQty), 0);
     const garmentPrice = totalQty > 0 ? garmentSum / totalQty : sizeUnitPrice(SIZES[0], MIN_QTY);
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;
@@ -762,8 +785,13 @@ class Component extends DCLogic {
       retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
       selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
-      belowMin: totalQty > 0 && totalQty < MIN_QTY,
-      missingQty: Math.max(0, MIN_QTY - totalQty),
+      belowMin: totalQty > 0 && rateQty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - rateQty),
+      cartGroupNote: cartQty > 0
+        ? (en
+            ? 'Already in the cart: ' + cartQty + ' pcs of this model. Price based on ' + rateQty + ' pcs.'
+            : 'Nel carrello hai già ' + cartQty + ' pz di questo modello. Prezzo calcolato su ' + rateQty + ' pz.')
+        : null,
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(totalQty > 0 ? garmentPrice : 0),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
@@ -772,7 +800,7 @@ class Component extends DCLogic {
       checkout: () => {
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
-        if (totalQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces, sizes can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi, anche in taglie miste.'); return; }
+        if (rateQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces across this model, sizes and colours can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi su questo modello, anche in taglie e colori misti.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneNames = {

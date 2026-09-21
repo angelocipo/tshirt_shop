@@ -7,6 +7,22 @@
 (function () {
   if (window.tsCart) return;
   var KEY = 'ts_cart';
+  // Prodotti che fanno quantità insieme: adulto e bambino dello stesso modello.
+  // Deve restare allineato a QTY_GROUPS in api/_pricing-data.js.
+  var GROUPS = {
+    'felpa-urban': 'felpa-urban', 'felpa-urban-kids': 'felpa-urban',
+    'felpa-badet': 'felpa-badet', 'felpa-badet-kids': 'felpa-badet',
+  };
+  function groupOf(id) { return GROUPS[id] || id; }
+  function rowQty(r) {
+    var f = r && r.body && r.body.formula;
+    return Math.max(0, parseInt(f && f.qty, 10) || 0);
+  }
+  // Pezzi già nel carrello per il gruppo di questo prodotto.
+  function groupQty(id) {
+    var g = groupOf(id);
+    return read().reduce(function (s, r) { return s + (groupOf(r.id) === g ? rowQty(r) : 0); }, 0);
+  }
 
   function read() {
     try {
@@ -112,6 +128,7 @@
   window.tsCart = {
     list: read, add: add, removeAt: removeAt, clear: clear,
     count: count, subtotal: subtotal, fmt: fmt, paint: paint, toast: toast,
+    groupOf: groupOf, groupQty: groupQty, rowQty: rowQty,
     shippingFee: function (sub) {
       var s = typeof sub === 'number' ? sub : subtotal();
       return s >= 50 ? 0 : 8;

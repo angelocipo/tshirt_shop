@@ -94,6 +94,9 @@
               <sc-if value="{{ l.ean }}" hint-placeholder-val="{{ null }}">
                 <div style="font-size:12px;letter-spacing:.04em;color:color-mix(in srgb, var(--color-text) 60%, transparent);margin-top:2px;">EAN {{ l.ean }}</div>
               </sc-if>
+              <sc-if value="{{ l.note }}" hint-placeholder-val="{{ null }}">
+                <div style="font-size:12px;font-weight:600;color:var(--color-accent-700);margin-top:2px;">{{ l.note }}</div>
+              </sc-if>
             </div>
             <div style="font-family:var(--font-heading);font-size:22px;white-space:nowrap;">€ {{ l.price }}</div>
           </div>
@@ -113,6 +116,9 @@
       </div>
       <sc-if value="{{ fromCart }}" hint-placeholder-val="{{ false }}">
         <p style="margin:var(--space-3) 0 0;font-size:13px;"><a href="carrello.html">Modifica il carrello</a></p>
+      </sc-if>
+      <sc-if value="{{ quoteFailed }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:var(--space-3) 0 0;font-size:12.5px;color:#b23b3b;">Non riesco a ricalcolare il carrello in questo momento: l'importo definitivo viene ricalcolato al pagamento e può risultare inferiore a quello qui sopra.</p>
       </sc-if>
     </div>
   </sc-if>
@@ -329,7 +335,7 @@ const EAN_BY_NAME = {
 class Component extends DCLogic {
   state = {
     productId: null, productName: '', productPrice: null, productCollection: 'misura', orderBody: null,
-    cartItems: null,
+    cartItems: null, quotedRows: null, quoteFailed: false,
     invType: 'privato',
     inv: { name: '', email: '', company: '', vat: '', cf: '', pec: '', sdi: '', address: '', city: '', cap: '', country: '' },
     shipSame: true,
@@ -409,25 +415,55 @@ class Component extends DCLogic {
       orderBody: items[0].body || { productId: items[0].id },
       shipZone: subtotal >= 50 ? 'gratuita' : this.state.shipZone,
     });
+    this.quote(items);
     this.mountPaypalWhenReady();
+  }
+
+  /* Prezzi ricalcolati dal server: le righe dello stesso modello fanno quantità
+     insieme, quindi il prezzo salvato al momento dell'aggiunta può essere più alto. */
+  quote(items) {
+    const bodies = items.map((r) => r.body || { productId: r.id });
+    fetch('/api/quote-cart', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: bodies }),
+    })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('quote'))))
+      .then((d) => {
+        if (!d || !Array.isArray(d.rows) || d.rows.length !== items.length) throw new Error('quote');
+        this.setState({
+          quotedRows: d.rows,
+          quoteFailed: false,
+          productPrice: d.subtotal.toFixed(2),
+          shipZone: d.subtotal >= 50 ? 'gratuita' : this.state.shipZone,
+        });
+      })
+      .catch(() => this.setState({ quoteFailed: true }));
   }
 
   /* Le righe del checkout: dal carrello oppure il singolo prodotto passato via URL. */
   lines() {
     if (this.state.cartItems && this.state.cartItems.length) {
-      return this.state.cartItems.map((r) => ({
-        name: r.name || 'Prodotto',
-        price: (parseFloat(r.price) || 0).toFixed(2),
-        ean: EAN_BY_NAME[r.name] || null,
-        details: this.buildOrderDetails(r.body),
-        body: r.body || { productId: r.id },
-      }));
+      const q = this.state.quotedRows;
+      return this.state.cartItems.map((r, i) => {
+        const rowQty = Math.max(0, parseInt(((r.body || {}).formula || {}).qty, 10) || 0);
+        const groupQty = q && q[i] ? q[i].groupQty : null;
+        return {
+          name: r.name || 'Prodotto',
+          price: (q && q[i] ? q[i].price : (parseFloat(r.price) || 0)).toFixed(2),
+          ean: EAN_BY_NAME[r.name] || null,
+          note: groupQty && groupQty > rowQty ? 'Prezzo calcolato su ' + groupQty + ' pz dello stesso modello' : null,
+          details: this.buildOrderDetails(r.body),
+          body: r.body || { productId: r.id },
+        };
+      });
     }
     if (!this.state.productId) return [];
     return [{
       name: this.state.productName,
       price: (parseFloat(this.state.productPrice) || 0).toFixed(2),
       ean: EAN_BY_NAME[this.state.productName] || null,
+      note: null,
       details: this.buildOrderDetails(this.state.orderBody),
       body: this.state.orderBody || { productId: this.state.productId },
     }];
@@ -568,6 +604,7 @@ class Component extends DCLogic {
       backHref: fromCart ? 'carrello.html' : 'index.html',
       backLabel: fromCart ? 'Torna al carrello' : 'Torna al catalogo',
       orderKicker: lines.length > 1 ? 'Il tuo ordine — ' + lines.length + ' prodotti' : 'Il tuo ordine',
+      quoteFailed: fromCart && s.quoteFailed,
       lines: lines.map((l) => ({ ...l, gap: l.details.length ? 'var(--space-4)' : '0' })),
       productName: s.productName,
       productPrice: s.productPrice,
