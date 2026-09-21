@@ -86,6 +86,9 @@ a:hover { color: var(--color-accent-900); }
             </div>
             <div class="cart-side" style="display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-2);">
               <div style="font-family:var(--font-heading);font-size:24px;white-space:nowrap;">{{ r.priceLabel }}</div>
+              <sc-if value="{{ r.unitLabel }}" hint-placeholder-val="{{ null }}">
+                <div style="font-size:12.5px;white-space:nowrap;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:-4px;">{{ r.unitLabel }}</div>
+              </sc-if>
               <sc-if value="{{ r.groupNote }}" hint-placeholder-val="{{ null }}">
                 <div style="font-size:11.5px;text-align:right;max-width:150px;color:var(--color-accent-700);font-weight:600;">{{ r.groupNote }}</div>
               </sc-if>
@@ -204,6 +207,7 @@ class Component extends DCLogic {
         url: r.url || 'index.html',
         img: r.img || 'img/favicon.png',
         priceLabel: this.fmt(priceAt(r, i)),
+        unitLabel: qtyOf(r) > 0 ? this.fmt(priceAt(r, i) / qtyOf(r)) + ' / pezzo' : null,
         groupNote: (q && q.rows[i] && q.rows[i].groupQty > qtyOf(r))
           ? 'Prezzo su ' + q.rows[i].groupQty + ' pz dello stesso modello'
           : null,
