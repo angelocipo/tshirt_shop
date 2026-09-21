@@ -15,26 +15,17 @@ function getStripe() {
   return stripe;
 }
 
-module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
+// Prezzo e descrizione di UNA riga d'ordine, calcolati dal listino server.
+// Il carrello manda `items: [...]`: ogni riga passa di qui, nessun importo arriva dal client.
+function priceItem(input) {
+  const { productId, tierIndex, sizeIndex, formula, deliveryIndex } = input || {};
+  const product = PRICING[productId];
+  if (!product) {
+    const e = new Error('Prodotto sconosciuto: ' + productId);
+    e.status = 400;
+    throw e;
   }
-  const stripe = getStripe();
-  if (!stripe) {
-    res.status(500).json({ error: 'STRIPE_SECRET_KEY non configurata su Vercel (Environment Variables → Production → redeploy).' });
-    return;
-  }
-
-  try {
-    const { productId, tierIndex, sizeIndex, formula, deliveryIndex, customer, shipping, sender, shippingFee, shippingZone, designRef, designFiles, designLink, customerNote } = req.body || {};
-    const product = PRICING[productId];
-    if (!product) {
-      res.status(400).json({ error: 'Prodotto sconosciuto' });
-      return;
-    }
-
-    let unitAmountCents, description;
+  let unitAmountCents, description;
     if (product.type === 'formula') {
       const qty = Math.max(1, parseInt(formula?.qty, 10) || 1);
       const strutturaIdx = formula?.strutturaIdx === 1 ? 1 : 0;
@@ -356,20 +347,42 @@ module.exports = async (req, res) => {
       unitAmountCents = Math.round(variant.price * 100);
       description = `${product.nome} — ${variant.label}`;
     } else {
-      res.status(400).json({ error: 'Questo prodotto richiede un preventivo, non è acquistabile online' });
-      return;
+      const e = new Error('Questo prodotto richiede un preventivo, non è acquistabile online');
+      e.status = 400;
+      throw e;
     }
+
+  return { unitAmountCents, description };
+}
+
+module.exports = async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+  const stripe = getStripe();
+  if (!stripe) {
+    res.status(500).json({ error: 'STRIPE_SECRET_KEY non configurata su Vercel (Environment Variables → Production → redeploy).' });
+    return;
+  }
+
+  try {
+    const { productId, tierIndex, sizeIndex, formula, deliveryIndex, items, customer, shipping, sender, shippingFee, shippingZone, designRef, designFiles, designLink, customerNote } = req.body || {};
+    const cart = Array.isArray(items) && items.length
+      ? items.slice(0, 20)
+      : [{ productId, tierIndex, sizeIndex, formula, deliveryIndex }];
+    const priced = cart.map(priceItem);
 
     const origin = req.headers.origin || `https://${req.headers.host}`;
 
-    const lineItems = [{
+    const lineItems = priced.map((p) => ({
       price_data: {
         currency: 'eur',
-        product_data: { name: description },
-        unit_amount: unitAmountCents,
+        product_data: { name: p.description },
+        unit_amount: p.unitAmountCents,
       },
       quantity: 1,
-    }];
+    }));
     // Stripe's left-hand summary only renders the line items, so the billing holder and the
     // custom sender are folded into the first item's description — otherwise the customer
     // never sees them again between our checkout page and the payment page.
@@ -455,6 +468,7 @@ module.exports = async (req, res) => {
     res.status(200).json({ url: session.url });
   } catch (err) {
     console.error(err);
+    if (err && err.status) { res.status(err.status).json({ error: err.message }); return; }
     res.status(500).json({ error: 'Errore nella creazione del pagamento' });
   }
 };
