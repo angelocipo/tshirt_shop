@@ -50,12 +50,11 @@
         { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici-uomo.html', sub: [
           { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
         ] },
-        { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
-          { it: 'T-Shirt Tecnica Slam', en: 'Slam Technical T-Shirt', href: 'slam.html' },
+        { it: 'Sport', en: 'Sport', href: 'sport-uomo.html', sub: [
           { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
           { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
           { it: 'Short Sport Murray', en: 'Murray Sports Shorts', href: 'murray.html' },
-          { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
+          { it: 'Tutto lo sport uomo', en: 'All men\'s sportswear', href: 'sport-uomo.html' },
         ] },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
           { it: 'Felpa Badet', en: 'Badet Sweatshirt', href: 'felpa-badet.html' },
@@ -85,10 +84,10 @@
           { it: 'Camice Vaccine donna', en: 'Vaccine Woman Lab Coat', href: 'vaccine-donna.html' },
           { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
         ] },
-        { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
+        { it: 'Sport', en: 'Sport', href: 'sport-donna.html', sub: [
           { it: 'T-Shirt Slam Woman', en: 'Slam Woman T-Shirt', href: 'slam-donna.html' },
           { it: 'Gonna Sport Serena', en: 'Serena Sports Skirt', href: 'serena.html' },
-          { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
+          { it: 'Tutto lo sport donna', en: 'All women\'s sportswear', href: 'sport-donna.html' },
         ] },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
           { it: 'Felpa Badet', en: 'Badet Sweatshirt', href: 'felpa-badet.html' },
@@ -116,7 +115,8 @@
         ] },
       ] },
       { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
-        { it: 'Tutto lo sport', en: 'All sportswear', href: 'sport.html' },
+        { it: 'Sport Uomo', en: 'Men\'s Sport', href: 'sport-uomo.html' },
+        { it: 'Sport Donna', en: 'Women\'s Sport', href: 'sport-donna.html' },
         { it: 'Polo tecniche', en: 'Technical polos', href: 'sport.html#polo', sub: [
           { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
           { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
