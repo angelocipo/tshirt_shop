@@ -470,6 +470,8 @@ const PRICING = {
 const QTY_GROUPS = {
   'felpa-urban': 'felpa-urban', 'felpa-urban-kids': 'felpa-urban',
   'felpa-badet': 'felpa-badet', 'felpa-badet-kids': 'felpa-badet',
+  'bahrain': 'bahrain', 'bahrain-kids': 'bahrain',
+  'nebraska': 'nebraska', 'nebraska-kids': 'nebraska',
 };
 function qtyGroup(productId) { return QTY_GROUPS[productId] || productId; }
 
