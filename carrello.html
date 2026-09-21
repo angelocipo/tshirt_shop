@@ -31,8 +31,9 @@
 }
 .idx-wrap{max-width:900px;margin:0 auto;padding:0 var(--space-6);}
 .co-section{padding:var(--space-6);margin-bottom:var(--space-6);}
-.cart-row{display:grid;grid-template-columns:96px 1fr auto;gap:var(--space-4);align-items:start;}
-@media (max-width:620px){.cart-row{grid-template-columns:72px 1fr;}.cart-row .cart-side{grid-column:2;align-items:flex-start!important;}.nav a{display:none;}}
+.cart-row{display:grid;grid-template-columns:96px 84px 1fr auto;gap:var(--space-4);align-items:start;}
+.cart-qr{display:block;width:100%;border:1px solid var(--color-divider);}
+@media (max-width:620px){.cart-row{grid-template-columns:72px 1fr;}.cart-row .cart-qr-cell{display:none;}.cart-row .cart-side{grid-column:2;align-items:flex-start!important;}.nav a{display:none;}}
 nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
 nav.nav .nav-brand { flex: 0 0 100%; }
 nav.nav > a:not(.nav-brand) { font-size: 14px; }
@@ -73,6 +74,10 @@ a:hover { color: var(--color-accent-900); }
             <a href="{{ r.url }}" style="display:block;border:1px solid var(--color-divider);aspect-ratio:1;">
               <img src="{{ r.img }}" alt="{{ r.name }}" style="width:100%;height:100%;object-fit:contain;display:block;">
             </a>
+            <div class="cart-qr-cell">
+              <img class="cart-qr" src="{{ r.qrSrc }}" alt="QR {{ r.name }}" width="84" height="84">
+              <div style="font-size:9.5px;text-align:center;margin-top:3px;color:color-mix(in srgb, var(--color-text) 55%, transparent);">Apri sul telefono</div>
+            </div>
             <div>
               <div class="card-kicker">Riga {{ r.n }}</div>
               <a href="{{ r.url }}" class="card-title" style="display:block;text-decoration:none;margin-bottom:var(--space-3);">{{ r.name }}</a>
@@ -88,7 +93,7 @@ a:hover { color: var(--color-accent-900); }
             <div class="cart-side" style="display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-2);">
               <div style="font-family:var(--font-heading);font-size:24px;white-space:nowrap;">{{ r.priceLabel }}</div>
               <sc-if value="{{ r.unitLabel }}" hint-placeholder-val="{{ null }}">
-                <div style="font-size:12.5px;white-space:nowrap;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:-4px;">{{ r.unitLabel }}</div>
+                <div style="font-size:11.5px;font-style:italic;font-weight:300;white-space:nowrap;color:#ec3013;margin-top:-4px;">{{ r.unitLabel }}</div>
               </sc-if>
               <sc-if value="{{ r.groupNote }}" hint-placeholder-val="{{ null }}">
                 <div style="font-size:11.5px;text-align:right;max-width:150px;color:var(--color-accent-700);font-weight:600;">{{ r.groupNote }}</div>
@@ -120,6 +125,7 @@ a:hover { color: var(--color-accent-900); }
       <a class="btn btn-primary btn-block blueprint" href="checkout.html?cart=1" style="text-decoration:none;">
         <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Procedi al checkout
       </a>
+      <button type="button" class="btn btn-secondary btn-block" style="margin-top:var(--space-3);" onClick="{{ requestQuote }}">Richiedi preventivo</button>
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-3);margin-top:var(--space-4);">
         <a href="felpe.html" style="font-size:13.5px;">Continua ad aggiungere prodotti</a>
         <button type="button" class="btn btn-ghost" style="font-size:13px;padding:4px 8px;" onClick="{{ emptyCart }}">Svuota il carrello</button>
@@ -185,6 +191,10 @@ class Component extends DCLogic {
       .filter(([, v]) => v !== undefined && v !== null && v !== '')
       .map(([k, v]) => ({ label: k, value: String(v) }));
   }
+  qrSrc(url) {
+    const abs = new URL(url || 'index.html', window.location.href).href;
+    return 'https://api.qrserver.com/v1/create-qr-code/?size=170x170&margin=0&data=' + encodeURIComponent(abs);
+  }
 
   renderVals() {
     const items = this.state.items || [];
@@ -213,6 +223,7 @@ class Component extends DCLogic {
           ? 'Prezzo su ' + q.rows[i].groupQty + ' pz dello stesso modello'
           : null,
         details: this.details(r),
+        qrSrc: this.qrSrc(r.url),
         remove: () => {
           if (window.tsCart) { window.tsCart.removeAt(i); return; }
           const a = (this.state.items || []).slice();
@@ -225,6 +236,21 @@ class Component extends DCLogic {
       shippingLabel: shipping === 0 ? 'gratuita' : this.fmt(shipping),
       totalLabel: this.fmt(subtotal + shipping),
       missingForFree: missing > 0 ? this.fmt(missing) : null,
+      requestQuote: () => {
+        const lines = items.map((r, i) => {
+          const h = (r.body || {}).human || {};
+          const bits = Object.entries(h).filter(([, v]) => v !== undefined && v !== null && v !== '').map(([k, v]) => `${k}: ${v}`);
+          return `${r.name || 'Prodotto'}${bits.length ? ' (' + bits.join(', ') + ')' : ''} — ${this.fmt(priceAt(r, i))}`;
+        });
+        const totalQty = items.reduce((s, r) => s + qtyOf(r), 0);
+        const params = new URLSearchParams({
+          prodotto: items.length === 1 ? (items[0].name || 'Prodotto') : `Carrello — ${items.length} prodotti`,
+          config: lines.join(' • '),
+          quantita: String(totalQty),
+          prezzo: (subtotal + shipping).toFixed(2),
+        });
+        window.open('./preventivo.html?' + params.toString(), '_blank', 'noopener');
+      },
       emptyCart: () => {
         if (!window.confirm('Svuotare il carrello?')) return;
         if (window.tsCart) { window.tsCart.clear(); return; }
