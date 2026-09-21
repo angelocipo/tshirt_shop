@@ -83,6 +83,7 @@
             <tr style="border-bottom:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);">
               <td style="padding:14px 6px;vertical-align:top;">
                 <div style="display:flex;gap:12px;align-items:flex-start;">
+                  <img src="{{ r.img }}" alt="{{ r.name }}" width="56" height="56" style="flex:none;border:1px solid color-mix(in srgb, var(--color-text) 20%, transparent);object-fit:contain;">
                   <img src="{{ r.qrSrc }}" alt="QR" width="56" height="56" style="flex:none;border:1px solid color-mix(in srgb, var(--color-text) 20%, transparent);">
                   <div style="min-width:0;">
                     <sc-if value="{{ r.hasUrl }}" hint-placeholder-val="{{ false }}">
@@ -295,6 +296,7 @@ class Component extends DCLogic {
         url: r.url || '',
         hasUrl: !!r.url,
         noUrl: !r.url,
+        img: r.img || '',
         ean: EAN_BY_NAME[r.name] || '',
         hasEan: !!EAN_BY_NAME[r.name],
         qrSrc: this.qrSrc(r.url),
