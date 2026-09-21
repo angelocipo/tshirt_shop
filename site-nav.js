@@ -174,7 +174,7 @@
     'nav.nav[data-site-nav] .nav-drop:hover > .nav-sub, nav.nav[data-site-nav] .nav-drop:focus-within > .nav-sub { display: flex; }',
     'nav.nav[data-site-nav] .nav-sub > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }',
     'nav.nav[data-site-nav] .nav-sub > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
-    'nav.nav[data-site-nav] .nav-sub .nav-drop > a, nav.nav[data-site-nav] .nav-sub-2 .nav-drop > a { color: var(--color-text); }',
+    'nav.nav[data-site-nav] .nav-sub .nav-drop > a, nav.nav[data-site-nav] .nav-sub-2 .nav-drop > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }',
     'nav.nav[data-site-nav] .nav-sub .nav-drop > a:hover, nav.nav[data-site-nav] .nav-sub-2 .nav-drop > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
     'nav.nav[data-site-nav] .nav-sub > span:not(.nav-drop) { padding: 9px 12px; font-size: 14px; color: var(--color-text); white-space: nowrap; }',
     'nav.nav[data-site-nav] .nav-sub .nav-drop { display: block; position: relative; }',
