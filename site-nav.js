@@ -29,106 +29,35 @@
         { it: 'Altre offerte in arrivo', en: 'More offers coming soon' },
       ] },
       { it: 'Uomo', en: 'Men', href: 'uomo.html', sub: [
-        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-uomo.html', sub: [
-          { it: 'T-Shirt Tecnica Slam', en: 'Slam Technical T-Shirt', href: 'slam.html' },
-          { it: 'Maglietta Beagle', en: 'Beagle T-Shirt', href: 'beagle.html' },
-          { it: 'Maglietta Tecnica Bahrain', en: 'Bahrain Technical T-Shirt', href: 'bahrain.html' },
-          { it: 'Atomic — in arrivo', en: 'Atomic — coming soon' },
-        ] },
-        { it: 'Polo', en: 'Polo', href: 'polo-uomo.html', sub: [
-          { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
-          { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
-          { it: 'Polo Prince', en: 'Prince Polo', href: 'prince-polo.html' },
-          { it: 'Polo Austral', en: 'Austral Polo', href: 'austral-polo.html' },
-          { it: 'Polo Star', en: 'Star Polo', href: 'star-polo.html' },
-        ] },
-        { it: 'Camicie', en: 'Shirts', href: 'camicie-uomo.html', sub: [
-          { it: 'Camicia Aifos manica lunga', en: 'Aifos L/S Shirt', href: 'aifos-ls.html' },
-          { it: 'Camicia Moscu cotone', en: 'Moscu Cotton Shirt', href: 'moscu.html' },
-          { it: 'Camicia Aifos manica corta', en: 'Aifos S/S Shirt', href: 'aifos.html' },
-        ] },
-        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici-uomo.html', sub: [
-          { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
-        ] },
-        { it: 'Sport', en: 'Sport', href: 'sport-uomo.html', sub: [
-          { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
-          { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
-          { it: 'Short Sport Murray', en: 'Murray Sports Shorts', href: 'murray.html' },
-          { it: 'Tutto lo sport uomo', en: 'All men\'s sportswear', href: 'sport-uomo.html' },
-        ] },
-        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
-          { it: 'Felpa Badet', en: 'Badet Sweatshirt', href: 'felpa-badet.html' },
-          { it: 'Felpa Urban', en: 'Urban Sweatshirt', href: 'felpa-urban.html' },
-        ] },
-        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html', sub: [
-          { it: 'Giubbotto Nebraska', en: 'Nebraska Softshell', href: 'nebraska.html' },
-          { it: 'Giubbotto Rudolph', en: 'Rudolph Softshell', href: 'rudolph.html' },
-        ] },
+        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-uomo.html' },
+        { it: 'Polo', en: 'Polo', href: 'polo-uomo.html' },
+        { it: 'Camicie', en: 'Shirts', href: 'camicie-uomo.html' },
+        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici-uomo.html' },
+        { it: 'Sport', en: 'Sport', href: 'sport-uomo.html' },
+        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html' },
+        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html' },
       ] },
       { it: 'Donna', en: 'Women', href: 'donna.html', sub: [
-        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.html', sub: [
-          { it: 'T-Shirt Slam Woman', en: 'Slam Woman T-Shirt', href: 'slam-donna.html' },
-          { it: 'Maglietta Jamaica Donna', en: "Jamaica Women's T-Shirt", href: 'jamaica.html' },
-          { it: 'Maglietta Tecnica Bahrain Donna', en: "Bahrain Women's Technical T-Shirt", href: 'bahrain-donna.html' },
-        ] },
-        { it: 'Polo', en: 'Polo', href: 'polo-donna.html', sub: [
-          { it: 'Polo Prince Woman', en: "Prince Women's Polo", href: 'prince-donna.html' },
-          { it: 'Polo Star Donna', en: "Star Women's Polo", href: 'star-polo-donna.html' },
-        ] },
-        { it: 'Camicie', en: 'Shirts', href: 'camicie-donna.html', sub: [
-          { it: 'Camicia Sofia manica corta', en: 'Sofia S/S Shirt', href: 'sofia.html' },
-          { it: 'Camicia Sofia manica lunga', en: 'Sofia L/S Shirt', href: 'sofia-ls.html' },
-          { it: 'Camicia Moscu donna manica lunga', en: 'Moscu Woman L/S Shirt', href: 'moscu-donna.html' },
-        ] },
-        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html', sub: [
-          { it: 'Camice Vaccine donna', en: 'Vaccine Woman Lab Coat', href: 'vaccine-donna.html' },
-          { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
-        ] },
-        { it: 'Sport', en: 'Sport', href: 'sport-donna.html', sub: [
-          { it: 'T-Shirt Slam Woman', en: 'Slam Woman T-Shirt', href: 'slam-donna.html' },
-          { it: 'Gonna Sport Serena', en: 'Serena Sports Skirt', href: 'serena.html' },
-          { it: 'Tutto lo sport donna', en: 'All women\'s sportswear', href: 'sport-donna.html' },
-        ] },
-        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html', sub: [
-          { it: 'Felpa Badet', en: 'Badet Sweatshirt', href: 'felpa-badet.html' },
-          { it: 'Felpa Urban', en: 'Urban Sweatshirt', href: 'felpa-urban.html' },
-        ] },
-        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html', sub: [
-          { it: 'Giubbotto Nebraska Donna', en: "Nebraska Women's Softshell", href: 'nebraska-donna.html' },
-        ] },
+        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.html' },
+        { it: 'Polo', en: 'Polo', href: 'polo-donna.html' },
+        { it: 'Camicie', en: 'Shirts', href: 'camicie-donna.html' },
+        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html' },
+        { it: 'Sport', en: 'Sport', href: 'sport-donna.html' },
+        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html' },
+        { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html' },
       ] },
       { it: 'Bambino', en: 'Kids', href: 'bambino.html', sub: [
-        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-bambino.html', sub: [
-          { it: 'Maglietta Beagle Bimbo', en: 'Beagle Kids T-Shirt', href: 'beagle-kids.html' },
-          { it: 'Maglietta Jamaica Bambina', en: 'Jamaica Kids T-Shirt', href: 'jamaica-kids.html' },
-          { it: 'Maglietta Tecnica Bahrain Bambino', en: 'Bahrain Kids Technical T-Shirt', href: 'bahrain-kids.html' },
-        ] },
-        { it: 'Polo', en: 'Polo', href: 'polo-bambino.html', sub: [
-          { it: 'Polo Star Bambino', en: 'Star Kids Polo', href: 'star-polo-kids.html' },
-        ] },
-        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe-bambino.html', sub: [
-          { it: 'Felpa Badet Bambino', en: 'Badet Kids Sweatshirt', href: 'felpa-badet-kids.html' },
-          { it: 'Felpa Urban Bambino', en: 'Urban Kids Sweatshirt', href: 'felpa-urban-kids.html' },
-        ] },
-        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-kids.html', sub: [
-          { it: 'Giubbotto Nebraska Bambino', en: 'Nebraska Kids Softshell', href: 'nebraska-kids.html' },
-        ] },
+        { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-bambino.html' },
+        { it: 'Polo', en: 'Polo', href: 'polo-bambino.html' },
+        { it: 'Felpe', en: 'Sweatshirts', href: 'felpe-bambino.html' },
+        { it: 'Giubbotti', en: 'Jackets', href: 'nebraska-kids.html' },
       ] },
       { it: 'Sport', en: 'Sport', href: 'sport.html', sub: [
         { it: 'Sport Uomo', en: 'Men\'s Sport', href: 'sport-uomo.html' },
         { it: 'Sport Donna', en: 'Women\'s Sport', href: 'sport-donna.html' },
-        { it: 'Polo tecniche', en: 'Technical polos', href: 'sport.html#polo', sub: [
-          { it: 'Polo Sport Tormo', en: 'Tormo Sports Polo', href: 'tormo.html' },
-          { it: 'Polo Sport Monzha', en: 'Monzha Sports Polo', href: 'monzha.html' },
-        ] },
-        { it: 'T-shirt tecniche', en: 'Technical T-shirts', href: 'sport.html#tshirt', sub: [
-          { it: 'T-Shirt Tecnica Slam', en: 'Slam Technical T-Shirt', href: 'slam.html' },
-          { it: 'T-Shirt Slam Woman', en: 'Slam Woman T-Shirt', href: 'slam-donna.html' },
-        ] },
-        { it: 'Shorts e gonne sport', en: 'Sports shorts and skirts', href: 'sport.html#shorts', sub: [
-          { it: 'Short Sport Murray', en: 'Murray Sports Shorts', href: 'murray.html' },
-          { it: 'Gonna Sport Serena', en: 'Serena Sports Skirt', href: 'serena.html' },
-        ] },
+        { it: 'Polo tecniche', en: 'Technical polos', href: 'sport.html#polo' },
+        { it: 'T-shirt tecniche', en: 'Technical T-shirts', href: 'sport.html#tshirt' },
+        { it: 'Shorts e gonne sport', en: 'Sports shorts and skirts', href: 'sport.html#shorts' },
         { it: 'Canotte e top', en: 'Vests and tops', href: 'sport.html#canotte' },
         { it: 'Leggings', en: 'Leggings', href: 'sport.html#leggings' },
         { it: 'Pantaloni e tute', en: 'Trousers and tracksuits', href: 'sport.html#pantaloni' },
@@ -137,26 +66,14 @@
       ] },
       { it: 'Lavoro', en: 'Workwear', href: 'abbigliamento-lavoro-personalizzato.html', sub: [
         { it: 'Alta visibilità', en: 'High visibility', href: 'alta-visibilita.html' },
-        { it: 'Camicie', en: 'Shirts', href: 'camicie.html', sub: [
-          { it: 'Camicia Aifos manica lunga', en: 'Aifos L/S Shirt', href: 'aifos-ls.html' },
-          { it: 'Camicia Moscu cotone', en: 'Moscu Cotton Shirt', href: 'moscu.html' },
-          { it: 'Camicia Sofia donna manica corta', en: 'Sofia Women\'s S/S Shirt', href: 'sofia.html' },
-          { it: 'Camicia Sofia donna manica lunga', en: 'Sofia Women\'s L/S Shirt', href: 'sofia-ls.html' },
-          { it: 'Camicia Moscu donna manica lunga', en: 'Moscu Woman L/S Shirt', href: 'moscu-donna.html' },
-          { it: 'Camicia Aifos manica corta', en: 'Aifos S/S Shirt', href: 'aifos.html' },
-        ] },
-        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html', sub: [
-          { it: 'Camice Vaccine unisex', en: 'Vaccine Lab Coat', href: 'vaccine.html' },
-          { it: 'Camice Vaccine donna', en: 'Vaccine Woman Lab Coat', href: 'vaccine-donna.html' },
-        ] },
+        { it: 'Camicie', en: 'Shirts', href: 'camicie.html' },
+        { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html' },
       ] },
       { it: 'Gadget', en: 'Gadgets', href: 'cappellini.html', sub: [
-        { it: 'Cappellini', en: 'Caps', href: 'cappellini.html', sub: [
-          { it: 'Tutti i cappellini', en: 'All caps', href: 'cappellini.html' },
-          { it: 'Cappellino Uranus', en: 'Uranus Cap', href: 'cappellini-uranus.html' },
-          { it: 'Cappellino Basica', en: 'Basica Cap', href: 'cappellini-basica.html' },
-          { it: 'Cappellino Karin (sportivo)', en: 'Karin Sports Cap', href: 'cappellini-karin.html' },
-        ] },
+        { it: 'Tutti i cappellini', en: 'All caps', href: 'cappellini.html' },
+        { it: 'Cappellino Uranus', en: 'Uranus Cap', href: 'cappellini-uranus.html' },
+        { it: 'Cappellino Basica', en: 'Basica Cap', href: 'cappellini-basica.html' },
+        { it: 'Cappellino Karin (sportivo)', en: 'Karin Sports Cap', href: 'cappellini-karin.html' },
       ] },
       { it: 'Solo stampa', en: 'Print only', href: 'solo-stampa.html' },
       { it: 'Esempi', en: 'Examples', href: 'esempi.html' },
@@ -170,19 +87,11 @@
     'nav.nav[data-site-nav] > a:not(.nav-brand) { font-size: 14px; }',
     'nav.nav[data-site-nav] .btn-primary, nav.nav[data-site-nav] .btn-primary:hover { font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }',
     'nav.nav[data-site-nav] .nav-drop { position: relative; display: inline-flex; align-items: center; }',
-    'nav.nav[data-site-nav] .nav-sub { position: absolute; top: 100%; left: 0; min-width: 186px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 60; }',
+    'nav.nav[data-site-nav] .nav-sub { position: absolute; top: 100%; left: 0; min-width: 280px; background: var(--color-neutral-200); box-shadow: 0 8px 24px rgba(0,0,0,.12); display: none; flex-direction: column; z-index: 60; }',
     'nav.nav[data-site-nav] .nav-drop:hover > .nav-sub, nav.nav[data-site-nav] .nav-drop:focus-within > .nav-sub { display: flex; }',
-    'nav.nav[data-site-nav] .nav-sub > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }',
-    'nav.nav[data-site-nav] .nav-sub > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
-    'nav.nav[data-site-nav] .nav-sub .nav-drop > a, nav.nav[data-site-nav] .nav-sub-2 .nav-drop > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }',
-    'nav.nav[data-site-nav] .nav-sub .nav-drop > a:hover, nav.nav[data-site-nav] .nav-sub-2 .nav-drop > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
-    'nav.nav[data-site-nav] .nav-sub > span:not(.nav-drop) { padding: 9px 12px; font-size: 14px; color: var(--color-text); white-space: nowrap; }',
-    'nav.nav[data-site-nav] .nav-sub .nav-drop { display: block; position: relative; }',
-    'nav.nav[data-site-nav] .nav-sub-2 { position: absolute; top: -1px; left: 100%; min-width: 190px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 61; }',
-    'nav.nav[data-site-nav] .nav-sub .nav-drop:hover > .nav-sub-2, nav.nav[data-site-nav] .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: flex; }',
-    'nav.nav[data-site-nav] .nav-sub-2 > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }',
-    'nav.nav[data-site-nav] .nav-sub-2 > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
-    'nav.nav[data-site-nav] .nav-sub-2 > span { padding: 9px 12px; font-size: 14px; color: var(--color-text); white-space: nowrap; }',
+    'nav.nav[data-site-nav] .nav-sub > a { padding: 16px 20px; font-size: 17px; text-decoration: none; color: var(--color-text); white-space: nowrap; }',
+    'nav.nav[data-site-nav] .nav-sub > a:hover { background: var(--color-neutral-300); }',
+    'nav.nav[data-site-nav] .nav-sub > span:not(.nav-drop) { padding: 16px 20px; font-size: 17px; color: var(--color-text); white-space: nowrap; }',
     'nav.nav[data-site-nav] .nav-lang { display: flex; align-items: center; border: 1px solid var(--color-divider); margin-left: auto; }',
     'nav.nav[data-site-nav] .nav-lang button { font-family: var(--font-heading); font-size: 12px; letter-spacing: .06em; padding: 7px 10px; border: none; background: transparent; color: var(--color-neutral-700); font-weight: 600; cursor: pointer; }',
     'nav.nav[data-site-nav] .nav-lang button + button { border-left: 1px solid var(--color-divider); }',
@@ -195,13 +104,13 @@
     '  nav.nav[data-site-nav] .nav-brand { justify-content: center; }',
     '  nav.nav[data-site-nav] > a, nav.nav[data-site-nav] .nav-drop > a { padding-top: 2px; padding-bottom: 2px; }',
     '  nav.nav[data-site-nav] .btn-primary { margin-left: 0; flex: 0 0 100%; }',
-    '  nav.nav[data-site-nav] .nav-sub, nav.nav[data-site-nav] .nav-sub-2 { display: none; }',
+    '  nav.nav[data-site-nav] .nav-sub { display: none; }',
     '  nav.nav[data-site-nav] .nav-cart { position: absolute; top: 10px; left: 18px; padding: 5px 9px; }',
     '}',
     // alcune pagine nascondono i link del menu sotto i 600px con ".nav a { display: none }":
     // qui li rimettiamo, altrimenti su telefono resterebbe solo il logo.
     'nav.nav[data-site-nav] > a, nav.nav[data-site-nav] .nav-drop > a,',
-    'nav.nav[data-site-nav] .nav-sub > a, nav.nav[data-site-nav] .nav-sub-2 > a { display: flex; align-items: center; }',
+    'nav.nav[data-site-nav] .nav-sub > a { display: flex; align-items: center; }',
     'nav.nav[data-site-nav] > a.btn-primary { display: inline-flex; }',
   ].join('\n');
 
@@ -211,12 +120,8 @@
   function en(node) {
     return node.en ? ' data-en="' + esc(node.en) + '"' : '';
   }
-  // Livello 2 e 3 del menu.
-  function renderChild(node, depth) {
-    if (node.sub && node.sub.length) {
-      return '<span class="nav-drop"><a href="' + esc(node.href || '#') + '"' + en(node) + '>' + esc(node.it) + '</a>' +
-        '<span class="nav-sub-' + (depth + 1) + '">' + node.sub.map(function (c) { return renderChild(c, depth + 1); }).join('') + '</span></span>';
-    }
+  // Livello 2 del menu (voci del sottomenu: nessuna ha pi\u00f9 un ulteriore sottolivello).
+  function renderChild(node) {
     if (!node.href) return '<span' + en(node) + '>' + esc(node.it) + '</span>';
     return '<a href="' + esc(node.href) + '"' + en(node) + '>' + esc(node.it) + '</a>';
   }
@@ -225,7 +130,7 @@
     var link = '<a href="' + esc(item.href || '#') + '"' + en(item) + style + '>' + esc(item.it) + '</a>';
     if (!item.sub || !item.sub.length) return link;
     return '<span class="nav-drop">' + link +
-      '<span class="nav-sub">' + item.sub.map(function (c) { return renderChild(c, 1); }).join('') + '</span></span>';
+      '<span class="nav-sub">' + item.sub.map(renderChild).join('') + '</span></span>';
   }
 
   function html() {
