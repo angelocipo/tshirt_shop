@@ -12,6 +12,7 @@
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
+  <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <title>Felpa Badet Personalizzata | Tshirt Shop Online</title>
@@ -769,15 +770,26 @@ class Component extends DCLogic {
             retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
           },
         };
-        const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
-        const params = new URLSearchParams({
+        const cartRow = {
           id: 'felpa-badet',
           name: 'Felpa Badet',
-          price: grandTotal.toFixed(2),
+          price: +grandTotal.toFixed(2),
           col: 'misura',
-          cfg,
-        });
-        window.location.href = './checkout.html?' + params.toString();
+          body: orderBody,
+          img: (IMAGE_BY_COLOR[activeColor.name] || DEFAULT_HERO_IMG.replace('-hero-plain', '-hero')),
+          url: 'felpa-badet.html',
+        };
+        if (window.tsCart) {
+          window.tsCart.add(cartRow);
+          window.tsCart.toast(en ? 'Added to the cart.' : 'Aggiunto al carrello.', en ? 'Go to cart' : 'Vai al carrello');
+        } else {
+          let prev = [];
+          try { prev = JSON.parse(localStorage.getItem('ts_cart') || '[]'); } catch (e) {}
+          if (!Array.isArray(prev)) prev = [];
+          prev.push(cartRow);
+          try { localStorage.setItem('ts_cart', JSON.stringify(prev)); } catch (e) {}
+          window.location.href = './carrello.html';
+        }
       },
       preventivo: () => {
         const cName = hasColor ? activeColor.name : 'da definire';

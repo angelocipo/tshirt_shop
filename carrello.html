@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta charset="utf-8">
+<script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="site-nav.js"></script>
+  <script defer src="nav-mobile.js"></script>
+  <script defer src="cart.js"></script>
+  <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.tshirt-shop.online/carrello.html">
+<meta property="og:url" content="https://www.tshirt-shop.online/carrello.html">
+<title>Carrello | Tshirt Shop Online</title>
+<meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
+<script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
+<style>
+:root, body {
+  --color-accent: #46433f; --color-accent-100: #ececeb; --color-accent-200: #d6d5d4; --color-accent-300: #b7b5b3;
+  --color-accent-400: #8f8c8a; --color-accent-500: #605d5b; --color-accent-600: #46433f; --color-accent-700: #302d2b;
+  --color-accent-800: #201e1c; --color-accent-900: #131211;
+}
+.idx-wrap{max-width:900px;margin:0 auto;padding:0 var(--space-6);}
+.co-section{padding:var(--space-6);margin-bottom:var(--space-6);}
+.cart-row{display:grid;grid-template-columns:96px 1fr auto;gap:var(--space-4);align-items:start;}
+@media (max-width:620px){.cart-row{grid-template-columns:72px 1fr;}.cart-row .cart-side{grid-column:2;align-items:flex-start!important;}.nav a{display:none;}}
+nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+nav.nav .nav-brand { flex: 0 0 100%; }
+nav.nav > a:not(.nav-brand) { font-size: 14px; }
+a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
+a { color: var(--color-accent-700); }
+a:hover { color: var(--color-accent-900); }
+</style>
+</helmet>
+
+<div style="background:var(--color-accent);color:var(--color-bg);text-align:center;padding:8px 16px;font-family:var(--font-heading);font-weight:700;font-size:13px;letter-spacing:0.02em;">Spedizione gratuita per ordini da € 50.</div>
+
+<nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
+
+<main class="idx-wrap" style="padding-top:var(--space-8);padding-bottom:calc(var(--space-8) * 2);">
+  <h1 style="font-size:32px;margin:0 0 var(--space-2);">Il tuo carrello.</h1>
+  <p class="card-body" style="margin:0 0 var(--space-6);">{{ leadLine }}</p>
+
+  <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+    <div class="card blueprint co-section">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="card-title" style="margin-bottom:var(--space-2);">Ancora vuoto.</div>
+      <p class="card-body" style="margin:0 0 var(--space-5);">Configura un capo e aggiungilo: resta qui ad aspettare gli altri.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);">
+        <a class="btn btn-primary blueprint" href="felpe.html" style="text-decoration:none;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Vedi le felpe
+        </a>
+        <a class="btn btn-secondary" href="index.html" style="text-decoration:none;">Tutto il catalogo</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;gap:var(--space-4);margin-bottom:var(--space-6);">
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="2">
+        <div class="card blueprint co-section" style="margin-bottom:0;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div class="cart-row">
+            <a href="{{ r.url }}" style="display:block;border:1px solid var(--color-divider);aspect-ratio:1;">
+              <img src="{{ r.img }}" alt="{{ r.name }}" style="width:100%;height:100%;object-fit:contain;display:block;">
+            </a>
+            <div>
+              <div class="card-kicker">Riga {{ r.n }}</div>
+              <a href="{{ r.url }}" class="card-title" style="display:block;text-decoration:none;margin-bottom:var(--space-3);">{{ r.name }}</a>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px,1fr));gap:var(--space-3);">
+                <sc-for list="{{ r.details }}" as="d" hint-placeholder-count="4">
+                  <div>
+                    <div style="font-size:10.5px;text-transform:uppercase;letter-spacing:0.04em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:2px;">{{ d.label }}</div>
+                    <div style="font-size:13.5px;font-weight:600;">{{ d.value }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="cart-side" style="display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-2);">
+              <div style="font-family:var(--font-heading);font-size:24px;white-space:nowrap;">{{ r.priceLabel }}</div>
+              <button type="button" class="btn btn-ghost" style="font-size:13px;padding:6px 10px;" onClick="{{ r.remove }}">Rimuovi</button>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div class="card blueprint co-section">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--space-2);">
+        <span style="font-size:14px;color:color-mix(in srgb, var(--color-text) 70%, transparent);">Subtotale</span>
+        <span style="font-family:var(--font-heading);font-size:20px;">{{ subtotalLabel }}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:var(--space-3);border-bottom:1px solid var(--color-divider);">
+        <span style="font-size:14px;color:color-mix(in srgb, var(--color-text) 70%, transparent);">Spedizione</span>
+        <span style="font-family:var(--font-heading);font-size:20px;">{{ shippingLabel }}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding-top:var(--space-3);margin-bottom:var(--space-5);">
+        <span style="font-size:14px;font-weight:700;">Totale</span>
+        <span style="font-family:var(--font-heading);font-size:28px;">{{ totalLabel }}</span>
+      </div>
+      <sc-if value="{{ missingForFree }}" hint-placeholder-val="{{ null }}">
+        <p style="margin:0 0 var(--space-4);font-size:13px;font-family:var(--font-heading);font-weight:700;color:var(--color-accent-700);">Ti mancano {{ missingForFree }} alla spedizione gratuita.</p>
+      </sc-if>
+      <a class="btn btn-primary btn-block blueprint" href="checkout.html?cart=1" style="text-decoration:none;">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Procedi al checkout
+      </a>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-3);margin-top:var(--space-4);">
+        <a href="felpe.html" style="font-size:13.5px;">Continua ad aggiungere prodotti</a>
+        <button type="button" class="btn btn-ghost" style="font-size:13px;padding:4px 8px;" onClick="{{ emptyCart }}">Svuota il carrello</button>
+      </div>
+    </div>
+  </sc-if>
+</main>
+
+<footer style="border-top:1px solid var(--color-divider);">
+  <div style="max-width:1280px;margin:0 auto;padding:var(--space-6);font-size:12.5px;color:color-mix(in srgb, var(--color-text) 60%, transparent);text-align:center;">© 2026 Tshirt Shop Online by Printing Italy · Via Lorenzo Bonincontri, 26, 00147 Roma · P.IVA 02452700590</div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { items: [], ready: false };
+
+  componentDidMount() {
+    this.sync();
+    this._onChange = () => this.sync();
+    document.addEventListener('ts-cart-change', this._onChange);
+    window.addEventListener('storage', this._onChange);
+    // cart.js è caricato con defer: se non è ancora pronto, ritenta una volta.
+    if (!window.tsCart) this._t = setTimeout(() => this.sync(), 300);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('ts-cart-change', this._onChange);
+    window.removeEventListener('storage', this._onChange);
+    if (this._t) clearTimeout(this._t);
+  }
+  sync() {
+    if (window.tsCart) { this.setState({ items: window.tsCart.list(), ready: true }); return; }
+    let items = [];
+    try { items = JSON.parse(localStorage.getItem('ts_cart') || '[]'); } catch (e) {}
+    this.setState({ items: Array.isArray(items) ? items : [], ready: true });
+  }
+  fmt(n) {
+    return '€ ' + (Math.round(n * 100) / 100).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  details(row) {
+    const h = row && row.body && row.body.human;
+    if (!h || typeof h !== 'object') return [];
+    return Object.entries(h)
+      .filter(([, v]) => v !== undefined && v !== null && v !== '')
+      .map(([k, v]) => ({ label: k, value: String(v) }));
+  }
+
+  renderVals() {
+    const items = this.state.items || [];
+    const subtotal = items.reduce((s, r) => s + (parseFloat(r.price) || 0), 0);
+    const shipping = subtotal >= 50 ? 0 : 8;
+    const missing = subtotal > 0 && subtotal < 50 ? 50 - subtotal : 0;
+    return {
+      hasRows: items.length > 0,
+      isEmpty: this.state.ready && items.length === 0,
+      leadLine: items.length === 0
+        ? 'Nessun capo in attesa.'
+        : (items.length === 1
+            ? 'Un prodotto in attesa. Aggiungine altri: restano qui.'
+            : items.length + ' prodotti in attesa. Restano qui fino al pagamento.'),
+      rows: items.map((r, i) => ({
+        n: i + 1,
+        name: r.name || 'Prodotto',
+        url: r.url || 'index.html',
+        img: r.img || 'img/favicon.png',
+        priceLabel: this.fmt(parseFloat(r.price) || 0),
+        details: this.details(r),
+        remove: () => {
+          if (window.tsCart) { window.tsCart.removeAt(i); return; }
+          const a = (this.state.items || []).slice();
+          a.splice(i, 1);
+          try { localStorage.setItem('ts_cart', JSON.stringify(a)); } catch (e) {}
+          this.setState({ items: a });
+        },
+      })),
+      subtotalLabel: this.fmt(subtotal),
+      shippingLabel: shipping === 0 ? 'gratuita' : this.fmt(shipping),
+      totalLabel: this.fmt(subtotal + shipping),
+      missingForFree: missing > 0 ? this.fmt(missing) : null,
+      emptyCart: () => {
+        if (!window.confirm('Svuotare il carrello?')) return;
+        if (window.tsCart) { window.tsCart.clear(); return; }
+        try { localStorage.setItem('ts_cart', '[]'); } catch (e) {}
+        this.setState({ items: [] });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

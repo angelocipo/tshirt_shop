@@ -186,12 +186,17 @@
     'nav.nav[data-site-nav] .nav-lang { display: flex; align-items: center; border: 1px solid var(--color-divider); margin-left: auto; }',
     'nav.nav[data-site-nav] .nav-lang button { font-family: var(--font-heading); font-size: 12px; letter-spacing: .06em; padding: 7px 10px; border: none; background: transparent; color: var(--color-neutral-700); font-weight: 600; cursor: pointer; }',
     'nav.nav[data-site-nav] .nav-lang button + button { border-left: 1px solid var(--color-divider); }',
+    'nav.nav[data-site-nav] .nav-cart { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--color-divider); padding: 6px 11px; text-decoration: none; color: var(--color-text); font-family: var(--font-heading); font-weight: 700; font-size: 13px; letter-spacing: .04em; }',
+    'nav.nav[data-site-nav] .nav-cart:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
+    'nav.nav[data-site-nav] .nav-cart svg { flex: none; }',
+    'nav.nav[data-site-nav] .nav-cart[data-cart-full="1"] { border-color: var(--color-accent); color: var(--color-accent-700); }',
     '@media (max-width: 700px) {',
     '  nav.nav[data-site-nav] { justify-content: center; row-gap: 4px; padding-left: 18px; padding-right: 18px; box-sizing: border-box; }',
     '  nav.nav[data-site-nav] .nav-brand { justify-content: center; }',
     '  nav.nav[data-site-nav] > a, nav.nav[data-site-nav] .nav-drop > a { padding-top: 2px; padding-bottom: 2px; }',
     '  nav.nav[data-site-nav] .btn-primary { margin-left: 0; flex: 0 0 100%; }',
     '  nav.nav[data-site-nav] .nav-sub, nav.nav[data-site-nav] .nav-sub-2 { display: none; }',
+    '  nav.nav[data-site-nav] .nav-cart { position: absolute; top: 10px; left: 18px; padding: 5px 9px; }',
     '}',
     // alcune pagine nascondono i link del menu sotto i 600px con ".nav a { display: none }":
     // qui li rimettiamo, altrimenti su telefono resterebbe solo il logo.
@@ -231,9 +236,23 @@
     out += '<span class="nav-lang">' +
       '<button type="button" data-lang="it" aria-pressed="true">IT</button>' +
       '<button type="button" data-lang="en" aria-pressed="false">EN</button></span>';
+    out += '<a class="nav-cart" href="carrello.html" data-cart-link aria-label="Carrello" title="Carrello">' +
+      '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+      '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>' +
+      '<path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>' +
+      '<span data-cart-count>0</span></a>';
     out += '<a class="btn btn-primary" href="' + esc(MENU.whatsapp.href) + '" style="text-decoration:none;" data-en="' +
       esc(MENU.whatsapp.en) + '">' + esc(MENU.whatsapp.it) + '</a>';
     return out;
+  }
+
+  // Il contatore del carrello vive in cart.js: caricalo una volta per tutte le pagine.
+  if (!window.tsCart && !document.querySelector('script[data-ts-cart]')) {
+    var cartScript = document.createElement('script');
+    cartScript.setAttribute('data-ts-cart', '');
+    cartScript.defer = true;
+    cartScript.src = 'cart.js';
+    (document.head || document.documentElement).appendChild(cartScript);
   }
 
   var style = document.createElement('style');
@@ -248,6 +267,8 @@
       if (el.getAttribute('data-site-nav-done') === '1') continue;
       el.innerHTML = html();
       el.setAttribute('data-site-nav-done', '1');
+      // Il menu appena iniettato porta il contatore a zero: cart.js lo riallinea subito.
+      if (window.tsCart) window.tsCart.paint();
     }
   }
 

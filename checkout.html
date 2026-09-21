@@ -13,6 +13,7 @@
 <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
+  <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
 
@@ -76,43 +77,49 @@
 <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
 <main class="idx-wrap" style="padding-top:var(--space-8);padding-bottom:calc(var(--space-8) * 2);">
-  <a href="beagle.html" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--space-4);">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Torna al prodotto
+  <a href="{{ backHref }}" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--space-4);">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>{{ backLabel }}
   </a>
   <h1 style="font-size:32px;margin:0 0 var(--space-6);">Checkout</h1>
 
   <sc-if value="{{ hasProduct }}" hint-placeholder-val="{{ true }}">
     <div class="card blueprint co-section">
       <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);margin-bottom:{{ detailsMarginBottom }};">
-        <div>
-          <div class="card-kicker">Il tuo ordine</div>
-          <div class="card-title">{{ productName }}</div>
-          <sc-if value="{{ hasEan }}" hint-placeholder-val="{{ false }}">
-            <div style="font-size:12px;letter-spacing:.04em;color:color-mix(in srgb, var(--color-text) 60%, transparent);margin-top:2px;">EAN {{ productEan }}</div>
-          </sc-if>
-        </div>
-        <div style="text-align:right;">
-          <div style="font-family:var(--font-heading);font-size:28px;">€{{ orderTotal }}</div>
-          <div style="font-size:12px;color:color-mix(in srgb, var(--color-text) 60%, transparent);">Prodotto € {{ productPrice }} + spedizione {{ shippingLabel }}</div>
-        </div>
-      </div>
-      <sc-if value="{{ hasDetails }}" hint-placeholder-val="{{ false }}">
-        <div style="border-top:1px solid var(--color-divider);padding-top:var(--space-4);display:grid;grid-template-columns:repeat(auto-fit, minmax(160px,1fr));gap:var(--space-3);">
-          <sc-for list="{{ orderDetails }}" as="d" hint-placeholder-count="4">
+      <div class="card-kicker" style="margin-bottom:var(--space-3);">{{ orderKicker }}</div>
+      <sc-for list="{{ lines }}" as="l" hint-placeholder-count="1">
+        <div style="border-top:1px solid var(--color-divider);padding:var(--space-4) 0;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-4);margin-bottom:{{ l.gap }};">
             <div>
-              <div style="font-size:10.5px;text-transform:uppercase;letter-spacing:0.04em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:2px;">{{ d.label }}</div>
-              <div style="font-size:13.5px;font-weight:600;">{{ d.value }}</div>
+              <div class="card-title">{{ l.name }}</div>
+              <sc-if value="{{ l.ean }}" hint-placeholder-val="{{ null }}">
+                <div style="font-size:12px;letter-spacing:.04em;color:color-mix(in srgb, var(--color-text) 60%, transparent);margin-top:2px;">EAN {{ l.ean }}</div>
+              </sc-if>
             </div>
-          </sc-for>
+            <div style="font-family:var(--font-heading);font-size:22px;white-space:nowrap;">€ {{ l.price }}</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px,1fr));gap:var(--space-3);">
+            <sc-for list="{{ l.details }}" as="d" hint-placeholder-count="4">
+              <div>
+                <div style="font-size:10.5px;text-transform:uppercase;letter-spacing:0.04em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:2px;">{{ d.label }}</div>
+                <div style="font-size:13.5px;font-weight:600;">{{ d.value }}</div>
+              </div>
+            </sc-for>
+          </div>
         </div>
+      </sc-for>
+      <div style="border-top:1px solid var(--color-divider);padding-top:var(--space-4);display:flex;justify-content:space-between;align-items:baseline;">
+        <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 60%, transparent);">Prodotti € {{ productPrice }} + spedizione {{ shippingLabel }}</div>
+        <div style="font-family:var(--font-heading);font-size:28px;">€{{ orderTotal }}</div>
+      </div>
+      <sc-if value="{{ fromCart }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:var(--space-3) 0 0;font-size:13px;"><a href="carrello.html">Modifica il carrello</a></p>
       </sc-if>
     </div>
   </sc-if>
   <sc-if value="{{ noProduct }}" hint-placeholder-val="{{ false }}">
     <div class="card blueprint co-section">
       <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <p class="card-body">Nessun prodotto selezionato. Torna a una pagina prodotto e clicca "Ordina ora".</p>
+      <p class="card-body">Carrello vuoto. Torna a una pagina prodotto e clicca "Aggiungi al carrello".</p>
     </div>
   </sc-if>
 
@@ -322,6 +329,7 @@ const EAN_BY_NAME = {
 class Component extends DCLogic {
   state = {
     productId: null, productName: '', productPrice: null, productCollection: 'misura', orderBody: null,
+    cartItems: null,
     invType: 'privato',
     inv: { name: '', email: '', company: '', vat: '', cf: '', pec: '', sdi: '', address: '', city: '', cap: '', country: '' },
     shipSame: true,
@@ -363,6 +371,7 @@ class Component extends DCLogic {
 
   componentDidMount() {
     const params = new URLSearchParams(window.location.search);
+    if (params.get('cart') === '1' && !params.get('id')) { this.loadCart(); return; }
     const id = params.get('id');
     const name = params.get('name');
     const price = params.get('price');
@@ -376,6 +385,52 @@ class Component extends DCLogic {
     const autoFree = (col === 'strategici') || priceNum >= 50;
     if (id) this.setState({ productId: id, productName: name || '', productPrice: price || '', productCollection: col || 'misura', orderBody, shipZone: autoFree ? 'gratuita' : this.state.shipZone });
     if (id) this.mountPaypalWhenReady();
+  }
+
+  /* Checkout dal carrello: le righe arrivano da localStorage (cart.js). */
+  loadCart(attempts) {
+    attempts = attempts || 0;
+    let items = [];
+    try { items = JSON.parse(localStorage.getItem('ts_cart') || '[]'); } catch (e) {}
+    if (!Array.isArray(items)) items = [];
+    items = items.filter((r) => r && r.id);
+    if (!items.length) {
+      if (attempts < 6) { setTimeout(() => this.loadCart(attempts + 1), 200); return; }
+      this.setState({ cartItems: [] });
+      return;
+    }
+    const subtotal = items.reduce((s, r) => s + (parseFloat(r.price) || 0), 0);
+    this.setState({
+      cartItems: items,
+      productId: items[0].id,
+      productName: items.length === 1 ? (items[0].name || '') : (items.length + ' prodotti'),
+      productPrice: subtotal.toFixed(2),
+      productCollection: 'misura',
+      orderBody: items[0].body || { productId: items[0].id },
+      shipZone: subtotal >= 50 ? 'gratuita' : this.state.shipZone,
+    });
+    this.mountPaypalWhenReady();
+  }
+
+  /* Le righe del checkout: dal carrello oppure il singolo prodotto passato via URL. */
+  lines() {
+    if (this.state.cartItems && this.state.cartItems.length) {
+      return this.state.cartItems.map((r) => ({
+        name: r.name || 'Prodotto',
+        price: (parseFloat(r.price) || 0).toFixed(2),
+        ean: EAN_BY_NAME[r.name] || null,
+        details: this.buildOrderDetails(r.body),
+        body: r.body || { productId: r.id },
+      }));
+    }
+    if (!this.state.productId) return [];
+    return [{
+      name: this.state.productName,
+      price: (parseFloat(this.state.productPrice) || 0).toFixed(2),
+      ean: EAN_BY_NAME[this.state.productName] || null,
+      details: this.buildOrderDetails(this.state.orderBody),
+      body: this.state.orderBody || { productId: this.state.productId },
+    }];
   }
 
   mountPaypalWhenReady(attempts) {
@@ -406,7 +461,7 @@ class Component extends DCLogic {
   }
 
   computeShippingFee() {
-    if (this.state.productCollection === 'strategici') return 0;
+    if (this.state.productCollection === 'strategici' && !this.state.cartItems) return 0;
     const price = parseFloat(this.state.productPrice) || 0;
     if (price >= 50) return 0;
     return 8;
@@ -437,6 +492,7 @@ class Component extends DCLogic {
       // Full recap for the thank-you page (kept after the purchase event fires).
       localStorage.setItem('ts_last_order', JSON.stringify({
         name: this.state.productName,
+        lines: this.lines().map((l) => ({ name: l.name, price: l.price, details: l.details })),
         subtotal: +(parseFloat(this.state.productPrice) || 0).toFixed(2),
         shippingFee: +shippingFee.toFixed(2),
         total: value,
@@ -454,15 +510,31 @@ class Component extends DCLogic {
     const err = this.validate();
     if (err) { this.setState({ errorMsg: err }); return; }
     this.setState({ submitting: true, errorMsg: null });
-    const { productId, invType, inv, shipSame, ship, shipZone, useSender, sender, orderBody } = this.state;
+    const { productId, invType, inv, shipSame, ship, shipZone, useSender, sender, orderBody, cartItems } = this.state;
     const shippingFee = this.computeShippingFee();
     this.stashOrder(shippingFee);
+    // Con più righe si manda `items`; l'API ricalcola ogni prezzo dal listino server.
+    let payload;
+    if (cartItems && cartItems.length > 1) {
+      const bodies = cartItems.map((r) => r.body || { productId: r.id });
+      const designFiles = bodies.reduce((a, b) => a.concat(Array.isArray(b.designFiles) ? b.designFiles : []), []);
+      const notes = bodies.map((b) => b.customerNote).filter(Boolean);
+      payload = {
+        items: bodies,
+        designRef: bodies.map((b) => b.designRef).filter(Boolean).join(', ') || undefined,
+        designFiles: designFiles.length ? designFiles : undefined,
+        designLink: bodies.map((b) => b.designLink).filter(Boolean)[0],
+        customerNote: notes.length ? notes.join(' | ') : undefined,
+      };
+    } else {
+      payload = { ...(orderBody || { productId }) };
+    }
     try {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...(orderBody || { productId }),
+          ...payload,
           shippingFee,
           shippingZone: shipZone,
           customer: { invType, ...inv },
@@ -487,16 +559,17 @@ class Component extends DCLogic {
     const s = this.state;
     const shippingFee = this.computeShippingFee();
     const orderTotal = (parseFloat(s.productPrice) || 0) + shippingFee;
-    const orderDetails = this.buildOrderDetails(s.orderBody);
+    const lines = this.lines();
+    const fromCart = !!(s.cartItems && s.cartItems.length);
     return {
       hasProduct: !!s.productId,
       noProduct: !s.productId,
-      hasDetails: orderDetails.length > 0,
-      orderDetails,
-      detailsMarginBottom: orderDetails.length > 0 ? 'var(--space-4)' : '0',
+      fromCart,
+      backHref: fromCart ? 'carrello.html' : 'index.html',
+      backLabel: fromCart ? 'Torna al carrello' : 'Torna al catalogo',
+      orderKicker: lines.length > 1 ? 'Il tuo ordine — ' + lines.length + ' prodotti' : 'Il tuo ordine',
+      lines: lines.map((l) => ({ ...l, gap: l.details.length ? 'var(--space-4)' : '0' })),
       productName: s.productName,
-      productEan: EAN_BY_NAME[s.productName] || '',
-      hasEan: !!EAN_BY_NAME[s.productName],
       productPrice: s.productPrice,
       orderTotal: orderTotal.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }).replace(/,00$/, ''),
       shippingLabel: shippingFee === 0 ? 'gratuita' : ('€ ' + shippingFee),
