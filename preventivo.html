@@ -78,28 +78,61 @@
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);">
-          <td style="padding:14px 6px;vertical-align:top;">
-            <sc-if value="{{ hasUrl }}" hint-placeholder-val="{{ false }}">
-              <div style="font-weight:600;"><a href="{{ prodottoUrl }}" target="_blank" rel="noopener" style="color:var(--color-accent-700);text-decoration:underline;">{{ prodotto }}</a></div>
-            </sc-if>
-            <sc-if value="{{ noUrl }}" hint-placeholder-val="{{ true }}">
-              <div style="font-weight:600;">{{ prodotto }}</div>
-            </sc-if>
-            <sc-if value="{{ hasEan }}" hint-placeholder-val="{{ false }}">
-              <div style="font-size:12px;letter-spacing:.04em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-top:2px;">EAN {{ productEan }}</div>
-            </sc-if>
-            <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ configurazione }}</div>
-            <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ unitPriceLine }}</div>
-          </td>
-          <td style="padding:14px 6px;text-align:right;vertical-align:top;">{{ quantita }}</td>
-          <td style="padding:14px 6px;text-align:right;vertical-align:top;font-weight:600;font-family:ui-monospace,monospace;">{{ prezzoLabel }}</td>
-        </tr>
+        <sc-if value="{{ isCart }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ cartRows }}" as="r" hint-placeholder-count="2">
+            <tr style="border-bottom:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);">
+              <td style="padding:14px 6px;vertical-align:top;">
+                <div style="display:flex;gap:12px;align-items:flex-start;">
+                  <img src="{{ r.qrSrc }}" alt="QR" width="56" height="56" style="flex:none;border:1px solid color-mix(in srgb, var(--color-text) 20%, transparent);">
+                  <div style="min-width:0;">
+                    <sc-if value="{{ r.hasUrl }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-weight:600;"><a href="{{ r.url }}" target="_blank" rel="noopener" style="color:var(--color-accent-700);text-decoration:underline;">{{ r.name }}</a></div>
+                    </sc-if>
+                    <sc-if value="{{ r.noUrl }}" hint-placeholder-val="{{ true }}">
+                      <div style="font-weight:600;">{{ r.name }}</div>
+                    </sc-if>
+                    <sc-if value="{{ r.hasEan }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:12px;letter-spacing:.04em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-top:2px;">EAN {{ r.ean }}</div>
+                    </sc-if>
+                    <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ r.configurazione }}</div>
+                    <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ r.unitPriceLine }}</div>
+                  </div>
+                </div>
+              </td>
+              <td style="padding:14px 6px;text-align:right;vertical-align:top;">{{ r.qty }}</td>
+              <td style="padding:14px 6px;text-align:right;vertical-align:top;font-weight:600;font-family:ui-monospace,monospace;">{{ r.priceFmt }}</td>
+            </tr>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
+          <tr style="border-bottom:1px solid color-mix(in srgb, var(--color-text) 15%, transparent);">
+            <td style="padding:14px 6px;vertical-align:top;">
+              <sc-if value="{{ hasUrl }}" hint-placeholder-val="{{ false }}">
+                <div style="font-weight:600;"><a href="{{ prodottoUrl }}" target="_blank" rel="noopener" style="color:var(--color-accent-700);text-decoration:underline;">{{ prodotto }}</a></div>
+              </sc-if>
+              <sc-if value="{{ noUrl }}" hint-placeholder-val="{{ true }}">
+                <div style="font-weight:600;">{{ prodotto }}</div>
+              </sc-if>
+              <sc-if value="{{ hasEan }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12px;letter-spacing:.04em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-top:2px;">EAN {{ productEan }}</div>
+              </sc-if>
+              <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ configurazione }}</div>
+              <div style="font-size:12.5px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin-top:3px;">{{ unitPriceLine }}</div>
+            </td>
+            <td style="padding:14px 6px;text-align:right;vertical-align:top;">{{ quantita }}</td>
+            <td style="padding:14px 6px;text-align:right;vertical-align:top;font-weight:600;font-family:ui-monospace,monospace;">{{ prezzoLabel }}</td>
+          </tr>
+        </sc-if>
       </tbody>
     </table>
 
     <div style="display:flex;justify-content:flex-end;margin-bottom:32px;">
       <div style="width:260px;">
+        <sc-if value="{{ isCart }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;padding:8px 6px;font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent);">
+            <span data-en="Shipping">Spedizione</span><span>{{ shippingLine }}</span>
+          </div>
+        </sc-if>
         <div style="display:flex;justify-content:space-between;padding:8px 6px;font-size:14px;">
           <span data-en="Net amount">Imponibile</span><span style="font-family:ui-monospace,monospace;">€ {{ imponibileFmt }}</span>
         </div>
@@ -205,8 +238,33 @@ const EAN_BY_NAME = {
 
 class Component extends DCLogic {
   state = {};
+  qrSrc(url) {
+    const abs = new URL(url || 'index.html', window.location.origin).href;
+    return 'https://api.qrserver.com/v1/create-qr-code/?size=140x140&margin=0&data=' + encodeURIComponent(abs);
+  }
   componentDidMount() {
     const params = new URLSearchParams(window.location.search);
+    if (params.get('cart') === '1') {
+      let quote = null;
+      try { quote = JSON.parse(localStorage.getItem('ts_cart_quote') || 'null'); } catch (e) {}
+      if (quote && Array.isArray(quote.rows) && quote.rows.length) {
+        const now = new Date();
+        this.setState({
+          isCart: true,
+          cartQuote: quote,
+          quoteNumber: `PRT-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`,
+          dateStr: now.toLocaleDateString(isEn() ? 'en-GB' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' }),
+          issuedAt: now.toISOString(),
+        });
+        this.onLang = () => {
+          const d = this.state.issuedAt ? new Date(this.state.issuedAt) : new Date();
+          this.setState({ dateStr: d.toLocaleDateString(isEn() ? 'en-GB' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' }) });
+        };
+        window.addEventListener('ts:langchange', this.onLang);
+        setTimeout(() => window.print(), 500);
+        return;
+      }
+    }
     const prodotto = params.get('prodotto') || (isEn() ? 'Tshirt Shop Online product' : 'Prodotto Tshirt Shop Online');
     const configurazione = params.get('config') || '';
     const quantita = params.get('quantita') || '-';
@@ -230,6 +288,38 @@ class Component extends DCLogic {
   }
   componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
   renderVals() {
+    const cartQuote = this.state.cartQuote;
+    if (this.state.isCart && cartQuote) {
+      const cartRows = cartQuote.rows.map((r) => ({
+        name: r.name || 'Prodotto',
+        url: r.url || '',
+        hasUrl: !!r.url,
+        noUrl: !r.url,
+        ean: EAN_BY_NAME[r.name] || '',
+        hasEan: !!EAN_BY_NAME[r.name],
+        qrSrc: this.qrSrc(r.url),
+        configurazione: (r.details || []).map((d) => `${d.label}: ${d.value}`).join(', '),
+        unitPriceLine: r.qty > 0 ? (isEn() ? 'Price per piece: € ' + eurIt(r.price / r.qty) : 'Prezzo al pezzo: € ' + eurIt(r.price / r.qty)) : '',
+        qty: r.qty || '-',
+        priceFmt: '€ ' + eurIt(r.price),
+      }));
+      const shippingLine = cartQuote.shipping > 0
+        ? (isEn() ? 'Shipping € ' + eurIt(cartQuote.shipping) : 'Spedizione € ' + eurIt(cartQuote.shipping))
+        : (isEn() ? 'Free shipping' : 'Spedizione gratuita');
+      const imponibile = cartQuote.total / 1.22;
+      const iva = cartQuote.total - imponibile;
+      return {
+        isCart: true, isSingle: false,
+        cartRows,
+        shippingLine,
+        quoteNumber: this.state.quoteNumber || '',
+        dateStr: this.state.dateStr || '',
+        prezzoLabel: '€ ' + eurIt(cartQuote.total),
+        imponibileFmt: eurIt(imponibile),
+        ivaFmt: eurIt(iva),
+        handlePrint: () => window.print(),
+      };
+    }
     const prezzo = this.state.prezzo || 0;
     const imponibile = prezzo / 1.22;
     const iva = prezzo - imponibile;
@@ -238,6 +328,7 @@ class Component extends DCLogic {
     const unitPrice = !daQuotare && Number.isFinite(pezzi) && pezzi > 0 && prezzo > 0 ? prezzo / pezzi : null;
     const dash = isEn() ? 'To be quoted' : 'Da quotare';
     return {
+      isCart: false, isSingle: true,
       prodotto: this.state.prodotto || '',
       productEan: EAN_BY_NAME[this.state.prodotto] || '',
       hasEan: !!EAN_BY_NAME[this.state.prodotto],

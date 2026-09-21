@@ -239,19 +239,18 @@ class Component extends DCLogic {
       totalLabel: this.fmt(subtotal + shipping),
       missingForFree: missing > 0 ? this.fmt(missing) : null,
       requestQuote: () => {
-        const lines = items.map((r, i) => {
-          const h = (r.body || {}).human || {};
-          const bits = Object.entries(h).filter(([, v]) => v !== undefined && v !== null && v !== '').map(([k, v]) => `${k}: ${v}`);
-          return `${r.name || 'Prodotto'}${bits.length ? ' (' + bits.join(', ') + ')' : ''} — ${this.fmt(priceAt(r, i))}`;
-        });
-        const totalQty = items.reduce((s, r) => s + qtyOf(r), 0);
-        const params = new URLSearchParams({
-          prodotto: items.length === 1 ? (items[0].name || 'Prodotto') : `Carrello — ${items.length} prodotti`,
-          config: lines.join(' • '),
-          quantita: String(totalQty),
-          prezzo: (subtotal + shipping).toFixed(2),
-        });
-        window.open('./preventivo.html?' + params.toString(), '_blank', 'noopener');
+        // Il preventivo in PDF mostra le stesse righe del carrello: le passiamo per intero,
+        // non solo un totale — preventivo.html le legge da qui quando vede ?cart=1.
+        const rows = items.map((r, i) => ({
+          name: r.name || 'Prodotto',
+          url: r.url || '',
+          img: r.img || '',
+          qty: qtyOf(r),
+          price: priceAt(r, i),
+          details: this.details(r),
+        }));
+        try { localStorage.setItem('ts_cart_quote', JSON.stringify({ rows, subtotal, shipping, total: subtotal + shipping })); } catch (e) {}
+        window.open('./preventivo.html?cart=1', '_blank', 'noopener');
       },
       emptyCart: () => {
         if (!window.confirm('Svuotare il carrello?')) return;
