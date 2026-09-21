@@ -130,9 +130,11 @@ function slugMult(slug, qty) {
     : POLO_SLUGS.includes(slug) ? POLO_QTY_MULT : HV_QTY_MULT;
   let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t.mult;
 }
-function hvGarmentTotal(slug, qty, sizes) {
+// rateQty: quantità di riferimento per la fascia di prezzo (può essere la somma
+// delle righe dello stesso modello nel carrello). qty resta la quantità della riga.
+function hvGarmentTotal(slug, qty, sizes, rateQty) {
   const base = HV_BASE[slug];
-  const m = slugMult(slug, qty);
+  const m = slugMult(slug, Math.max(qty, parseInt(rateQty, 10) || 0));
   const unit = (s) => Math.round((base[s] || 0) * m * 100) / 100;
   const map = sizes && typeof sizes === 'object' ? sizes : {};
   const keys = Object.keys(base);
@@ -245,133 +247,133 @@ const PRICING = {
     coloredSurcharge: 1.1 },
 
   'hv-delta': { nome: 'T-Shirt Alta Visibilità Delta', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-delta', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-delta', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-delta', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'hv-tauri': { nome: 'T-Shirt Alta Visibilità Tauri', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-tauri', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-tauri', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-tauri', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'hv-vega': { nome: 'Polo Alta Visibilità Vega', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-vega', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-vega', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-vega', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'hv-vega-ls': { nome: 'Polo Alta Visibilità Vega Maniche Lunghe', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-vega-ls', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-vega-ls', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-vega-ls', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'hv-atrio': { nome: 'Polo Alta Visibilità Atrio', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-atrio', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-atrio', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-atrio', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'hv-atrio-ls': { nome: 'Polo Alta Visibilità Atrio Maniche Lunghe', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-atrio-ls', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-atrio-ls', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-atrio-ls', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'prince-donna': { nome: 'Polo da Donna Prince Woman', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('prince-donna', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('prince-donna', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('prince-donna', 1, null) * slugMult('prince-donna', qty) / slugMult('prince-donna', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'prince-polo': { nome: 'Polo da Uomo Prince', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('prince-polo', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('prince-polo', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('prince-polo', 1, null) * slugMult('prince-polo', qty) / slugMult('prince-polo', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'aifos': { nome: 'Camicia Uomo Aifos Manica Corta', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('aifos', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('aifos', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('aifos', 1, null) * slugMult('aifos', qty) / slugMult('aifos', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'aifos-ls': { nome: 'Camicia Uomo Aifos Manica Lunga', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('aifos-ls', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('aifos-ls', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('aifos-ls', 1, null) * slugMult('aifos-ls', qty) / slugMult('aifos-ls', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'moscu': { nome: 'Camicia Uomo Moscu Manica Lunga', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('moscu', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('moscu', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('moscu', 1, null) * slugMult('moscu', qty) / slugMult('moscu', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'vaccine-donna': { nome: 'Camice da Laboratorio Donna Vaccine', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('vaccine-donna', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('vaccine-donna', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('vaccine-donna', 1, null) * slugMult('vaccine-donna', qty) / slugMult('vaccine-donna', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'vaccine': { nome: 'Camice da Laboratorio Vaccine', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('vaccine', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('vaccine', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('vaccine', 1, null) * slugMult('vaccine', qty) / slugMult('vaccine', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'sofia-ls': { nome: 'Camicia Donna Sofia Manica Lunga', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('sofia-ls', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('sofia-ls', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('sofia-ls', 1, null) * slugMult('sofia-ls', qty) / slugMult('sofia-ls', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'sofia': { nome: 'Camicia Donna Sofia Manica Corta', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('sofia', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('sofia', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('sofia', 1, null) * slugMult('sofia', qty) / slugMult('sofia', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'moscu-donna': { nome: 'Camicia Donna Moscu Manica Lunga', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('moscu-donna', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('moscu-donna', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('moscu-donna', 1, null) * slugMult('moscu-donna', qty) / slugMult('moscu-donna', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'hv-polaris': { nome: 'Polo Alta Visibilità Polaris', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-polaris', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-polaris', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-polaris', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'hv-foran': { nome: 'Polo Foran Maggiore Visibilità', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-foran', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-foran', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-foran', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'slam-donna': { nome: 'T-Shirt Tecnica Slam Woman', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('slam-donna', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('slam-donna', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('slam-donna', 1, null) * slugMult('slam-donna', qty) / slugMult('slam-donna', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -379,7 +381,7 @@ const PRICING = {
 
   // T-shirt tecnica Slam (Roly CA0304) — moltiplicatore 3: 3,00 → 2,00.
   'slam': { nome: 'T-Shirt Tecnica Slam', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('slam', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('slam', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('slam', 1, null) * slugMult('slam', qty) / slugMult('slam', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -387,7 +389,7 @@ const PRICING = {
 
   // Polo sport Monzha (Roly PO0404) — moltiplicatore 3: 3,00 → 2,00.
   'monzha': { nome: 'Polo Sport Monzha', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('monzha', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('monzha', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('monzha', 1, null) * slugMult('monzha', qty) / slugMult('monzha', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -395,14 +397,14 @@ const PRICING = {
 
   // Gonna sport Serena (Roly PA0307) e short sport Murray (Roly PA0306) — moltiplicatore 3: 3,00 → 2,00.
   'serena': { nome: 'Gonna Sport Serena', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('serena', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('serena', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('serena', 1, null) * slugMult('serena', qty) / slugMult('serena', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'murray': { nome: 'Short Sport Murray', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('murray', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('murray', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('murray', 1, null) * slugMult('murray', qty) / slugMult('murray', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -410,7 +412,7 @@ const PRICING = {
 
   // Polo sport Tormo (Roly PO0400) — scala moltiplicatore 3: 3,00 a 1 pz → 2,00 da 100 pz.
   'tormo': { nome: 'Polo Sport Tormo', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('tormo', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('tormo', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('tormo', 1, null) * slugMult('tormo', qty) / slugMult('tormo', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -418,14 +420,14 @@ const PRICING = {
 
   // Felpa Badet (Roly SU1058) — moltiplicatore 3: 3,00 → 2,00.
   'felpa-badet': { nome: 'Felpa Badet', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('felpa-badet', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-badet', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('felpa-badet', 1, null) * slugMult('felpa-badet', qty) / slugMult('felpa-badet', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'felpa-badet-kids': { nome: 'Felpa Badet Bambino', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('felpa-badet-kids', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-badet-kids', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('felpa-badet-kids', 1, null) * slugMult('felpa-badet-kids', qty) / slugMult('felpa-badet-kids', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -433,21 +435,21 @@ const PRICING = {
 
   // Felpa Urban (Roly SU1067) — moltiplicatore 3: 3,00 → 2,00.
   'felpa-urban': { nome: 'Felpa Urban', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('felpa-urban', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-urban', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('felpa-urban', 1, null) * slugMult('felpa-urban', qty) / slugMult('felpa-urban', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'felpa-urban-kids': { nome: 'Felpa Urban Bambino', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('felpa-urban-kids', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-urban-kids', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('felpa-urban-kids', 1, null) * slugMult('felpa-urban-kids', qty) / slugMult('felpa-urban-kids', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'hv-foran-ls': { nome: 'Polo Foran L/S Maggiore Visibilità', type: 'tshirt',
-    garmentTotal: (qty, sizes) => hvGarmentTotal('hv-foran-ls', qty, sizes),
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-foran-ls', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-foran-ls', 1, null) * hvMult(qty) / hvMult(1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -464,4 +466,11 @@ const PRICING = {
     printUnitPrice: (qty) => pickTier(BASICA_CAP_PRINT_TIERS, qty).price },
 };
 
-module.exports = { PRICING, ANGOLI_ARROTONDATI_TIERS, angoliArrotondatiPrice };
+// Prodotti che fanno quantità insieme: adulto e bambino dello stesso modello.
+const QTY_GROUPS = {
+  'felpa-urban': 'felpa-urban', 'felpa-urban-kids': 'felpa-urban',
+  'felpa-badet': 'felpa-badet', 'felpa-badet-kids': 'felpa-badet',
+};
+function qtyGroup(productId) { return QTY_GROUPS[productId] || productId; }
+
+module.exports = { PRICING, ANGOLI_ARROTONDATI_TIERS, angoliArrotondatiPrice, QTY_GROUPS, qtyGroup };
