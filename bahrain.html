@@ -12,6 +12,7 @@
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
+  <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <title>Maglietta Tecnica Bahrain Personalizzata | Tshirt Shop Online</title>
@@ -298,6 +299,9 @@
         </div>
       </div>
       <div class="cfg-rest">
+      <sc-if value="{{ cartGroupNote }}" hint-placeholder-val="{{ null }}">
+        <div style="border:1px solid var(--color-accent);padding:10px 12px;font-size:12.5px;font-weight:600;color:var(--color-accent-700);margin-bottom:var(--space-3);">{{ cartGroupNote }}</div>
+      </sc-if>
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
@@ -524,6 +528,7 @@ function isEn() {
 
 class Component extends DCLogic {
   state = {
+    cartGroupQty: 0,
     colorIndex: null,
     sizeQty: {},
     zones: {},
@@ -554,12 +559,26 @@ class Component extends DCLogic {
       el.alt = i != null ? ('Maglietta tecnica Bahrain ' + COLORS[i].name) : 'Maglietta tecnica Bahrain — vista frontale';
     }
   }
+  syncCartQty() {
+    const q = window.tsCart ? window.tsCart.groupQty('bahrain') : 0;
+    if (q !== this.state.cartGroupQty) this.setState({ cartGroupQty: q });
+  }
   componentDidMount() {
     this.syncHero();
     this.onLang = () => this.forceUpdate();
+    this.onCart = () => this.syncCartQty();
+    document.addEventListener('ts-cart-change', this.onCart);
+    window.addEventListener('storage', this.onCart);
+    this.syncCartQty();
+    this._cartT = setTimeout(this.onCart, 500);
     window.addEventListener('ts:langchange', this.onLang);
   }
-  componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
+  componentWillUnmount() {
+    window.removeEventListener('ts:langchange', this.onLang);
+    document.removeEventListener('ts-cart-change', this.onCart);
+    window.removeEventListener('storage', this.onCart);
+    if (this._cartT) clearTimeout(this._cartT);
+  }
   componentDidUpdate() { this.syncHero(); }
 
   makeDesignRef() {
@@ -642,10 +661,12 @@ class Component extends DCLogic {
       };
     });
     const totalQty = sizes.reduce((n, x) => n + x.qty, 0);
+    const cartQty = this.state.cartGroupQty || 0;
+    const rateQty = totalQty + cartQty;
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(totalQty);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty);
+      if (key === 'cuore') return cuoreUnitPrice(rateQty);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(rateQty);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(rateQty);
       return 0;
     };
     const zones = ZONE_DEFS.map(z => {
@@ -686,7 +707,7 @@ class Component extends DCLogic {
       : (activeColor.kids
           ? (en ? 'Available in adult and kids sizes' : 'Disponibile in taglie adulto e bambino')
           : (en ? 'Adult sizes only' : 'Disponibile solo in taglie adulto'));
-    const garmentPrice = garmentUnitPrice(totalQty, isWhite);
+    const garmentPrice = garmentUnitPrice(rateQty, isWhite);
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;
 
@@ -726,8 +747,13 @@ class Component extends DCLogic {
       retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
       selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
-      belowMin: totalQty > 0 && totalQty < MIN_QTY,
-      missingQty: Math.max(0, MIN_QTY - totalQty),
+      belowMin: totalQty > 0 && rateQty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - rateQty),
+      cartGroupNote: cartQty > 0
+        ? (en
+            ? 'Already in the cart: ' + cartQty + ' pcs of this model. Price based on ' + rateQty + ' pcs.'
+            : 'Nel carrello hai già ' + cartQty + ' pz di questo modello. Prezzo calcolato su ' + rateQty + ' pz.')
+        : null,
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(totalQty > 0 ? garmentPrice : 0),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
@@ -736,7 +762,7 @@ class Component extends DCLogic {
       checkout: () => {
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
-        if (totalQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces, sizes can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi, anche in taglie miste.'); return; }
+        if (rateQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces across this model, sizes and colours can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi su questo modello, anche in taglie e colori misti.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneNames = {
@@ -773,14 +799,27 @@ class Component extends DCLogic {
           },
         };
         const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
-        const params = new URLSearchParams({
+        const heroEl = document.getElementById('prod-hero');
+        const cartRow = {
           id: 'bahrain',
           name: 'Maglietta Tecnica Bahrain',
-          price: grandTotal.toFixed(2),
+          price: +grandTotal.toFixed(2),
           col: 'misura',
-          cfg,
-        });
-        window.location.href = './checkout.html?' + params.toString();
+          body: orderBody,
+          img: heroEl ? heroEl.src : '',
+          url: 'bahrain.html',
+        };
+        if (window.tsCart) {
+          window.tsCart.add(cartRow);
+          window.tsCart.toast(en ? 'Added to the cart.' : 'Aggiunto al carrello.', en ? 'Go to cart' : 'Vai al carrello');
+        } else {
+          let prev = [];
+          try { prev = JSON.parse(localStorage.getItem('ts_cart') || '[]'); } catch (e) {}
+          if (!Array.isArray(prev)) prev = [];
+          prev.push(cartRow);
+          try { localStorage.setItem('ts_cart', JSON.stringify(prev)); } catch (e) {}
+          window.location.href = './carrello.html';
+        }
       },
       preventivo: () => {
         const cName = hasColor ? activeColor.name : 'da definire';
