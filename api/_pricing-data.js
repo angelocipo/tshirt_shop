@@ -59,6 +59,11 @@ const BASICA_CAP_PRICE_TIERS = [
   { min: 1, price: 5 }, { min: 5, price: 4 }, { min: 10, price: 3.1 },
   { min: 20, price: 2.2 }, { min: 50, price: 2 }, { min: 100, price: 1.8 },
 ];
+// Zaino Hamelin — prezzo zaino (senza stampa), listino fornitore × moltiplicatore fascia qty.
+const ZAINO_HAMELIN_PRICE_TIERS = [
+  { min: 1, price: 0.61 }, { min: 2, price: 0.60 }, { min: 5, price: 0.58 },
+  { min: 10, price: 0.56 }, { min: 20, price: 0.55 }, { min: 50, price: 0.53 }, { min: 100, price: 0.52 },
+];
 const KARIN_CAP_PRICE_TIERS = [
   { min: 1, price: 7.8 }, { min: 5, price: 6.24 }, { min: 10, price: 4.84 },
   { min: 20, price: 3.43 }, { min: 50, price: 3.12 }, { min: 100, price: 2.81 },
@@ -488,6 +493,10 @@ const PRICING = {
   'uranus-cap': { nome: 'Cappellino Uranus', type: 'cap',
     garmentUnitPrice: (qty) => pickTier(URANUS_CAP_PRICE_TIERS, qty).price,
     printUnitPrice: (qty) => pickTier(BASICA_CAP_PRINT_TIERS, qty).price },
+  'zaino-hamelin': { nome: 'Zaino Hamelin', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(ZAINO_HAMELIN_PRICE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 };
 
 // Prodotti che fanno quantità insieme: adulto e bambino dello stesso modello.
