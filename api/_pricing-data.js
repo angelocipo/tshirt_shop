@@ -117,6 +117,7 @@ const HV_BASE = {
   'felpa-ulan': {"XS":7.6,"S":7.6,"M":7.6,"L":7.6,"XL":7.6,"XXL":7.6,"XXXL":7.84},
   'felpa-ulan-kids': {"3/4":6.08,"5/6":6.08,"7/8":6.08,"9/10":6.08,"11/12":6.08},
   'felpa-aneto': {"XS":6.8,"S":6.8,"M":6.8,"L":6.8,"XL":6.8,"XXL":6.8,"XXXL":7.36},
+  'felpa-fuji': {"S":8.52,"M":8.52,"L":8.52,"XL":8.52,"XXL":8.52,"XXXL":8.96},
   'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
 };
 // Le camicie hanno una scala moltiplicatore propria (più bassa): 3,00 a 1 pz → 2,00 da 100 pz.
@@ -125,7 +126,7 @@ const CAMICIE_QTY_MULT = [
   { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
   { min: 100, mult: 2.00 },
 ];
-const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids', 'felpa-urban', 'felpa-urban-kids', 'felpa-ulan', 'felpa-ulan-kids', 'felpa-aneto'];
+const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids', 'felpa-urban', 'felpa-urban-kids', 'felpa-ulan', 'felpa-ulan-kids', 'felpa-aneto', 'felpa-fuji'];
 // Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
 const POLO_QTY_MULT = [
   { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
@@ -473,6 +474,14 @@ const PRICING = {
   'felpa-aneto': { nome: 'Felpa Aneto', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-aneto', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('felpa-aneto', 1, null) * slugMult('felpa-aneto', qty) / slugMult('felpa-aneto', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Felpa Fuji (Roly SU1105) — moltiplicatore 3: 3,00 → 2,00.
+  'felpa-fuji': { nome: 'Felpa Fuji', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-fuji', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('felpa-fuji', 1, null) * slugMult('felpa-fuji', qty) / slugMult('felpa-fuji', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
