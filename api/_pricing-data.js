@@ -63,11 +63,21 @@ const BASICA_CAP_PRICE_TIERS = [
 const SHOPPER_MISO_PRICE_TIERS = [
   { min: 1, price: 1.54 }, { min: 2, price: 1.51 }, { min: 5, price: 1.46 },
   { min: 10, price: 1.41 }, { min: 20, price: 1.38 }, { min: 50, price: 1.33 }, { min: 100, price: 1.31 },
+  { min: 150, price: 1.27 }, { min: 200, price: 1.23 }, { min: 250, price: 1.19 }, { min: 300, price: 1.15 }, { min: 350, price: 1.10 }, { min: 500, price: 1.05 }, { min: 1000, price: 1.00 },
+];
+// Sconto stampa Miso: come TSHIRT_DISCOUNT_TIERS + fasce 150–1000 (350 pz × 20×20 = 720 €).
+const SHOPPER_MISO_DISCOUNT_TIERS = [...TSHIRT_DISCOUNT_TIERS,
+  { min: 150, mult: 0.25928571 }, { min: 200, mult: 0.19428571 }, { min: 250, mult: 0.13642857 }, { min: 300, mult: 0.09642857 }, { min: 350, mult: 0.06836735 }, { min: 500, mult: 0.06428571 }, { min: 1000, mult: 0.06071429 },
 ];
 // Shopper Hill (Stamina 7601) — prezzo shopper senza stampa: costo fornitore 0,3632€ × moltiplicatori Hamelin.
 const SHOPPER_HILL_PRICE_TIERS = [
   { min: 1, price: 0.73 }, { min: 2, price: 0.71 }, { min: 5, price: 0.69 },
   { min: 10, price: 0.67 }, { min: 20, price: 0.65 }, { min: 50, price: 0.63 }, { min: 100, price: 0.62 },
+  { min: 150, price: 0.60 }, { min: 200, price: 0.58 }, { min: 250, price: 0.56 }, { min: 300, price: 0.54 }, { min: 350, price: 0.52 }, { min: 500, price: 0.50 }, { min: 1000, price: 0.47 },
+];
+// Sconto stampa Hill: stessa scala graduale della Miso.
+const SHOPPER_HILL_DISCOUNT_TIERS = [...TSHIRT_DISCOUNT_TIERS,
+  { min: 150, mult: 0.25928571 }, { min: 200, mult: 0.19428571 }, { min: 250, mult: 0.13642857 }, { min: 300, mult: 0.09642857 }, { min: 350, mult: 0.06836735 }, { min: 500, mult: 0.06428571 }, { min: 1000, mult: 0.06071429 },
 ];
 // Zaino Hamelin — prezzo zaino (senza stampa), listino fornitore × moltiplicatore fascia qty.
 const ZAINO_HAMELIN_PRICE_TIERS = [
@@ -519,11 +529,11 @@ const PRICING = {
   'shopper-miso': { nome: 'Shopper Miso', type: 'tshirt',
     garmentUnitPrice: (qty) => pickTier(SHOPPER_MISO_PRICE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
-    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+    discount: (qty) => pickTier(SHOPPER_MISO_DISCOUNT_TIERS, qty).mult },
   'shopper-hill': { nome: 'Shopper Hill', type: 'tshirt',
     garmentUnitPrice: (qty) => pickTier(SHOPPER_HILL_PRICE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
-    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+    discount: (qty) => pickTier(SHOPPER_HILL_DISCOUNT_TIERS, qty).mult },
 };
 
 // Prodotti che fanno quantità insieme: adulto e bambino dello stesso modello.
