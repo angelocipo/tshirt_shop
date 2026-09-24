@@ -59,6 +59,16 @@ const BASICA_CAP_PRICE_TIERS = [
   { min: 1, price: 5 }, { min: 5, price: 4 }, { min: 10, price: 3.1 },
   { min: 20, price: 2.2 }, { min: 50, price: 2 }, { min: 100, price: 1.8 },
 ];
+// Shopper Miso (Stamina 7618) — prezzo shopper senza stampa: costo fornitore 0,7684€ × moltiplicatori Hamelin.
+const SHOPPER_MISO_PRICE_TIERS = [
+  { min: 1, price: 1.54 }, { min: 2, price: 1.51 }, { min: 5, price: 1.46 },
+  { min: 10, price: 1.41 }, { min: 20, price: 1.38 }, { min: 50, price: 1.33 }, { min: 100, price: 1.31 },
+];
+// Shopper Hill (Stamina 7601) — prezzo shopper senza stampa: costo fornitore 0,3632€ × moltiplicatori Hamelin.
+const SHOPPER_HILL_PRICE_TIERS = [
+  { min: 1, price: 0.73 }, { min: 2, price: 0.71 }, { min: 5, price: 0.69 },
+  { min: 10, price: 0.67 }, { min: 20, price: 0.65 }, { min: 50, price: 0.63 }, { min: 100, price: 0.62 },
+];
 // Zaino Hamelin — prezzo zaino (senza stampa), listino fornitore × moltiplicatore fascia qty.
 const ZAINO_HAMELIN_PRICE_TIERS = [
   { min: 1, price: 0.61 }, { min: 2, price: 0.60 }, { min: 5, price: 0.58 },
@@ -504,6 +514,14 @@ const PRICING = {
     printUnitPrice: (qty) => pickTier(BASICA_CAP_PRINT_TIERS, qty).price },
   'zaino-hamelin': { nome: 'Zaino Hamelin', type: 'tshirt',
     garmentUnitPrice: (qty) => pickTier(ZAINO_HAMELIN_PRICE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+  'shopper-miso': { nome: 'Shopper Miso', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(SHOPPER_MISO_PRICE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+  'shopper-hill': { nome: 'Shopper Hill', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(SHOPPER_HILL_PRICE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 };
