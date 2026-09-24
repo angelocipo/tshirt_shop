@@ -72,6 +72,7 @@
       { it: 'Gadget', en: 'Gadgets', href: 'cappellini.html', sub: [
         { it: 'Cappellini', en: 'All caps', href: 'cappellini.html' },
         { it: 'Zaini', en: 'Backpacks', href: 'zaini.html' },
+        { it: 'Shopper', en: 'Tote bags', href: 'shopper.html' },
       ] },
       { it: 'Solo stampa', en: 'Print only', href: 'solo-stampa.html' },
       { it: 'Esempi', en: 'Examples', href: 'esempi.html' },

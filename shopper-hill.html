@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="i18n.js"></script>
+  <script defer src="site-nav.js"></script>
+  <script defer src="nav-mobile.js"></script>
+  <script defer src="cart.js"></script>
+  <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Shopper Personalizzata Hill | Tshirt Shop Online</title>
+  <meta name="description" content="Shopper Hill personalizzata: 100% cotone naturale 140 g/m², 37×41 cm, stampa DTF su due lati fino a 25×25 cm, prodotta a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/shopper-hill.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/shopper-hill.html">
+  <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
+  <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
+  <style>
+    html, body { height: auto !important; min-height: 100%; overflow: visible !important; overflow-anchor: none; }
+    body { background: var(--color-bg); }
+    .swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--color-divider); cursor: pointer; padding: 0; }
+    .swatch:hover { border-color: var(--color-text); }
+    .swatch-selected { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent); }
+    .prod-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 620px; align-items: start; }
+    .prod-head, .prod-visual, .prod-config { min-width: 0; }
+    @media (min-width: 900px) {
+      .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6); align-items: start;
+        grid-template-areas: "head head" "left mid" "left right"; grid-template-rows: auto min-content 1fr; align-content: start; }
+      .prod-head { grid-area: head; }
+      .col-left { grid-area: left; display: flex; flex-direction: column; }
+      .col-mid { grid-area: mid; }
+      .col-right { grid-area: right; }
+      .col-left, .col-mid, .col-right { align-self: stretch; border: 1px solid var(--color-divider); padding: var(--space-4); }
+      .col-left { align-self: start; }
+      .prod-media { max-width: 100% !important; }
+    }
+    @media (min-width: 1200px) {
+      .prod-grid { grid-template-columns: minmax(0, 400px) minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        grid-template-areas: "head head head" "left mid right"; }
+      .col-left { align-self: stretch; }
+    }
+    @media (max-width: 899px) {
+      .col-left, .col-mid, .col-right { display: contents; }
+      .prod-grid { grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "head" "visual" "cfgtop" "zones" "qty" "listino" "comp" "cfgrest"; }
+      .prod-head { grid-area: head; }
+      .prod-visual { grid-area: visual; }
+      .cfg-top { grid-area: cfgtop; }
+      .cfg-zones { grid-area: zones; }
+      .prod-qty { grid-area: qty; }
+      .cfg-listino { grid-area: listino; }
+      .cfg-comp { grid-area: comp; }
+      .cfg-rest { grid-area: cfgrest; }
+      .prod-media { max-width: 100% !important; }
+    }
+    .qty-group { display: flex; align-items: center; }
+    .qty-btn { width: 32px; height: 30px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+    .qty-input { width: 64px; height: 30px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+    .zone-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider); cursor: pointer; }
+    .zone-row:last-child { border-bottom: none; }
+    .zone-check { width: 18px; height: 18px; border: 1.5px solid var(--color-divider); flex: none; display: flex; align-items: center; justify-content: center; }
+    .zone-check-on { background: var(--color-accent); border-color: var(--color-accent); }
+    .pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+    .listino-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .listino-table th { text-align: right; font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; padding: 6px var(--space-3); border-bottom: 2px solid var(--color-text); color: var(--color-neutral-700); }
+    .listino-table th:first-child { text-align: left; }
+    .listino-table td { text-align: right; padding: 5px var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .listino-table td:first-child { text-align: left; font-family: var(--font-heading); font-weight: 800; }
+    .listino-row-on td { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+    nav.nav .nav-brand { flex: 0 0 100%; }
+    nav.nav > a:not(.nav-brand) { font-size: 14px; }
+    nav.nav .btn-primary { font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }
+    nav.nav .btn-primary:hover { color: var(--color-bg); }
+    a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
+    @media (max-width: 700px) {
+      nav.nav { justify-content: flex-start; }
+      nav.nav .btn-primary { margin-left: 0; flex: 0 0 100%; }
+      h1 { font-size: clamp(26px, 7vw, 34px) !important; }
+    }
+    .nav-drop { position: relative; display: inline-flex; align-items: center; }
+    .nav-sub { position: absolute; top: 100%; left: 0; min-width: 186px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 60; }
+    .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: flex; }
+    .nav-sub > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
+    .nav-sub > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+    .nav-sub > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
+    @media (max-width: 700px) {
+      .nav-drop { display: inline-flex; }
+      .nav-sub, .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: none; }
+    }
+    .nav-sub .nav-drop { display: block; position: relative; }
+    .nav-sub-2 { position: absolute; top: -1px; left: 100%; min-width: 170px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 61; }
+    .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: flex; }
+    .nav-sub-2 > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
+    .nav-sub-2 > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+    @media (max-width: 700px) {
+      .nav-sub-2, .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: none; }
+    }
+  </style>
+</helmet>
+
+<div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);">
+
+  <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
+
+  <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
+    <span class="tag tag-accent" data-en="DTF">DTF</span>
+    <span class="tag tag-neutral" data-en="100% cotton 140 g/m²">100% cotone 140 g/m²</span>
+    <span class="tag tag-neutral" data-en="One size">Taglia unica</span>
+  </div>
+
+  <div class="prod-grid">
+
+    <div class="prod-head">
+      <h1 style="margin-bottom: 4px;" data-en="Hill Custom Tote Bag">Shopper Personalizzata Hill</h1>
+    </div>
+
+    <div class="col-left">
+      <div class="prod-visual">
+        <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
+          <div style="aspect-ratio: 1;">
+            <img id="prod-hero" alt="Shopper Hill personalizzata" src="img/shopper-hill-hero-plain.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          </div>
+        </div>
+      </div>
+      <div class="cfg-top" style="margin-bottom: var(--space-4);">
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Tote Colour:">Colore Shopper:</span> {{ selectedColorName }}</label></div>
+        <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
+          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="1">
+            <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.name }}" aria-label="{{ c.name }}" onClick="{{ c.select }}"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div class="cfg-zones" style="margin-bottom: var(--space-4);">
+        <div class="field"><label data-en="Print on">Stampa su</label></div>
+        <div>
+          <sc-for list="{{ zones }}" as="z" hint-placeholder-count="2">
+            <div>
+              <div class="zone-row" onClick="{{ z.toggle }}">
+                <div style="display:flex; align-items:center; gap: var(--space-2);">
+                  <div class="{{ z.checkClass }}">
+                    <sc-if value="{{ z.checked }}" hint-placeholder-val="{{ false }}">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    </sc-if>
+                  </div>
+                  <span style="font-size: 14px;">{{ z.label }}</span>
+                </div>
+                <span class="text-muted" style="font-size: 13px;">{{ z.priceLabel }}</span>
+              </div>
+              <sc-if value="{{ z.checked }}" hint-placeholder-val="{{ false }}">
+                <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
+                  <div class="field">
+                    <label>{{ z.widthLabel }} — {{ z.widthCm }}cm</label>
+                    <input type="range" min="0" max="5" step="1" value="{{ z.widthIdx }}" onChange="{{ z.setWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                  </div>
+                  <div class="field">
+                    <label>{{ z.heightLabel }} — {{ z.heightCm }}cm</label>
+                    <input type="range" min="0" max="5" step="1" value="{{ z.heightIdx }}" onChange="{{ z.setHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <p class="text-muted" style="font-size: 12px; margin: var(--space-2) 0 0; line-height: 1.5;" data-en="DTF print, side A and/or side B, up to 25×25 cm each side.">Stampa DTF, lato A e/o lato B, fino a 25×25 cm per lato.</p>
+      </div>
+    </div>
+
+    <div class="col-mid">
+      <div class="prod-qty" style="margin-bottom: var(--space-4);">
+        <div class="field"><label><span data-en="Quantity">Quantità</span> — {{ quantity }} <span data-en="pcs">pz</span></label></div>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 20 pcs, one size fits all.">Ordine minimo: 20 pz, taglia unica.</p>
+        <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 20-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 20.</p>
+        </sc-if>
+        <div class="qty-group" style="margin-bottom: var(--space-2);">
+          <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
+          <input class="qty-input" type="text" inputmode="numeric" value="{{ quantity }}" onChange="{{ setQty }}">
+          <button type="button" class="qty-btn" onClick="{{ incQty }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
+        </div>
+      </div>
+      <div class="cfg-listino" style="margin-bottom: var(--space-4);">
+        <div class="field"><label data-en="Quantity discounts">Sconti quantità</label></div>
+        <table class="listino-table" style="margin-bottom: var(--space-3);">
+          <thead>
+            <tr>
+              <th data-en="Qty">Q.tà</th>
+              <th data-en="Tote € each">Shopper € cad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ listino }}" as="r" hint-placeholder-count="6">
+              <tr class="{{ r.rowClass }}">
+                <td>{{ r.range }}</td>
+                <td>{{ r.zaino }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+        <p class="text-muted" style="font-size: 12px; margin: 0; line-height: 1.5;" data-en="Tote price per piece, VAT included; print is added separately based on the size chosen above.">Prezzo shopper al pezzo, IVA compresa; la stampa si aggiunge a parte in base alla misura scelta sopra.</p>
+      </div>
+      <div style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
+        <div style="padding: var(--space-4);">
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="One size fits all">Taglia unica</div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="37 × 41 cm. 70 cm handles. No sizes to choose.">37 × 41 cm. Manici da 70 cm. Nessuna taglia da scegliere.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-config col-right">
+      <div class="cfg-comp" style="border-bottom: 1px solid var(--color-divider); margin-bottom: var(--space-4); padding-bottom: var(--space-4);">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+        <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700);">
+          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% cotton, 140 g/m².">100% cotone, 140 g/m².</span></div>
+          <div data-en="Bag in natural-colour 140 g/m² cotton, with long tape handles in the same colour. 70 cm handles. 37×41 cm.">Borsa realizzata in tessuto di cotone color naturale da 140 g/m², con manico lungo in nastro dello stesso colore. Manici da 70 cm. 37×41 cm.</div>
+          <div style="font-weight: 700; color: var(--color-text);">EAN 0652026574067</div>
+        </div>
+      </div>
+      <div class="cfg-rest">
+      <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Tote price">Prezzo Shopper</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
+        <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
+        <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
+        <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label data-en="File Upload">File Upload</label>
+        <label class="btn btn-secondary btn-block" style="cursor: pointer; flex-wrap: nowrap; white-space: nowrap;">
+          <span data-en="Upload your design">Carica il tuo design</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <input type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.svg,.pdf,.ai,.eps,.psd,.tif,.tiff,.zip" multiple="{{ true }}" onChange="{{ pickFiles }}" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;">
+        </label>
+        <sc-for list="{{ designFiles }}" as="f" hint-placeholder-count="0">
+          <div style="display:flex; align-items:center; gap:8px; padding:6px 4px 6px 8px; margin-top:6px; border:1px solid var(--color-divider); font-size:12px;">
+            <span style="flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ f.name }}</span>
+            <span class="text-muted" style="white-space:nowrap;">{{ f.sizeLabel }}</span>
+            <span style="white-space:nowrap; font-weight:600; font-size:11px; letter-spacing:.04em; text-transform:uppercase;">{{ f.statusLabel }}</span>
+            <button type="button" class="btn btn-ghost" style="padding:0 6px; min-height:0; line-height:1.4;" title="Rimuovi" data-en-title="Remove" onClick="{{ f.remove }}">×</button>
+          </div>
+        </sc-for>
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="JPG, PNG, PDF, AI, EPS, ZIP — max 4 MB per file. Larger files: email them to us after ordering.">JPG, PNG, PDF, AI, EPS, ZIP — max 4 MB per file. File più grandi: inviaceli via email dopo l'ordine.</div>
+        <sc-if value="{{ hasDesignRef }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:11.5px; margin-top:4px;"><span data-en="File reference:">Riferimento file:</span> <strong>{{ designRef }}</strong></div>
+        </sc-if>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label for="design-link" data-en="Or paste a link to your file">Oppure incolla un link al file</label>
+        <input class="input" id="design-link" type="url" inputmode="url" placeholder="Canva, SwissTransfer, WeTransfer, Drive…" data-en-placeholder="Canva, SwissTransfer, WeTransfer, Drive…" value="{{ designLink }}" onChange="{{ setDesignLink }}">
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="Canva and Drive: share an unlocked link, no password.">Canva e Drive: condividi il link già sbloccato, senza password.</div>
+        <sc-if value="{{ designLinkError }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:11.5px; margin-top:4px; color:#ec3013;" data-en="The link must start with http:// or https://">Il link deve iniziare con http:// o https://</div>
+        </sc-if>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label for="order-note" data-en="Deadline or other useful information (optional)">Data di consegna richiesta o altre informazioni utili (opzionale)</label>
+        <textarea class="input" id="order-note" rows="3" style="resize:vertical;font-family:inherit;" placeholder="Es. mi servono entro venerdì 12, evento sabato mattina — colore Pantone, posizione stampa…" data-en-placeholder="E.g. needed by Friday 12th, event on Saturday morning — Pantone colour, print position…" value="{{ orderNote }}" onChange="{{ setOrderNote }}"></textarea>
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="We read every note before printing. Tell us your deadline and we confirm feasibility by email.">Leggiamo ogni nota prima della stampa. Indica la data che ti serve: confermiamo la fattibilità per email.</div>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" onClick="{{ checkout }}">{{ checkoutLabel }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 2-1.58l1.65-8.42H5.12"/></svg></button>
+
+      <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
+
+      <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Shipping ready within the week">Spedizione pronta in settimana</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<footer style="border-top:1px solid var(--color-divider);">
+  <div style="max-width:1280px;margin:0 auto;padding:var(--space-8) var(--space-6);">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-6);margin-bottom:var(--space-8);">
+      <div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Magliette e stampa</div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+          <a href="beagle.html" style="font-size:13.5px;">Crea la tua maglietta 24H</a>
+          <a href="promozioni.html" style="font-size:13.5px;">Tutte le promozioni</a>
+          <a href="promozione-100-magliette.html" style="font-size:13.5px;">Promozione 100 magliette</a>
+          <a href="stampa-dtf-roma.html" style="font-size:13.5px;">Stampa DTF a Roma</a>
+          <a href="stampa-magliette-24-ore-roma.html" style="font-size:13.5px;">Stampa magliette in 24 ore</a>
+          <a href="stampa-t-shirt-grandi-quantita.html" style="font-size:13.5px;">Grandi quantità</a>
+          <a href="stampa-oro-argento-olografica.html" style="font-size:13.5px;">Oro, argento e olografica</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Abbigliamento personalizzato</div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+          <a href="stampa-su-magliette-centro-stampa-roma-eur.html" style="font-size:13.5px;">Stampa su magliette</a>
+          <a href="felpe-personalizzate.html" style="font-size:13.5px;">Felpe personalizzate</a>
+          <a href="abbigliamento-personalizzato-roma.html" style="font-size:13.5px;">Abbigliamento personalizzato</a>
+          <a href="abbigliamento-lavoro-personalizzato.html" style="font-size:13.5px;">Abbigliamento da lavoro</a>
+          <a href="magliette-con-frasi-romani-roma-eur.html" style="font-size:13.5px;">Magliette con frasi romane</a>
+          <a href="magliette-personalizzate-eventi.html" style="font-size:13.5px;">Magliette per eventi</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Guide e servizio</div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+          <a href="preparare-file-stampa-t-shirt.html" style="font-size:13.5px;">Preparare il file di stampa DTF</a>
+          <a href="stampa-t-shirt-roma-eur-guida.html" style="font-size:13.5px;">Guida alla stampa t-shirt</a>
+          <a href="servizio-express-stampa-roma-sud.html" style="font-size:13.5px;">Servizio express Roma Sud</a>
+          <a href="custom-t-shirt-printing-rome.html" style="font-size:13.5px;">Custom t-shirt printing in Rome</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Catalogo</div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+          <a href="tshirt-uomo.html" style="font-size:13.5px;">T-shirt uomo</a>
+          <a href="bahrain.html" style="font-size:13.5px;">Maglietta tecnica Bahrain</a>
+          <a href="cappellini.html" style="font-size:13.5px;">Cappellini personalizzati</a>
+          <a href="zaini.html" style="font-size:13.5px;">Zaini personalizzati</a>
+          <a href="shopper.html" style="font-size:13.5px;">Shopper personalizzate</a>
+          <a href="tshirt-donna.html" style="font-size:13.5px;">T-shirt donna</a>
+          <a href="tshirt-bambino.html" style="font-size:13.5px;">T-shirt bambino</a>
+          <a href="esempi.html" style="font-size:13.5px;">Esempi di lavori</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Azienda</div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+          <a href="blog.html" style="font-size:13.5px;">Blog</a>
+          <a href="contattateci.html" style="font-size:13.5px;">Contattateci</a>
+          <a href="termini-di-servizio-terms-of-service.html" style="font-size:13.5px;">Termini di servizio</a>
+          <a href="privacy-gdpr.html" style="font-size:13.5px;">Privacy & GDPR</a>
+          <a href="privacy-policy.html" style="font-size:13.5px;">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--color-divider);padding-top:var(--space-4);font-size:12.5px;color:color-mix(in srgb, var(--color-text) 60%, transparent);text-align:center;">© 2026 Tshirt Shop Online by Printing Italy · Via Lorenzo Bonincontri, 26, 00147 Roma · Lun-Ven: 8-12/15-18, Sab: chiuso • P.IVA 02452700590</div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const COLORS = [
+  { name: '29 Naturale', hex: '#ebe3cf', img: 'img/shopper-hill-hero-plain.webp' },
+];
+const DEFAULT_HERO_IMG = 'img/shopper-hill-hero-plain.webp';
+const MIN_QTY = 20;
+// Prezzo shopper: costo fornitore Stamina 7601 (0,3632€/pz) × moltiplicatori Hamelin per fascia quantità.
+// Ogni modifica va replicata in api/_pricing-data.js.
+const BAG_PRICE_TIERS = [
+  { min: 1, price: 0.73 }, { min: 2, price: 0.71 }, { min: 5, price: 0.69 },
+  { min: 10, price: 0.67 }, { min: 20, price: 0.65 }, { min: 50, price: 0.63 }, { min: 100, price: 0.62 },
+];
+function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
+const LISTINO_ROWS = [
+  { min: 1, max: 1, range: '1' }, { min: 2, max: 4, range: '2 – 4' },
+  { min: 5, max: 9, range: '5 – 9' }, { min: 10, max: 19, range: '10 – 19' },
+  { min: 20, max: 49, range: '20 – 49' }, { min: 50, max: 99, range: '50 – 99' },
+  { min: 100, max: Infinity, range: '100 +' },
+];
+// Stampa DTF: stessa tabella area/sconto di Hamelin, area massima 25×25 cm (indici 0–5).
+const W_BREAKS = [8, 10, 15, 20, 22, 25];
+const H_BREAKS = [8, 10, 15, 20, 22, 25];
+const cm = (v) => String(v).replace('.', ',');
+const AREA_TABLE = [
+  [12, 12, 12, 13, 14, 14],
+  [12, 12, 13, 14, 14, 14],
+  [12, 13, 14, 14, 14, 16],
+  [13, 14, 14, 14, 16, 16],
+  [14, 14, 14, 16, 16, 16],
+  [14, 14, 16, 16, 16, 17],
+];
+function areaUnitPrice(wIdx, hIdx) { return AREA_TABLE[wIdx][hIdx]; }
+const DISCOUNT_TIERS = [
+  { min: 1, mult: 1 }, { min: 2, mult: 0.67 }, { min: 5, mult: 0.61 },
+  { min: 10, mult: 0.56 }, { min: 20, mult: 0.44 }, { min: 50, mult: 0.39 }, { min: 100, mult: 0.33 },
+];
+function discount(qty) { return pickTier(DISCOUNT_TIERS, qty).mult; }
+const ZONE_DEFS = [
+  { key: 'davanti', label: 'Lato A (fino a 25×25cm)', labelEn: 'Side A (up to 25×25cm)' },
+  { key: 'retro', label: 'Lato B (fino a 25×25cm)', labelEn: 'Side B (up to 25×25cm)' },
+];
+function isEn() {
+  try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; }
+}
+
+class Component extends DCLogic {
+  state = {
+    colorIndex: 0,
+    qty: 20,
+    zones: {},
+    davantiWidthIdx: 3, davantiHeightIdx: 3,
+    retroWidthIdx: 3, retroHeightIdx: 3,
+    designFiles: [],
+    designRef: null,
+    designLink: '',
+    orderNote: '',
+  };
+
+  fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€' + s; }
+
+  syncHero() {
+    const el = document.getElementById('prod-hero');
+    if (!el) return;
+    const i = this.state.colorIndex;
+    const src = i != null ? (COLORS[i].img || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
+    const want = new URL(src, window.location.href).href;
+    if (el.src !== want) {
+      el.src = src;
+      el.alt = i != null ? ('Shopper Hill ' + COLORS[i].name) : 'Shopper Hill personalizzata';
+    }
+  }
+  componentDidMount() {
+    this.syncHero();
+    this.onLang = () => this.forceUpdate();
+    window.addEventListener('ts:langchange', this.onLang);
+  }
+  componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
+  componentDidUpdate() { this.syncHero(); }
+
+  makeDesignRef() {
+    const alpha = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let s = '';
+    for (let i = 0; i < 6; i++) s += alpha[Math.floor(Math.random() * alpha.length)];
+    return 'DES-' + s;
+  }
+
+  patchFile(id, fields) {
+    this.setState(s => ({ designFiles: s.designFiles.map(f => (f.id === id ? { ...f, ...fields } : f)) }));
+  }
+
+  handleFiles(fileList) {
+    const MAX = 4 * 1024 * 1024;
+    const OK = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'pdf', 'ai', 'eps', 'psd', 'tif', 'tiff', 'zip'];
+    const ref = this.state.designRef || this.makeDesignRef();
+    if (!this.state.designRef) this.setState({ designRef: ref });
+    Array.from(fileList).forEach((file, i) => {
+      const id = 'f' + Date.now() + '_' + i + Math.random().toString(36).slice(2, 6);
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      const entry = { id, name: file.name, size: file.size, status: 'uploading', message: '' };
+      if (!OK.includes(ext)) { entry.status = 'error'; entry.message = 'formato non supportato'; }
+      else if (file.size > MAX) { entry.status = 'error'; entry.message = 'oltre 4 MB'; }
+      this.setState(s => ({ designFiles: [...s.designFiles, entry] }));
+      if (entry.status !== 'error') this.uploadFile(file, id, ref);
+    });
+  }
+
+  async uploadFile(file, id, ref) {
+    try {
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Shopper Hill' });
+      const res = await fetch('/api/upload-design?' + qs.toString(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/octet-stream' },
+        body: file,
+      });
+      let data = {};
+      try { data = await res.json(); } catch (_) {}
+      if (!res.ok) throw new Error(data.error || ('errore ' + res.status));
+      this.patchFile(id, { status: 'done' });
+    } catch (ex) {
+      this.patchFile(id, { status: 'error', message: (ex.message || 'invio non riuscito').slice(0, 60) });
+    }
+  }
+
+  renderVals() {
+    const st = this.state;
+    const en = isEn();
+    const colorsAll = COLORS.map((c, i) => ({
+      ...c,
+      swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
+      select: () => this.setState({ colorIndex: i }),
+    }));
+    const lum = (hex) => {
+      const h = hex.replace('#', '');
+      const [r, g, b] = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255)
+        .map(v => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)));
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const colorsByLightness = colorsAll.sort((a, b) => lum(b.hex) - lum(a.hex));
+    const qty = st.qty || 0;
+    const setQtyVal = (v) => this.setState({ qty: Math.max(0, Math.min(9999, v)) });
+    const priceQty = Math.max(1, qty);
+    const garmentPrice = pickTier(BAG_PRICE_TIERS, priceQty).price;
+
+    const zonePrice = (key) => {
+      const wIdx = st[key + 'WidthIdx'], hIdx = st[key + 'HeightIdx'];
+      return areaUnitPrice(wIdx, hIdx) * discount(priceQty);
+    };
+    const zones = ZONE_DEFS.map(z => {
+      const checked = !!st.zones[z.key];
+      const wKey = z.key + 'WidthIdx', hKey = z.key + 'HeightIdx';
+      return {
+        key: z.key,
+        label: en ? z.labelEn : z.label,
+        checked,
+        checkClass: 'zone-check' + (checked ? ' zone-check-on' : ''),
+        priceLabel: '+' + this.fmt(zonePrice(z.key)),
+        toggle: () => this.setState(s => ({ zones: { ...s.zones, [z.key]: !s.zones[z.key] } })),
+        widthLabel: en ? 'Width' : 'Larghezza',
+        heightLabel: en ? 'Height' : 'Altezza',
+        widthIdx: st[wKey], heightIdx: st[hKey],
+        widthCm: cm(W_BREAKS[st[wKey]]), heightCm: cm(H_BREAKS[st[hKey]]),
+        setWidthIdx: (e) => this.setState({ [wKey]: Math.min(5, Number(e.target.value)) }),
+        setHeightIdx: (e) => this.setState({ [hKey]: Math.min(5, Number(e.target.value)) }),
+      };
+    });
+    const printTotal = ZONE_DEFS.reduce((sum, z) => sum + (st.zones[z.key] ? zonePrice(z.key) : 0), 0);
+    const unitTotal = garmentPrice + printTotal;
+    const grandTotal = qty > 0 ? unitTotal * qty : 0;
+    const hasColor = st.colorIndex != null;
+    const activeColor = hasColor ? COLORS[st.colorIndex] : null;
+
+    const listino = LISTINO_ROWS.map(r => ({
+      range: r.range,
+      zaino: this.fmt(pickTier(BAG_PRICE_TIERS, r.min).price),
+      rowClass: qty >= r.min && qty <= r.max ? 'listino-row-on' : '',
+    }));
+
+    const fileSizeLabel = (b) => (b < 1024 * 1024 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1).replace('.', ',') + ' MB');
+    const statusText = { uploading: 'invio…', done: 'caricato', error: 'errore' };
+    const designFiles = (st.designFiles || []).map(f => ({
+      name: f.name,
+      sizeLabel: fileSizeLabel(f.size),
+      statusLabel: f.status === 'error' ? (f.message || 'errore') : statusText[f.status],
+      remove: () => this.setState(s => ({ designFiles: s.designFiles.filter(x => x.id !== f.id) })),
+    }));
+    const uploadedFiles = (st.designFiles || []).filter(f => f.status === 'done').map(f => f.name);
+    const uploadingCount = (st.designFiles || []).filter(f => f.status === 'uploading').length;
+    const hasDesignRef = uploadedFiles.length > 0;
+    const designLink = (st.designLink || '').trim();
+    const designLinkOk = /^https?:\/\/\S+\.\S+/i.test(designLink);
+    const designLinkError = designLink.length > 0 && !designLinkOk;
+    const orderNote = (st.orderNote || '').trim().slice(0, 480);
+
+    return {
+      designFiles, hasDesignRef, designRef: st.designRef || '',
+      designLink: st.designLink || '', designLinkError,
+      setDesignLink: (e) => this.setState({ designLink: e.target.value }),
+      orderNote: st.orderNote || '',
+      setOrderNote: (e) => this.setState({ orderNote: e.target.value }),
+      pickFiles: (e) => { const fl = e.target.files; if (fl && fl.length) this.handleFiles(fl); e.target.value = ''; },
+      colorsByLightness, zones, listino,
+      selectedColorName: hasColor ? activeColor.name : '',
+      quantity: qty,
+      incQty: () => setQtyVal((this.state.qty || 0) + 1),
+      decQty: () => setQtyVal((this.state.qty || 0) - 1),
+      setQty: (e) => setQtyVal(parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
+      belowMin: qty > 0 && qty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - qty),
+      unitPriceLabel: qty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
+      garmentPriceLabel: this.fmt(qty > 0 ? garmentPrice : 0),
+      printPriceLabel: (qty > 0 && printTotal > 0 ? '+' : '') + this.fmt(qty > 0 ? printTotal : 0),
+      totalPriceLabel: this.fmt(grandTotal),
+      checkoutLabel: en ? 'Add to cart' : 'Aggiungi al carrello',
+      checkout: () => {
+        if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
+        if (qty < 1) { alert(en ? 'Enter a quantity.' : 'Inserisci la quantità.'); return; }
+        if (qty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi.'); return; }
+        if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
+        if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
+        const zoneNames = {
+          davanti: 'Lato A ' + cm(W_BREAKS[st.davantiWidthIdx]) + '×' + cm(H_BREAKS[st.davantiHeightIdx]) + ' cm',
+          retro: 'Lato B ' + cm(W_BREAKS[st.retroWidthIdx]) + '×' + cm(H_BREAKS[st.retroHeightIdx]) + ' cm',
+        };
+        const zoneList = [];
+        if (st.zones.davanti) zoneList.push(zoneNames.davanti);
+        if (st.zones.retro) zoneList.push(zoneNames.retro);
+        const orderBody = {
+          productId: 'shopper-hill',
+          human: {
+            'Colore': activeColor.name,
+            'Taglia': 'Unica (37×41cm)',
+            'Tecnica': 'DTF',
+            'Quantità': qty,
+            'Stampa': zoneList.length ? zoneList.join(' + ') : 'Nessuna stampa',
+            ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
+            ...(designLinkOk ? { 'Link file': designLink } : {}),
+            ...(orderNote ? { 'Consegna richiesta / note': orderNote } : {}),
+          },
+          ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
+          ...(designLinkOk ? { designLink } : {}),
+          ...(orderNote ? { customerNote: orderNote } : {}),
+          formula: {
+            qty,
+            size: 'Unica',
+            zones: { davanti: !!st.zones.davanti, retro: !!st.zones.retro },
+            davantiWidthIdx: st.davantiWidthIdx, davantiHeightIdx: st.davantiHeightIdx,
+            retroWidthIdx: st.retroWidthIdx, retroHeightIdx: st.retroHeightIdx,
+            colorName: activeColor.name,
+          },
+        };
+        const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
+        const heroEl = document.getElementById('prod-hero');
+        const cartRow = {
+          id: 'shopper-hill',
+          name: 'Shopper Hill',
+          price: +grandTotal.toFixed(2),
+          col: 'misura',
+          body: orderBody,
+          img: heroEl ? heroEl.src : '',
+          url: 'shopper-hill.html',
+        };
+        if (window.tsCart) {
+          window.tsCart.add(cartRow);
+          window.tsCart.toast(en ? 'Added to the cart.' : 'Aggiunto al carrello.', en ? 'Go to cart' : 'Vai al carrello');
+        } else {
+          let prev = [];
+          try { prev = JSON.parse(localStorage.getItem('ts_cart') || '[]'); } catch (e) {}
+          if (!Array.isArray(prev)) prev = [];
+          prev.push(cartRow);
+          try { localStorage.setItem('ts_cart', JSON.stringify(prev)); } catch (e) {}
+          window.location.href = './carrello.html';
+        }
+      },
+      preventivo: () => {
+        const cName = hasColor ? activeColor.name : 'da definire';
+        const zoneNames = {
+          davanti: 'Lato A ' + cm(W_BREAKS[st.davantiWidthIdx]) + '×' + cm(H_BREAKS[st.davantiHeightIdx]) + ' cm',
+          retro: 'Lato B ' + cm(W_BREAKS[st.retroWidthIdx]) + '×' + cm(H_BREAKS[st.retroHeightIdx]) + ' cm',
+        };
+        const zoneList = [];
+        if (st.zones.davanti) zoneList.push(zoneNames.davanti);
+        if (st.zones.retro) zoneList.push(zoneNames.retro);
+        const config = `Colore: ${cName}, Taglia unica, DTF, ` + (zoneList.length ? `Stampa: ${zoneList.join(' + ')}` : 'Senza stampa');
+        const params = new URLSearchParams({
+          prodotto: 'Shopper Hill',
+          config: orderNote ? config + ' — Note: ' + orderNote : config,
+          url: window.location.origin + window.location.pathname,
+          quantita: String(qty),
+          prezzo: grandTotal.toFixed(2),
+        });
+        window.open('./preventivo.html?' + params.toString(), '_blank', 'noopener');
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
