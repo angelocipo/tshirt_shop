@@ -12,6 +12,7 @@
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
+  <script defer src="filtro-sezioni.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
@@ -82,8 +83,16 @@
       <p style="font-size:17px;line-height:1.6;margin:0;color:var(--color-neutral-700);max-width:52ch;" data-en="Create garments that represent your style and your personality">Crea capi che rappresentano il tuo stile e la tua personalità</p>
     </div>
   </header>
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="T-shirts and polo shirts">Magliette e polo</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <nav aria-label="Categorie" data-filtro-nav style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin:calc(var(--space-8) * -0.5) 0 var(--space-8);">
+    <a class="btn btn-primary" href="#tutti" data-filtro="tutti" style="text-decoration:none;" data-en="All">Tutti</a>
+    <a class="btn btn-secondary" href="#sez-magliette-e-polo" data-filtro="sez-magliette-e-polo" style="text-decoration:none;" data-en="T-shirts and polo shirts">Magliette e polo</a>
+    <a class="btn btn-secondary" href="#sez-camicie" data-filtro="sez-camicie" style="text-decoration:none;" data-en="Shirts">Camicie</a>
+    <a class="btn btn-secondary" href="#sez-felpe" data-filtro="sez-felpe" style="text-decoration:none;" data-en="Sweatshirts">Felpe</a>
+    <a class="btn btn-secondary" href="#sez-giubbotti" data-filtro="sez-giubbotti" style="text-decoration:none;" data-en="Jackets">Giubbotti</a>
+    <a class="btn btn-secondary" href="#sez-cappellini" data-filtro="sez-cappellini" style="text-decoration:none;" data-en="Caps">Cappellini</a>
+  </nav>
+  <h2 id="sez-magliette-e-polo" data-sez="sez-magliette-e-polo" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="T-shirts and polo shirts">Magliette e polo</h2>
+  <section data-sez="sez-magliette-e-polo" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="slam-donna.html">
       <div class="cat-media"><img src="img/slam-donna-hero.webp" alt="T-shirt tecnica Slam Woman personalizzata" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -138,8 +147,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Shirts">Camicie</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-camicie" data-sez="sez-camicie" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Shirts">Camicie</h2>
+  <section data-sez="sez-camicie" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="sofia.html">
       <div class="cat-media"><img src="img/sofia-hero.webp" alt="Camicia Sofia donna manica corta personalizzata" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -166,8 +175,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Sweatshirts">Felpe</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-felpe" data-sez="sez-felpe" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Sweatshirts">Felpe</h2>
+  <section data-sez="sez-felpe" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="felpa-badet.html">
       <div class="cat-media"><img src="img/felpa-badet-hero.webp" alt="Felpa Badet unisex personalizzata" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -214,8 +223,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Jackets">Giubbotti</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-giubbotti" data-sez="sez-giubbotti" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Jackets">Giubbotti</h2>
+  <section data-sez="sez-giubbotti" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="nebraska-donna.html">
       <div class="cat-media"><img src="img/nebraska-donna-hero.webp" alt="Giubbotto Nebraska donna personalizzato"></div>
       <div style="padding: var(--space-4);">
@@ -227,8 +236,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Caps">Cappellini</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-cappellini" data-sez="sez-cappellini" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Caps">Cappellini</h2>
+  <section data-sez="sez-cappellini" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="cappellini-uranus.html">
       <div class="cat-media"><img src="img/uranus-hero.webp" alt="Cappellino Uranus personalizzato" loading="lazy"></div>
       <div style="padding: var(--space-4);">

@@ -12,6 +12,7 @@
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
+  <script defer src="filtro-sezioni.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
@@ -82,8 +83,18 @@
       <p style="font-size:15px;line-height:1.6;margin:0;color:var(--color-neutral-700);max-width:52ch;" data-en="Customised with your design. Choose the model, the colour, the sizes and the quantity: the price appears straight away.">Personalizzati con la tua grafica. Scegli modello, colore, taglie e quantità: il prezzo compare subito.</p>
     </div>
   </header>
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="T-shirts and polo shirts">Magliette e polo</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <nav aria-label="Categorie" data-filtro-nav style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin:calc(var(--space-8) * -0.5) 0 var(--space-8);">
+    <a class="btn btn-primary" href="#tutti" data-filtro="tutti" style="text-decoration:none;" data-en="All">Tutti</a>
+    <a class="btn btn-secondary" href="#sez-magliette-e-polo" data-filtro="sez-magliette-e-polo" style="text-decoration:none;" data-en="T-shirts and polo shirts">Magliette e polo</a>
+    <a class="btn btn-secondary" href="#sez-camicie" data-filtro="sez-camicie" style="text-decoration:none;" data-en="Shirts">Camicie</a>
+    <a class="btn btn-secondary" href="#sez-felpe" data-filtro="sez-felpe" style="text-decoration:none;" data-en="Sweatshirts">Felpe</a>
+    <a class="btn btn-secondary" href="#sez-giubbotti" data-filtro="sez-giubbotti" style="text-decoration:none;" data-en="Jackets">Giubbotti</a>
+    <a class="btn btn-secondary" href="#sez-alta-visibilita" data-filtro="sez-alta-visibilita" style="text-decoration:none;" data-en="High visibility">Alta visibilità</a>
+    <a class="btn btn-secondary" href="#sez-sport" data-filtro="sez-sport" style="text-decoration:none;" data-en="Sport">Sport</a>
+    <a class="btn btn-secondary" href="#sez-cappellini" data-filtro="sez-cappellini" style="text-decoration:none;" data-en="Caps">Cappellini</a>
+  </nav>
+  <h2 id="sez-magliette-e-polo" data-sez="sez-magliette-e-polo" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="T-shirts and polo shirts">Magliette e polo</h2>
+  <section data-sez="sez-magliette-e-polo" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="slam.html">
       <div class="cat-media"><img src="img/slam-hero.webp" alt="T-shirt tecnica Slam personalizzata" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -155,8 +166,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Shirts">Camicie</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-camicie" data-sez="sez-camicie" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Shirts">Camicie</h2>
+  <section data-sez="sez-camicie" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="aifos-ls.html">
       <div class="cat-media"><img src="img/aifos-ls-hero.webp" alt="Camicia Aifos manica lunga personalizzata" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -183,8 +194,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Sweatshirts">Felpe</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-felpe" data-sez="sez-felpe" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Sweatshirts">Felpe</h2>
+  <section data-sez="sez-felpe" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="felpa-badet.html">
       <div class="cat-media"><img src="img/felpa-badet-hero.webp" alt="Felpa Badet unisex personalizzata" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -231,8 +242,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Jackets">Giubbotti</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-giubbotti" data-sez="sez-giubbotti" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Jackets">Giubbotti</h2>
+  <section data-sez="sez-giubbotti" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="nebraska.html">
       <div class="cat-media"><img src="img/nebraska-hero.webp" alt="Giubbotto Nebraska personalizzato"></div>
       <div style="padding: var(--space-4);">
@@ -253,8 +264,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="High visibility">Alta visibilità</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-alta-visibilita" data-sez="sez-alta-visibilita" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="High visibility">Alta visibilità</h2>
+  <section data-sez="sez-alta-visibilita" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="hv-delta.html">
       <div class="cat-media"><img src="img/hv-delta-hv9310.webp" alt="DELTA HV9310 — abbigliamento alta visibilità personalizzato" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -329,12 +340,12 @@
     </a>
   </section>
 
-  <div style="margin-bottom: var(--space-8);">
+  <div data-sez="sez-alta-visibilita" style="margin-bottom: var(--space-8);">
     <a href="alta-visibilita.html" style="font-size:14px;font-weight:600;" data-en="See the whole high-visibility range →">Vedi tutta la gamma alta visibilità →</a>
   </div>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Sport">Sport</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-sport" data-sez="sez-sport" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Sport">Sport</h2>
+  <section data-sez="sez-sport" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="murray.html">
       <div class="cat-media"><img src="img/murray-hero.webp" alt="Short Sport Murray personalizzato" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -345,8 +356,8 @@
     </a>
   </section>
 
-  <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Caps">Cappellini</h2>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-cappellini" data-sez="sez-cappellini" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Caps">Cappellini</h2>
+  <section data-sez="sez-cappellini" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="cappellini-uranus.html">
       <div class="cat-media"><img src="img/uranus-hero.webp" alt="Cappellino Uranus personalizzato" loading="lazy"></div>
       <div style="padding: var(--space-4);">

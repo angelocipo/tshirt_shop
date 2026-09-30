@@ -12,6 +12,7 @@
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
+  <script defer src="filtro-sezioni.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
@@ -80,6 +81,17 @@
     <h1 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(32px,5vw,54px);line-height:1.04;margin:0 0 var(--space-3);text-wrap:pretty;" data-en="Sportswear">Abbigliamento sport personalizzato</h1>
     <p style="font-size:17px;line-height:1.6;margin:0;color:var(--color-neutral-700);" data-en="Over ninety technical models: polos, T-shirts, shorts, leggings, tracksuits, jackets and football kits. Printed or embroidered with your logo. Price on request on WhatsApp — we reply with a quote the same day.">Oltre novanta modelli tecnici: polo, t-shirt, shorts, leggings, tute, giacche e completi calcio. Personalizzati con stampa o ricamo del tuo logo. Prezzo su richiesta su WhatsApp: rispondiamo con il preventivo in giornata.</p>
   </header>
+  <nav aria-label="Categorie" data-filtro-nav style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin:calc(var(--space-8) * -0.5) 0 var(--space-8);">
+    <a class="btn btn-primary" href="#tutti" data-filtro="tutti" style="text-decoration:none;" data-en="All">Tutti</a>
+    <a class="btn btn-secondary" href="#polo" data-filtro="polo" style="text-decoration:none;" data-en="Technical polos">Polo tecniche</a>
+    <a class="btn btn-secondary" href="#tshirt" data-filtro="tshirt" style="text-decoration:none;" data-en="Technical T-shirts">T-shirt tecniche</a>
+    <a class="btn btn-secondary" href="#canotte" data-filtro="canotte" style="text-decoration:none;" data-en="Vests and tops">Canotte e top</a>
+    <a class="btn btn-secondary" href="#shorts" data-filtro="shorts" style="text-decoration:none;" data-en="Shorts and skirts">Shorts e gonne</a>
+    <a class="btn btn-secondary" href="#leggings" data-filtro="leggings" style="text-decoration:none;" data-en="Leggings">Leggings</a>
+    <a class="btn btn-secondary" href="#pantaloni" data-filtro="pantaloni" style="text-decoration:none;" data-en="Trousers and tracksuits">Pantaloni e tute</a>
+    <a class="btn btn-secondary" href="#felpe" data-filtro="felpe" style="text-decoration:none;" data-en="Sweatshirts and jackets">Felpe e giacche sport</a>
+    <a class="btn btn-secondary" href="#calcio" data-filtro="calcio" style="text-decoration:none;" data-en="Football kits">Completi calcio</a>
+  </nav>
 
   <div class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="sport-uomo.html">
@@ -98,7 +110,7 @@
     </a>
   </div>
 
-  <section id="polo" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
+  <section id="polo" data-sez="polo" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Technical polos">Polo tecniche</h2>
     <div class="cat-list">
       <a class="cat-item" href="tormo.html">
@@ -168,7 +180,7 @@
     </div>
   </section>
 
-  <section id="tshirt" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
+  <section id="tshirt" data-sez="tshirt" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Technical T-shirts">T-shirt tecniche</h2>
     <div class="cat-list">
       <a class="cat-item" href="bahrain.html">
@@ -414,7 +426,7 @@
     </div>
   </section>
 
-  <section id="canotte" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
+  <section id="canotte" data-sez="canotte" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Vests and tops">Canotte e top</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Ciao%2C%20vorrei%20un%20preventivo%20per%20ANDRE%200350%20%E2%80%94%20abbigliamento%20sport%20personalizzato." target="_blank" rel="noopener">
@@ -459,7 +471,7 @@
     </div>
   </section>
 
-  <section id="shorts" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
+  <section id="shorts" data-sez="shorts" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Shorts and skirts">Shorts e gonne</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Ciao%2C%20vorrei%20un%20preventivo%20per%20PLAYER%200453%20%E2%80%94%20abbigliamento%20sport%20personalizzato." target="_blank" rel="noopener">
@@ -617,7 +629,7 @@
     </div>
   </section>
 
-  <section id="leggings" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
+  <section id="leggings" data-sez="leggings" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Leggings">Leggings</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Ciao%2C%20vorrei%20un%20preventivo%20per%20GALES%206700%20%E2%80%94%20abbigliamento%20sport%20personalizzato." target="_blank" rel="noopener">
@@ -687,7 +699,7 @@
     </div>
   </section>
 
-  <section id="pantaloni" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
+  <section id="pantaloni" data-sez="pantaloni" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Trousers and tracksuits">Pantaloni e tute</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Ciao%2C%20vorrei%20un%20preventivo%20per%20NEAPOLIS%200521%20%E2%80%94%20abbigliamento%20sport%20personalizzato." target="_blank" rel="noopener">
@@ -765,7 +777,7 @@
     </div>
   </section>
 
-  <section id="felpe" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
+  <section id="felpe" data-sez="felpe" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Sweatshirts and jackets">Felpe e giacche sport</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Ciao%2C%20vorrei%20un%20preventivo%20per%20ESTAMBUL%201031%20%E2%80%94%20abbigliamento%20sport%20personalizzato." target="_blank" rel="noopener">
@@ -875,7 +887,7 @@
     </div>
   </section>
 
-  <section id="calcio" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
+  <section id="calcio" data-sez="calcio" style="margin-bottom: var(--space-8); scroll-margin-top: var(--space-4);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="Football kits">Completi calcio</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Ciao%2C%20vorrei%20un%20preventivo%20per%20JUVE%200525%20%E2%80%94%20abbigliamento%20sport%20personalizzato." target="_blank" rel="noopener">

@@ -12,6 +12,7 @@
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
+  <script defer src="filtro-sezioni.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
@@ -82,7 +83,15 @@
       <p style="font-size:17px;line-height:1.6;margin:0;color:var(--color-neutral-700);max-width:52ch;" data-en="T-shirts, polo shirts and jackets for kids, printed with your design — classes, teams, birthdays. Choose the model, the colour, the sizes and the quantity: the price appears straight away.">Magliette, polo e giubbotti bambino personalizzati — classi, squadre, compleanni. Scegli modello, colore, taglie e quantità: il prezzo compare subito.</p>
     </div>
   </header>
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <nav aria-label="Categorie" data-filtro-nav style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin:calc(var(--space-8) * -0.5) 0 var(--space-8);">
+    <a class="btn btn-primary" href="#tutti" data-filtro="tutti" style="text-decoration:none;" data-en="All">Tutti</a>
+    <a class="btn btn-secondary" href="#sez-magliette" data-filtro="sez-magliette" style="text-decoration:none;" data-en="T-shirts">Magliette</a>
+    <a class="btn btn-secondary" href="#sez-polo" data-filtro="sez-polo" style="text-decoration:none;" data-en="Polo shirts">Polo</a>
+    <a class="btn btn-secondary" href="#sez-felpe" data-filtro="sez-felpe" style="text-decoration:none;" data-en="Sweatshirts">Felpe</a>
+    <a class="btn btn-secondary" href="#sez-giubbotti" data-filtro="sez-giubbotti" style="text-decoration:none;" data-en="Jackets">Giubbotti</a>
+  </nav>
+  <h2 id="sez-magliette" data-sez="sez-magliette" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="T-shirts">Magliette</h2>
+  <section data-sez="sez-magliette" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="beagle-kids.html">
       <div class="cat-media"><img src="img/beagle-kids-hero.webp" alt="Maglietta Beagle bambino personalizzata" style="object-position:50% 0%;"></div>
       <div style="padding: var(--space-4);">
@@ -111,8 +120,8 @@
       </div>
     </a>
   </section>
-
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-polo" data-sez="sez-polo" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Polo shirts">Polo</h2>
+  <section data-sez="sez-polo" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="star-polo-kids.html">
       <div class="cat-media"><img src="img/star-kids-hero.webp" alt="Polo Star bambino personalizzata"></div>
       <div style="padding: var(--space-4);">
@@ -124,7 +133,8 @@
     </a>
   </section>
 
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-felpe" data-sez="sez-felpe" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Sweatshirts">Felpe</h2>
+  <section data-sez="sez-felpe" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="felpa-badet-kids.html">
       <div class="cat-media"><img src="img/felpa-badet-kids-hero.webp" alt="Felpa Badet bambino personalizzata" loading="lazy"></div>
       <div style="padding: var(--space-4);">
@@ -153,7 +163,8 @@
     </a>
   </section>
 
-  <section class="cat-list" style="margin-bottom: var(--space-8);">
+  <h2 id="sez-giubbotti" data-sez="sez-giubbotti" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);scroll-margin-top:var(--space-4);" data-en="Jackets">Giubbotti</h2>
+  <section data-sez="sez-giubbotti" class="cat-list" style="margin-bottom: var(--space-8);">
     <a class="cat-item" href="nebraska-kids.html">
       <div class="cat-media"><img src="img/nebraska-kids-hero.webp" alt="Giubbotto Nebraska bambino personalizzato"></div>
       <div style="padding: var(--space-4);">
