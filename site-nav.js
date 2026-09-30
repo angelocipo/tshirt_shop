@@ -20,7 +20,7 @@
     document.head.appendChild(siScript);
   }
   var MENU = {
-    brand: { href: 'index.html', logo: 'img/logo-tshirt-shop.webp', name: 'TSHIRT SHOP ONLINE', suffix: 'by Printing Italy' },
+    brand: { href: 'index.html', logo: 'img/logo-tshirt-shop.webp', name: 'TSHIRT SHOP ONLINE' },
     whatsapp: { href: 'https://api.whatsapp.com/send/?phone=393396021366', it: 'Preventivo WhatsApp', en: 'Quote on WhatsApp' },
     items: [
       { it: 'PROMO', en: 'Promo', href: 'promozioni.html', accent: true, sub: [
@@ -97,14 +97,22 @@
     'nav.nav[data-site-nav] .nav-cart { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--color-divider); padding: 6px 11px; text-decoration: none; color: var(--color-text); font-family: var(--font-heading); font-weight: 700; font-size: 13px; letter-spacing: .04em; }',
     'nav.nav[data-site-nav] .nav-cart:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }',
     'nav.nav[data-site-nav] .nav-cart svg { flex: none; }',
+    'nav.nav[data-site-nav] > .btn-primary, nav.nav[data-site-nav] .nav-cart { height: 40px; box-sizing: border-box; padding-top: 0; padding-bottom: 0; display: inline-flex; align-items: center; justify-content: center; }',
     'nav.nav[data-site-nav] .nav-cart[data-cart-full="1"] { border-color: var(--color-accent); color: var(--color-accent-700); }',
     '@media (max-width: 700px) {',
-    '  nav.nav[data-site-nav] { justify-content: center; row-gap: 4px; padding-left: 18px; padding-right: 18px; box-sizing: border-box; }',
-    '  nav.nav[data-site-nav] .nav-brand { justify-content: center; }',
+    '  :has(> nav.nav[data-site-nav]) { padding-top: 5px !important; }',
+    '  nav.nav[data-site-nav] { padding-top: 0 !important; }',
+    '  nav.nav[data-site-nav] { justify-content: center; row-gap: 4px; padding-left: 0 !important; padding-right: 0 !important; box-sizing: border-box; position: relative; }',
+    '  nav.nav[data-site-nav]::before { content: ""; order: -1; flex: 0 0 100%; height: 0; }',
+    '  nav.nav[data-site-nav] .nav-brand { order: -3; flex: 1 1 0; min-width: 0; justify-content: flex-start; gap: 6px; white-space: nowrap; }',
+    '  nav.nav[data-site-nav] .nav-brand img { height: 38px; }',
+    '  nav.nav[data-site-nav] .nav-lang { order: -2; margin-left: auto; margin-right: 0; flex: none; }',
+    '  nav.nav[data-site-nav] .nav-brand > span { position: absolute; left: 50%; transform: translateX(-50%); max-width: calc(100% - 200px); text-align: center; font-size: clamp(11px, 3.6vw, 17px); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: clip; }',
     '  nav.nav[data-site-nav] > a, nav.nav[data-site-nav] .nav-drop > a { padding-top: 2px; padding-bottom: 2px; }',
-    '  nav.nav[data-site-nav] .btn-primary { margin-left: 0; flex: 0 0 100%; }',
+    '  nav.nav[data-site-nav] .btn-primary { margin-left: 0; flex: 1 1 0; }',
     '  nav.nav[data-site-nav] .nav-sub { display: none; }',
-    '  nav.nav[data-site-nav] .nav-cart { position: absolute; top: 10px; left: 18px; padding: 5px 9px; }',
+    '  nav.nav[data-site-nav] .nav-cart { flex: none; width: var(--nav-lang-w, auto); padding-left: 0; padding-right: 0; margin-left: 8px; justify-content: center; }',
+    '  nav.nav[data-site-nav] > .btn-primary, nav.nav[data-site-nav] > .nav-cart { height: 30px; min-height: 0; font-size: 13px; margin-top: 10px; margin-bottom: 0; align-self: center; }',
     '}',
     // alcune pagine nascondono i link del menu sotto i 600px con ".nav a { display: none }":
     // qui li rimettiamo, altrimenti su telefono resterebbe solo il logo.
@@ -135,18 +143,18 @@
   function html() {
     var b = MENU.brand;
     var out = '<a href="' + esc(b.href) + '" class="nav-brand"><img src="' + esc(b.logo) + '" alt="' + esc(b.name) + '"><span>' +
-      esc(b.name) + ' <span style="opacity:.55;font-weight:400;">' + esc(b.suffix) + '</span></span></a>';
+      esc(b.name) + '</span></a>';
     out += MENU.items.map(renderTop).join('');
     out += '<span class="nav-lang">' +
       '<button type="button" data-lang="it" aria-pressed="true">IT</button>' +
       '<button type="button" data-lang="en" aria-pressed="false">EN</button></span>';
+    out += '<a class="btn btn-primary" href="' + esc(MENU.whatsapp.href) + '" style="text-decoration:none;" data-en="' +
+      esc(MENU.whatsapp.en) + '">' + esc(MENU.whatsapp.it) + '</a>';
     out += '<a class="nav-cart" href="carrello.html" data-cart-link aria-label="Carrello" title="Carrello">' +
       '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
       '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>' +
       '<path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>' +
       '<span data-cart-count>0</span></a>';
-    out += '<a class="btn btn-primary" href="' + esc(MENU.whatsapp.href) + '" style="text-decoration:none;" data-en="' +
-      esc(MENU.whatsapp.en) + '">' + esc(MENU.whatsapp.it) + '</a>';
     return out;
   }
 
@@ -171,6 +179,15 @@
       if (el.getAttribute('data-site-nav-done') === '1') continue;
       el.innerHTML = html();
       el.setAttribute('data-site-nav-done', '1');
+      (function (nav) {
+        function syncW() {
+          var l = nav.querySelector('.nav-lang');
+          if (l && l.offsetWidth) nav.style.setProperty('--nav-lang-w', l.offsetWidth + 'px');
+        }
+        syncW();
+        window.addEventListener('resize', syncW);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncW);
+      })(el);
       // Il menu appena iniettato porta il contatore a zero: cart.js lo riallinea subito.
       if (window.tsCart) window.tsCart.paint();
     }
