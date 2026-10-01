@@ -109,6 +109,8 @@
     '  nav.nav[data-site-nav] .nav-lang { order: -2; position: absolute; right: 0; top: 19px; transform: translateY(-50%); margin: 0; flex: none; }',
     '  nav.nav[data-site-nav] .nav-brand > span { position: absolute; left: 50%; transform: translateX(-50%); max-width: calc(100% - 200px); text-align: center; font-size: clamp(11px, 3.6vw, 17px); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: clip; }',
     '  nav.nav[data-site-nav] > a, nav.nav[data-site-nav] .nav-drop > a { padding-top: 2px; padding-bottom: 2px; }',
+    '  nav.nav[data-site-nav]::after { content: ""; order: 1; flex: 0 0 100%; height: 0; }',
+    '  nav.nav[data-site-nav] > .btn-primary, nav.nav[data-site-nav] > .nav-cart { order: 2; }',
     '  nav.nav[data-site-nav] .btn-primary { margin-left: 0; flex: 1 1 0; }',
     '  nav.nav[data-site-nav] .nav-sub { display: none; }',
     '  nav.nav[data-site-nav] .nav-cart { flex: none; width: var(--nav-lang-w, auto); padding-left: 0; padding-right: 0; margin-left: 8px; justify-content: center; }',
