@@ -194,6 +194,13 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
+  // Stampa Oro / Argento / Ologramma — capo Beagle + 5 €/pz di effetto lucido; stampa = tariffe DTF t-shirt. Nessun minimo.
+  'tshirt-foil': { nome: 'Maglietta Stampa Oro, Argento, Ologramma', type: 'tshirt',
+    garmentUnitPrice: (qty, isWhite) => { const t = pickTier(TSHIRT_PRICE_TIERS, qty); return (isWhite ? t.white : t.other) + 5; },
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
   // Polo Austral — listino capi Austral (unico per tutti i colori); stampa = tariffe DTF t-shirt.
   // Polo Star — listino capi Star (tabella 1-1, unico per tutti i colori); stampa = tariffe DTF t-shirt.
   'star-polo': { nome: 'Polo Star', type: 'tshirt',
