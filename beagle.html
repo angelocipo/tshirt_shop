@@ -15,7 +15,7 @@
   <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Maglietta Unisex 24H Personalizzata | Tshirt Shop Online</title>
+  <title>Maglietta Unisex Personalizzata | Tshirt Shop Online</title>
   <meta name="description" content="T-shirt personalizzata in cotone premium con stampa DTF: preventivo in 30 secondi, spedizione pronta in settimana, prodotto a Roma.">
   <link rel="canonical" href="https://www.tshirt-shop.online/beagle.html">
   <meta property="og:url" content="https://www.tshirt-shop.online/beagle.html">
@@ -159,7 +159,7 @@
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Unisex T-Shirt 24H">Maglietta Unisex 24H</h1>
+      <h1 style="margin-bottom: 4px;" data-en="Unisex T-Shirt">Maglietta Unisex</h1>
     </div>
 
     <div class="col-left">
@@ -627,7 +627,7 @@ class Component extends DCLogic {
 
   async uploadFile(file, id, ref) {
     try {
-      const qs = new URLSearchParams({ ref, name: file.name, product: 'Maglietta Unisex 24H' });
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Maglietta Unisex' });
       const res = await fetch('/api/upload-design?' + qs.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -808,7 +808,7 @@ class Component extends DCLogic {
         const heroEl = document.getElementById('beagle-hero');
         const cartRow = {
           id: 'tshirt',
-          name: 'Maglietta Unisex 24H',
+          name: 'Maglietta Unisex',
           price: +grandTotal.toFixed(2),
           col: 'misura',
           body: orderBody,
@@ -840,7 +840,7 @@ class Component extends DCLogic {
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
         const params = new URLSearchParams({
-          prodotto: 'Maglietta Unisex 24H',
+          prodotto: 'Maglietta Unisex',
           config: orderNote ? config + ' — Note: ' + orderNote : config,
           url: window.location.origin + window.location.pathname,
           quantita: String(totalQty),
