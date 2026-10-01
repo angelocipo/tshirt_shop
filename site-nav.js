@@ -106,7 +106,7 @@
     '  nav.nav[data-site-nav]::before { content: ""; order: -1; flex: 0 0 100%; height: 0; }',
     '  nav.nav[data-site-nav] .nav-brand { order: -3; flex: 1 1 0; min-width: 0; justify-content: flex-start; gap: 6px; white-space: nowrap; }',
     '  nav.nav[data-site-nav] .nav-brand img { height: 38px; }',
-    '  nav.nav[data-site-nav] .nav-lang { order: -2; margin-left: auto; margin-right: 0; flex: none; }',
+    '  nav.nav[data-site-nav] .nav-lang { order: -2; position: absolute; right: 0; top: 19px; transform: translateY(-50%); margin: 0; flex: none; }',
     '  nav.nav[data-site-nav] .nav-brand > span { position: absolute; left: 50%; transform: translateX(-50%); max-width: calc(100% - 200px); text-align: center; font-size: clamp(11px, 3.6vw, 17px); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: clip; }',
     '  nav.nav[data-site-nav] > a, nav.nav[data-site-nav] .nav-drop > a { padding-top: 2px; padding-bottom: 2px; }',
     '  nav.nav[data-site-nav] .btn-primary { margin-left: 0; flex: 1 1 0; }',
@@ -183,10 +183,19 @@
         function syncW() {
           var l = nav.querySelector('.nav-lang');
           if (l && l.offsetWidth) nav.style.setProperty('--nav-lang-w', l.offsetWidth + 'px');
+          // su telefono IT/EN è assoluto: allinea il suo bordo destro a quello del carrello
+          var c = nav.querySelector('.nav-cart');
+          if (!l || !c) return;
+          l.style.right = '';
+          if (window.matchMedia('(max-width: 700px)').matches && c.offsetWidth) {
+            var d = c.getBoundingClientRect().right - l.getBoundingClientRect().right;
+            if (Math.abs(d) > 0.5) l.style.right = (-d) + 'px';
+          }
         }
         syncW();
         window.addEventListener('resize', syncW);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncW);
+        window.addEventListener('load', syncW);
       })(el);
       // Il menu appena iniettato porta il contatore a zero: cart.js lo riallinea subito.
       if (window.tsCart) window.tsCart.paint();
