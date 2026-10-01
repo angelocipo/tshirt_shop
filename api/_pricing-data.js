@@ -7,7 +7,7 @@ function angoliArrotondatiPrice(qty) {
   return (t || ANGOLI_ARROTONDATI_TIERS[ANGOLI_ARROTONDATI_TIERS.length - 1]).price;
 }
 
-// --- T-Shirt Unisex 24H (mirror of T-Shirt Product Page.html) ---
+// --- T-Shirt Unisex (mirror of T-Shirt Product Page.html) ---
 const TSHIRT_PRICE_TIERS = [
   { min: 1, white: 8, other: 8.8 }, { min: 5, white: 6.5, other: 7.15 },
   { min: 10, white: 5, other: 5.5 }, { min: 20, white: 3.5, other: 3.85 },
@@ -188,7 +188,7 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
-  'tshirt': { nome: 'Maglietta Unisex 24H', type: 'tshirt',
+  'tshirt': { nome: 'Maglietta Unisex', type: 'tshirt',
     garmentUnitPrice: (qty, isWhite) => { const t = pickTier(TSHIRT_PRICE_TIERS, qty); return isWhite ? t.white : t.other; },
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
