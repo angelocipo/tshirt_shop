@@ -1,5 +1,6 @@
-// Receives ONE design file as a raw binary POST body and forwards it to the shop owner
-// as an email attachment (Resend). Nothing is stored server-side.
+// Receives ONE design file as a raw binary POST body and PARKS it in Vercel Blob under
+// designs/<ref>/. No email is sent here: the file is attached to the owner's order email by
+// api/stripe-webhook.js only when the payment completes. Unpaid uploads expire after 7 days.
 //
 //   POST /api/upload-design?ref=DES-AB12CD&name=logo.pdf
 //   Content-Type: application/octet-stream
@@ -7,12 +8,12 @@
 //
 // Content-Type is deliberately NOT application/json: the Vercel Node runtime then leaves
 // the request stream untouched so we can read the bytes without base64 inflation.
-// Requires RESEND_API_KEY and OWNER_NOTIFICATION_EMAIL env vars.
+// Requires BLOB_READ_WRITE_TOKEN (created automatically when a Blob store is connected).
+const { put, list, del } = require('@vercel/blob');
+const EXPIRE_MS = 7 * 24 * 3600 * 1000;
 
 const MAX_BYTES = 4 * 1024 * 1024; // Vercel serverless request bodies cap out at 4.5 MB — hard platform limit
 const ALLOWED_EXT = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'pdf', 'ai', 'eps', 'psd', 'tif', 'tiff', 'zip'];
-const RESEND_FROM = process.env.RESEND_FROM || 'Tshirt Shop Online <ordini@tshirt-shop.online>';
-const OWNER_EMAIL = process.env.OWNER_NOTIFICATION_EMAIL || 'tipografiaromaeur@gmail.com';
 
 function readBody(req) {
   return new Promise((resolve, reject) => {
@@ -49,8 +50,8 @@ module.exports = async (req, res) => {
     res.status(415).json({ error: `Formato .${ext} non supportato. Usa ${ALLOWED_EXT.join(', ')}.` });
     return;
   }
-  if (!process.env.RESEND_API_KEY) {
-    res.status(500).json({ error: 'Servizio di upload non configurato (RESEND_API_KEY).' });
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    res.status(500).json({ error: 'Servizio di upload non configurato (BLOB_READ_WRITE_TOKEN).' });
     return;
   }
 
@@ -67,36 +68,25 @@ module.exports = async (req, res) => {
   }
   if (!buf || !buf.length) { res.status(400).json({ error: 'File vuoto.' }); return; }
 
-  const kb = (buf.length / 1024).toFixed(0);
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
-      body: JSON.stringify({
-        from: RESEND_FROM,
-        to: OWNER_EMAIL,
-        subject: `File design ${ref} — ${filename}`,
-        html: `<p style="font:400 15px/1.5 Barlow,Arial,sans-serif;">Nuovo file caricato dal configuratore.</p>
-<p style="font:400 14px/1.6 Barlow,Arial,sans-serif;">
-Riferimento: <strong>${ref}</strong><br>
-File: <strong>${filename}</strong> (${kb} KB)<br>
-Prodotto: ${product || '—'}<br>
-Ricevuto: ${new Date().toLocaleString('it-IT')}
-</p>
-<p style="font:400 13px/1.6 Barlow,Arial,sans-serif;color:#6b6f72;">Se il cliente completa l'ordine, lo stesso riferimento comparirà nella mail di conferma.</p>`,
-        attachments: [{ filename, content: buf.toString('base64') }],
-      }),
+    await put(`designs/${ref}/${filename}`, buf, {
+      access: 'public',
+      addRandomSuffix: true,
+      contentType: 'application/octet-stream',
     });
-    const text = await r.text();
-    if (!r.ok) {
-      console.error(`upload-design: Resend failed status=${r.status} body=${text}`);
-      res.status(502).json({ error: 'Invio del file non riuscito, riprova.' });
-      return;
-    }
   } catch (err) {
-    console.error('upload-design error', err);
+    console.error('upload-design: Blob put failed', err);
     res.status(502).json({ error: 'Invio del file non riuscito, riprova.' });
     return;
+  }
+
+  // Housekeeping: drop files from carts that never reached payment. Never blocks the reply.
+  try {
+    const { blobs } = await list({ prefix: 'designs/', limit: 1000 });
+    const old = blobs.filter((b) => Date.now() - new Date(b.uploadedAt).getTime() > EXPIRE_MS).map((b) => b.url);
+    if (old.length) await del(old);
+  } catch (err) {
+    console.error('upload-design: cleanup failed', err);
   }
 
   res.status(200).json({ ok: true, ref, filename, bytes: buf.length });

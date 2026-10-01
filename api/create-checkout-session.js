@@ -108,7 +108,7 @@ module.exports = async (req, res) => {
       metadata.sender_city = sn.city || '';
       metadata.sender_cap = sn.cap || '';
     }
-    if (designRef) metadata.design_ref = String(designRef).slice(0, 40);
+    if (designRef) metadata.design_ref = String(designRef).slice(0, 490);
     if (Array.isArray(designFiles) && designFiles.length) metadata.design_files = designFiles.join(', ').slice(0, 490);
     if (designLink && /^https?:\/\//i.test(String(designLink))) metadata.design_link = String(designLink).slice(0, 490);
     if (customerNote) metadata.customer_note = String(customerNote).slice(0, 490);

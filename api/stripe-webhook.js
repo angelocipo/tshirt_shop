@@ -17,11 +17,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // Keeping it inline means this endpoint has no local dependency that can go missing.
 const RESEND_FROM = process.env.RESEND_FROM || 'Tshirt Shop Online <ordini@tshirt-shop.online>';
 
-async function sendEmail({ to, subject, html }) {
+async function sendEmail({ to, subject, html, attachments }) {
+  const payload = { from: RESEND_FROM, to, subject, html };
+  if (attachments && attachments.length) payload.attachments = attachments;
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
-    body: JSON.stringify({ from: RESEND_FROM, to, subject, html }),
+    body: JSON.stringify(payload),
   });
   const text = await r.text();
   if (!r.ok) {
@@ -32,6 +34,28 @@ async function sendEmail({ to, subject, html }) {
 }
 
 const OWNER_EMAIL = process.env.OWNER_NOTIFICATION_EMAIL || 'info@tshirt-shop.online';
+
+// Design files parked by api/upload-design.js under designs/<ref>/. Loaded lazily so a missing
+// package or token can never stop the order confirmation from going out.
+async function collectDesignFiles(refField) {
+  const refs = String(refField || '').split(',').map((s) => s.trim()).filter(Boolean);
+  if (!refs.length || !process.env.BLOB_READ_WRITE_TOKEN) return { attachments: [], urls: [] };
+  const { list } = require('@vercel/blob');
+  const attachments = [], urls = [];
+  for (const ref of refs) {
+    const { blobs } = await list({ prefix: `designs/${ref}/` });
+    for (const b of blobs) {
+      const r = await fetch(b.url);
+      if (!r.ok) { console.error('Design file download failed', b.pathname, r.status); continue; }
+      const buf = Buffer.from(await r.arrayBuffer());
+      // pathname = designs/<ref>/<name>-<randomSuffix>.<ext> → strip the suffix for the attachment name
+      const base = b.pathname.split('/').pop().replace(/-[A-Za-z0-9]{20,}(\.[^.]+)$/, '$1');
+      attachments.push({ filename: `${ref}_${base}`, content: buf.toString('base64') });
+      urls.push(b.url);
+    }
+  }
+  return { attachments, urls };
+}
 
 function buffer(req) {
   return new Promise((resolve, reject) => {
@@ -166,13 +190,24 @@ module.exports = async (req, res) => {
           console.error('Buyer confirmation FAILED for session', session.id, mailErr);
         }
       }
+      let design = { attachments: [], urls: [] };
+      try {
+        design = await collectDesignFiles(md.design_ref);
+      } catch (blobErr) {
+        console.error('Design files lookup FAILED for', md.design_ref, blobErr);
+      }
       try {
         await sendEmail({
           to: OWNER_EMAIL,
-          subject: `Nuovo ordine #${order.number} — € ${total.toFixed(2)}`,
-          html: summaryHtml.replace('</body></html>', ownerBlockHtml(order, buyerEmail, session) + '</body></html>'),
+          subject: `Nuovo ordine #${order.number} — € ${total.toFixed(2)}${design.attachments.length ? ` — ${design.attachments.length} file` : ''}`,
+          html: summaryHtml.replace('</body></html>', ownerBlockHtml(order, buyerEmail, session, design.attachments.length) + '</body></html>'),
+          attachments: design.attachments,
         });
-        console.log('Owner notification sent to', OWNER_EMAIL);
+        console.log('Owner notification sent to', OWNER_EMAIL, 'with', design.attachments.length, 'file(s)');
+        // Delete only after the mail with the files went out — otherwise a Stripe retry can resend them.
+        if (design.urls.length) {
+          try { await require('@vercel/blob').del(design.urls); } catch (e) { console.error('Blob delete failed', e); }
+        }
       } catch (mailErr) {
         console.error('Owner notification FAILED to', OWNER_EMAIL, mailErr);
       }
@@ -397,7 +432,7 @@ function orderEmailHtml(order, total, md) {
 </body></html>`;
 }
 
-function ownerBlockHtml(order, buyerEmail, session) {
+function ownerBlockHtml(order, buyerEmail, session, attachedCount) {
   const md = session.metadata || {};
   const rowsData = [
     ['Cliente', order.customer.name],
@@ -413,7 +448,7 @@ function ownerBlockHtml(order, buyerEmail, session) {
     rowsData.push(['Consegna / note', esc(md.customer_note)]);
   }
   if (md.design_ref) {
-    rowsData.push(['File design', `${md.design_ref}${md.design_files ? ' — ' + md.design_files : ''} (arrivati per email separata)`]);
+    rowsData.push(['File design', `${md.design_ref}${md.design_files ? ' — ' + md.design_files : ''} (${attachedCount ? attachedCount + ' allegati a questa email' : 'NESSUN file trovato — chiedilo al cliente'})`]);
   }
   if (md.design_link) {
     rowsData.push(['Link file', `<a href="${md.design_link}" style="color:${STEEL};">${md.design_link}</a>`]);
