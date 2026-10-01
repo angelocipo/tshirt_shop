@@ -26,6 +26,7 @@
       { it: 'PROMO', en: 'Promo', href: 'promozioni.html', accent: true, sub: [
         { it: '100 Magliette + Stampa', en: '100 T-Shirts + Printing', href: 'promozione-100-magliette.html' },
         { it: 'Maglietta Unisex', en: 'Unisex T-Shirt', href: 'beagle.html' },
+        { it: 'Stampa Oro, Argento, Ologramma', en: 'Gold, Silver, Hologram Print', href: 'maglietta-oro-argento-ologramma.html' },
         { it: 'Altre offerte in arrivo', en: 'More offers coming soon' },
       ] },
       { it: 'Uomo', en: 'Men', href: 'uomo.html', sub: [
