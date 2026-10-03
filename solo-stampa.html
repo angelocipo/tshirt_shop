@@ -534,9 +534,9 @@ class Component extends DCLogic {
     const totalQty = Math.max(0, Math.min(9999, st.qty || 0));
     const setQtyTo = (v) => this.setState({ qty: Math.max(0, Math.min(9999, v)) });
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(totalQty);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty);
+      if (key === 'cuore') return cuoreUnitPrice(totalQty || MIN_QTY);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
       return 0;
     };
     const zones = ZONE_DEFS.map(z => {

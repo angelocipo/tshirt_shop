@@ -734,9 +734,9 @@ class Component extends DCLogic {
       x.measure = SIZE_MEASURE[x.label] ? SIZE_MEASURE[x.label] + ' cm' : '';
     });
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(rateQty);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(rateQty);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(rateQty);
+      if (key === 'cuore') return cuoreUnitPrice(rateQty || MIN_QTY);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(rateQty || MIN_QTY);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(rateQty || MIN_QTY);
       return 0;
     };
     const zones = ZONE_DEFS.map(z => {

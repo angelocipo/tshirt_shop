@@ -252,7 +252,7 @@
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="No minimum order, sizes can be mixed.">Nessun minimo d'ordine, taglie miste ammesse.</p>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, sizes can be mixed.">Ordine minimo: 5 pz, taglie miste ammesse.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
           <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
         </sc-if>
@@ -501,7 +501,7 @@ const IMAGE_BY_COLOR = {
   '86 Blue Denim': 'img/beagle-86-blue-denim.webp',
   '87 Cioccolato': 'img/beagle-87-cioccolato.webp',
 };
-const MIN_QTY = 1;
+const MIN_QTY = 5;
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 const SIZE_MEASURE = { 'S': 'A 49 × B 69', 'M': 'A 52 × B 71', 'L': 'A 55 × B 73', 'XL': 'A 58 × B 75', 'XXL': 'A 62 × B 77', 'XXXL': 'A 66 × B 79' };
 const SIZE_STOCK = { S: 19520, M: 10677, L: 18581, XL: 9532, XXL: 2368, XXXL: 969 };
@@ -688,9 +688,9 @@ class Component extends DCLogic {
       setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
     }));
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(totalQty);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty);
+      if (key === 'cuore') return cuoreUnitPrice(totalQty || MIN_QTY);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
       return 0;
     };
     const zones = ZONE_DEFS.map(z => {
