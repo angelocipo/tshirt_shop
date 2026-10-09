@@ -90,14 +90,21 @@
   }
 
   var TOAST_CSS = [
-    '[data-ts-toast] { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%) translateY(8px);',
-    '  z-index: 9000; background: var(--color-surface, #fff); border: 1px solid var(--color-text, #1d1f20);',
-    '  padding: 12px 16px; display: flex; align-items: center; gap: 14px; box-shadow: 0 8px 28px rgba(0,0,0,.14);',
-    '  font-family: var(--font-body, system-ui); font-size: 14px; max-width: calc(100vw - 32px);',
-    '  opacity: 0; transition: opacity .18s ease, transform .18s ease; }',
-    '[data-ts-toast][data-on="1"] { opacity: 1; transform: translateX(-50%) translateY(0); }',
-    '[data-ts-toast] strong { font-family: var(--font-heading, system-ui); font-weight: 700; }',
-    '[data-ts-toast] a { color: var(--color-accent-700, #302d2b); font-weight: 700; white-space: nowrap; }',
+    '[data-ts-toast] { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center;',
+    '  padding: 16px; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .2s ease; }',
+    '[data-ts-toast][data-on="1"] { opacity: 1; pointer-events: auto; }',
+    '[data-ts-toast] .ts-t-card { background: var(--color-surface, #fff); border: 2px solid var(--color-text, #1d1f20);',
+    '  padding: 36px 32px 28px; width: 440px; max-width: 100%; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.28);',
+    '  font-family: var(--font-body, system-ui); transform: scale(.92); transition: transform .2s ease; }',
+    '[data-ts-toast][data-on="1"] .ts-t-card { transform: scale(1); }',
+    '[data-ts-toast] .ts-t-check { width: 56px; height: 56px; border-radius: 50%; background: var(--color-accent, #ec3013); color: #fff;',
+    '  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }',
+    '[data-ts-toast] .ts-t-msg { font-family: var(--font-heading, system-ui); font-weight: 800; font-size: 28px; line-height: 1.1; color: var(--color-text, #1d1f20); margin: 0 0 24px; }',
+    '[data-ts-toast] .ts-t-actions { display: flex; flex-direction: column; gap: 10px; }',
+    '[data-ts-toast] .ts-t-go { display: block; padding: 15px 20px; background: var(--color-accent, #ec3013); color: #fff; font-weight: 700; font-size: 17px; text-decoration: none; }',
+    '[data-ts-toast] .ts-t-go:hover { filter: brightness(.92); color: #fff; }',
+    '[data-ts-toast] .ts-t-stay { padding: 12px 20px; background: none; border: 1px solid var(--color-divider, #cfcccc); font: inherit; font-size: 15px; color: var(--color-text, #1d1f20); cursor: pointer; }',
+    '[data-ts-toast] .ts-t-stay:hover { border-color: var(--color-text, #1d1f20); }',
     '@media print { [data-ts-toast] { display: none; } }',
   ].join('\n');
 
@@ -112,17 +119,26 @@
     if (!toastEl || !toastEl.isConnected) {
       toastEl = document.createElement('div');
       toastEl.setAttribute('data-ts-toast', '');
-      toastEl.setAttribute('role', 'status');
+      toastEl.setAttribute('role', 'dialog');
+      toastEl.setAttribute('aria-modal', 'true');
+      toastEl.addEventListener('click', function (e) {
+        if (e.target === toastEl || e.target.closest('.ts-t-stay')) toastEl.removeAttribute('data-on');
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && toastEl) toastEl.removeAttribute('data-on'); });
       document.body.appendChild(toastEl);
     }
-    toastEl.innerHTML = '<span><strong>' + msg + '</strong></span>' +
-      '<a href="carrello.html">' + (linkLabel || 'Vai al carrello') + ' (<span data-cart-count>' + count() + '</span>)</a>';
+    var en = /cart/i.test(linkLabel || '');
+    toastEl.innerHTML = '<div class="ts-t-card">' +
+      '<div class="ts-t-check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>' +
+      '<p class="ts-t-msg">' + msg + '</p>' +
+      '<div class="ts-t-actions">' +
+      '<a class="ts-t-go" href="carrello.html">' + (linkLabel || 'Vai al carrello') + ' (<span data-cart-count>' + count() + '</span>)</a>' +
+      '<button type="button" class="ts-t-stay">' + (en ? 'Keep shopping' : 'Continua gli acquisti') + '</button>' +
+      '</div></div>';
     paint();
     requestAnimationFrame(function () { toastEl.setAttribute('data-on', '1'); });
     if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () {
-      if (toastEl) toastEl.removeAttribute('data-on');
-    }, 6000);
+    var go = toastEl.querySelector('.ts-t-go'); if (go) go.focus({ preventScroll: true });
   }
 
   window.tsCart = {
