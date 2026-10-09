@@ -15,10 +15,10 @@
   <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Felpa Fuji Personalizzata | Tshirt Shop Online</title>
-  <meta name="description" content="Felpa Fuji unisex personalizzata: zip intera e cappuccio foderato in rete, 280 g/m², 7 colori tinta unita e a contrasto, taglie S-XXXL. Stampa DTF a Roma.">
-  <link rel="canonical" href="https://www.tshirt-shop.online/felpa-fuji.html">
-  <meta property="og:url" content="https://www.tshirt-shop.online/felpa-fuji.html">
+  <title>Felpa Roma Sacra | Tshirt Shop Online</title>
+  <meta name="description" content="Felpa con cappuccio Roma Sacra, garzata 280 g/m², 44 colori: quattro grafiche religiose personalizzabili, anche 1 pezzo. Stampa DTF a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/felpa-roma-sacra.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/felpa-roma-sacra.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -49,7 +49,7 @@
     @media (max-width: 899px) {
       .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "graf" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
@@ -150,6 +150,10 @@
       .nav-sub-2, .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: none; }
     }
   
+    .graf-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 92px; padding: 10px 6px; border: 1px solid var(--color-divider); background: var(--color-surface); cursor: pointer; text-align: center; color: var(--color-text); font-family: inherit; }
+    .graf-tile:hover { border-color: var(--color-text); }
+    .graf-on { border: 2px solid var(--color-accent); padding: 9px 5px; }
+    @media (max-width: 899px) { .cfg-graf { grid-area: graf; } }
   </style>
 </helmet>
 
@@ -158,32 +162,45 @@
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
-    <span class="tag tag-accent" data-en="Contrast. Pure energy.">Contrasto. Energia pura.</span>
-    <span class="tag tag-neutral" data-en="Unbrushed 280 g">Non garzata 280 g</span>
-    <span class="tag tag-neutral" data-en="Full zip + hood">Zip intera + cappuccio</span>
-    <span class="tag tag-neutral" data-en="7 colours">7 colori</span>
+    <span class="tag tag-accent">Roma Sacra</span>
+    <span class="tag tag-neutral" data-en="From 1 piece">Da 1 pezzo</span>
+    <span class="tag tag-neutral" data-en="Made in Rome">Prodotto a Roma</span>
   </div>
 
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Fuji Sweatshirt">Felpa Fuji</h1>
+      <h1 style="margin-bottom: 4px;" data-en="Roma Sacra Hoodie">Felpa Roma Sacra</h1>
+      <p style="margin: 0; font-size: 16px; color: var(--color-neutral-700);" data-en="Lined hood. Warm. An ancient sign.">Cappuccio foderato. Calda. Un segno antico.</p>
     </div>
 
     <div class="col-left">
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
         <div style="aspect-ratio: 1;">
-          <img id="prod-hero" alt="Felpa Fuji — vista frontale" src="img/felpa-fuji-hero-plain.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          <img id="prod-hero" alt="Felpa Urban — vista frontale" src="img/felpa-urban-hero-plain.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
         </div>
       </div>
     </div>
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
         <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Sweatshirt Colour:">Colore Felpa:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
-        <div style="display: grid; grid-template-columns: repeat(7, 30px); gap: var(--space-2); justify-content: space-between;">
+        <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
           <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="24">
             <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div class="cfg-graf" style="margin-bottom: var(--space-4);">
+        <div class="field"><label><span data-en="Design:">Grafica:</span> {{ grafName }}</label></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--space-2);">
+          <sc-for list="{{ grafiche }}" as="g" hint-placeholder-count="5">
+            <button type="button" class="{{ g.cls }}" onClick="{{ g.select }}" aria-label="{{ g.latin }}">
+              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1;">{{ g.symbol }}</span>
+              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.25;">{{ g.latin }}</span>
+              <span class="text-muted" style="font-size: 10.5px; line-height: 1.3;">{{ g.sub }}</span>
+            </button>
           </sc-for>
         </div>
       </div>
@@ -254,7 +271,7 @@
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, sizes can be mixed.">Ordine minimo: 5 pz, taglie miste ammesse.</p>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="No minimum: from 1 piece, sizes can be mixed.">Nessun minimo: anche 1 pezzo, taglie miste ammesse.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
           <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
         </sc-if>
@@ -281,10 +298,10 @@
       <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
           <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Sweatshirt line">Linea felpe</div>
-          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Seven colours. Fluo contrast.">Sette colori. Contrasto fluo.</p>
+          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Forty-four colours. One hood.">Quarantaquattro colori. Un cappuccio solo.</p>
           <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
           <a href="felpe.html" style="font-size:13px;font-weight:600;" data-en="All sweatshirts">Tutte le felpe</a>
-          
+          <a href="felpa-urban-kids.html" style="font-size:13px;font-weight:600;" data-en="Urban kids sweatshirt">Felpa Urban bambino</a>
           <a href="uomo.html" style="font-size:13px;font-weight:600;" data-en="Menswear">Uomo</a>
           </div>
         </div>
@@ -295,10 +312,11 @@
       <div class="cfg-comp" style="border-bottom: 1px solid var(--color-divider); margin-bottom: var(--space-4); padding-bottom: var(--space-4);">
         <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
         <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700);">
-          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> Tessuto principale: 60% cotone / 40% poliestere, 280 g/m². Fodera del cappuccio: 100% poliestere microforato. Colore grigio mélange 58: 85% cotone / 15% viscosa.</div>
-          <div>Felpa non garzata con zip frontale e cappuccio. Cappuccio foderato in rete di poliestere. Cordini piatti in poliestere. Polsini e fascia in vita in costina 2x1 con elastan. Nastro di rinforzo interno nello stesso tessuto. Varianti in tinta unita e a contrasto.</div>
-          <div>Etichetta rimovibile. Confezione: scatola 20 pz, pack 1 pz. Lavaggio a 40°. OEKO-TEX Standard 100.</div>
-          <div style="font-weight: 700; color: var(--color-text);">Rif. Roly SU1105</div>
+          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> 50% cotone / 50% poliestere, garzata, 280 g/m². Colore grigio mélange 58: 55% cotone / 40% poliestere / 5% viscosa.</div>
+          <div>Felpa unisex garzata con cappuccio foderato. Polsini e fascia in vita in costina 2×1 con elastan. Nastro di rinforzo interno nello stesso tessuto. Cordino piatto nel cappuccio. Varianti colore con cappuccio a contrasto e occhielli metallici tono su tono.</div>
+          <div>Etichetta rimovibile. Modello Duo. Confezione: scatola 25 pz, pack 1 pz. Lavaggio a 40°.</div>
+          <div style="font-weight: 700; color: var(--color-text);">Rif. Roly SU1067</div>
+          <div style="font-weight: 700; color: var(--color-text);">EAN 0652026573916</div>
         </div>
       </div>
       <div class="cfg-rest">
@@ -312,6 +330,12 @@
         <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
         <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
         <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label for="graf-testo" data-en="Personalisation (optional)">Personalizzazione (opzionale)</label>
+        <input class="input" id="graf-testo" type="text" maxlength="40" placeholder="Es. Parrocchia San Clemente · 2026" data-en-placeholder="E.g. St Clement Parish · 2026" value="{{ grafTesto }}" onChange="{{ setGrafTesto }}">
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="One line of text under the design. Max 40 characters.">Una riga di testo sotto la grafica. Max 40 caratteri.</div>
       </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
@@ -430,35 +454,115 @@
 </footer>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;forest&quot;,&quot;ochre&quot;,&quot;ink&quot;],&quot;section&quot;:&quot;Color&quot;}}">
-const CLS = 'Non garzata 280 g/m² — 60% cotone / 40% poliestere';
-const CLS_GREY = 'Non garzata 280 g/m² — 85% cotone / 15% viscosa';
+const CLS = 'Garzata 280 g/m² — 50% cotone / 50% poliestere';
+const CLS_GREY = 'Garzata 280 g/m² — 55% cotone / 40% poliestere / 5% viscosa';
 const COLORS = [
-  { name: '58221 Grigio Mélange / Giallo Fluo', hex: 'linear-gradient(135deg, #9c9c9e 0 50%, #dff23c 50%)', cls: CLS_GREY },
-  { name: '05221 Blu Royal / Giallo Fluo', hex: 'linear-gradient(135deg, #1f5fae 0 50%, #dff23c 50%)', cls: CLS },
-  { name: '02221 Nero / Giallo Fluo', hex: 'linear-gradient(135deg, #171717 0 50%, #dff23c 50%)', cls: CLS },
-  { name: '58223 Grigio Mélange / Arancio Fluo', hex: 'linear-gradient(135deg, #9c9c9e 0 50%, #f58a3c 50%)', cls: CLS_GREY },
-  { name: '02223 Nero / Arancio Fluo', hex: 'linear-gradient(135deg, #171717 0 50%, #f58a3c 50%)', cls: CLS },
+  { name: '01 Bianco', hex: '#e8e8e8', cls: CLS },
+  { name: '132 Bianco Vintage', hex: '#f9f3e5', cls: CLS },
+  { name: '07 Sabbia', hex: '#d7bea2', cls: CLS },
+  { name: '08 Cioccolato', hex: '#936e5b', cls: CLS },
+  { name: '229 Beige', hex: '#e3cdb5', cls: CLS },
+  { name: '03 Giallo', hex: '#ebdb24', cls: CLS },
+  { name: '172 Ocra', hex: '#c67c32', cls: CLS },
+  { name: '31 Arancione', hex: '#f26315', cls: CLS },
+  { name: '60 Rosso', hex: '#e52525', cls: CLS },
+  { name: '120 Corallo', hex: '#fd836c', cls: CLS },
+  { name: '168 Rosa Antico', hex: '#db8479', cls: CLS },
+  { name: '169 Malva', hex: '#6e3c41', cls: CLS },
+  { name: '57 Granata', hex: '#561822', cls: CLS },
+  { name: '78 Rosa Fucsia', hex: '#e43b7c', cls: CLS },
+  { name: '48 Rosa Chiaro', hex: '#ecc1d4', cls: CLS },
+  { name: '71 Viola', hex: '#64057a', cls: CLS },
+  { name: '121 Prugna', hex: '#594963', cls: CLS },
+  { name: '711 Lavanda', hex: '#7863a6', cls: CLS },
+  { name: '05 Blu Royal', hex: '#09529b', cls: CLS },
+  { name: '12 Turchese', hex: '#41a5bb', cls: CLS },
   { name: '55 Blu Navy', hex: '#192033', cls: CLS },
+  { name: '263 Azzurro Polvere', hex: '#8697b6', cls: CLS },
+  { name: '170 Blu Petrolio', hex: '#516c79', cls: CLS },
+  { name: '430 Verde Petrolio', hex: '#37545c', cls: CLS },
+  { name: '264 Verde Menta', hex: '#dcecd2', cls: CLS },
+  { name: '56 Verde Bottiglia', hex: '#204e2c', cls: CLS },
+  { name: '275 Verde Salvia', hex: '#5e6b62', cls: CLS },
+  { name: '152 Verde Militare', hex: '#4d523e', cls: CLS },
+  { name: '58 Grigio Vigoré', hex: '#b7b7b9', cls: CLS_GREY },
+  { name: '108 Grigio Chiaro', hex: '#b7b7b7', cls: CLS },
+  { name: '231 Antracite', hex: '#464646', cls: CLS },
   { name: '02 Nero', hex: '#171717', cls: CLS },
+  { name: '177 Grigio Perla', hex: '#d6d6d6', cls: CLS },
+  { name: '0155 Bianco / Nero', hex: 'linear-gradient(135deg, #e8e8e8 0 50%, #171717 50%)', cls: CLS },
+  { name: '5802 Grigio Vigoré / Nero', hex: 'linear-gradient(135deg, #b8b7b9 0 50%, #171717 50%)', cls: CLS },
+  { name: '6002 Rosso / Nero', hex: 'linear-gradient(135deg, #fc2829 0 50%, #171717 50%)', cls: CLS },
+  { name: '5758 Granata / Grigio Vigoré', hex: 'linear-gradient(135deg, #79081c 0 50%, #b7b7b9 50%)', cls: CLS },
+  { name: '4858 Rosa / Grigio Vigoré', hex: 'linear-gradient(135deg, #fdbacc 0 50%, #b7b7b9 50%)', cls: CLS },
+  { name: '0501 Blu Royal / Bianco', hex: 'linear-gradient(135deg, #014b97 0 50%, #f2f2f2 50%)', cls: CLS },
+  { name: '1001 Celeste / Bianco', hex: 'linear-gradient(135deg, #87adcd 0 50%, #f2f2f2 50%)', cls: CLS },
+  { name: '5558 Blu Navy / Grigio Vigoré', hex: 'linear-gradient(135deg, #0a1a3a 0 50%, #b7b7b9 50%)', cls: CLS },
+  { name: '2001 Verde Prato / Bianco', hex: 'linear-gradient(135deg, #017a25 0 50%, #f2f2f2 50%)', cls: CLS },
+  { name: '5658 Verde Bottiglia / Grigio Vigoré', hex: 'linear-gradient(135deg, #014622 0 50%, #b7b7b9 50%)', cls: CLS },
+  { name: '0258 Nero / Grigio Vigoré', hex: 'linear-gradient(135deg, #121212 0 50%, #b7b7b9 50%)', cls: CLS },
 ];
 const IMAGE_BY_COLOR = {
-  '58221 Grigio Mélange / Giallo Fluo': 'img/felpa-fuji-58221.webp',
-  '05221 Blu Royal / Giallo Fluo': 'img/felpa-fuji-05221.webp',
-  '02221 Nero / Giallo Fluo': 'img/felpa-fuji-02221.webp',
-  '58223 Grigio Mélange / Arancio Fluo': 'img/felpa-fuji-58223.webp',
-  '02223 Nero / Arancio Fluo': 'img/felpa-fuji-02223.webp',
-  '55 Blu Navy': 'img/felpa-fuji-55.webp',
-  '02 Nero': 'img/felpa-fuji-02.webp',
+  '01 Bianco': 'img/felpa-urban-01.webp',
+  '132 Bianco Vintage': 'img/felpa-urban-132.webp',
+  '07 Sabbia': 'img/felpa-urban-07.webp',
+  '08 Cioccolato': 'img/felpa-urban-08.webp',
+  '229 Beige': 'img/felpa-urban-229.webp',
+  '03 Giallo': 'img/felpa-urban-03.webp',
+  '172 Ocra': 'img/felpa-urban-172.webp',
+  '31 Arancione': 'img/felpa-urban-31.webp',
+  '60 Rosso': 'img/felpa-urban-60.webp',
+  '120 Corallo': 'img/felpa-urban-120.webp',
+  '168 Rosa Antico': 'img/felpa-urban-168.webp',
+  '169 Malva': 'img/felpa-urban-169.webp',
+  '57 Granata': 'img/felpa-urban-57.webp',
+  '78 Rosa Fucsia': 'img/felpa-urban-78.webp',
+  '48 Rosa Chiaro': 'img/felpa-urban-48.webp',
+  '71 Viola': 'img/felpa-urban-71.webp',
+  '121 Prugna': 'img/felpa-urban-121.webp',
+  '711 Lavanda': 'img/felpa-urban-711.webp',
+  '05 Blu Royal': 'img/felpa-urban-05.webp',
+  '12 Turchese': 'img/felpa-urban-12.webp',
+  '55 Blu Navy': 'img/felpa-urban-55.webp',
+  '263 Azzurro Polvere': 'img/felpa-urban-263.webp',
+  '170 Blu Petrolio': 'img/felpa-urban-170.webp',
+  '430 Verde Petrolio': 'img/felpa-urban-430.webp',
+  '264 Verde Menta': 'img/felpa-urban-264.webp',
+  '56 Verde Bottiglia': 'img/felpa-urban-56.webp',
+  '275 Verde Salvia': 'img/felpa-urban-275.webp',
+  '152 Verde Militare': 'img/felpa-urban-152.webp',
+  '58 Grigio Vigoré': 'img/felpa-urban-58.webp',
+  '108 Grigio Chiaro': 'img/felpa-urban-108.webp',
+  '231 Antracite': 'img/felpa-urban-231.webp',
+  '02 Nero': 'img/felpa-urban-02.webp',
+  '177 Grigio Perla': 'img/felpa-urban-177.webp',
+  '0155 Bianco / Nero': 'img/felpa-urban-0155.webp',
+  '5802 Grigio Vigoré / Nero': 'img/felpa-urban-5802.webp',
+  '6002 Rosso / Nero': 'img/felpa-urban-6002.webp',
+  '5758 Granata / Grigio Vigoré': 'img/felpa-urban-5758.webp',
+  '4858 Rosa / Grigio Vigoré': 'img/felpa-urban-4858.webp',
+  '0501 Blu Royal / Bianco': 'img/felpa-urban-0501.webp',
+  '1001 Celeste / Bianco': 'img/felpa-urban-1001.webp',
+  '5558 Blu Navy / Grigio Vigoré': 'img/felpa-urban-5558.webp',
+  '2001 Verde Prato / Bianco': 'img/felpa-urban-2001.webp',
+  '5658 Verde Bottiglia / Grigio Vigoré': 'img/felpa-urban-5658.webp',
+  '0258 Nero / Grigio Vigoré': 'img/felpa-urban-0258.webp',
 };
-const DEFAULT_HERO_IMG = 'img/felpa-fuji-hero-plain.webp';
-const MIN_QTY = 5;
-const SIZES = ["S","M","L","XL","XXL","XXXL"];
-const SIZE_MEASURE = {"S":"A 50 × B 63","M":"A 53 × B 66","L":"A 56 × B 69","XL":"A 59 × B 72","XXL":"A 62 × B 75","XXXL":"A 65 × B 78"};
-// Listino Roly SU1105 per taglia (prezzo di acquisto Roly × -20%) × moltiplicatore della fascia quantità.
-// Costo Roly: 10,65 € (S-XXL), 11,20 € (XXXL) — scontato del 20% come le altre felpe.
+const DEFAULT_HERO_IMG = 'img/felpa-urban-hero-plain.webp';
+const MIN_QTY = 1;
+const GRAFICHE = [
+  { key: 'crux', symbol: '✞', latin: 'In hoc signo vinces', sub: 'Croce · Ponte Milvio', subEn: 'Cross · Milvian Bridge', label: 'Crux — In hoc signo vinces' },
+  { key: 'lux', symbol: '☧', latin: 'Dominus illuminatio mea', sub: 'Salmo 27', subEn: 'Psalm 27', label: 'Lux — Dominus illuminatio mea' },
+  { key: 'sancti', symbol: '✠', latin: 'Petrus et Paulus', sub: 'Santi patroni di Roma', subEn: 'Patron saints of Rome', label: 'Sancti — Petrus et Paulus' },
+  { key: 'via', symbol: 'km 0', latin: 'Via Francigena', sub: 'Roma, fine del cammino', subEn: 'Rome, end of the way', label: 'Via — Via Francigena, Roma km 0' },
+  { key: 'tuo', symbol: '+', latin: 'Il tuo design', latinEn: 'Your design', sub: 'Carica il file', subEn: 'Upload your file', label: 'Design del cliente' },
+];
+const SIZES = ["XS","S","M","L","XL","XXL","XXXL","XXXXL"];
+const SIZE_MEASURE = {"XS":"A 51 × B 65","S":"A 54 × B 67","M":"A 57 × B 69","L":"A 60 × B 71","XL":"A 63 × B 73","XXL":"A 66 × B 75","XXXL":"A 69 × B 77","XXXXL":"A 72 × B 78"};
+// Listino Roly SU1067 per taglia (prezzo di acquisto) × moltiplicatore della fascia quantità.
 // Scala moltiplicatore 3: 3,00 a 1 pz → 2,00 da 100 pz (come le camicie e lo sport).
 // Ogni modifica va replicata in api/_pricing-data.js (validazione server).
-const BASE_PRICE = {"S":8.52,"M":8.52,"L":8.52,"XL":8.52,"XXL":8.52,"XXXL":8.96};
+const BASE_PRICE = {"XS":6,"S":6,"M":6,"L":6,"XL":6,"XXL":6,"XXXL":6.6,"XXXXL":7};
 const QTY_MULT = [
   { min: 1, mult: 3.00 }, { min: 2, mult: 2.90 }, { min: 5, mult: 2.80 },
   { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
@@ -520,9 +624,11 @@ function isEn() {
 
 class Component extends DCLogic {
   state = {
+    grafica: 0,
+    grafTesto: '',
     colorIndex: null,
     sizeQty: {},
-    zones: {},
+    zones: { davanti: true },
     cuoreWidth: 8,
     cuoreHeight: 8,
     davantiWidthIdx: 4,
@@ -548,13 +654,13 @@ class Component extends DCLogic {
     const want = new URL(src, window.location.href).href;
     if (el.src !== want) {
       el.src = src;
-      el.alt = i != null ? ('Felpa Fuji ' + COLORS[i].name) : 'Felpa Fuji — vista frontale';
+      el.alt = i != null ? ('Felpa Urban ' + COLORS[i].name) : 'Felpa Urban — vista frontale';
     }
   }
   // Righe dello stesso modello già nel carrello (adulto + bambino): fanno quantità
   // insieme, quindi la fascia di prezzo si legge sul totale cumulato.
   syncCartQty() {
-    const q = window.tsCart ? window.tsCart.groupQty('felpa-fuji') : 0;
+    const q = window.tsCart ? window.tsCart.groupQty('felpa-roma-sacra') : 0;
     if (q !== this.state.cartGroupQty) this.setState({ cartGroupQty: q });
   }
   componentDidMount() {
@@ -604,7 +710,7 @@ class Component extends DCLogic {
 
   async uploadFile(file, id, ref) {
     try {
-      const qs = new URLSearchParams({ ref, name: file.name, product: 'Felpa Fuji' });
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Felpa Roma Sacra' });
       const res = await fetch('/api/upload-design?' + qs.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -726,7 +832,19 @@ class Component extends DCLogic {
     const themeMap = { indigo: 'theme-indigo', forest: 'theme-forest', ochre: 'theme-ochre', ink: 'theme-ink' };
     const themeClass = themeMap[this.props.accentTheme] ?? 'theme-indigo';
 
+    const grafSel = GRAFICHE[this.state.grafica] || GRAFICHE[0];
+    const grafTestoVal = (this.state.grafTesto || '').trim().slice(0, 40);
+    const grafiche = GRAFICHE.map((g, i) => ({
+      symbol: g.symbol,
+      latin: isEn() && g.latinEn ? g.latinEn : g.latin,
+      sub: isEn() ? g.subEn : g.sub,
+      cls: 'graf-tile' + (i === this.state.grafica ? ' graf-on' : ''),
+      select: () => this.setState({ grafica: i }),
+    }));
     return {
+      grafiche, grafName: isEn() && grafSel.latinEn ? grafSel.latinEn : grafSel.latin,
+      grafTesto: this.state.grafTesto || '',
+      setGrafTesto: (e) => this.setState({ grafTesto: e.target.value.slice(0, 40) }),
       designFiles, hasDesignRef, designRef: st.designRef || '',
       designLink: st.designLink || '', designLinkError,
       setDesignLink: (e) => this.setState({ designLink: e.target.value }),
@@ -755,6 +873,7 @@ class Component extends DCLogic {
       totalPriceLabel: this.fmt(grandTotal),
       checkoutLabel: en ? 'Add to cart' : 'Aggiungi al carrello',
       checkout: () => {
+        if (grafSel.key === 'tuo' && !hasDesignRef && !designLinkOk) { alert(isEn() ? 'You chose your own design: upload the file or paste a link.' : 'Hai scelto il tuo design: carica il file o incolla un link.'); return; }
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
         if (rateQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces across this model, sizes and colours can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi su questo modello, anche in taglie e colori misti.'); return; }
@@ -770,7 +889,7 @@ class Component extends DCLogic {
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const orderBody = {
-          productId: 'felpa-fuji',
+          productId: 'felpa-roma-sacra',
           human: {
             'Colore': activeColor.name,
             'Taglie': sizeBreakdown,
@@ -778,6 +897,8 @@ class Component extends DCLogic {
             'Stampa': zoneList.length ? zoneList.join(' + ') : 'Nessuna stampa',
             ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
             ...(designLinkOk ? { 'Link file': designLink } : {}),
+            'Grafica': grafSel.label,
+            ...(grafTestoVal ? { 'Personalizzazione': grafTestoVal } : {}),
             ...(orderNote ? { 'Consegna richiesta / note': orderNote } : {}),
           },
           ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
@@ -794,13 +915,13 @@ class Component extends DCLogic {
           },
         };
         const cartRow = {
-          id: 'felpa-fuji',
-          name: 'Felpa Fuji',
+          id: 'felpa-roma-sacra',
+          name: 'Felpa Roma Sacra',
           price: +grandTotal.toFixed(2),
           col: 'misura',
           body: orderBody,
           img: (IMAGE_BY_COLOR[activeColor.name] || DEFAULT_HERO_IMG.replace('-hero-plain', '-hero')),
-          url: 'felpa-fuji.html',
+          url: 'felpa-roma-sacra.html',
         };
         if (window.tsCart) {
           window.tsCart.add(cartRow);
@@ -825,9 +946,9 @@ class Component extends DCLogic {
         if (st.zones.cuore) zoneList.push(zoneNames.cuore);
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
-        const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
+        const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa') + ', Grafica: ' + grafSel.label + (grafTestoVal ? ' (' + grafTestoVal + ')' : '');
         const params = new URLSearchParams({
-          prodotto: 'Felpa Fuji',
+          prodotto: 'Felpa Roma Sacra',
           config: orderNote ? config + ' — Note: ' + orderNote : config,
           url: window.location.origin + window.location.pathname,
           quantita: String(totalQty),

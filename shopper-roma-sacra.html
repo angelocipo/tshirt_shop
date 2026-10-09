@@ -15,10 +15,10 @@
   <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Felpa Fuji Personalizzata | Tshirt Shop Online</title>
-  <meta name="description" content="Felpa Fuji unisex personalizzata: zip intera e cappuccio foderato in rete, 280 g/m², 7 colori tinta unita e a contrasto, taglie S-XXXL. Stampa DTF a Roma.">
-  <link rel="canonical" href="https://www.tshirt-shop.online/felpa-fuji.html">
-  <meta property="og:url" content="https://www.tshirt-shop.online/felpa-fuji.html">
+  <title>Shopper Roma Sacra | Tshirt Shop Online</title>
+  <meta name="description" content="Shopper Roma Sacra in cotone naturale 140 g/m², 37×41 cm: grafiche religiose e Via Francigena, personalizzabili, anche 1 pezzo. Stampa DTF a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/shopper-roma-sacra.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/shopper-roma-sacra.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -26,9 +26,9 @@
     body { background: var(--color-bg); }
     .swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--color-divider); cursor: pointer; padding: 0; }
     .swatch:hover { border-color: var(--color-text); }
+    .swatch-selected { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent); }
     .prod-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 620px; align-items: start; }
     .prod-head, .prod-visual, .prod-config { min-width: 0; }
-    /* landscape / wide: image + price beside the configurator */
     @media (min-width: 900px) {
       .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6); align-items: start;
         grid-template-areas: "head head" "left mid" "left right"; grid-template-rows: auto min-content 1fr; align-content: start; }
@@ -49,76 +49,33 @@
     @media (max-width: 899px) {
       .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "graf" "zones" "qty" "listino" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
-      .prod-qty { grid-area: qty; }
-      .cfg-family { grid-area: family; }
       .cfg-zones { grid-area: zones; }
-      .cfg-misure { grid-area: misure; }
+      .prod-qty { grid-area: qty; }
+      .cfg-listino { grid-area: listino; }
       .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
     }
-    .pair-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-4); }
-    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
-    image-slot, .thumb { touch-action: pan-y; }
-    @media (max-width: 700px) {
-      nav.nav { justify-content: flex-start; }
-      nav.nav .nav-brand { flex: 0 0 100%; }
-    }
-    @media (max-width: 600px) {
-      .pair-grid { grid-template-columns: 1fr; gap: var(--space-3); }
-      h1 { font-size: clamp(26px, 7vw, 34px) !important; }
-    }
-    .swatch-selected { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent); }
-    .size-btn { min-width: 46px; height: 40px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .size-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
-    .size-selected { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
-    .size-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: 2px var(--space-3); border-bottom: 1px solid var(--color-divider); }
-    .size-row-off { opacity: .38; pointer-events: none; }
-    .size-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
-    .size-grid .size-row:last-child { border-bottom: none; }
-    @media (max-width: 480px) {
-      .size-grid { grid-template-columns: minmax(0, 1fr); }
-      .size-grid .size-row:nth-child(even) { border-left: none; }
-      .size-grid .size-row:nth-last-child(-n+2) { border-bottom: 1px solid var(--color-divider); }
-      .size-grid .size-row:last-child { border-bottom: none; }
-    }
     .qty-group { display: flex; align-items: center; }
-    .qty-input { width: 52px; height: 30px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .qty-btn { width: 32px; height: 30px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+    .qty-input { width: 64px; height: 30px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
     .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
     .zone-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider); cursor: pointer; }
     .zone-row:last-child { border-bottom: none; }
     .zone-check { width: 18px; height: 18px; border: 1.5px solid var(--color-divider); flex: none; display: flex; align-items: center; justify-content: center; }
     .zone-check-on { background: var(--color-accent); border-color: var(--color-accent); }
-    .qty-btn { width: 32px; height: 30px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
-    .thumb { width: 100%; aspect-ratio: 1; background: var(--color-surface); border: 1px solid var(--color-divider); cursor: pointer; padding: 0; }
-    .thumb-selected { border-color: var(--color-accent); border-width: 2px; }
-
-    .theme-indigo {
-      --color-accent: #4f5cd6; --color-accent-100: #eef0fc; --color-accent-200: #d7dbf7; --color-accent-300: #b7bff0;
-      --color-accent-400: #8b96e6; --color-accent-500: #4f5cd6; --color-accent-600: #3541b9; --color-accent-700: #262f8f;
-      --color-accent-800: #1b2266; --color-accent-900: #141a4a;
-    }
-    .theme-forest {
-      --color-accent: #3f9a4c; --color-accent-100: #eaf3ea; --color-accent-200: #cfe6d0; --color-accent-300: #a8d2ab;
-      --color-accent-400: #74b87b; --color-accent-500: #3f9a4c; --color-accent-600: #2c7d39; --color-accent-700: #1f612c;
-      --color-accent-800: #164a21; --color-accent-900: #0f3618;
-    }
-    .theme-ochre {
-      --color-accent: #c98a1a; --color-accent-100: #faf1e0; --color-accent-200: #f3ddb0; --color-accent-300: #e9c47a;
-      --color-accent-400: #dba845; --color-accent-500: #c98a1a; --color-accent-600: #a86f10; --color-accent-700: #82550c;
-      --color-accent-800: #5e3d09; --color-accent-900: #402a07;
-    }
-    .theme-ink {
-      --color-accent: #46433f; --color-accent-100: #ececeb; --color-accent-200: #d6d5d4; --color-accent-300: #b7b5b3;
-      --color-accent-400: #8f8c8a; --color-accent-500: #605d5b; --color-accent-600: #46433f; --color-accent-700: #302d2b;
-      --color-accent-800: #201e1c; --color-accent-900: #131211;
-    }
-  
+    .pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+    .listino-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .listino-table th { text-align: right; font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; padding: 6px var(--space-3); border-bottom: 2px solid var(--color-text); color: var(--color-neutral-700); }
+    .listino-table th:first-child { text-align: left; }
+    .listino-table td { text-align: right; padding: 5px var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .listino-table td:first-child { text-align: left; font-family: var(--font-heading); font-weight: 800; }
+    .listino-row-on td { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
     nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
     nav.nav .nav-brand { flex: 0 0 100%; }
     nav.nav > a:not(.nav-brand) { font-size: 14px; }
@@ -128,8 +85,8 @@
     @media (max-width: 700px) {
       nav.nav { justify-content: flex-start; }
       nav.nav .btn-primary { margin-left: 0; flex: 0 0 100%; }
+      h1 { font-size: clamp(26px, 7vw, 34px) !important; }
     }
-  
     .nav-drop { position: relative; display: inline-flex; align-items: center; }
     .nav-sub { position: absolute; top: 100%; left: 0; min-width: 186px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 60; }
     .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: flex; }
@@ -140,50 +97,64 @@
       .nav-drop { display: inline-flex; }
       .nav-sub, .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: none; }
     }
-  .nav-sub .nav-drop { display: block; position: relative; }
+    .nav-sub .nav-drop { display: block; position: relative; }
     .nav-sub-2 { position: absolute; top: -1px; left: 100%; min-width: 170px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 61; }
     .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: flex; }
     .nav-sub-2 > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
     .nav-sub-2 > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
-    .nav-sub-2 > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
     @media (max-width: 700px) {
       .nav-sub-2, .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: none; }
     }
-  
+    .graf-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 92px; padding: 10px 6px; border: 1px solid var(--color-divider); background: var(--color-surface); cursor: pointer; text-align: center; color: var(--color-text); font-family: inherit; }
+    .graf-tile:hover { border-color: var(--color-text); }
+    .graf-on { border: 2px solid var(--color-accent); padding: 9px 5px; }
+    @media (max-width: 899px) { .cfg-graf { grid-area: graf; } }
   </style>
 </helmet>
 
-<div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
+<div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);">
 
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
-    <span class="tag tag-accent" data-en="Contrast. Pure energy.">Contrasto. Energia pura.</span>
-    <span class="tag tag-neutral" data-en="Unbrushed 280 g">Non garzata 280 g</span>
-    <span class="tag tag-neutral" data-en="Full zip + hood">Zip intera + cappuccio</span>
-    <span class="tag tag-neutral" data-en="7 colours">7 colori</span>
+    <span class="tag tag-accent">Roma Sacra</span>
+    <span class="tag tag-neutral" data-en="From 1 piece">Da 1 pezzo</span>
+    <span class="tag tag-neutral" data-en="Made in Rome">Prodotto a Roma</span>
   </div>
 
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Fuji Sweatshirt">Felpa Fuji</h1>
+      <h1 style="margin-bottom: 4px;" data-en="Roma Sacra Tote Bag">Shopper Roma Sacra</h1>
+      <p style="margin: 0; font-size: 16px; color: var(--color-neutral-700);" data-en="Natural cotton. Made for the way.">Cotone naturale. Fatta per il cammino.</p>
     </div>
 
     <div class="col-left">
-    <div class="prod-visual">
-      <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
-        <div style="aspect-ratio: 1;">
-          <img id="prod-hero" alt="Felpa Fuji — vista frontale" src="img/felpa-fuji-hero-plain.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+      <div class="prod-visual">
+        <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
+          <div style="aspect-ratio: 1;">
+            <img id="prod-hero" alt="Shopper Hill personalizzata" src="img/shopper-hill-hero-plain.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          </div>
         </div>
       </div>
-    </div>
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
-        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Sweatshirt Colour:">Colore Felpa:</span> {{ selectedColorName }}</label></div>
-        <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
-        <div style="display: grid; grid-template-columns: repeat(7, 30px); gap: var(--space-2); justify-content: space-between;">
-          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="24">
-            <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Tote Colour:">Colore Shopper:</span> {{ selectedColorName }}</label></div>
+        <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
+          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="1">
+            <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.name }}" aria-label="{{ c.name }}" onClick="{{ c.select }}"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div class="cfg-graf" style="margin-bottom: var(--space-4);">
+        <div class="field"><label><span data-en="Design:">Grafica:</span> {{ grafName }}</label></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--space-2);">
+          <sc-for list="{{ grafiche }}" as="g" hint-placeholder-count="5">
+            <button type="button" class="{{ g.cls }}" onClick="{{ g.select }}" aria-label="{{ g.latin }}">
+              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1;">{{ g.symbol }}</span>
+              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.25;">{{ g.latin }}</span>
+              <span class="text-muted" style="font-size: 10.5px; line-height: 1.3;">{{ g.sub }}</span>
+            </button>
           </sc-for>
         </div>
       </div>
@@ -191,7 +162,7 @@
       <div class="cfg-zones" style="margin-bottom: var(--space-4);">
         <div class="field"><label data-en="Print on">Stampa su</label></div>
         <div>
-          <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
+          <sc-for list="{{ zones }}" as="z" hint-placeholder-count="2">
             <div>
               <div class="zone-row" onClick="{{ z.toggle }}">
                 <div style="display:flex; align-items:center; gap: var(--space-2);">
@@ -205,88 +176,61 @@
                 <span class="text-muted" style="font-size: 13px;">{{ z.priceLabel }}</span>
               </div>
               <sc-if value="{{ z.checked }}" hint-placeholder-val="{{ false }}">
-                <sc-if value="{{ z.isCuore }}" hint-placeholder-val="{{ false }}">
-                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
-                    <div class="field">
-                      <label><span data-en="Width">Larghezza</span> — {{ cuoreWidth }}cm</label>
-                      <input type="range" min="3" max="8" step="1" value="{{ cuoreWidth }}" onChange="{{ setCuoreWidth }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                    <div class="field">
-                      <label><span data-en="Height">Altezza</span> — {{ cuoreHeight }}cm</label>
-                      <input type="range" min="3" max="8" step="1" value="{{ cuoreHeight }}" onChange="{{ setCuoreHeight }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
+                <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
+                  <div class="field">
+                    <label>{{ z.widthLabel }} — {{ z.widthCm }}cm</label>
+                    <input type="range" min="0" max="5" step="1" value="{{ z.widthIdx }}" onChange="{{ z.setWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
                   </div>
-                </sc-if>
-                <sc-if value="{{ z.isDavanti }}" hint-placeholder-val="{{ false }}">
-                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
-                    <div class="field">
-                      <label><span data-en="Front width">Larghezza davanti</span> — {{ davantiWidthCm }}cm</label>
-                      <input type="range" min="0" max="9" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                    <div class="field">
-                      <label><span data-en="Front height">Altezza davanti</span> — {{ davantiHeightCm }}cm</label>
-                      <input type="range" min="0" max="11" step="1" value="{{ davantiHeightIdx }}" onChange="{{ setDavantiHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
+                  <div class="field">
+                    <label>{{ z.heightLabel }} — {{ z.heightCm }}cm</label>
+                    <input type="range" min="0" max="5" step="1" value="{{ z.heightIdx }}" onChange="{{ z.setHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
                   </div>
-                </sc-if>
-                <sc-if value="{{ z.isRetro }}" hint-placeholder-val="{{ false }}">
-                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
-                    <div class="field">
-                      <label><span data-en="Back width">Larghezza retro</span> — {{ retroWidthCm }}cm</label>
-                      <input type="range" min="0" max="9" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                    <div class="field">
-                      <label><span data-en="Back height">Altezza retro</span> — {{ retroHeightCm }}cm</label>
-                      <input type="range" min="0" max="11" step="1" value="{{ retroHeightIdx }}" onChange="{{ setRetroHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                  </div>
-                </sc-if>
+                </div>
               </sc-if>
             </div>
           </sc-for>
         </div>
+        <p class="text-muted" style="font-size: 12px; margin: var(--space-2) 0 0; line-height: 1.5;" data-en="DTF print, side A and/or side B, up to 25×25 cm each side.">Stampa DTF, lato A e/o lato B, fino a 25×25 cm per lato.</p>
       </div>
     </div>
 
     <div class="col-mid">
-      <div class="cfg-misure" style="margin-bottom: var(--space-3);">
-        <img src="img/misure-tshirt.webp" alt="Come misurare la felpa: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
-      </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
-        <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, sizes can be mixed.">Ordine minimo: 5 pz, taglie miste ammesse.</p>
+        <div class="field"><label><span data-en="Quantity">Quantità</span> — {{ quantity }} <span data-en="pcs">pz</span></label></div>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="No minimum: from 1 piece, sizes can be mixed.">Nessun minimo: anche 1 pezzo, taglie miste ammesse.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 20-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 20.</p>
         </sc-if>
-        <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
-            <div class="{{ s.rowClass }}">
-              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
-              <div class="qty-group">
-                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
-                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
-                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
-              </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
-            </div>
-          </sc-for>
-        </div>
-        <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
-          <div style="padding: var(--space-4);">
-            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the measurements first">Controlla prima le misure</div>
-            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Measure a sweatshirt you already wear — A = width, B = height, garment laid flat — and compare it with the measurements shown next to each size before choosing.">Misura una felpa che indossi già — A = larghezza, B = altezza, capo steso — e confrontala con le misure indicate accanto a ogni taglia prima di scegliere.</p>
-          </div>
+        <div class="qty-group" style="margin-bottom: var(--space-2);">
+          <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
+          <input class="qty-input" type="text" inputmode="numeric" value="{{ quantity }}" onChange="{{ setQty }}">
+          <button type="button" class="qty-btn" onClick="{{ incQty }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
         </div>
       </div>
-      <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+      <div class="cfg-listino" style="margin-bottom: var(--space-4);">
+        <div class="field"><label data-en="Quantity discounts">Sconti quantità</label></div>
+        <table class="listino-table" style="margin-bottom: var(--space-3);">
+          <thead>
+            <tr>
+              <th data-en="Qty">Q.tà</th>
+              <th data-en="Tote € each">Shopper € cad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ listino }}" as="r" hint-placeholder-count="6">
+              <tr class="{{ r.rowClass }}">
+                <td>{{ r.range }}</td>
+                <td>{{ r.zaino }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+        <p class="text-muted" style="font-size: 12px; margin: 0; line-height: 1.5;" data-en="Tote price per piece, VAT included; print is added separately based on the size chosen above.">Prezzo shopper al pezzo, IVA compresa; la stampa si aggiunge a parte in base alla misura scelta sopra.</p>
+      </div>
+      <div style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Sweatshirt line">Linea felpe</div>
-          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Seven colours. Fluo contrast.">Sette colori. Contrasto fluo.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
-          <a href="felpe.html" style="font-size:13px;font-weight:600;" data-en="All sweatshirts">Tutte le felpe</a>
-          
-          <a href="uomo.html" style="font-size:13px;font-weight:600;" data-en="Menswear">Uomo</a>
-          </div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="One size fits all">Taglia unica</div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="37 × 41 cm. 70 cm handles. No sizes to choose.">37 × 41 cm. Manici da 70 cm. Nessuna taglia da scegliere.</p>
         </div>
       </div>
     </div>
@@ -295,23 +239,25 @@
       <div class="cfg-comp" style="border-bottom: 1px solid var(--color-divider); margin-bottom: var(--space-4); padding-bottom: var(--space-4);">
         <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
         <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700);">
-          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> Tessuto principale: 60% cotone / 40% poliestere, 280 g/m². Fodera del cappuccio: 100% poliestere microforato. Colore grigio mélange 58: 85% cotone / 15% viscosa.</div>
-          <div>Felpa non garzata con zip frontale e cappuccio. Cappuccio foderato in rete di poliestere. Cordini piatti in poliestere. Polsini e fascia in vita in costina 2x1 con elastan. Nastro di rinforzo interno nello stesso tessuto. Varianti in tinta unita e a contrasto.</div>
-          <div>Etichetta rimovibile. Confezione: scatola 20 pz, pack 1 pz. Lavaggio a 40°. OEKO-TEX Standard 100.</div>
-          <div style="font-weight: 700; color: var(--color-text);">Rif. Roly SU1105</div>
+          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% cotton, 140 g/m².">100% cotone, 140 g/m².</span></div>
+          <div data-en="Bag in natural-colour 140 g/m² cotton, with long tape handles in the same colour. 70 cm handles. 37×41 cm.">Borsa realizzata in tessuto di cotone color naturale da 140 g/m², con manico lungo in nastro dello stesso colore. Manici da 70 cm. 37×41 cm.</div>
+          <div style="font-weight: 700; color: var(--color-text);">EAN 0652026574067</div>
         </div>
       </div>
       <div class="cfg-rest">
-      <sc-if value="{{ cartGroupNote }}" hint-placeholder-val="{{ null }}">
-        <div style="border:1px solid var(--color-accent);padding:10px 12px;font-size:12.5px;font-weight:600;color:var(--color-accent-700);margin-bottom:var(--space-3);">{{ cartGroupNote }}</div>
-      </sc-if>
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Felpa</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Tote price">Prezzo Shopper</span><span>{{ garmentPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
         <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
         <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
         <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label for="graf-testo" data-en="Personalisation (optional)">Personalizzazione (opzionale)</label>
+        <input class="input" id="graf-testo" type="text" maxlength="40" placeholder="Es. Parrocchia San Clemente · 2026" data-en-placeholder="E.g. St Clement Parish · 2026" value="{{ grafTesto }}" onChange="{{ setGrafTesto }}">
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="One line of text under the design. Max 40 characters.">Una riga di testo sotto la grafica. Max 40 caratteri.</div>
       </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
@@ -405,12 +351,11 @@
         <div style="display:flex;flex-direction:column;gap:var(--space-2);">
           <a href="tshirt-uomo.html" style="font-size:13.5px;">T-shirt uomo</a>
           <a href="bahrain.html" style="font-size:13.5px;">Maglietta tecnica Bahrain</a>
-          <a href="bahrain-kids.html" style="font-size:13.5px;">Maglietta tecnica Bahrain bambino</a>
-          <a href="polo-uomo.html" style="font-size:13.5px;">Polo uomo</a>
+          <a href="cappellini.html" style="font-size:13.5px;">Cappellini personalizzati</a>
+          <a href="zaini.html" style="font-size:13.5px;">Zaini personalizzati</a>
+          <a href="shopper.html" style="font-size:13.5px;">Shopper personalizzate</a>
           <a href="tshirt-donna.html" style="font-size:13.5px;">T-shirt donna</a>
-          <a href="polo-donna.html" style="font-size:13.5px;">Polo donna</a>
           <a href="tshirt-bambino.html" style="font-size:13.5px;">T-shirt bambino</a>
-          <a href="polo-bambino.html" style="font-size:13.5px;">Polo bambino</a>
           <a href="esempi.html" style="font-size:13.5px;">Esempi di lavori</a>
         </div>
       </div>
@@ -429,90 +374,60 @@
   </div>
 </footer>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;accentTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;forest&quot;,&quot;ochre&quot;,&quot;ink&quot;],&quot;section&quot;:&quot;Color&quot;}}">
-const CLS = 'Non garzata 280 g/m² — 60% cotone / 40% poliestere';
-const CLS_GREY = 'Non garzata 280 g/m² — 85% cotone / 15% viscosa';
+<script type="text/x-dc" data-dc-script>
 const COLORS = [
-  { name: '58221 Grigio Mélange / Giallo Fluo', hex: 'linear-gradient(135deg, #9c9c9e 0 50%, #dff23c 50%)', cls: CLS_GREY },
-  { name: '05221 Blu Royal / Giallo Fluo', hex: 'linear-gradient(135deg, #1f5fae 0 50%, #dff23c 50%)', cls: CLS },
-  { name: '02221 Nero / Giallo Fluo', hex: 'linear-gradient(135deg, #171717 0 50%, #dff23c 50%)', cls: CLS },
-  { name: '58223 Grigio Mélange / Arancio Fluo', hex: 'linear-gradient(135deg, #9c9c9e 0 50%, #f58a3c 50%)', cls: CLS_GREY },
-  { name: '02223 Nero / Arancio Fluo', hex: 'linear-gradient(135deg, #171717 0 50%, #f58a3c 50%)', cls: CLS },
-  { name: '55 Blu Navy', hex: '#192033', cls: CLS },
-  { name: '02 Nero', hex: '#171717', cls: CLS },
+  { name: '29 Naturale', hex: '#ebe3cf', img: 'img/shopper-hill-hero-plain.webp' },
 ];
-const IMAGE_BY_COLOR = {
-  '58221 Grigio Mélange / Giallo Fluo': 'img/felpa-fuji-58221.webp',
-  '05221 Blu Royal / Giallo Fluo': 'img/felpa-fuji-05221.webp',
-  '02221 Nero / Giallo Fluo': 'img/felpa-fuji-02221.webp',
-  '58223 Grigio Mélange / Arancio Fluo': 'img/felpa-fuji-58223.webp',
-  '02223 Nero / Arancio Fluo': 'img/felpa-fuji-02223.webp',
-  '55 Blu Navy': 'img/felpa-fuji-55.webp',
-  '02 Nero': 'img/felpa-fuji-02.webp',
-};
-const DEFAULT_HERO_IMG = 'img/felpa-fuji-hero-plain.webp';
-const MIN_QTY = 5;
-const SIZES = ["S","M","L","XL","XXL","XXXL"];
-const SIZE_MEASURE = {"S":"A 50 × B 63","M":"A 53 × B 66","L":"A 56 × B 69","XL":"A 59 × B 72","XXL":"A 62 × B 75","XXXL":"A 65 × B 78"};
-// Listino Roly SU1105 per taglia (prezzo di acquisto Roly × -20%) × moltiplicatore della fascia quantità.
-// Costo Roly: 10,65 € (S-XXL), 11,20 € (XXXL) — scontato del 20% come le altre felpe.
-// Scala moltiplicatore 3: 3,00 a 1 pz → 2,00 da 100 pz (come le camicie e lo sport).
-// Ogni modifica va replicata in api/_pricing-data.js (validazione server).
-const BASE_PRICE = {"S":8.52,"M":8.52,"L":8.52,"XL":8.52,"XXL":8.52,"XXXL":8.96};
-const QTY_MULT = [
-  { min: 1, mult: 3.00 }, { min: 2, mult: 2.90 }, { min: 5, mult: 2.80 },
-  { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
-  { min: 100, mult: 2.00 },
+const DEFAULT_HERO_IMG = 'img/shopper-hill-hero-plain.webp';
+const MIN_QTY = 1;
+const GRAFICHE = [
+  { key: 'crux', symbol: '✞', latin: 'In hoc signo vinces', sub: 'Croce · Ponte Milvio', subEn: 'Cross · Milvian Bridge', label: 'Crux — In hoc signo vinces' },
+  { key: 'lux', symbol: '☧', latin: 'Dominus illuminatio mea', sub: 'Salmo 27', subEn: 'Psalm 27', label: 'Lux — Dominus illuminatio mea' },
+  { key: 'sancti', symbol: '✠', latin: 'Petrus et Paulus', sub: 'Santi patroni di Roma', subEn: 'Patron saints of Rome', label: 'Sancti — Petrus et Paulus' },
+  { key: 'via', symbol: 'km 0', latin: 'Via Francigena', sub: 'Roma, fine del cammino', subEn: 'Rome, end of the way', label: 'Via — Via Francigena, Roma km 0' },
+  { key: 'tuo', symbol: '+', latin: 'Il tuo design', latinEn: 'Your design', sub: 'Carica il file', subEn: 'Upload your file', label: 'Design del cliente' },
 ];
-function qtyMult(qty) { let t = QTY_MULT[0]; for (const x of QTY_MULT) if (qty >= x.min) t = x; return t.mult; }
-function sizeUnitPrice(size, qty) { return Math.round((BASE_PRICE[size] || 0) * qtyMult(qty) * 100) / 100; }
-function garmentUnitPrice(qty) { return sizeUnitPrice(SIZES[0], qty); }
-const CUORE_PRICE_TIERS = [
-  { min: 1, price: 14 }, { min: 2, price: 10 }, { min: 5, price: 3.5 },
-  { min: 10, price: 3 }, { min: 20, price: 2.5 }, { min: 50, price: 2 },
-  { min: 100, price: 1.8 },
+// Prezzo shopper: costo fornitore Stamina 7601 (0,3632€/pz) × moltiplicatori Hamelin per fascia quantità.
+// Ogni modifica va replicata in api/_pricing-data.js.
+const BAG_PRICE_TIERS = [
+  { min: 1, price: 0.73 }, { min: 2, price: 0.71 }, { min: 5, price: 0.69 },
+  { min: 10, price: 0.67 }, { min: 20, price: 0.65 }, { min: 50, price: 0.63 }, { min: 100, price: 0.62 },
+  { min: 150, price: 0.60 }, { min: 200, price: 0.58 }, { min: 250, price: 0.56 }, { min: 300, price: 0.54 }, { min: 350, price: 0.52 }, { min: 500, price: 0.50 }, { min: 1000, price: 0.47 },
 ];
-function cuoreUnitPrice(qty) {
-  let tier = CUORE_PRICE_TIERS[0];
-  for (const t of CUORE_PRICE_TIERS) if (qty >= t.min) tier = t;
-  return tier.price;
-}
-// Area massima stampabile: 38 cm di larghezza × 48 cm di altezza.
-const W_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 38];
-const H_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 48];
-const W_MAX_IDX = W_BREAKS.length - 1;
-const H_MAX_IDX = H_BREAKS.length - 1;
+function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
+const LISTINO_ROWS = [
+  { min: 1, max: 1, range: '1' }, { min: 2, max: 4, range: '2 – 4' },
+  { min: 5, max: 9, range: '5 – 9' }, { min: 10, max: 19, range: '10 – 19' },
+  { min: 20, max: 49, range: '20 – 49' }, { min: 50, max: 99, range: '50 – 99' },
+  { min: 100, max: 149, range: '100 – 149' },
+  { min: 150, max: 199, range: '150 – 199' }, { min: 200, max: 249, range: '200 – 249' },
+  { min: 250, max: 299, range: '250 – 299' }, { min: 300, max: 349, range: '300 – 349' },
+  { min: 350, max: 499, range: '350 – 499' }, { min: 500, max: 999, range: '500 – 999' },
+  { min: 1000, max: Infinity, range: '1000 +' },
+];
+// Stampa DTF: stessa tabella area/sconto di Hamelin, area massima 25×25 cm (indici 0–5).
+const W_BREAKS = [8, 10, 15, 20, 22, 25];
+const H_BREAKS = [8, 10, 15, 20, 22, 25];
+const cm = (v) => String(v).replace('.', ',');
 const AREA_TABLE = [
-  [9, 9, 9, 13, 14, 14, 14, 16, 16, 16, 17, 18],
-  [9, 9, 9, 14, 14, 14, 16, 16, 16, 17, 18, 18],
-  [9, 9, 9, 14, 14, 16, 16, 16, 17, 18, 18, 19],
-  [13, 14, 14, 14, 16, 16, 16, 17, 18, 20.5, 22.5, 25],
-  [14, 14, 14, 16, 16, 16, 17, 18, 19, 22, 24.75, 26],
-  [14, 14, 16, 16, 16, 17, 18, 20, 22, 25, 28, 28],
-  [14, 16, 16, 16, 17, 18, 20, 22, 24, 26, 28, 30],
-  [16, 16, 16, 17, 18, 20, 22, 24, 26, 28, 30, 32],
-  [16, 16, 17, 18, 19, 22, 24, 26, 28, 30, 32, 34],
-  [16, 17, 18, 20.5, 22, 25, 26, 28, 30, 32, 34, 36],
-  [17, 18, 18, 22.5, 24.75, 28, 28, 30, 32, 34, 36, 38],
-  [18, 18, 19, 25, 26, 28, 30, 32, 34, 36, 38, 40],
+  [12, 12, 12, 13, 14, 14],
+  [12, 12, 13, 14, 14, 14],
+  [12, 13, 14, 14, 14, 16],
+  [13, 14, 14, 14, 16, 16],
+  [14, 14, 14, 16, 16, 16],
+  [14, 14, 16, 16, 16, 17],
 ];
-function areaUnitPrice(widthIdx, heightIdx) {
-  return AREA_TABLE[widthIdx][heightIdx];
-}
-const DAVANTI_DISCOUNT_TIERS = [
-  { min: 1, mult: 1 }, { min: 2, mult: 0.67 }, { min: 5, mult: 0.52 },
-  { min: 10, mult: 0.47 }, { min: 20, mult: 0.40 }, { min: 50, mult: 0.39 },
-  { min: 100, mult: 0.33 },
+function areaUnitPrice(wIdx, hIdx) { return AREA_TABLE[wIdx][hIdx]; }
+const DISCOUNT_TIERS = [
+  { min: 1, mult: 1 }, { min: 2, mult: 0.67 }, { min: 5, mult: 0.61 },
+  { min: 10, mult: 0.56 }, { min: 20, mult: 0.44 }, { min: 50, mult: 0.39 }, { min: 100, mult: 0.33 },
+  // Fasce 150–1000: stessa scala graduale della Shopper Miso.
+  { min: 150, mult: 0.25928571 }, { min: 200, mult: 0.19428571 }, { min: 250, mult: 0.13642857 }, { min: 300, mult: 0.09642857 }, { min: 350, mult: 0.06836735 }, { min: 500, mult: 0.06428571 }, { min: 1000, mult: 0.06071429 },
 ];
-function davantiDiscount(qty) {
-  let tier = DAVANTI_DISCOUNT_TIERS[0];
-  for (const t of DAVANTI_DISCOUNT_TIERS) if (qty >= t.min) tier = t;
-  return tier.mult;
-}
+function discount(qty) { return pickTier(DISCOUNT_TIERS, qty).mult; }
 const ZONE_DEFS = [
-  { key: 'cuore', label: 'Cuore / Manica (max 8×8cm)', labelEn: 'Chest / Sleeve (max 8×8cm)', price: (qty) => cuoreUnitPrice(qty) },
-  { key: 'davanti', label: 'Davanti (fino a 38×48cm)', labelEn: 'Front (up to 38×48cm)' },
-  { key: 'retro', label: 'Retro (fino a 38×48cm)', labelEn: 'Back (up to 38×48cm)' },
+  { key: 'davanti', label: 'Lato A (fino a 25×25cm)', labelEn: 'Side A (up to 25×25cm)' },
+  { key: 'retro', label: 'Lato B (fino a 25×25cm)', labelEn: 'Side B (up to 25×25cm)' },
 ];
 function isEn() {
   try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; }
@@ -520,59 +435,38 @@ function isEn() {
 
 class Component extends DCLogic {
   state = {
-    colorIndex: null,
-    sizeQty: {},
-    zones: {},
-    cuoreWidth: 8,
-    cuoreHeight: 8,
-    davantiWidthIdx: 4,
-    davantiHeightIdx: 7,
-    retroWidthIdx: 4,
-    retroHeightIdx: 7,
+    grafica: 0,
+    grafTesto: '',
+    colorIndex: 0,
+    qty: 1,
+    zones: { davanti: true },
+    davantiWidthIdx: 3, davantiHeightIdx: 3,
+    retroWidthIdx: 3, retroHeightIdx: 3,
     designFiles: [],
     designRef: null,
     designLink: '',
     orderNote: '',
-    cartGroupQty: 0,
   };
 
   fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€' + s; }
 
-  // The hero <img> keeps a literal src in the template: a {{ hole }} in src makes the browser
-  // request the unresolved placeholder string once on every load. Swap it imperatively instead.
   syncHero() {
     const el = document.getElementById('prod-hero');
     if (!el) return;
     const i = this.state.colorIndex;
-    const src = i != null ? (IMAGE_BY_COLOR[COLORS[i].name] || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
+    const src = i != null ? (COLORS[i].img || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
     const want = new URL(src, window.location.href).href;
     if (el.src !== want) {
       el.src = src;
-      el.alt = i != null ? ('Felpa Fuji ' + COLORS[i].name) : 'Felpa Fuji — vista frontale';
+      el.alt = i != null ? ('Shopper Hill ' + COLORS[i].name) : 'Shopper Hill personalizzata';
     }
-  }
-  // Righe dello stesso modello già nel carrello (adulto + bambino): fanno quantità
-  // insieme, quindi la fascia di prezzo si legge sul totale cumulato.
-  syncCartQty() {
-    const q = window.tsCart ? window.tsCart.groupQty('felpa-fuji') : 0;
-    if (q !== this.state.cartGroupQty) this.setState({ cartGroupQty: q });
   }
   componentDidMount() {
     this.syncHero();
     this.onLang = () => this.forceUpdate();
     window.addEventListener('ts:langchange', this.onLang);
-    this.onCart = () => this.syncCartQty();
-    document.addEventListener('ts-cart-change', this.onCart);
-    window.addEventListener('storage', this.onCart);
-    this.syncCartQty();
-    this._cartT = setTimeout(this.onCart, 500);
   }
-  componentWillUnmount() {
-    window.removeEventListener('ts:langchange', this.onLang);
-    document.removeEventListener('ts-cart-change', this.onCart);
-    window.removeEventListener('storage', this.onCart);
-    if (this._cartT) clearTimeout(this._cartT);
-  }
+  componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
   componentDidUpdate() { this.syncHero(); }
 
   makeDesignRef() {
@@ -604,7 +498,7 @@ class Component extends DCLogic {
 
   async uploadFile(file, id, ref) {
     try {
-      const qs = new URLSearchParams({ ref, name: file.name, product: 'Felpa Fuji' });
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Shopper Roma Sacra' });
       const res = await fetch('/api/upload-design?' + qs.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -633,78 +527,45 @@ class Component extends DCLogic {
         .map(v => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)));
       return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     };
-    const colorsByLightness = colorsAll.map(c => ({ ...c, title: c.name + ' — ' + c.cls }));
-    const hasColorSel = st.colorIndex != null;
-    const sizeQty = st.sizeQty || {};
-    const setQtyFor = (s, v) => this.setState(prev => ({
-      sizeQty: { ...prev.sizeQty, [s]: Math.max(0, Math.min(9999, v)) },
-    }));
-    const sizes = SIZES.map(s => {
-      const blocked = false;
-      return {
-      label: s,
-      measure: SIZE_MEASURE[s] ? SIZE_MEASURE[s] + ' cm' : '',
-      blocked,
-      rowClass: 'size-row' + (blocked ? ' size-row-off' : ''),
-      qty: blocked ? 0 : (sizeQty[s] || 0),
-      inc: () => { if (!blocked) setQtyFor(s, (this.state.sizeQty[s] || 0) + 1); },
-      dec: () => { if (!blocked) setQtyFor(s, (this.state.sizeQty[s] || 0) - 1); },
-      setQty: (e) => { if (!blocked) setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0); },
-      };
-    });
-    const totalQty = sizes.reduce((n, x) => n + x.qty, 0);
-    // Fascia di prezzo letta sul cumulato con quanto è già in carrello.
-    const cartQty = this.state.cartGroupQty || 0;
-    const rateQty = totalQty + cartQty;
-    sizes.forEach(x => {
-      x.measure = SIZE_MEASURE[x.label] ? SIZE_MEASURE[x.label] + ' cm' : '';
-    });
+    const colorsByLightness = colorsAll.sort((a, b) => lum(b.hex) - lum(a.hex));
+    const qty = st.qty || 0;
+    const setQtyVal = (v) => this.setState({ qty: Math.max(0, Math.min(9999, v)) });
+    const priceQty = Math.max(1, qty);
+    const garmentPrice = pickTier(BAG_PRICE_TIERS, priceQty).price;
+
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(rateQty || MIN_QTY);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(rateQty || MIN_QTY);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(rateQty || MIN_QTY);
-      return 0;
+      const wIdx = st[key + 'WidthIdx'], hIdx = st[key + 'HeightIdx'];
+      return areaUnitPrice(wIdx, hIdx) * discount(priceQty);
     };
     const zones = ZONE_DEFS.map(z => {
       const checked = !!st.zones[z.key];
-      const price = zonePrice(z.key);
+      const wKey = z.key + 'WidthIdx', hKey = z.key + 'HeightIdx';
       return {
-        label: en && z.labelEn ? z.labelEn : z.label,
+        key: z.key,
+        label: en ? z.labelEn : z.label,
         checked,
-        isCuore: z.key === 'cuore',
-        isDavanti: z.key === 'davanti',
-        isRetro: z.key === 'retro',
         checkClass: 'zone-check' + (checked ? ' zone-check-on' : ''),
-        priceLabel: '+' + this.fmt(price),
+        priceLabel: '+' + this.fmt(zonePrice(z.key)),
         toggle: () => this.setState(s => ({ zones: { ...s.zones, [z.key]: !s.zones[z.key] } })),
+        widthLabel: en ? 'Width' : 'Larghezza',
+        heightLabel: en ? 'Height' : 'Altezza',
+        widthIdx: st[wKey], heightIdx: st[hKey],
+        widthCm: cm(W_BREAKS[st[wKey]]), heightCm: cm(H_BREAKS[st[hKey]]),
+        setWidthIdx: (e) => this.setState({ [wKey]: Math.min(5, Number(e.target.value)) }),
+        setHeightIdx: (e) => this.setState({ [hKey]: Math.min(5, Number(e.target.value)) }),
       };
     });
-    const cuoreChecked = !!st.zones.cuore;
-    const cuoreWidth = st.cuoreWidth;
-    const cuoreHeight = st.cuoreHeight;
-    const setCuoreWidth = (e) => this.setState({ cuoreWidth: Number(e.target.value) });
-    const setCuoreHeight = (e) => this.setState({ cuoreHeight: Number(e.target.value) });
-    const davantiChecked = !!st.zones.davanti;
-    const retroChecked = !!st.zones.retro;
-    const davantiWidthCm = W_BREAKS[Math.min(st.davantiWidthIdx, W_MAX_IDX)];
-    const davantiHeightCm = H_BREAKS[Math.min(st.davantiHeightIdx, H_MAX_IDX)];
-    const retroWidthCm = W_BREAKS[Math.min(st.retroWidthIdx, W_MAX_IDX)];
-    const retroHeightCm = H_BREAKS[Math.min(st.retroHeightIdx, H_MAX_IDX)];
-    const setDavantiWidthIdx = (e) => this.setState({ davantiWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) });
-    const setDavantiHeightIdx = (e) => this.setState({ davantiHeightIdx: Number(e.target.value) });
-    const setRetroWidthIdx = (e) => this.setState({ retroWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) });
-    const setRetroHeightIdx = (e) => this.setState({ retroHeightIdx: Number(e.target.value) });
     const printTotal = ZONE_DEFS.reduce((sum, z) => sum + (st.zones[z.key] ? zonePrice(z.key) : 0), 0);
+    const unitTotal = garmentPrice + printTotal;
+    const grandTotal = qty > 0 ? unitTotal * qty : 0;
     const hasColor = st.colorIndex != null;
     const activeColor = hasColor ? COLORS[st.colorIndex] : null;
-    const isWhite = false;
-    const selectedColorNote = hasColor ? activeColor.cls : '';
-    // Prezzo capo: somma per taglia (le taglie forti costano di più a listino),
-    // mostrata come media per pezzo così il totale resta esatto.
-    const garmentSum = SIZES.reduce((sum, s) => sum + (sizeQty[s] || 0) * sizeUnitPrice(s, rateQty), 0);
-    const garmentPrice = totalQty > 0 ? garmentSum / totalQty : sizeUnitPrice(SIZES[0], MIN_QTY);
-    const unitTotal = garmentPrice + printTotal;
-    const grandTotal = unitTotal * totalQty;
+
+    const listino = LISTINO_ROWS.map(r => ({
+      range: r.range,
+      zaino: this.fmt(pickTier(BAG_PRICE_TIERS, r.min).price),
+      rowClass: qty >= r.min && qty <= r.max ? 'listino-row-on' : '',
+    }));
 
     const fileSizeLabel = (b) => (b < 1024 * 1024 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1).replace('.', ',') + ' MB');
     const statusText = { uploading: 'invio…', done: 'caricato', error: 'errore' };
@@ -722,85 +583,88 @@ class Component extends DCLogic {
     const designLinkError = designLink.length > 0 && !designLinkOk;
     const orderNote = (st.orderNote || '').trim().slice(0, 480);
 
-    const sizeBreakdown = SIZES.filter(s => sizeQty[s] > 0).map(s => `${s}×${sizeQty[s]}`).join(', ') || 'nessuna';
-    const themeMap = { indigo: 'theme-indigo', forest: 'theme-forest', ochre: 'theme-ochre', ink: 'theme-ink' };
-    const themeClass = themeMap[this.props.accentTheme] ?? 'theme-indigo';
-
+    const grafSel = GRAFICHE[this.state.grafica] || GRAFICHE[0];
+    const grafTestoVal = (this.state.grafTesto || '').trim().slice(0, 40);
+    const grafiche = GRAFICHE.map((g, i) => ({
+      symbol: g.symbol,
+      latin: isEn() && g.latinEn ? g.latinEn : g.latin,
+      sub: isEn() ? g.subEn : g.sub,
+      cls: 'graf-tile' + (i === this.state.grafica ? ' graf-on' : ''),
+      select: () => this.setState({ grafica: i }),
+    }));
     return {
+      grafiche, grafName: isEn() && grafSel.latinEn ? grafSel.latinEn : grafSel.latin,
+      grafTesto: this.state.grafTesto || '',
+      setGrafTesto: (e) => this.setState({ grafTesto: e.target.value.slice(0, 40) }),
       designFiles, hasDesignRef, designRef: st.designRef || '',
       designLink: st.designLink || '', designLinkError,
       setDesignLink: (e) => this.setState({ designLink: e.target.value }),
       orderNote: st.orderNote || '',
       setOrderNote: (e) => this.setState({ orderNote: e.target.value }),
       pickFiles: (e) => { const fl = e.target.files; if (fl && fl.length) this.handleFiles(fl); e.target.value = ''; },
-      colorsByLightness, sizes, zones, themeClass, selectedColorNote,
-      cuoreChecked, cuoreWidth, cuoreHeight, setCuoreWidth, setCuoreHeight,
-      davantiChecked, retroChecked,
-      davantiWidthCm, davantiHeightCm, setDavantiWidthIdx, setDavantiHeightIdx,
-      davantiWidthIdx: Math.min(st.davantiWidthIdx, W_MAX_IDX), davantiHeightIdx: Math.min(st.davantiHeightIdx, H_MAX_IDX),
-      retroWidthCm, retroHeightCm, setRetroWidthIdx, setRetroHeightIdx,
-      retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
+      colorsByLightness, zones, listino,
       selectedColorName: hasColor ? activeColor.name : '',
-      quantity: totalQty,
-      belowMin: totalQty > 0 && rateQty < MIN_QTY,
-      missingQty: Math.max(0, MIN_QTY - rateQty),
-      cartGroupNote: cartQty > 0
-        ? (en
-            ? 'Already in the cart: ' + cartQty + ' pcs of this model. Price based on ' + rateQty + ' pcs.'
-            : 'Nel carrello hai già ' + cartQty + ' pz di questo modello. Prezzo calcolato su ' + rateQty + ' pz.')
-        : null,
-      unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
-      garmentPriceLabel: this.fmt(totalQty > 0 ? garmentPrice : 0),
-      printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
+      quantity: qty,
+      incQty: () => setQtyVal((this.state.qty || 0) + 1),
+      decQty: () => setQtyVal((this.state.qty || 0) - 1),
+      setQty: (e) => setQtyVal(parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
+      belowMin: qty > 0 && qty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - qty),
+      unitPriceLabel: qty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
+      garmentPriceLabel: this.fmt(qty > 0 ? garmentPrice : 0),
+      printPriceLabel: (qty > 0 && printTotal > 0 ? '+' : '') + this.fmt(qty > 0 ? printTotal : 0),
       totalPriceLabel: this.fmt(grandTotal),
       checkoutLabel: en ? 'Add to cart' : 'Aggiungi al carrello',
       checkout: () => {
+        if (grafSel.key === 'tuo' && !hasDesignRef && !designLinkOk) { alert(isEn() ? 'You chose your own design: upload the file or paste a link.' : 'Hai scelto il tuo design: carica il file o incolla un link.'); return; }
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
-        if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
-        if (rateQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces across this model, sizes and colours can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi su questo modello, anche in taglie e colori misti.'); return; }
+        if (qty < 1) { alert(en ? 'Enter a quantity.' : 'Inserisci la quantità.'); return; }
+        if (qty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneNames = {
-          cuore: 'Cuore/manica ' + cuoreWidth + '×' + cuoreHeight + ' cm',
-          davanti: 'Davanti ' + davantiWidthCm + '×' + davantiHeightCm + ' cm',
-          retro: 'Retro ' + retroWidthCm + '×' + retroHeightCm + ' cm',
+          davanti: 'Lato A ' + cm(W_BREAKS[st.davantiWidthIdx]) + '×' + cm(H_BREAKS[st.davantiHeightIdx]) + ' cm',
+          retro: 'Lato B ' + cm(W_BREAKS[st.retroWidthIdx]) + '×' + cm(H_BREAKS[st.retroHeightIdx]) + ' cm',
         };
         const zoneList = [];
-        if (st.zones.cuore) zoneList.push(zoneNames.cuore);
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const orderBody = {
-          productId: 'felpa-fuji',
+          productId: 'shopper-roma-sacra',
           human: {
             'Colore': activeColor.name,
-            'Taglie': sizeBreakdown,
-            'Quantità': totalQty,
+            'Taglia': 'Unica (37×41cm)',
+            'Tecnica': 'DTF',
+            'Quantità': qty,
             'Stampa': zoneList.length ? zoneList.join(' + ') : 'Nessuna stampa',
             ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
             ...(designLinkOk ? { 'Link file': designLink } : {}),
+            'Grafica': grafSel.label,
+            ...(grafTestoVal ? { 'Personalizzazione': grafTestoVal } : {}),
             ...(orderNote ? { 'Consegna richiesta / note': orderNote } : {}),
           },
           ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
           ...(designLinkOk ? { designLink } : {}),
           ...(orderNote ? { customerNote: orderNote } : {}),
           formula: {
-            qty: totalQty,
-            isWhite,
+            qty,
+            size: 'Unica',
+            zones: { davanti: !!st.zones.davanti, retro: !!st.zones.retro },
+            davantiWidthIdx: st.davantiWidthIdx, davantiHeightIdx: st.davantiHeightIdx,
+            retroWidthIdx: st.retroWidthIdx, retroHeightIdx: st.retroHeightIdx,
             colorName: activeColor.name,
-            sizes: sizeQty,
-            zones: { cuore: !!st.zones.cuore, davanti: !!st.zones.davanti, retro: !!st.zones.retro },
-            davantiWidthIdx: Math.min(st.davantiWidthIdx, W_MAX_IDX), davantiHeightIdx: Math.min(st.davantiHeightIdx, H_MAX_IDX),
-            retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
           },
         };
+        const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
+        const heroEl = document.getElementById('prod-hero');
         const cartRow = {
-          id: 'felpa-fuji',
-          name: 'Felpa Fuji',
+          id: 'shopper-roma-sacra',
+          name: 'Shopper Roma Sacra',
           price: +grandTotal.toFixed(2),
           col: 'misura',
           body: orderBody,
-          img: (IMAGE_BY_COLOR[activeColor.name] || DEFAULT_HERO_IMG.replace('-hero-plain', '-hero')),
-          url: 'felpa-fuji.html',
+          img: heroEl ? heroEl.src : '',
+          url: 'shopper-roma-sacra.html',
         };
         if (window.tsCart) {
           window.tsCart.add(cartRow);
@@ -817,20 +681,18 @@ class Component extends DCLogic {
       preventivo: () => {
         const cName = hasColor ? activeColor.name : 'da definire';
         const zoneNames = {
-          cuore: 'Cuore/manica ' + cuoreWidth + '×' + cuoreHeight + ' cm',
-          davanti: 'Davanti ' + davantiWidthCm + '×' + davantiHeightCm + ' cm',
-          retro: 'Retro ' + retroWidthCm + '×' + retroHeightCm + ' cm',
+          davanti: 'Lato A ' + cm(W_BREAKS[st.davantiWidthIdx]) + '×' + cm(H_BREAKS[st.davantiHeightIdx]) + ' cm',
+          retro: 'Lato B ' + cm(W_BREAKS[st.retroWidthIdx]) + '×' + cm(H_BREAKS[st.retroHeightIdx]) + ' cm',
         };
         const zoneList = [];
-        if (st.zones.cuore) zoneList.push(zoneNames.cuore);
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
-        const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
+        const config = `Colore: ${cName}, Taglia unica, DTF, ` + (zoneList.length ? `Stampa: ${zoneList.join(' + ')}` : 'Senza stampa') + ', Grafica: ' + grafSel.label + (grafTestoVal ? ' (' + grafTestoVal + ')' : '');
         const params = new URLSearchParams({
-          prodotto: 'Felpa Fuji',
+          prodotto: 'Shopper Roma Sacra',
           config: orderNote ? config + ' — Note: ' + orderNote : config,
           url: window.location.origin + window.location.pathname,
-          quantita: String(totalQty),
+          quantita: String(qty),
           prezzo: grandTotal.toFixed(2),
         });
         window.open('./preventivo.html?' + params.toString(), '_blank', 'noopener');
@@ -838,7 +700,6 @@ class Component extends DCLogic {
     };
   }
 }
-
 </script>
 </body>
 </html>

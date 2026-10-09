@@ -15,7 +15,7 @@
   <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Maglietta Bambina Jamaica Personalizzata 24H | Tshirt Shop Online</title>
+  <title>Maglietta Bambina Jamaica Personalizzata | Tshirt Shop Online</title>
   <meta name="description" content="T-shirt bambina Jamaica in cotone 155 g/m² con stampa DTF: taglie 1/2-11/12 anni, preventivo in 30 secondi, prodotta a Roma.">
   <link rel="canonical" href="https://www.tshirt-shop.online/jamaica-kids.html">
   <meta property="og:url" content="https://www.tshirt-shop.online/jamaica-kids.html">
@@ -152,7 +152,6 @@
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
-    <span class="tag tag-accent">24H</span>
     <span class="tag tag-neutral">Made in Italy</span>
     <span class="tag tag-neutral" data-en="Premium Cotton">Cotone Premium</span>
     <span class="tag tag-neutral" data-en="Kids sizes">Taglie bambina</span>
@@ -161,7 +160,7 @@
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Jamaica Kids T-Shirt 24H">Maglietta Bambina Jamaica 24H</h1>
+      <h1 style="margin-bottom: 4px;" data-en="Jamaica Kids T-Shirt">Maglietta Bambina Jamaica</h1>
     </div>
 
     <div class="col-left">
@@ -364,11 +363,11 @@
       <div>
         <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Magliette e stampa</div>
         <div style="display:flex;flex-direction:column;gap:var(--space-2);">
-          <a href="beagle.html" style="font-size:13.5px;">Crea la tua maglietta 24H</a>
+          <a href="beagle.html" style="font-size:13.5px;">Crea la tua maglietta</a>
           <a href="promozioni.html" style="font-size:13.5px;">Tutte le promozioni</a>
           <a href="promozione-100-magliette.html" style="font-size:13.5px;">Promozione 100 magliette</a>
           <a href="stampa-dtf-roma.html" style="font-size:13.5px;">Stampa DTF a Roma</a>
-          <a href="stampa-magliette-24-ore-roma.html" style="font-size:13.5px;">Stampa magliette in 24 ore</a>
+          <a href="stampa-magliette-24-ore-roma.html" style="font-size:13.5px;">Stampa magliette a Roma EUR</a>
           <a href="stampa-t-shirt-grandi-quantita.html" style="font-size:13.5px;">Grandi quantità</a>
           <a href="stampa-oro-argento-olografica.html" style="font-size:13.5px;">Oro, argento e olografica</a>
         </div>
@@ -389,7 +388,7 @@
         <div style="display:flex;flex-direction:column;gap:var(--space-2);">
           <a href="preparare-file-stampa-t-shirt.html" style="font-size:13.5px;">Preparare il file di stampa DTF</a>
           <a href="stampa-t-shirt-roma-eur-guida.html" style="font-size:13.5px;">Guida alla stampa t-shirt</a>
-          <a href="servizio-express-stampa-roma-sud.html" style="font-size:13.5px;">Servizio express Roma Sud</a>
+          <a href="servizio-express-stampa-roma-sud.html" style="font-size:13.5px;">Stampa per aziende Roma Sud</a>
           <a href="custom-t-shirt-printing-rome.html" style="font-size:13.5px;">Custom t-shirt printing in Rome</a>
         </div>
       </div>
@@ -620,7 +619,7 @@ class Component extends DCLogic {
       return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     };
     const colorsByLightness = colorsAll
-      .map(c => ({ ...c, title: c.name + (c.group === 'order' ? ' — su ordinazione (1 settimana)' : ' — 24H') }))
+      .map(c => ({ ...c, title: c.name + (c.group === 'order' ? ' — su ordinazione (1 settimana)' : ' — disponibile (1 settimana)') }))
       .sort((a, b) => lum(b.hex) - lum(a.hex));
     const sizeQty = st.sizeQty || {};
     const totalQty = SIZES.reduce((n, s) => n + (sizeQty[s] || 0), 0);
@@ -680,7 +679,7 @@ class Component extends DCLogic {
       ? ''
       : (selectedColorGroup === 'order'
           ? (en ? 'Made to order — takes 1 week' : 'Su ordinazione — richiede 1 settimana')
-          : (en ? '24H colour — in stock now' : 'Colore 24H — disponibile subito'));
+          : (en ? 'In stock — ready in 1 week' : 'Disponibile — pronto in 1 settimana'));
     const garmentPrice = garmentUnitPrice(totalQty, isWhite);
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;

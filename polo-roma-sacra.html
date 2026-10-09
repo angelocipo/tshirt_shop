@@ -15,10 +15,10 @@
   <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Felpa Fuji Personalizzata | Tshirt Shop Online</title>
-  <meta name="description" content="Felpa Fuji unisex personalizzata: zip intera e cappuccio foderato in rete, 280 g/m², 7 colori tinta unita e a contrasto, taglie S-XXXL. Stampa DTF a Roma.">
-  <link rel="canonical" href="https://www.tshirt-shop.online/felpa-fuji.html">
-  <meta property="og:url" content="https://www.tshirt-shop.online/felpa-fuji.html">
+  <title>Polo Roma Sacra | Tshirt Shop Online</title>
+  <meta name="description" content="Polo Roma Sacra in piqué, 34 colori: quattro grafiche religiose personalizzabili sul cuore o sul retro, anche 1 pezzo. Stampa DTF a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/polo-roma-sacra.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/polo-roma-sacra.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -31,7 +31,8 @@
     /* landscape / wide: image + price beside the configurator */
     @media (min-width: 900px) {
       .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6); align-items: start;
-        grid-template-areas: "head head" "left mid" "left right"; grid-template-rows: auto min-content 1fr; align-content: start; }
+        grid-template-rows: auto min-content 1fr;
+        grid-template-areas: "head head" "left mid" "left right"; align-content: start; }
       .prod-head { grid-area: head; }
       .col-left { grid-area: left; display: flex; flex-direction: column; }
       .col-mid { grid-area: mid; }
@@ -49,14 +50,14 @@
     @media (max-width: 899px) {
       .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "graf" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
-      .prod-qty { grid-area: qty; }
-      .cfg-family { grid-area: family; }
       .cfg-zones { grid-area: zones; }
       .cfg-misure { grid-area: misure; }
+      .prod-qty { grid-area: qty; }
+      .cfg-family { grid-area: family; }
       .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
@@ -76,16 +77,8 @@
     .size-btn { min-width: 46px; height: 40px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .size-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
     .size-selected { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
-    .size-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: 2px var(--space-3); border-bottom: 1px solid var(--color-divider); }
-    .size-row-off { opacity: .38; pointer-events: none; }
-    .size-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
-    .size-grid .size-row:last-child { border-bottom: none; }
-    @media (max-width: 480px) {
-      .size-grid { grid-template-columns: minmax(0, 1fr); }
-      .size-grid .size-row:nth-child(even) { border-left: none; }
-      .size-grid .size-row:nth-last-child(-n+2) { border-bottom: 1px solid var(--color-divider); }
-      .size-grid .size-row:last-child { border-bottom: none; }
-    }
+    .size-row { display: flex; align-items: center; gap: var(--space-3); padding: 2px var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .size-row:last-child { border-bottom: none; }
     .qty-group { display: flex; align-items: center; }
     .qty-input { width: 52px; height: 30px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
     .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
@@ -150,6 +143,10 @@
       .nav-sub-2, .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: none; }
     }
   
+    .graf-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 92px; padding: 10px 6px; border: 1px solid var(--color-divider); background: var(--color-surface); cursor: pointer; text-align: center; color: var(--color-text); font-family: inherit; }
+    .graf-tile:hover { border-color: var(--color-text); }
+    .graf-on { border: 2px solid var(--color-accent); padding: 9px 5px; }
+    @media (max-width: 899px) { .cfg-graf { grid-area: graf; } }
   </style>
 </helmet>
 
@@ -158,32 +155,49 @@
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
-    <span class="tag tag-accent" data-en="Contrast. Pure energy.">Contrasto. Energia pura.</span>
-    <span class="tag tag-neutral" data-en="Unbrushed 280 g">Non garzata 280 g</span>
-    <span class="tag tag-neutral" data-en="Full zip + hood">Zip intera + cappuccio</span>
-    <span class="tag tag-neutral" data-en="7 colours">7 colori</span>
+    <span class="tag tag-accent">Roma Sacra</span>
+    <span class="tag tag-neutral" data-en="From 1 piece">Da 1 pezzo</span>
+    <span class="tag tag-neutral" data-en="Made in Rome">Prodotto a Roma</span>
   </div>
 
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Fuji Sweatshirt">Felpa Fuji</h1>
+      <h1 style="margin-bottom: 4px;" data-en="Roma Sacra Polo">Polo Roma Sacra</h1>
+      <p style="margin: 0; font-size: 16px; color: var(--color-neutral-700);" data-en="Premium piqué. Understated. For every celebration.">Piqué premium. Sobria. Per ogni celebrazione.</p>
     </div>
 
     <div class="col-left">
     <div class="prod-visual">
       <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
-        <div style="aspect-ratio: 1;">
-          <img id="prod-hero" alt="Felpa Fuji — vista frontale" src="img/felpa-fuji-hero-plain.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+        <div style="aspect-ratio: 1; background: var(--color-bg);">
+          <img id="polo-hero" alt="Polo Star — vista frontale" src="img/star-polo-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+        </div>
+        <div id="photo-missing-note" style="display:none;align-items:center;gap:8px;border:1px solid var(--color-divider);border-top:none;padding:8px 10px;font-size:13px;color:var(--color-neutral-700);">
+          <span style="width:14px;height:14px;border:1px solid var(--color-neutral-500);flex:none;"></span>
+          <span data-en="No photo yet for this colour — see the swatch. The garment is produced in the selected colour.">Foto non ancora disponibile per questo colore — fai riferimento al campione. Il capo viene prodotto nel colore selezionato.</span>
         </div>
       </div>
     </div>
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
-        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Sweatshirt Colour:">Colore Felpa:</span> {{ selectedColorName }}</label></div>
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Polo Colour:">Colore Polo:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
-        <div style="display: grid; grid-template-columns: repeat(7, 30px); gap: var(--space-2); justify-content: space-between;">
-          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="24">
+        <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
+          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="36">
             <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.title }}" aria-label="{{ c.title }}" onClick="{{ c.select }}"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div class="cfg-graf" style="margin-bottom: var(--space-4);">
+        <div class="field"><label><span data-en="Design:">Grafica:</span> {{ grafName }}</label></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--space-2);">
+          <sc-for list="{{ grafiche }}" as="g" hint-placeholder-count="5">
+            <button type="button" class="{{ g.cls }}" onClick="{{ g.select }}" aria-label="{{ g.latin }}">
+              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1;">{{ g.symbol }}</span>
+              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.25;">{{ g.latin }}</span>
+              <span class="text-muted" style="font-size: 10.5px; line-height: 1.3;">{{ g.sub }}</span>
+            </button>
           </sc-for>
         </div>
       </div>
@@ -249,18 +263,19 @@
     </div>
 
     <div class="col-mid">
+      
       <div class="cfg-misure" style="margin-bottom: var(--space-3);">
-        <img src="img/misure-tshirt.webp" alt="Come misurare la felpa: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
+        <img src="img/misure-tshirt.webp" alt="Come misurare: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field"><label><span data-en="Qty per size">Quantità per taglia</span> — {{ quantity }} <span data-en="pcs total">pz totali</span></label></div>
-        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="Minimum order: 5 pcs, sizes can be mixed.">Ordine minimo: 5 pz, taglie miste ammesse.</p>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="No minimum: from 1 piece, sizes can be mixed.">Nessun minimo: anche 1 pezzo, taglie miste ammesse.</p>
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
           <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
         </sc-if>
-        <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="6">
-            <div class="{{ s.rowClass }}">
+        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
+          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="8">
+            <div class="size-row">
               <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
               <div class="qty-group">
                 <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
@@ -274,44 +289,49 @@
         <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
           <div style="padding: var(--space-4);">
             <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="Check the measurements first">Controlla prima le misure</div>
-            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Measure a sweatshirt you already wear — A = width, B = height, garment laid flat — and compare it with the measurements shown next to each size before choosing.">Misura una felpa che indossi già — A = larghezza, B = altezza, capo steso — e confrontala con le misure indicate accanto a ogni taglia prima di scegliere.</p>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Measure a polo you already wear — A = width, B = height, garment laid flat — and compare it with the measurements shown next to each size before choosing.">Misura una polo che indossi già — A = larghezza, B = altezza, capo steso — e confrontala con le misure indicate accanto a ogni taglia prima di scegliere.</p>
           </div>
         </div>
       </div>
       <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Sweatshirt line">Linea felpe</div>
-          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Seven colours. Fluo contrast.">Sette colori. Contrasto fluo.</p>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Star family">Famiglia Star</div>
+          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="The Star polo shirts share the same 100% cotton piqué and the same dye baths across men's, women's and kids' cuts: the colour codes match, so a mixed order comes out in one uniform shade.">Le polo Star condividono lo stesso piqué 100% cotone e gli stessi bagni di tintura tra taglio uomo, donna e bambino: i codici colore corrispondono, quindi un ordine misto esce in una tinta uniforme.</p>
           <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
-          <a href="felpe.html" style="font-size:13px;font-weight:600;" data-en="All sweatshirts">Tutte le felpe</a>
-          
-          <a href="uomo.html" style="font-size:13px;font-weight:600;" data-en="Menswear">Uomo</a>
+          <a href="star-polo-donna.html" style="font-size:13px;font-weight:600;" data-en="Star women’s polo">Polo Star donna</a>
+          <a href="star-polo-kids.html" style="font-size:13px;font-weight:600;" data-en="Star kids polo">Polo Star bambino</a>
           </div>
         </div>
       </div>
     </div>
 
     <div class="prod-config col-right">
-      <div class="cfg-comp" style="border-bottom: 1px solid var(--color-divider); margin-bottom: var(--space-4); padding-bottom: var(--space-4);">
-        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
-        <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700);">
-          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> Tessuto principale: 60% cotone / 40% poliestere, 280 g/m². Fodera del cappuccio: 100% poliestere microforato. Colore grigio mélange 58: 85% cotone / 15% viscosa.</div>
-          <div>Felpa non garzata con zip frontale e cappuccio. Cappuccio foderato in rete di poliestere. Cordini piatti in poliestere. Polsini e fascia in vita in costina 2x1 con elastan. Nastro di rinforzo interno nello stesso tessuto. Varianti in tinta unita e a contrasto.</div>
-          <div>Etichetta rimovibile. Confezione: scatola 20 pz, pack 1 pz. Lavaggio a 40°. OEKO-TEX Standard 100.</div>
-          <div style="font-weight: 700; color: var(--color-text);">Rif. Roly SU1105</div>
+      <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+        <div style="padding: var(--space-4);">
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+          <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
+            <div data-en="Custom polo shirt, fast delivery — DTF printing made in Rome">Polo personalizzata, consegna rapida — stampa DTF prodotta a Roma</div>
+            <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="100% cotton, piqué, 200 g/m².">100% cotone, piqué, 200 g/m².</span></div>
+            <div data-en="Heather grey 58: 85% cotton / 15% viscose.">Grigio vigorè 58: 85% cotone / 15% viscosa.</div>
+            <div style="font-weight: 700; color: var(--color-text);">EAN 0652026573008</div>
+          </div>
         </div>
       </div>
       <div class="cfg-rest">
-      <sc-if value="{{ cartGroupNote }}" hint-placeholder-val="{{ null }}">
-        <div style="border:1px solid var(--color-accent);padding:10px 12px;font-size:12.5px;font-weight:600;color:var(--color-accent-700);margin-bottom:var(--space-3);">{{ cartGroupNote }}</div>
-      </sc-if>
+
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
-        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Felpa</span><span>{{ garmentPriceLabel }}</span></div>
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Garment price">Prezzo Maglia</span><span>{{ garmentPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
         <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
         <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
         <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label for="graf-testo" data-en="Personalisation (optional)">Personalizzazione (opzionale)</label>
+        <input class="input" id="graf-testo" type="text" maxlength="40" placeholder="Es. Parrocchia San Clemente · 2026" data-en-placeholder="E.g. St Clement Parish · 2026" value="{{ grafTesto }}" onChange="{{ setGrafTesto }}">
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="One line of text under the design. Max 40 characters.">Una riga di testo sotto la grafica. Max 40 caratteri.</div>
       </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
@@ -359,7 +379,6 @@
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
       </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -404,8 +423,6 @@
         <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Catalogo</div>
         <div style="display:flex;flex-direction:column;gap:var(--space-2);">
           <a href="tshirt-uomo.html" style="font-size:13.5px;">T-shirt uomo</a>
-          <a href="bahrain.html" style="font-size:13.5px;">Maglietta tecnica Bahrain</a>
-          <a href="bahrain-kids.html" style="font-size:13.5px;">Maglietta tecnica Bahrain bambino</a>
           <a href="polo-uomo.html" style="font-size:13.5px;">Polo uomo</a>
           <a href="tshirt-donna.html" style="font-size:13.5px;">T-shirt donna</a>
           <a href="polo-donna.html" style="font-size:13.5px;">Polo donna</a>
@@ -430,43 +447,104 @@
 </footer>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;forest&quot;,&quot;ochre&quot;,&quot;ink&quot;],&quot;section&quot;:&quot;Color&quot;}}">
-const CLS = 'Non garzata 280 g/m² — 60% cotone / 40% poliestere';
-const CLS_GREY = 'Non garzata 280 g/m² — 85% cotone / 15% viscosa';
 const COLORS = [
-  { name: '58221 Grigio Mélange / Giallo Fluo', hex: 'linear-gradient(135deg, #9c9c9e 0 50%, #dff23c 50%)', cls: CLS_GREY },
-  { name: '05221 Blu Royal / Giallo Fluo', hex: 'linear-gradient(135deg, #1f5fae 0 50%, #dff23c 50%)', cls: CLS },
-  { name: '02221 Nero / Giallo Fluo', hex: 'linear-gradient(135deg, #171717 0 50%, #dff23c 50%)', cls: CLS },
-  { name: '58223 Grigio Mélange / Arancio Fluo', hex: 'linear-gradient(135deg, #9c9c9e 0 50%, #f58a3c 50%)', cls: CLS_GREY },
-  { name: '02223 Nero / Arancio Fluo', hex: 'linear-gradient(135deg, #171717 0 50%, #f58a3c 50%)', cls: CLS },
-  { name: '55 Blu Navy', hex: '#192033', cls: CLS },
-  { name: '02 Nero', hex: '#171717', cls: CLS },
+  { name: '01 Bianco', hex: '#ffffff', group: '24h' },
+  { name: '07 Sabbia', hex: '#c09f80', group: '24h' },
+  { name: '87 Cioccolato', hex: '#341912', group: '24h' },
+  { name: '03 Giallo', hex: '#ffe403', group: '24h' },
+  { name: '266 Rosa Antico', hex: '#cf8577', group: '24h' },
+  { name: '31 Arancio', hex: '#f08927', group: '24h' },
+  { name: '60 Rosso', hex: '#dc012e', group: '24h' },
+  { name: '262 Rosso Mattone', hex: '#be454f', group: '24h' },
+  { name: '168 Malva', hex: '#a4777f', group: '24h' },
+  { name: '169 Berry Red', hex: '#703b45', group: '24h' },
+  { name: '57 Granata', hex: '#870120', group: '24h' },
+  { name: '78 Fucsia', hex: '#dc016b', group: '24h' },
+  { name: '48 Rosa Chiaro', hex: '#f8ccd5', group: '24h' },
+  { name: '71 Viola', hex: '#750d68', group: '24h' },
+  { name: '121 Lilla', hex: '#4c4358', group: '24h' },
+  { name: '261 Azzurro Riviera', hex: '#6884ac', group: '24h' },
+  { name: '05 Blue Royal', hex: '#015fa7', group: '24h' },
+  { name: '10 Celeste', hex: '#c4ddf1', group: '24h' },
+  { name: '12 Turchese', hex: '#049fd1', group: '24h' },
+  { name: '86 Blue Denim', hex: '#4a4c72', group: '24h' },
+  { name: '55 Blue Navy', hex: '#001d43', group: '24h' },
+  { name: '263 Grigio Blu', hex: '#a0a9be', group: '24h' },
+  { name: '170 Petrolio', hex: '#3d6173', group: '24h' },
+  { name: '171 Grigio Perla', hex: '#879ba3', group: '24h' },
+  { name: '164 Verde Salvia', hex: '#70a290', group: '24h' },
+  { name: '98 Acquamarina', hex: '#9fd9d7', group: '24h' },
+  { name: '264 Verde Pallido', hex: '#d4ddc4', group: '24h' },
+  { name: '83 Verde Mela', hex: '#509f26', group: '24h' },
+  { name: '216 Verde Tropicale', hex: '#038b14', group: '24h' },
+  { name: '56 Verde Bottiglia', hex: '#004237', group: '24h' },
+  { name: '152 Verde Avventura', hex: '#444838', group: '24h' },
+  { name: '58 Grigio', hex: '#c4c4c4', group: '24h' },
+  { name: '46 Grigio Scuro', hex: '#484e41', group: '24h' },
+  { name: '02 Nero', hex: '#000000', group: '24h' },
 ];
+const DEFAULT_HERO_IMG = 'img/star-polo-hero.webp';
 const IMAGE_BY_COLOR = {
-  '58221 Grigio Mélange / Giallo Fluo': 'img/felpa-fuji-58221.webp',
-  '05221 Blu Royal / Giallo Fluo': 'img/felpa-fuji-05221.webp',
-  '02221 Nero / Giallo Fluo': 'img/felpa-fuji-02221.webp',
-  '58223 Grigio Mélange / Arancio Fluo': 'img/felpa-fuji-58223.webp',
-  '02223 Nero / Arancio Fluo': 'img/felpa-fuji-02223.webp',
-  '55 Blu Navy': 'img/felpa-fuji-55.webp',
-  '02 Nero': 'img/felpa-fuji-02.webp',
+  '01 Bianco': 'img/star-01-bianco.webp',
+  '02 Nero': 'img/star-02-nero-nobg.webp',
+  '03 Giallo': 'img/star-03-giallo-nobg.webp',
+  '05 Blue Royal': 'img/star-05-royal-nobg.webp',
+  '07 Sabbia': 'img/star-07-sabbia-nobg.webp',
+  '10 Celeste': 'img/star-10-celeste-nobg.webp',
+  '12 Turchese': 'img/star-12-turchese-nobg.webp',
+  '31 Arancio': 'img/star-31-arancio-nobg.webp',
+  '46 Grigio Scuro': 'img/star-46-grigio-scuro-nobg.webp',
+  '48 Rosa Chiaro': 'img/star-48-rosa-chiaro-nobg.webp',
+  '58 Grigio': 'img/star-58-grigio-nobg.webp',
+  '98 Acquamarina': 'img/star-98-acquamarina-nobg.webp',
+  '164 Verde Salvia': 'img/star-164-verde-salvia-nobg.webp',
+  '55 Blue Navy': 'img/star-55-navy-nobg.webp',
+  '83 Verde Mela': 'img/star-83-verde-mela-nobg.webp',
+  '171 Grigio Perla': 'img/star-171-grigio-perla-nobg.webp',
+  '168 Malva': 'img/star-168-malva-nobg.webp',
+  '216 Verde Tropicale': 'img/star-216-verde-nobg.webp',
+  '261 Azzurro Riviera': 'img/star-261-azzurro-riviera-nobg.webp',
+  '78 Fucsia': 'img/star-78-fucsia-nobg.webp',
+  '170 Petrolio': 'img/star-170-petrolio-nobg.webp',
+  '262 Rosso Mattone': 'img/star-262-rosso-mattone-nobg.webp',
+  '60 Rosso': 'img/star-60-rosso-nobg.webp',
+  '121 Lilla': 'img/star-121-lilla-nobg.webp',
+  '86 Blue Denim': 'img/star-86-blue-denim-nobg.webp',
+  '169 Berry Red': 'img/star-169-berry-red-nobg.webp',
+  '152 Verde Avventura': 'img/star-152-verde-militare-nobg.webp',
+  '87 Cioccolato': 'img/star-87-cioccolato-nobg.webp',
+  '57 Granata': 'img/star-57-granata-nobg.webp',
+  '71 Viola': 'img/star-71-viola-nobg.webp',
+  '56 Verde Bottiglia': 'img/star-56-verde-bottiglia-nobg.webp',
+  '263 Grigio Blu': 'img/star-263-grigio-blu-nobg.webp',
+  '264 Verde Pallido': 'img/star-264-verde-pallido-nobg.webp',
+  '266 Rosa Antico': 'img/star-266-rosa-antico-nobg.webp',
 };
-const DEFAULT_HERO_IMG = 'img/felpa-fuji-hero-plain.webp';
-const MIN_QTY = 5;
-const SIZES = ["S","M","L","XL","XXL","XXXL"];
-const SIZE_MEASURE = {"S":"A 50 × B 63","M":"A 53 × B 66","L":"A 56 × B 69","XL":"A 59 × B 72","XXL":"A 62 × B 75","XXXL":"A 65 × B 78"};
-// Listino Roly SU1105 per taglia (prezzo di acquisto Roly × -20%) × moltiplicatore della fascia quantità.
-// Costo Roly: 10,65 € (S-XXL), 11,20 € (XXXL) — scontato del 20% come le altre felpe.
-// Scala moltiplicatore 3: 3,00 a 1 pz → 2,00 da 100 pz (come le camicie e lo sport).
-// Ogni modifica va replicata in api/_pricing-data.js (validazione server).
-const BASE_PRICE = {"S":8.52,"M":8.52,"L":8.52,"XL":8.52,"XXL":8.52,"XXXL":8.96};
-const QTY_MULT = [
-  { min: 1, mult: 3.00 }, { min: 2, mult: 2.90 }, { min: 5, mult: 2.80 },
-  { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
-  { min: 100, mult: 2.00 },
+const MIN_QTY = 1;
+const GRAFICHE = [
+  { key: 'crux', symbol: '✞', latin: 'In hoc signo vinces', sub: 'Croce · Ponte Milvio', subEn: 'Cross · Milvian Bridge', label: 'Crux — In hoc signo vinces' },
+  { key: 'lux', symbol: '☧', latin: 'Dominus illuminatio mea', sub: 'Salmo 27', subEn: 'Psalm 27', label: 'Lux — Dominus illuminatio mea' },
+  { key: 'sancti', symbol: '✠', latin: 'Petrus et Paulus', sub: 'Santi patroni di Roma', subEn: 'Patron saints of Rome', label: 'Sancti — Petrus et Paulus' },
+  { key: 'via', symbol: 'km 0', latin: 'Via Francigena', sub: 'Roma, fine del cammino', subEn: 'Rome, end of the way', label: 'Via — Via Francigena, Roma km 0' },
+  { key: 'tuo', symbol: '+', latin: 'Il tuo design', latinEn: 'Your design', sub: 'Carica il file', subEn: 'Upload your file', label: 'Design del cliente' },
 ];
-function qtyMult(qty) { let t = QTY_MULT[0]; for (const x of QTY_MULT) if (qty >= x.min) t = x; return t.mult; }
-function sizeUnitPrice(size, qty) { return Math.round((BASE_PRICE[size] || 0) * qtyMult(qty) * 100) / 100; }
-function garmentUnitPrice(qty) { return sizeUnitPrice(SIZES[0], qty); }
+const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'];
+const SIZE_MEASURE = { 'XS': 'A 48 × B 65', 'S': 'A 51 × B 70', 'M': 'A 54 × B 72', 'L': 'A 57 × B 74', 'XL': 'A 60 × B 76', 'XXL': 'A 64 × B 79', 'XXXL': 'A 67 × B 82', 'XXXXL': 'A 70 × B 85' };
+const SIZE_STOCK = { XS: 500, S: 19520, M: 10677, L: 18581, XL: 9532, XXL: 2368, XXXL: 969, XXXXL: 750 };
+const PRICE_TIERS = [
+  { min: 1, white: 9, other: 9 },
+  { min: 2, white: 8.5, other: 8.5 },
+  { min: 5, white: 8, other: 8 },
+  { min: 10, white: 7.5, other: 7.5 },
+  { min: 20, white: 7, other: 7 },
+  { min: 50, white: 6.5, other: 6.5 },
+  { min: 100, white: 5.95, other: 5.95 },
+];
+function garmentUnitPrice(qty, isWhite) {
+  let tier = PRICE_TIERS[0];
+  for (const t of PRICE_TIERS) if (qty >= t.min) tier = t;
+  return isWhite ? tier.white : tier.other;
+}
 const CUORE_PRICE_TIERS = [
   { min: 1, price: 14 }, { min: 2, price: 10 }, { min: 5, price: 3.5 },
   { min: 10, price: 3 }, { min: 20, price: 2.5 }, { min: 50, price: 2 },
@@ -520,9 +598,11 @@ function isEn() {
 
 class Component extends DCLogic {
   state = {
+    grafica: 0,
+    grafTesto: '',
     colorIndex: null,
     sizeQty: {},
-    zones: {},
+    zones: { davanti: true },
     cuoreWidth: 8,
     cuoreHeight: 8,
     davantiWidthIdx: 4,
@@ -533,7 +613,6 @@ class Component extends DCLogic {
     designRef: null,
     designLink: '',
     orderNote: '',
-    cartGroupQty: 0,
   };
 
   fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€' + s; }
@@ -541,38 +620,27 @@ class Component extends DCLogic {
   // The hero <img> keeps a literal src in the template: a {{ hole }} in src makes the browser
   // request the unresolved placeholder string once on every load. Swap it imperatively instead.
   syncHero() {
-    const el = document.getElementById('prod-hero');
+    const el = document.getElementById('polo-hero');
     if (!el) return;
     const i = this.state.colorIndex;
-    const src = i != null ? (IMAGE_BY_COLOR[COLORS[i].name] || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
+    const own = i != null ? IMAGE_BY_COLOR[COLORS[i].name] : null;
+    const missing = i != null && !own;
+    const note = document.getElementById('photo-missing-note');
+    if (note) note.style.display = missing ? 'flex' : 'none';
+    el.style.filter = missing ? 'grayscale(1) opacity(.6)' : '';
+    const src = own || DEFAULT_HERO_IMG;
     const want = new URL(src, window.location.href).href;
     if (el.src !== want) {
       el.src = src;
-      el.alt = i != null ? ('Felpa Fuji ' + COLORS[i].name) : 'Felpa Fuji — vista frontale';
+      el.alt = i != null ? ('Polo Star ' + COLORS[i].name) : 'Polo Star — vista frontale';
     }
-  }
-  // Righe dello stesso modello già nel carrello (adulto + bambino): fanno quantità
-  // insieme, quindi la fascia di prezzo si legge sul totale cumulato.
-  syncCartQty() {
-    const q = window.tsCart ? window.tsCart.groupQty('felpa-fuji') : 0;
-    if (q !== this.state.cartGroupQty) this.setState({ cartGroupQty: q });
   }
   componentDidMount() {
     this.syncHero();
     this.onLang = () => this.forceUpdate();
     window.addEventListener('ts:langchange', this.onLang);
-    this.onCart = () => this.syncCartQty();
-    document.addEventListener('ts-cart-change', this.onCart);
-    window.addEventListener('storage', this.onCart);
-    this.syncCartQty();
-    this._cartT = setTimeout(this.onCart, 500);
   }
-  componentWillUnmount() {
-    window.removeEventListener('ts:langchange', this.onLang);
-    document.removeEventListener('ts-cart-change', this.onCart);
-    window.removeEventListener('storage', this.onCart);
-    if (this._cartT) clearTimeout(this._cartT);
-  }
+  componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
   componentDidUpdate() { this.syncHero(); }
 
   makeDesignRef() {
@@ -604,7 +672,7 @@ class Component extends DCLogic {
 
   async uploadFile(file, id, ref) {
     try {
-      const qs = new URLSearchParams({ ref, name: file.name, product: 'Felpa Fuji' });
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Polo Roma Sacra' });
       const res = await fetch('/api/upload-design?' + qs.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -633,36 +701,29 @@ class Component extends DCLogic {
         .map(v => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)));
       return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     };
-    const colorsByLightness = colorsAll.map(c => ({ ...c, title: c.name + ' — ' + c.cls }));
-    const hasColorSel = st.colorIndex != null;
+    const colorsByLightness = colorsAll
+      .map(c => ({ ...c, title: c.name + (c.group === 'order' ? ' — su ordinazione (1 settimana)' : ' — disponibile (1 settimana)') }))
+      .sort((a, b) => lum(b.hex) - lum(a.hex));
     const sizeQty = st.sizeQty || {};
+    const totalQty = SIZES.reduce((n, s) => n + (sizeQty[s] || 0), 0);
     const setQtyFor = (s, v) => this.setState(prev => ({
       sizeQty: { ...prev.sizeQty, [s]: Math.max(0, Math.min(9999, v)) },
     }));
-    const sizes = SIZES.map(s => {
-      const blocked = false;
-      return {
+    const sizes = SIZES.map(s => ({
       label: s,
       measure: SIZE_MEASURE[s] ? SIZE_MEASURE[s] + ' cm' : '',
-      blocked,
-      rowClass: 'size-row' + (blocked ? ' size-row-off' : ''),
-      qty: blocked ? 0 : (sizeQty[s] || 0),
-      inc: () => { if (!blocked) setQtyFor(s, (this.state.sizeQty[s] || 0) + 1); },
-      dec: () => { if (!blocked) setQtyFor(s, (this.state.sizeQty[s] || 0) - 1); },
-      setQty: (e) => { if (!blocked) setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0); },
-      };
-    });
-    const totalQty = sizes.reduce((n, x) => n + x.qty, 0);
-    // Fascia di prezzo letta sul cumulato con quanto è già in carrello.
-    const cartQty = this.state.cartGroupQty || 0;
-    const rateQty = totalQty + cartQty;
-    sizes.forEach(x => {
-      x.measure = SIZE_MEASURE[x.label] ? SIZE_MEASURE[x.label] + ' cm' : '';
-    });
+      qty: sizeQty[s] || 0,
+      stockLabel: SIZE_STOCK[s] == null
+        ? (en ? 'made to order' : 'su ordinazione')
+        : SIZE_STOCK[s].toLocaleString('it-IT') + (en ? ' avail.' : ' disp.'),
+      inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
+      dec: () => setQtyFor(s, (this.state.sizeQty[s] || 0) - 1),
+      setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
+    }));
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(rateQty || MIN_QTY);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(rateQty || MIN_QTY);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(rateQty || MIN_QTY);
+      if (key === 'cuore') return cuoreUnitPrice(totalQty || MIN_QTY);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
       return 0;
     };
     const zones = ZONE_DEFS.map(z => {
@@ -697,12 +758,14 @@ class Component extends DCLogic {
     const printTotal = ZONE_DEFS.reduce((sum, z) => sum + (st.zones[z.key] ? zonePrice(z.key) : 0), 0);
     const hasColor = st.colorIndex != null;
     const activeColor = hasColor ? COLORS[st.colorIndex] : null;
-    const isWhite = false;
-    const selectedColorNote = hasColor ? activeColor.cls : '';
-    // Prezzo capo: somma per taglia (le taglie forti costano di più a listino),
-    // mostrata come media per pezzo così il totale resta esatto.
-    const garmentSum = SIZES.reduce((sum, s) => sum + (sizeQty[s] || 0) * sizeUnitPrice(s, rateQty), 0);
-    const garmentPrice = totalQty > 0 ? garmentSum / totalQty : sizeUnitPrice(SIZES[0], MIN_QTY);
+    const isWhite = hasColor && activeColor.name === '01 Bianco';
+    const selectedColorGroup = hasColor ? activeColor.group : null;
+    const selectedColorNote = !hasColor
+      ? ''
+      : (selectedColorGroup === 'order'
+          ? (en ? 'Made to order — takes 1 week' : 'Su ordinazione — richiede 1 settimana')
+          : (en ? 'In stock — ready in 1 week' : 'Disponibile — pronto in 1 settimana'));
+    const garmentPrice = garmentUnitPrice(totalQty, isWhite);
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;
 
@@ -726,7 +789,19 @@ class Component extends DCLogic {
     const themeMap = { indigo: 'theme-indigo', forest: 'theme-forest', ochre: 'theme-ochre', ink: 'theme-ink' };
     const themeClass = themeMap[this.props.accentTheme] ?? 'theme-indigo';
 
+    const grafSel = GRAFICHE[this.state.grafica] || GRAFICHE[0];
+    const grafTestoVal = (this.state.grafTesto || '').trim().slice(0, 40);
+    const grafiche = GRAFICHE.map((g, i) => ({
+      symbol: g.symbol,
+      latin: isEn() && g.latinEn ? g.latinEn : g.latin,
+      sub: isEn() ? g.subEn : g.sub,
+      cls: 'graf-tile' + (i === this.state.grafica ? ' graf-on' : ''),
+      select: () => this.setState({ grafica: i }),
+    }));
     return {
+      grafiche, grafName: isEn() && grafSel.latinEn ? grafSel.latinEn : grafSel.latin,
+      grafTesto: this.state.grafTesto || '',
+      setGrafTesto: (e) => this.setState({ grafTesto: e.target.value.slice(0, 40) }),
       designFiles, hasDesignRef, designRef: st.designRef || '',
       designLink: st.designLink || '', designLinkError,
       setDesignLink: (e) => this.setState({ designLink: e.target.value }),
@@ -742,22 +817,18 @@ class Component extends DCLogic {
       retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
       selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
-      belowMin: totalQty > 0 && rateQty < MIN_QTY,
-      missingQty: Math.max(0, MIN_QTY - rateQty),
-      cartGroupNote: cartQty > 0
-        ? (en
-            ? 'Already in the cart: ' + cartQty + ' pcs of this model. Price based on ' + rateQty + ' pcs.'
-            : 'Nel carrello hai già ' + cartQty + ' pz di questo modello. Prezzo calcolato su ' + rateQty + ' pz.')
-        : null,
+      belowMin: totalQty > 0 && totalQty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - totalQty),
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(totalQty > 0 ? garmentPrice : 0),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
       totalPriceLabel: this.fmt(grandTotal),
       checkoutLabel: en ? 'Add to cart' : 'Aggiungi al carrello',
       checkout: () => {
+        if (grafSel.key === 'tuo' && !hasDesignRef && !designLinkOk) { alert(isEn() ? 'You chose your own design: upload the file or paste a link.' : 'Hai scelto il tuo design: carica il file o incolla un link.'); return; }
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
-        if (rateQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces across this model, sizes and colours can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi su questo modello, anche in taglie e colori misti.'); return; }
+        if (totalQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces, sizes can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi, anche in taglie miste.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneNames = {
@@ -770,7 +841,7 @@ class Component extends DCLogic {
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
         const orderBody = {
-          productId: 'felpa-fuji',
+          productId: 'polo-roma-sacra',
           human: {
             'Colore': activeColor.name,
             'Taglie': sizeBreakdown,
@@ -778,6 +849,8 @@ class Component extends DCLogic {
             'Stampa': zoneList.length ? zoneList.join(' + ') : 'Nessuna stampa',
             ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
             ...(designLinkOk ? { 'Link file': designLink } : {}),
+            'Grafica': grafSel.label,
+            ...(grafTestoVal ? { 'Personalizzazione': grafTestoVal } : {}),
             ...(orderNote ? { 'Consegna richiesta / note': orderNote } : {}),
           },
           ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
@@ -793,14 +866,16 @@ class Component extends DCLogic {
             retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
           },
         };
+        const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
+        const heroEl = document.getElementById('polo-hero');
         const cartRow = {
-          id: 'felpa-fuji',
-          name: 'Felpa Fuji',
+          id: 'polo-roma-sacra',
+          name: 'Polo Roma Sacra',
           price: +grandTotal.toFixed(2),
           col: 'misura',
           body: orderBody,
-          img: (IMAGE_BY_COLOR[activeColor.name] || DEFAULT_HERO_IMG.replace('-hero-plain', '-hero')),
-          url: 'felpa-fuji.html',
+          img: heroEl ? heroEl.src : '',
+          url: 'polo-roma-sacra.html',
         };
         if (window.tsCart) {
           window.tsCart.add(cartRow);
@@ -825,9 +900,9 @@ class Component extends DCLogic {
         if (st.zones.cuore) zoneList.push(zoneNames.cuore);
         if (st.zones.davanti) zoneList.push(zoneNames.davanti);
         if (st.zones.retro) zoneList.push(zoneNames.retro);
-        const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa');
+        const config = `Colore: ${cName}, Taglie: ${sizeBreakdown}` + (zoneList.length ? `, Stampa: ${zoneList.join(' + ')}` : ', Senza stampa') + ', Grafica: ' + grafSel.label + (grafTestoVal ? ' (' + grafTestoVal + ')' : '');
         const params = new URLSearchParams({
-          prodotto: 'Felpa Fuji',
+          prodotto: 'Polo Roma Sacra',
           config: orderNote ? config + ' — Note: ' + orderNote : config,
           url: window.location.origin + window.location.pathname,
           quantita: String(totalQty),

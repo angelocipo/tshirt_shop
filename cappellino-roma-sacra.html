@@ -15,10 +15,10 @@
   <script defer src="cart.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Solo Stampa DTF sul Tuo Capo | Tshirt Shop Online</title>
-  <meta name="description" content="Servizio di sola stampa DTF: porti o spedisci i tuoi capi, noi stampiamo. Preventivo in 30 secondi, minimo 5 pezzi, a Roma.">
-  <link rel="canonical" href="https://www.tshirt-shop.online/solo-stampa.html">
-  <meta property="og:url" content="https://www.tshirt-shop.online/solo-stampa.html">
+  <title>Cappellino Roma Sacra | Tshirt Shop Online</title>
+  <meta name="description" content="Cappellino Roma Sacra a 5 pannelli, 10 colori, taglia unica: grafica religiosa sul fronte 12×8 cm, personalizzabile, anche 1 pezzo. Prodotto a Roma.">
+  <link rel="canonical" href="https://www.tshirt-shop.online/cappellino-roma-sacra.html">
+  <meta property="og:url" content="https://www.tshirt-shop.online/cappellino-roma-sacra.html">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
   <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
   <style>
@@ -26,13 +26,12 @@
     body { background: var(--color-bg); }
     .swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--color-divider); cursor: pointer; padding: 0; }
     .swatch:hover { border-color: var(--color-text); }
+    .swatch-selected { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent); }
     .prod-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 620px; align-items: start; }
     .prod-head, .prod-visual, .prod-config { min-width: 0; }
-    /* landscape / wide: image + price beside the configurator */
     @media (min-width: 900px) {
       .prod-grid { max-width: 100%; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: var(--space-8); row-gap: var(--space-6); align-items: start;
-        grid-template-rows: auto min-content 1fr;
-        grid-template-areas: "head head" "left mid" "left right"; align-content: start; }
+        grid-template-areas: "head head" "left mid" "left right"; grid-template-rows: auto min-content 1fr; align-content: start; }
       .prod-head { grid-area: head; }
       .col-left { grid-area: left; display: flex; flex-direction: column; }
       .col-mid { grid-area: mid; }
@@ -50,47 +49,61 @@
     @media (max-width: 899px) {
       .col-left, .col-mid, .col-right { display: contents; }
       .prod-grid { grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "visual" "cfgtop" "zones" "misure" "qty" "family" "comp" "cfgrest"; }
+        grid-template-areas: "head" "visual" "cfgtop" "graf" "zones" "qty" "listino" "comp" "cfgrest"; }
       .prod-head { grid-area: head; }
       .prod-visual { grid-area: visual; }
       .cfg-top { grid-area: cfgtop; }
       .cfg-zones { grid-area: zones; }
-      .cfg-misure { grid-area: misure; }
       .prod-qty { grid-area: qty; }
-      .cfg-family { grid-area: family; }
+      .cfg-listino { grid-area: listino; }
       .cfg-comp { grid-area: comp; }
       .cfg-rest { grid-area: cfgrest; }
       .prod-media { max-width: 100% !important; }
     }
-    .pair-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-4); }
-    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
-    image-slot, .thumb { touch-action: pan-y; }
-    @media (max-width: 700px) {
-      nav.nav { justify-content: flex-start; }
-      nav.nav .nav-brand { flex: 0 0 100%; }
-    }
-    @media (max-width: 600px) {
-      .pair-grid { grid-template-columns: 1fr; gap: var(--space-3); }
-      h1 { font-size: clamp(26px, 7vw, 34px) !important; }
-    }
-    .swatch-selected { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent); }
-    .size-btn { min-width: 46px; height: 40px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .size-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
-    .size-selected { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
-    .size-row { display: flex; align-items: center; gap: var(--space-3); padding: 2px var(--space-3); border-bottom: 1px solid var(--color-divider); }
-    .size-row:last-child { border-bottom: none; }
     .qty-group { display: flex; align-items: center; }
-    .qty-input { width: 52px; height: 30px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .qty-btn { width: 32px; height: 30px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+    .qty-input { width: 64px; height: 30px; text-align: center; border: 1px solid var(--color-divider); border-left: none; border-right: none; background: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
     .qty-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
     .zone-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider); cursor: pointer; }
     .zone-row:last-child { border-bottom: none; }
     .zone-check { width: 18px; height: 18px; border: 1.5px solid var(--color-divider); flex: none; display: flex; align-items: center; justify-content: center; }
     .zone-check-on { background: var(--color-accent); border-color: var(--color-accent); }
-    .qty-btn { width: 32px; height: 30px; border: 1px solid var(--color-divider); background: var(--color-surface); font-family: var(--font-heading); font-weight: 800; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .qty-btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
-    .thumb { width: 100%; aspect-ratio: 1; background: var(--color-surface); border: 1px solid var(--color-divider); cursor: pointer; padding: 0; }
-    .thumb-selected { border-color: var(--color-accent); border-width: 2px; }
-
+    .listino-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .listino-table th { text-align: right; font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; padding: 6px var(--space-3); border-bottom: 2px solid var(--color-text); color: var(--color-neutral-700); }
+    .listino-table th:first-child { text-align: left; }
+    .listino-table td { text-align: right; padding: 5px var(--space-3); border-bottom: 1px solid var(--color-divider); }
+    .listino-table td:first-child { text-align: left; font-family: var(--font-heading); font-weight: 800; }
+    .listino-row-on td { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
+    nav.nav .nav-brand { flex: 0 0 100%; }
+    nav.nav > a:not(.nav-brand) { font-size: 14px; }
+    nav.nav .btn-primary { font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }
+    nav.nav .btn-primary:hover { color: var(--color-bg); }
+    a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
+    @media (max-width: 700px) {
+      nav.nav { justify-content: flex-start; }
+      nav.nav .btn-primary { margin-left: 0; flex: 0 0 100%; }
+      h1 { font-size: clamp(26px, 7vw, 34px) !important; }
+    }
+    .nav-drop { position: relative; display: inline-flex; align-items: center; }
+    .nav-sub { position: absolute; top: 100%; left: 0; min-width: 186px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 60; }
+    .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: flex; }
+    .nav-sub > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
+    .nav-sub > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+    .nav-sub > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
+    @media (max-width: 700px) {
+      .nav-drop { display: inline-flex; }
+      .nav-sub, .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: none; }
+    }
+    .nav-sub .nav-drop { display: block; position: relative; }
+    .nav-sub-2 { position: absolute; top: -1px; left: 100%; min-width: 170px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 61; }
+    .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: flex; }
+    .nav-sub-2 > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
+    .nav-sub-2 > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+    @media (max-width: 700px) {
+      .nav-sub-2, .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: none; }
+    }
     .theme-indigo {
       --color-accent: #4f5cd6; --color-accent-100: #eef0fc; --color-accent-200: #d7dbf7; --color-accent-300: #b7bff0;
       --color-accent-400: #8b96e6; --color-accent-500: #4f5cd6; --color-accent-600: #3541b9; --color-accent-700: #262f8f;
@@ -111,38 +124,10 @@
       --color-accent-400: #8f8c8a; --color-accent-500: #605d5b; --color-accent-600: #46433f; --color-accent-700: #302d2b;
       --color-accent-800: #201e1c; --color-accent-900: #131211;
     }
-  
-    nav.nav { flex-wrap: wrap; row-gap: var(--space-2); }
-    nav.nav .nav-brand { flex: 0 0 100%; }
-    nav.nav > a:not(.nav-brand) { font-size: 14px; }
-    nav.nav .btn-primary { font-size: 14px; padding: 10px 16px; white-space: nowrap; color: var(--color-bg); }
-    nav.nav .btn-primary:hover { color: var(--color-bg); }
-    a.btn-primary, a.btn-primary:hover { color: var(--color-bg); }
-    @media (max-width: 700px) {
-      nav.nav { justify-content: flex-start; }
-      nav.nav .btn-primary { margin-left: 0; flex: 0 0 100%; }
-    }
-  
-    .nav-drop { position: relative; display: inline-flex; align-items: center; }
-    .nav-sub { position: absolute; top: 100%; left: 0; min-width: 186px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 60; }
-    .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: flex; }
-    .nav-sub > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
-    .nav-sub > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
-    .nav-sub > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
-    @media (max-width: 700px) {
-      .nav-drop { display: inline-flex; }
-      .nav-sub, .nav-drop:hover > .nav-sub, .nav-drop:focus-within > .nav-sub { display: none; }
-    }
-  .nav-sub .nav-drop { display: block; position: relative; }
-    .nav-sub-2 { position: absolute; top: -1px; left: 100%; min-width: 170px; background: var(--color-surface); border: 1px solid var(--color-divider); display: none; flex-direction: column; z-index: 61; }
-    .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: flex; }
-    .nav-sub-2 > a { padding: 9px 12px; font-size: 14px; text-decoration: none; color: var(--color-text); white-space: nowrap; }
-    .nav-sub-2 > a:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
-    .nav-sub-2 > span { padding: 9px 12px; font-size: 14px; color: var(--color-neutral-500); white-space: nowrap; }
-    @media (max-width: 700px) {
-      .nav-sub-2, .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: none; }
-    }
-  
+    .graf-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 92px; padding: 10px 6px; border: 1px solid var(--color-divider); background: var(--color-surface); cursor: pointer; text-align: center; color: var(--color-text); font-family: inherit; }
+    .graf-tile:hover { border-color: var(--color-text); }
+    .graf-on { border: 2px solid var(--color-accent); padding: 9px 5px; }
+    @media (max-width: 899px) { .cfg-graf { grid-area: graf; } }
   </style>
 </helmet>
 
@@ -151,146 +136,133 @@
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
   <div style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);">
-    <span class="tag tag-accent" data-en="Print only">Solo stampa</span>
-    <span class="tag tag-neutral" data-en="Your garment">Il tuo capo</span>
-    <span class="tag tag-neutral" data-en="Made in Rome">Stampato a Roma</span>
+    <span class="tag tag-accent">Roma Sacra</span>
+    <span class="tag tag-neutral" data-en="From 1 piece">Da 1 pezzo</span>
+    <span class="tag tag-neutral" data-en="Made in Rome">Prodotto a Roma</span>
   </div>
 
   <div class="prod-grid">
 
     <div class="prod-head">
-      <h1 style="margin-bottom: 4px;" data-en="Print Only">Solo Stampa</h1>
-      <p style="margin: 0; font-size: 15px; color: var(--color-neutral-700); max-width: 60ch;" data-en="Your garment. Our press. DTF printing on the clothes you already have — from 5 pieces.">Il tuo capo. La nostra stampa. DTF sui capi che hai già, da 5 pezzi.</p>
+      <h1 style="margin-bottom: 4px;" data-en="Roma Sacra Cap">Cappellino Roma Sacra</h1>
+      <p style="margin: 0; font-size: 16px; color: var(--color-neutral-700);" data-en="Five panels. One symbol. Light.">Cinque pannelli. Un simbolo. Leggero.</p>
     </div>
 
     <div class="col-left">
-    <div class="prod-visual">
-      <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
-        <div style="aspect-ratio: 1;">
-          <img alt="Stampa DTF applicata a pressa su una t-shirt bianca nel laboratorio di Roma" src="img/solo-stampa-hero.webp" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div class="prod-visual">
+        <div class="prod-media" style="max-width: 480px; margin-bottom: var(--space-3);">
+          <div style="aspect-ratio: 1;">
+            <img id="basica-hero" alt="Cappellino Basica personalizzato — vista frontale" src="img/basica-hero.webp" style="width:100%;height:100%;object-fit:contain;display:block;touch-action:pan-y;">
+          </div>
         </div>
       </div>
-    </div>
+      <div class="cfg-top" style="margin-bottom: var(--space-4);">
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Cap Colour:">Colore Cappellino:</span> {{ selectedColorName }}</label></div>
+        <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
+          <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="10">
+            <button type="button" class="{{ c.swatchClass }}" style="background: {{ c.hex }}" title="{{ c.name }}" aria-label="{{ c.name }}" onClick="{{ c.select }}"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div class="cfg-graf" style="margin-bottom: var(--space-4);">
+        <div class="field"><label><span data-en="Design:">Grafica:</span> {{ grafName }}</label></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--space-2);">
+          <sc-for list="{{ grafiche }}" as="g" hint-placeholder-count="5">
+            <button type="button" class="{{ g.cls }}" onClick="{{ g.select }}" aria-label="{{ g.latin }}">
+              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1;">{{ g.symbol }}</span>
+              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.25;">{{ g.latin }}</span>
+              <span class="text-muted" style="font-size: 10.5px; line-height: 1.3;">{{ g.sub }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
       <div class="cfg-zones" style="margin-bottom: var(--space-4);">
         <div class="field"><label data-en="Print on">Stampa su</label></div>
         <div>
-          <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
-            <div>
-              <div class="zone-row" onClick="{{ z.toggle }}">
-                <div style="display:flex; align-items:center; gap: var(--space-2);">
-                  <div class="{{ z.checkClass }}">
-                    <sc-if value="{{ z.checked }}" hint-placeholder-val="{{ false }}">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                    </sc-if>
-                  </div>
-                  <span style="font-size: 14px;">{{ z.label }}</span>
-                </div>
-                <span class="text-muted" style="font-size: 13px;">{{ z.priceLabel }}</span>
+          <div class="zone-row" onClick="{{ toggleStampa }}">
+            <div style="display:flex; align-items:center; gap: var(--space-2);">
+              <div class="{{ stampaCheckClass }}">
+                <sc-if value="{{ stampaChecked }}" hint-placeholder-val="{{ false }}">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </sc-if>
               </div>
-              <sc-if value="{{ z.checked }}" hint-placeholder-val="{{ false }}">
-                <sc-if value="{{ z.isCuore }}" hint-placeholder-val="{{ false }}">
-                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
-                    <div class="field">
-                      <label><span data-en="Width">Larghezza</span> — {{ cuoreWidth }}cm</label>
-                      <input type="range" min="3" max="8" step="1" value="{{ cuoreWidth }}" onChange="{{ setCuoreWidth }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                    <div class="field">
-                      <label><span data-en="Height">Altezza</span> — {{ cuoreHeight }}cm</label>
-                      <input type="range" min="3" max="8" step="1" value="{{ cuoreHeight }}" onChange="{{ setCuoreHeight }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                  </div>
-                </sc-if>
-                <sc-if value="{{ z.isDavanti }}" hint-placeholder-val="{{ false }}">
-                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
-                    <div class="field">
-                      <label><span data-en="Front width">Larghezza davanti</span> — {{ davantiWidthCm }}cm</label>
-                      <input type="range" min="0" max="9" step="1" value="{{ davantiWidthIdx }}" onChange="{{ setDavantiWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                    <div class="field">
-                      <label><span data-en="Front height">Altezza davanti</span> — {{ davantiHeightCm }}cm</label>
-                      <input type="range" min="0" max="11" step="1" value="{{ davantiHeightIdx }}" onChange="{{ setDavantiHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                  </div>
-                </sc-if>
-                <sc-if value="{{ z.isRetro }}" hint-placeholder-val="{{ false }}">
-                  <div class="pair-grid" style="padding: var(--space-2) 0 var(--space-3);">
-                    <div class="field">
-                      <label><span data-en="Back width">Larghezza retro</span> — {{ retroWidthCm }}cm</label>
-                      <input type="range" min="0" max="9" step="1" value="{{ retroWidthIdx }}" onChange="{{ setRetroWidthIdx }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                    <div class="field">
-                      <label><span data-en="Back height">Altezza retro</span> — {{ retroHeightCm }}cm</label>
-                      <input type="range" min="0" max="11" step="1" value="{{ retroHeightIdx }}" onChange="{{ setRetroHeightIdx }}" style="width:100%; accent-color: var(--color-accent);">
-                    </div>
-                  </div>
-                </sc-if>
-              </sc-if>
+              <span style="font-size: 14px;" data-en="Front (12×8 cm)">Fronte (12×8 cm)</span>
             </div>
-          </sc-for>
+            <span class="text-muted" style="font-size: 13px;">{{ stampaPriceLabel }}</span>
+          </div>
         </div>
+        <p class="text-muted" style="font-size: 12px; margin: var(--space-2) 0 0; line-height: 1.5;" data-en="Full-colour DTF print on the front panel, up to 12×8 cm.">Stampa DTF a colori pieni sul pannello frontale, fino a 12×8 cm.</p>
       </div>
     </div>
 
     <div class="col-mid">
-      <div class="cfg-howto" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
-        <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: var(--space-3);" data-en="How it works">Come funziona</div>
-          <div style="display: grid; gap: var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);">
-            <div><strong style="color: var(--color-text);">1.</strong> <span data-en="Configure the print areas and the quantity here, then order.">Configura qui le zone di stampa e la quantità, poi ordina.</span></div>
-            <div><strong style="color: var(--color-text);">2.</strong> <span data-en="Send us your file, or paste a link to it.">Caricaci il file, oppure incolla il link.</span></div>
-            <div><strong style="color: var(--color-text);">3.</strong> <span data-en="Bring the garments to our lab in Rome, or ship them to us — the address travels with the order confirmation.">Porta i capi in laboratorio a Roma, o spediscili: l’indirizzo arriva con la conferma d’ordine.</span></div>
-            <div><strong style="color: var(--color-text);">4.</strong> <span data-en="We print and hand them back — ready within the week.">Stampiamo e te li riconsegniamo, pronti in settimana.</span></div>
-          </div>
-          <p style="margin: var(--space-3) 0 0; font-size: 12.5px; line-height: 1.5; color: var(--color-neutral-700);" data-en="Cotton, cotton blends and polyester, light or dark: DTF prints on all of them. Waterproof or coated fabrics: ask us first.">Cotone, misto cotone e poliestere, chiaro o scuro: il DTF stampa su tutti. Tessuti impermeabili o spalmati: chiedici prima.</p>
-        </div>
-      </div>
-
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
-        <div class="field">
-          <label for="solo-qty"><span data-en="Quantity">Quantità</span> — <span data-en="min 5 pcs">minimo 5 pz</span></label>
-          <div class="qty-group" style="margin-bottom: var(--space-2);">
-            <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
-            <input class="qty-input" id="solo-qty" type="text" inputmode="numeric" value="{{ quantity }}" onChange="{{ setQty }}">
-            <button type="button" class="qty-btn" onClick="{{ incQty }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
-          </div>
-          <div class="text-muted" style="font-size: 12px; line-height: 1.45;" data-en="Number of garments to print. The price per piece drops at 20, 50 and 100 pieces.">Numero di capi da stampare. Il prezzo al pezzo scende a 20, 50 e 100 pezzi.</div>
-        </div>
-        <sc-if value="{{ qtyTooLow }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size: 12.5px; margin-top: var(--space-2); color: #ec3013;" data-en="Minimum order: 5 garments.">Ordine minimo: 5 capi.</div>
+        <div class="field"><label><span data-en="Quantity">Quantità</span> — {{ quantity }} <span data-en="pcs">pz</span></label></div>
+        <p class="text-muted" style="font-size:12px;margin:-4px 0 var(--space-2);" data-en="No minimum: from 1 piece, sizes can be mixed.">Nessun minimo: anche 1 pezzo, taglie miste ammesse.</p>
+        <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
         </sc-if>
+        <div class="qty-group" style="margin-bottom: var(--space-2);">
+          <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
+          <input class="qty-input" type="text" inputmode="numeric" value="{{ quantity }}" onChange="{{ setQty }}">
+          <button type="button" class="qty-btn" onClick="{{ incQty }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
+        </div>
       </div>
-      <div class="cfg-family" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
+      <div class="cfg-listino" style="margin-bottom: var(--space-4);">
+        <div class="field"><label data-en="Quantity discounts">Sconti quantità</label></div>
+        <table class="listino-table" style="margin-bottom: var(--space-3);">
+          <thead>
+            <tr>
+              <th data-en="Qty">Q.tà</th>
+              <th data-en="Cap € each">Capo € cad</th>
+              <th data-en="Print € each">Stampa € cad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ listino }}" as="r" hint-placeholder-count="4">
+              <tr class="{{ r.rowClass }}">
+                <td>{{ r.range }}</td>
+                <td>{{ r.capo }}</td>
+                <td>{{ r.stampa }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+        <p class="text-muted" style="font-size: 12px; margin: 0; line-height: 1.5;" data-en="Prices per piece, VAT included. The highlighted row is the bracket of your current quantity.">Prezzi al pezzo, IVA compresa. La riga evidenziata è la fascia della quantità scelta.</p>
+      </div>
+      <div style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
         <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Prefer the garment included?">Preferisci capo e stampa insieme?</div>
-          <p style="margin: 0 0 var(--space-3); font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Order the garment from us and the print comes ready: same tariffs, nothing to ship.">Ordina il capo da noi e la stampa arriva già fatta. Stesse tariffe, niente da spedire.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
-          <a href="beagle.html" style="font-size:13px;font-weight:600;" data-en="Unisex t-shirt">Maglietta Unisex</a>
-          <a href="tshirt-uomo.html" style="font-size:13px;font-weight:600;" data-en="All t-shirts">Tutte le t-shirt</a>
-          <a href="abbigliamento-lavoro-personalizzato.html" style="font-size:13px;font-weight:600;" data-en="Workwear">Abbigliamento da lavoro</a>
-          </div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;" data-en="One size fits all">Taglia unica</div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-neutral-700);" data-en="Velcro closure at the back: the cap adjusts to any adult head size. No sizes to choose.">Chiusura in velcro sul retro: il cappellino si regola su ogni misura di testa adulta. Nessuna taglia da scegliere.</p>
         </div>
       </div>
     </div>
 
     <div class="prod-config col-right">
-      <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
-        <div style="padding: var(--space-4);">
-          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="The service">Il servizio</div>
-          <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
-            <div data-en="Print-only service: you supply the garments, we print them with DTF in Rome.">Servizio di sola stampa: i capi li fornisci tu, la stampa DTF la facciamo noi a Roma.</div>
-            <div data-en="Delivery to our lab or shipping to us is at your charge. Minimum 5 pieces.">Consegna in laboratorio o spedizione verso di noi a tuo carico. Minimo 5 pezzi.</div>
-            <div style="font-weight: 700; color: var(--color-text);">EAN 0652026570038</div>
-          </div>
+      <div class="cfg-comp" style="border-bottom: 1px solid var(--color-divider); margin-bottom: var(--space-4); padding-bottom: var(--space-4);">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="Composition and notes">Composizione e osservazioni</div>
+        <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700);">
+          <div><strong style="color: var(--color-text); font-weight: 600;" data-en="Material:">Materiale:</strong> <span data-en="95% polyester / 5% cotton, 165 g/m².">95% poliestere / 5% cotone, 165 g/m².</span></div>
+          <div data-en="5-panel cap. 2 embroidered ventilation holes. 4 stitched lines on the visor. Inner sweatband. Velcro closure.">Cappellino 5 pannelli. 2 fori di aerazione ricamati. 4 linee cucite sulla visiera. Fettuccia parasudore interna. Chiusura in velcro.</div>
+          <div style="font-weight: 700; color: var(--color-text);">EAN 0652026573701</div>
         </div>
       </div>
       <div class="cfg-rest">
-
       <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
+        <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Cap price">Prezzo Cappellino</span><span>{{ garmentPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Print price">Prezzo Stampa</span><span>{{ printPriceLabel }}</span></div>
         <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Quantity">Quantità</span><span>× {{ quantity }}</span></div>
         <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span data-en="Total price">Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
         <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
         <div class="text-muted" style="text-align: right; font-size: 11.5px;" data-en="VAT included">IVA compresa</div>
+      </div>
+
+      <div class="field" style="margin-bottom: var(--space-4);">
+        <label for="graf-testo" data-en="Personalisation (optional)">Personalizzazione (opzionale)</label>
+        <input class="input" id="graf-testo" type="text" maxlength="40" placeholder="Es. Parrocchia San Clemente · 2026" data-en-placeholder="E.g. St Clement Parish · 2026" value="{{ grafTesto }}" onChange="{{ setGrafTesto }}">
+        <div class="text-muted" style="font-size:11.5px; margin-top:6px; line-height:1.45;" data-en="One line of text under the design. Max 40 characters.">Una riga di testo sotto la grafica. Max 40 caratteri.</div>
       </div>
 
       <div class="field" style="margin-bottom: var(--space-4);">
@@ -334,10 +306,11 @@
       <button type="button" class="btn btn-secondary btn-block" style="margin-top: var(--space-2);" onClick="{{ preventivo }}"><span data-en="Request a formal quote">Richiedi un preventivo ufficiale</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></button>
 
       <div style="display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap;">
-        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Ready within the week">Pronto in settimana</span></div>
+        <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-en="Shipping ready within the week">Spedizione pronta in settimana</span></div>
         <div style="display:flex; align-items:center; gap:6px; font-size: 13px;" class="text-muted"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg><span data-en="Made in Rome">Prodotto a Roma</span></div>
       </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -408,52 +381,43 @@
 </footer>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;forest&quot;,&quot;ochre&quot;,&quot;ink&quot;],&quot;section&quot;:&quot;Color&quot;}}">
-const CUORE_PRICE_TIERS = [
-  { min: 1, price: 14 }, { min: 2, price: 10 }, { min: 5, price: 3.5 },
-  { min: 10, price: 3 }, { min: 20, price: 2.5 }, { min: 50, price: 2 },
-  { min: 100, price: 1.8 },
+const COLORS = [
+  { name: '01 Bianco', hex: '#f4f4f4', img: 'img/basica-01-bianco.webp' },
+  { name: '02 Nero', hex: '#242424', img: 'img/basica-02-nero.webp' },
+  { name: '03 Giallo', hex: '#f5e004', img: 'img/basica-03-giallo.webp' },
+  { name: '05 Blue Royal', hex: '#1c3f9c', img: 'img/basica-05-royal.webp' },
+  { name: '31 Arancione', hex: '#f07818', img: 'img/basica-31-arancione.webp' },
+  { name: '55 Blue Navy', hex: '#454f66', img: 'img/basica-55-blue-navy.webp' },
+  { name: '60 Rosso', hex: '#e03a2f', img: 'img/basica-60-rosso.webp' },
+  { name: '63 Viola', hex: '#8a4fc0', img: 'img/basica-63-viola.webp' },
+  { name: '107 Verde Bottiglia', hex: '#2c5a41', img: 'img/basica-107-verde-bottiglia.webp' },
+  { name: '226 Verde Felce', hex: '#27a53a', img: 'img/basica-226-verde-felce.webp' },
 ];
-function cuoreUnitPrice(qty) {
-  let tier = CUORE_PRICE_TIERS[0];
-  for (const t of CUORE_PRICE_TIERS) if (qty >= t.min) tier = t;
-  return tier.price;
-}
-// Area massima stampabile: 38 cm di larghezza × 48 cm di altezza.
-const W_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 38];
-const H_BREAKS = [8, 10, 15, 20, 22, 25, 30, 32, 35, 40, 45, 48];
-const W_MAX_IDX = W_BREAKS.length - 1;
-const H_MAX_IDX = H_BREAKS.length - 1;
-const AREA_TABLE = [
-  [9, 9, 9, 13, 14, 14, 14, 16, 16, 16, 17, 18],
-  [9, 9, 9, 14, 14, 14, 16, 16, 16, 17, 18, 18],
-  [9, 9, 9, 14, 14, 16, 16, 16, 17, 18, 18, 19],
-  [13, 14, 14, 14, 16, 16, 16, 17, 18, 20.5, 22.5, 25],
-  [14, 14, 14, 16, 16, 16, 17, 18, 19, 22, 24.75, 26],
-  [14, 14, 16, 16, 16, 17, 18, 20, 22, 25, 28, 28],
-  [14, 16, 16, 16, 17, 18, 20, 22, 24, 26, 28, 30],
-  [16, 16, 16, 17, 18, 20, 22, 24, 26, 28, 30, 32],
-  [16, 16, 17, 18, 19, 22, 24, 26, 28, 30, 32, 34],
-  [16, 17, 18, 20.5, 22, 25, 26, 28, 30, 32, 34, 36],
-  [17, 18, 18, 22.5, 24.75, 28, 28, 30, 32, 34, 36, 38],
-  [18, 18, 19, 25, 26, 28, 30, 32, 34, 36, 38, 40],
+const DEFAULT_HERO_IMG = 'img/basica-hero.webp';
+const MIN_QTY = 1;
+const GRAFICHE = [
+  { key: 'crux', symbol: '✞', latin: 'In hoc signo vinces', sub: 'Croce · Ponte Milvio', subEn: 'Cross · Milvian Bridge', label: 'Crux — In hoc signo vinces' },
+  { key: 'lux', symbol: '☧', latin: 'Dominus illuminatio mea', sub: 'Salmo 27', subEn: 'Psalm 27', label: 'Lux — Dominus illuminatio mea' },
+  { key: 'sancti', symbol: '✠', latin: 'Petrus et Paulus', sub: 'Santi patroni di Roma', subEn: 'Patron saints of Rome', label: 'Sancti — Petrus et Paulus' },
+  { key: 'via', symbol: 'km 0', latin: 'Via Francigena', sub: 'Roma, fine del cammino', subEn: 'Rome, end of the way', label: 'Via — Via Francigena, Roma km 0' },
+  { key: 'tuo', symbol: '+', latin: 'Il tuo design', latinEn: 'Your design', sub: 'Carica il file', subEn: 'Upload your file', label: 'Design del cliente' },
 ];
-function areaUnitPrice(widthIdx, heightIdx) {
-  return AREA_TABLE[widthIdx][heightIdx];
-}
-const DAVANTI_DISCOUNT_TIERS = [
-  { min: 1, mult: 1 }, { min: 2, mult: 0.67 }, { min: 5, mult: 0.52 },
-  { min: 10, mult: 0.47 }, { min: 20, mult: 0.40 }, { min: 50, mult: 0.39 },
-  { min: 100, mult: 0.33 },
+// Prezzi IVA compresa (listino Basica). Ogni modifica va replicata in api/_pricing-data.js.
+const CAP_PRICE_TIERS = [
+  { min: 1, price: 5 }, { min: 5, price: 4 }, { min: 10, price: 3.1 },
+  { min: 20, price: 2.2 }, { min: 50, price: 2 }, { min: 100, price: 1.8 },
 ];
-function davantiDiscount(qty) {
-  let tier = DAVANTI_DISCOUNT_TIERS[0];
-  for (const t of DAVANTI_DISCOUNT_TIERS) if (qty >= t.min) tier = t;
-  return tier.mult;
-}
-const ZONE_DEFS = [
-  { key: 'cuore', label: 'Cuore / Manica (max 8×8cm)', labelEn: 'Chest / Sleeve (max 8×8cm)', price: (qty) => cuoreUnitPrice(qty) },
-  { key: 'davanti', label: 'Davanti (fino a 38×48cm)', labelEn: 'Front (up to 38×48cm)' },
-  { key: 'retro', label: 'Retro (fino a 38×48cm)', labelEn: 'Back (up to 38×48cm)' },
+const PRINT_PRICE_TIERS = [
+  { min: 1, price: 5 }, { min: 2, price: 4.5 }, { min: 5, price: 4.2 },
+  { min: 10, price: 3.8 }, { min: 20, price: 3.5 }, { min: 50, price: 3.2 }, { min: 100, price: 3 },
+];
+function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
+// Fasce mostrate in pagina (dal minimo d'ordine in su).
+const LISTINO_ROWS = [
+  { min: 10, max: 19, range: '10 – 19' },
+  { min: 20, max: 49, range: '20 – 49' },
+  { min: 50, max: 99, range: '50 – 99' },
+  { min: 100, max: Infinity, range: '100 +' },
 ];
 function isEn() {
   try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; }
@@ -461,14 +425,11 @@ function isEn() {
 
 class Component extends DCLogic {
   state = {
-    qty: 10,
-    zones: {},
-    cuoreWidth: 8,
-    cuoreHeight: 8,
-    davantiWidthIdx: 4,
-    davantiHeightIdx: 7,
-    retroWidthIdx: 4,
-    retroHeightIdx: 7,
+    grafica: 0,
+    grafTesto: '',
+    colorIndex: null,
+    qty: 1,
+    stampa: true,
     designFiles: [],
     designRef: null,
     designLink: '',
@@ -477,11 +438,24 @@ class Component extends DCLogic {
 
   fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€' + s; }
 
+  syncHero() {
+    const el = document.getElementById('basica-hero');
+    if (!el) return;
+    const i = this.state.colorIndex;
+    const src = i != null ? (COLORS[i].img || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
+    const want = new URL(src, window.location.href).href;
+    if (el.src !== want) {
+      el.src = src;
+      el.alt = i != null ? ('Cappellino Basica ' + COLORS[i].name) : 'Cappellino Basica personalizzato — vista frontale';
+    }
+  }
   componentDidMount() {
+    this.syncHero();
     this.onLang = () => this.forceUpdate();
     window.addEventListener('ts:langchange', this.onLang);
   }
   componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
+  componentDidUpdate() { this.syncHero(); }
 
   makeDesignRef() {
     const alpha = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -512,7 +486,7 @@ class Component extends DCLogic {
 
   async uploadFile(file, id, ref) {
     try {
-      const qs = new URLSearchParams({ ref, name: file.name, product: 'Solo Stampa DTF' });
+      const qs = new URLSearchParams({ ref, name: file.name, product: 'Cappellino Roma Sacra' });
       const res = await fetch('/api/upload-design?' + qs.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -530,36 +504,35 @@ class Component extends DCLogic {
   renderVals() {
     const st = this.state;
     const en = isEn();
-    const MIN_QTY = 5;
-    const totalQty = Math.max(0, Math.min(9999, st.qty || 0));
-    const setQtyTo = (v) => this.setState({ qty: Math.max(0, Math.min(9999, v)) });
-    const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(totalQty || MIN_QTY);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
-      return 0;
+    const colorsAll = COLORS.map((c, i) => ({
+      ...c,
+      swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
+      select: () => this.setState({ colorIndex: i }),
+    }));
+    const lum = (hex) => {
+      const h = hex.replace('#', '');
+      const [r, g, b] = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255)
+        .map(v => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)));
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     };
-    const zones = ZONE_DEFS.map(z => {
-      const checked = !!st.zones[z.key];
-      return {
-        label: en && z.labelEn ? z.labelEn : z.label,
-        checked,
-        isCuore: z.key === 'cuore',
-        isDavanti: z.key === 'davanti',
-        isRetro: z.key === 'retro',
-        checkClass: 'zone-check' + (checked ? ' zone-check-on' : ''),
-        priceLabel: '+' + this.fmt(zonePrice(z.key)),
-        toggle: () => this.setState(s => ({ zones: { ...s.zones, [z.key]: !s.zones[z.key] } })),
-      };
-    });
-    const cuoreWidth = st.cuoreWidth;
-    const cuoreHeight = st.cuoreHeight;
-    const davantiWidthCm = W_BREAKS[Math.min(st.davantiWidthIdx, W_MAX_IDX)];
-    const davantiHeightCm = H_BREAKS[Math.min(st.davantiHeightIdx, H_MAX_IDX)];
-    const retroWidthCm = W_BREAKS[Math.min(st.retroWidthIdx, W_MAX_IDX)];
-    const retroHeightCm = H_BREAKS[Math.min(st.retroHeightIdx, H_MAX_IDX)];
-    const printTotal = ZONE_DEFS.reduce((sum, z) => sum + (st.zones[z.key] ? zonePrice(z.key) : 0), 0);
-    const grandTotal = printTotal * totalQty;
+    const colorsByLightness = colorsAll.sort((a, b) => lum(b.hex) - lum(a.hex));
+    const qty = st.qty || 0;
+    const setQtyVal = (v) => this.setState({ qty: Math.max(0, Math.min(9999, v)) });
+    const priceQty = Math.max(1, qty);
+    const garmentPrice = pickTier(CAP_PRICE_TIERS, priceQty).price;
+    const printPrice = st.stampa ? pickTier(PRINT_PRICE_TIERS, priceQty).price : 0;
+    const stampaPriceUnit = pickTier(PRINT_PRICE_TIERS, priceQty).price;
+    const unitTotal = garmentPrice + printPrice;
+    const grandTotal = qty > 0 ? unitTotal * qty : 0;
+    const hasColor = st.colorIndex != null;
+    const activeColor = hasColor ? COLORS[st.colorIndex] : null;
+
+    const listino = LISTINO_ROWS.map(r => ({
+      range: r.range,
+      capo: this.fmt(pickTier(CAP_PRICE_TIERS, r.min).price),
+      stampa: this.fmt(pickTier(PRINT_PRICE_TIERS, r.min).price),
+      rowClass: qty >= r.min && qty <= r.max ? 'listino-row-on' : '',
+    }));
 
     const fileSizeLabel = (b) => (b < 1024 * 1024 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1).replace('.', ',') + ' MB');
     const statusText = { uploading: 'invio…', done: 'caricato', error: 'errore' };
@@ -576,84 +549,84 @@ class Component extends DCLogic {
     const designLinkOk = /^https?:\/\/\S+\.\S+/i.test(designLink);
     const designLinkError = designLink.length > 0 && !designLinkOk;
     const orderNote = (st.orderNote || '').trim().slice(0, 480);
-
-    const zoneNames = {
-      cuore: 'Cuore/manica ' + cuoreWidth + '×' + cuoreHeight + ' cm',
-      davanti: 'Davanti ' + davantiWidthCm + '×' + davantiHeightCm + ' cm',
-      retro: 'Retro ' + retroWidthCm + '×' + retroHeightCm + ' cm',
-    };
-    const zoneList = [];
-    if (st.zones.cuore) zoneList.push(zoneNames.cuore);
-    if (st.zones.davanti) zoneList.push(zoneNames.davanti);
-    if (st.zones.retro) zoneList.push(zoneNames.retro);
-
     const themeMap = { indigo: 'theme-indigo', forest: 'theme-forest', ochre: 'theme-ochre', ink: 'theme-ink' };
     const themeClass = themeMap[this.props.accentTheme] ?? 'theme-indigo';
 
+    const grafSel = GRAFICHE[this.state.grafica] || GRAFICHE[0];
+    const grafTestoVal = (this.state.grafTesto || '').trim().slice(0, 40);
+    const grafiche = GRAFICHE.map((g, i) => ({
+      symbol: g.symbol,
+      latin: isEn() && g.latinEn ? g.latinEn : g.latin,
+      sub: isEn() ? g.subEn : g.sub,
+      cls: 'graf-tile' + (i === this.state.grafica ? ' graf-on' : ''),
+      select: () => this.setState({ grafica: i }),
+    }));
     return {
+      grafiche, grafName: isEn() && grafSel.latinEn ? grafSel.latinEn : grafSel.latin,
+      grafTesto: this.state.grafTesto || '',
+      setGrafTesto: (e) => this.setState({ grafTesto: e.target.value.slice(0, 40) }),
       designFiles, hasDesignRef, designRef: st.designRef || '',
       designLink: st.designLink || '', designLinkError,
       setDesignLink: (e) => this.setState({ designLink: e.target.value }),
       orderNote: st.orderNote || '',
       setOrderNote: (e) => this.setState({ orderNote: e.target.value }),
       pickFiles: (e) => { const fl = e.target.files; if (fl && fl.length) this.handleFiles(fl); e.target.value = ''; },
-      zones, themeClass,
-      cuoreChecked: !!st.zones.cuore, cuoreWidth, cuoreHeight,
-      setCuoreWidth: (e) => this.setState({ cuoreWidth: Number(e.target.value) }),
-      setCuoreHeight: (e) => this.setState({ cuoreHeight: Number(e.target.value) }),
-      davantiChecked: !!st.zones.davanti, retroChecked: !!st.zones.retro,
-      davantiWidthCm, davantiHeightCm,
-      setDavantiWidthIdx: (e) => this.setState({ davantiWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) }),
-      setDavantiHeightIdx: (e) => this.setState({ davantiHeightIdx: Number(e.target.value) }),
-      davantiWidthIdx: Math.min(st.davantiWidthIdx, W_MAX_IDX), davantiHeightIdx: Math.min(st.davantiHeightIdx, H_MAX_IDX),
-      retroWidthCm, retroHeightCm,
-      setRetroWidthIdx: (e) => this.setState({ retroWidthIdx: Math.min(Number(e.target.value), W_MAX_IDX) }),
-      setRetroHeightIdx: (e) => this.setState({ retroHeightIdx: Number(e.target.value) }),
-      retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
-      quantity: totalQty,
-      qtyTooLow: totalQty > 0 && totalQty < MIN_QTY,
-      incQty: () => setQtyTo(totalQty + 1),
-      decQty: () => setQtyTo(totalQty - 1),
-      setQty: (e) => setQtyTo(parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
-      unitPriceLabel: totalQty > 0 ? this.fmt(printTotal) + (en ? ' / piece' : ' / pezzo') : '',
-      printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
+      colorsByLightness, themeClass, listino,
+      selectedColorName: hasColor ? activeColor.name : '',
+      stampaChecked: !!st.stampa,
+      stampaCheckClass: 'zone-check' + (st.stampa ? ' zone-check-on' : ''),
+      stampaPriceLabel: '+' + this.fmt(stampaPriceUnit),
+      toggleStampa: () => this.setState(s => ({ stampa: !s.stampa })),
+      quantity: qty,
+      incQty: () => setQtyVal((this.state.qty || 0) + 1),
+      decQty: () => setQtyVal((this.state.qty || 0) - 1),
+      setQty: (e) => setQtyVal(parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
+      belowMin: qty > 0 && qty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - qty),
+      unitPriceLabel: qty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
+      garmentPriceLabel: this.fmt(qty > 0 ? garmentPrice : 0),
+      printPriceLabel: (qty > 0 && printPrice > 0 ? '+' : '') + this.fmt(qty > 0 ? printPrice : 0),
       totalPriceLabel: this.fmt(grandTotal),
       checkoutLabel: en ? 'Add to cart' : 'Aggiungi al carrello',
       checkout: () => {
-        if (totalQty < MIN_QTY) { alert(en ? 'Minimum order: 5 garments.' : 'Ordine minimo: 5 capi.'); return; }
-        if (!zoneList.length) { alert(en ? 'Pick at least one print area.' : 'Scegli almeno una zona di stampa.'); return; }
+        if (grafSel.key === 'tuo' && !hasDesignRef && !designLinkOk) { alert(isEn() ? 'You chose your own design: upload the file or paste a link.' : 'Hai scelto il tuo design: carica il file o incolla un link.'); return; }
+        if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
+        if (qty < 1) { alert(en ? 'Enter a quantity.' : 'Inserisci la quantità.'); return; }
+        if (qty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const orderBody = {
-          productId: 'solo-stampa',
+          productId: 'cappellino-roma-sacra',
           human: {
-            'Servizio': 'Solo stampa — capi forniti dal cliente',
-            'Quantità': totalQty,
-            'Stampa': zoneList.join(' + '),
+            'Colore': activeColor.name,
+            'Taglia': 'Unica (velcro)',
+            'Quantità': qty,
+            'Stampa': st.stampa ? 'Fronte 12×8 cm' : 'Nessuna stampa',
             ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
             ...(designLinkOk ? { 'Link file': designLink } : {}),
+            'Grafica': grafSel.label,
+            ...(grafTestoVal ? { 'Personalizzazione': grafTestoVal } : {}),
             ...(orderNote ? { 'Consegna richiesta / note': orderNote } : {}),
           },
           ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
           ...(designLinkOk ? { designLink } : {}),
           ...(orderNote ? { customerNote: orderNote } : {}),
           formula: {
-            qty: totalQty,
-            zones: { cuore: !!st.zones.cuore, davanti: !!st.zones.davanti, retro: !!st.zones.retro },
-            davantiWidthIdx: Math.min(st.davantiWidthIdx, W_MAX_IDX), davantiHeightIdx: Math.min(st.davantiHeightIdx, H_MAX_IDX),
-            retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
+            qty,
+            stampa: !!st.stampa,
+            colorName: activeColor.name,
           },
         };
         const cfg = btoa(encodeURIComponent(JSON.stringify(orderBody)));
-        const heroEl = document.getElementById('prod-hero');
+        const heroEl = document.getElementById('basica-hero');
         const cartRow = {
-          id: 'solo-stampa',
-          name: 'Solo Stampa DTF',
+          id: 'cappellino-roma-sacra',
+          name: 'Cappellino Roma Sacra',
           price: +grandTotal.toFixed(2),
-          col: 'servizio',
+          col: 'misura',
           body: orderBody,
           img: heroEl ? heroEl.src : '',
-          url: 'solo-stampa.html',
+          url: 'cappellino-roma-sacra.html',
         };
         if (window.tsCart) {
           window.tsCart.add(cartRow);
@@ -668,12 +641,13 @@ class Component extends DCLogic {
         }
       },
       preventivo: () => {
-        const config = 'Solo stampa su capi del cliente' + (zoneList.length ? ', Stampa: ' + zoneList.join(' + ') : ', Zone da definire');
+        const cName = hasColor ? activeColor.name : 'da definire';
+        const config = `Colore: ${cName}, Taglia unica, ` + (st.stampa ? 'Stampa: Fronte 12×8 cm' : 'Senza stampa') + ', Grafica: ' + grafSel.label + (grafTestoVal ? ' (' + grafTestoVal + ')' : '');
         const params = new URLSearchParams({
-          prodotto: 'Solo Stampa DTF',
+          prodotto: 'Cappellino Roma Sacra',
           config: orderNote ? config + ' — Note: ' + orderNote : config,
           url: window.location.origin + window.location.pathname,
-          quantita: String(totalQty),
+          quantita: String(qty),
           prezzo: grandTotal.toFixed(2),
         });
         window.open('./preventivo.html?' + params.toString(), '_blank', 'noopener');
