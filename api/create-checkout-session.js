@@ -119,6 +119,7 @@ module.exports = async (req, res) => {
       mode: 'payment',
       payment_method_types: ['card'],
       customer_email: c.email || undefined,
+      payment_intent_data: c.email ? { receipt_email: c.email } : undefined,
       line_items: lineItems,
       metadata,
       success_url: `${origin}/grazie.html?session_id={CHECKOUT_SESSION_ID}`,
