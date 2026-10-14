@@ -1,19 +1,46 @@
 {
   "cleanUrls": false,
   "trailingSlash": false,
-  "rewrites": [
+  "redirects": [
     {
       "source": "/come-creare-file-dtf.html",
-      "destination": "/preparare-file-stampa-t-shirt.html"
+      "destination": "/preparare-file-stampa-t-shirt.html",
+      "permanent": true
+    },
+    {
+      "source": "/Star-Polo.dc.html",
+      "destination": "/star-polo.html",
+      "permanent": true
+    },
+    {
+      "source": "/Star-Polo-donna.dc.html",
+      "destination": "/star-polo-donna.html",
+      "permanent": true
+    },
+    {
+      "source": "/Star-Polo-kids.dc.html",
+      "destination": "/star-polo-kids.html",
+      "permanent": true
+    },
+    {
+      "source": "/Austral-Polo.dc.html",
+      "destination": "/austral-polo.html",
+      "permanent": true
+    },
+    {
+      "source": "/Beagle.dc.html",
+      "destination": "/beagle.html",
+      "permanent": true
+    },
+    {
+      "source": "/Jamaica.kids.dc.html",
+      "destination": "/jamaica-kids.html",
+      "permanent": true
+    },
+    {
+      "source": "/:page.dc.html",
+      "destination": "/:page.html",
+      "permanent": true
     }
-  ],
-  "redirects": [
-    { "source": "/Star-Polo.dc.html", "destination": "/star-polo.html", "permanent": true },
-    { "source": "/Star-Polo-donna.dc.html", "destination": "/star-polo-donna.html", "permanent": true },
-    { "source": "/Star-Polo-kids.dc.html", "destination": "/star-polo-kids.html", "permanent": true },
-    { "source": "/Austral-Polo.dc.html", "destination": "/austral-polo.html", "permanent": true },
-    { "source": "/Beagle.dc.html", "destination": "/beagle.html", "permanent": true },
-    { "source": "/Jamaica.kids.dc.html", "destination": "/jamaica-kids.html", "permanent": true },
-    { "source": "/:page.dc.html", "destination": "/:page.html", "permanent": true }
   ]
 }
