@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <script defer src="site-nav.js"></script>
+  <script defer src="nav-mobile.js"></script>
+  <script defer src="cart.js"></script>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Test settimanale | Tshirt Shop Online</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
+  <script src="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/_ds_bundle.js"></script>
+  <style>
+    html, body { height: auto !important; min-height: 100%; overflow: visible !important; }
+    body { background: var(--color-bg); }
+    a { color: var(--color-text); }
+    a:hover { color: var(--color-accent); }
+  </style>
+</helmet>
+<div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);">
+  <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
+  <div style="max-width: 560px; border: 1px solid var(--color-divider); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+    <span class="tag" style="align-self: flex-start;">Solo uso interno</span>
+    <h1 style="font-family: var(--font-heading); font-size: 40px; line-height: 1.05; margin: 0;">Test settimanale.</h1>
+    <p style="margin: 0; font-size: 16px; line-height: 1.5; text-wrap: pretty;">Un euro. Tutto il percorso d'acquisto. Pagamento, email di conferma, fattura.</p>
+    <div style="font-family: var(--font-heading); font-size: 48px; font-weight: 800;">€ 1,00</div>
+    <p style="margin: 0; font-size: 14px; color: color-mix(in srgb, var(--color-text) 70%, transparent);">Spedizione gratuita. Nessun prodotto da spedire.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
+      <a class="btn btn-primary" href="checkout.html?id=test-settimanale&amp;name=Test%20settimanale&amp;price=1&amp;col=test">Paga ora</a>
+      <button class="btn btn-secondary" type="button" onClick="{{ addToCart }}">Aggiungi al carrello</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      addToCart: () => {
+        const row = { id: 'test-settimanale', name: 'Test settimanale', price: 1, col: 'test', body: { productId: 'test-settimanale' }, img: '', url: 'test-settimanale.html' };
+        if (window.tsCart) {
+          window.tsCart.add(row);
+          window.tsCart.toast('Aggiunto al carrello.', 'Vai al carrello');
+        }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -393,7 +393,7 @@ class Component extends DCLogic {
       try { orderBody = JSON.parse(decodeURIComponent(atob(cfg))); } catch (e) {}
     }
     const priceNum = parseFloat(price) || 0;
-    const autoFree = (col === 'strategici') || priceNum >= 50;
+    const autoFree = (col === 'strategici') || (col === 'test') || priceNum >= 50;
     if (id) this.setState({ productId: id, productName: name || '', productPrice: price || '', productCollection: col || 'misura', orderBody, shipZone: autoFree ? 'gratuita' : this.state.shipZone });
     if (id) this.mountPaypalWhenReady();
   }
@@ -502,7 +502,10 @@ class Component extends DCLogic {
   }
 
   computeShippingFee() {
-    if (this.state.productCollection === 'strategici' && !this.state.cartItems) return 0;
+    if ((this.state.productCollection === 'strategici' || this.state.productCollection === 'test') && !this.state.cartItems) return 0;
+    // Carrello con solo il prodotto di test: nessuna spedizione.
+    const ci = this.state.cartItems;
+    if (ci && ci.length && ci.every((r) => r.id === 'test-settimanale')) return 0;
     const price = parseFloat(this.state.productPrice) || 0;
     if (price >= 50) return 0;
     return 8;

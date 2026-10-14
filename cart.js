@@ -147,6 +147,8 @@
     groupOf: groupOf, groupQty: groupQty, rowQty: rowQty,
     shippingFee: function (sub) {
       var s = typeof sub === 'number' ? sub : subtotal();
+      var rows = read();
+      if (rows.length && rows.every(function (r) { return r.id === 'test-settimanale'; })) return 0;
       return s >= 50 ? 0 : 8;
     },
   };
