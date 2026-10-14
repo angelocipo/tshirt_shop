@@ -25,6 +25,7 @@
     items: [
       { it: 'PROMO', en: 'Promo', href: 'promozioni.html', accent: true, sub: [
         { it: '100 Magliette + Stampa', en: '100 T-Shirts + Printing', href: 'promozione-100-magliette.html' },
+        { it: 'Felpe Personalizzate', en: 'Custom Hoodies', href: 'promozione-felpe.html' },
         { it: 'Maglietta Unisex', en: 'Unisex T-Shirt', href: 'beagle.html' },
         { it: 'Stampa Oro, Argento, Ologramma', en: 'Gold, Silver, Hologram Print', href: 'maglietta-oro-argento-ologramma.html' },
         { it: 'Altre offerte in arrivo', en: 'More offers coming soon' },
@@ -37,6 +38,7 @@
         { it: 'Sport', en: 'Sport', href: 'sport-uomo.html' },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html' },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html' },
+        { it: 'Roma Sacra', en: 'Roma Sacra', href: 'roma-sacra.html' },
       ] },
       { it: 'Donna', en: 'Women', href: 'donna.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.html' },
