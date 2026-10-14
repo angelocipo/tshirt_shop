@@ -282,6 +282,14 @@ const PRICING = {
     ],
     coloredSurcharge: 1.1 },
 
+  // Promozione Felpe Urban + stampa lato cuore 8×8 cm. Prezzi al pezzo IVA esclusa (come nella grafica
+  // promo); il carrello addebita IVA inclusa: prezzo × 1,22 arrotondato al centesimo. Minimo 10 pz.
+  'promo-felpe': { nome: 'Promozione Felpe Personalizzate', type: 'promoTiers',
+    minQty: 10, maxQty: 999, vat: 1.22,
+    tiers: [ { min: 10, net: 13.10 }, { min: 20, net: 12.60 }, { min: 30, net: 12.30 }, { min: 50, net: 11.55 }, { min: 100, net: 11.10 } ],
+    colors: ['01 Bianco', '58 Grigio Vigoré', '60 Rosso', '05 Blu Royal', '57 Granata', '56 Verde Bottiglia', '55 Blu Navy', '02 Nero'],
+    printLabel: 'Lato cuore 8×8 cm' },
+
   'hv-delta': { nome: 'T-Shirt Alta Visibilità Delta', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-delta', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-delta', 1, null) * hvMult(qty) / hvMult(1),
@@ -542,6 +550,15 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(SHOPPER_HILL_DISCOUNT_TIERS, qty).mult },
 };
+
+// Collezione Roma Sacra — stesso listino del capo base, nessun minimo (anche 1 pz).
+Object.assign(PRICING, {
+  'maglietta-roma-sacra': { ...PRICING['tshirt'], nome: 'Maglietta Roma Sacra' },
+  'felpa-roma-sacra': { ...PRICING['felpa-urban'], nome: 'Felpa Roma Sacra' },
+  'polo-roma-sacra': { ...PRICING['star-polo'], nome: 'Polo Roma Sacra' },
+  'cappellino-roma-sacra': { ...PRICING['basica-cap'], nome: 'Cappellino Roma Sacra' },
+  'shopper-roma-sacra': { ...PRICING['shopper-hill'], nome: 'Shopper Roma Sacra' },
+});
 
 // Prodotti che fanno quantità insieme: adulto e bambino dello stesso modello.
 const QTY_GROUPS = {

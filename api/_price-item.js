@@ -322,6 +322,18 @@ function priceItem(input) {
           .join(' ');
       }
       description = `${product.nome} — ${qty}pz, ${color || 'colore'}, ${sizeLabel || 'taglie da definire'}, stampa: ${choice.label}`;
+    } else if (product.type === 'promoTiers') {
+      const f = formula || {};
+      const sizeMap = f.sizes && typeof f.sizes === 'object' ? f.sizes : {};
+      const SZ = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'];
+      const sizeSum = SZ.reduce((n, s) => n + Math.max(0, parseInt(sizeMap[s], 10) || 0), 0);
+      const qty = Math.max(product.minQty, Math.min(product.maxQty, sizeSum || parseInt(f.qty, 10) || product.minQty));
+      const tier = product.tiers.filter((t) => qty >= t.min).pop() || product.tiers[0];
+      const unitGross = Math.round(tier.net * product.vat * 100) / 100;
+      unitAmountCents = Math.round(unitGross * qty * 100);
+      const color = product.colors.includes(f.colorName) ? f.colorName : (product.colors[0]);
+      const sizeLabel = SZ.filter((s) => (parseInt(sizeMap[s], 10) || 0) > 0).map((s) => `${s}×${parseInt(sizeMap[s], 10)}`).join(' ');
+      description = `${product.nome} — Felpa Urban, ${qty}pz, ${color}, ${sizeLabel || 'taglie da definire'}, stampa: ${product.printLabel}`;
     } else if (product.type === 'cap') {
       const f = formula || {};
       const qty = Math.max(1, Math.min(9999, parseInt(f.qty, 10) || 1));
