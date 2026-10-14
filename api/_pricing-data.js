@@ -181,6 +181,8 @@ function hvGarmentTotal(slug, qty, sizes, rateQty) {
 function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
 
 const PRICING = {
+  // Prodotto di test interno (test-settimanale.html, non linkato): verifica settimanale del checkout.
+  'test-settimanale': { nome: 'Test settimanale', type: 'flat', price: 1 },
   // Solo stampa — il capo lo fornisce il cliente: nessun costo capo, solo tariffe DTF. Minimo 5 pz.
   'solo-stampa': { nome: 'Solo Stampa DTF', type: 'tshirt',
     garmentUnitPrice: () => 0,
