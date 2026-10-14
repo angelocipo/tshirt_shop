@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /importa-prodotti.html
+Disallow: /test-settimanale.html
 
-Sitemap: https://tshirt-shop.online/sitemap.xml
+Sitemap: https://www.tshirt-shop.online/sitemap.xml
