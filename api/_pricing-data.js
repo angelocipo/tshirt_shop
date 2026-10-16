@@ -136,6 +136,8 @@ const HV_BASE = {
   'felpa-urban-kids': {"3/4":5.2,"5/6":5.2,"7/8":5.2,"9/10":5.2,"11/12":5.2},
   'felpa-ulan': {"XS":7.6,"S":7.6,"M":7.6,"L":7.6,"XL":7.6,"XXL":7.6,"XXXL":7.84},
   'felpa-ulan-kids': {"3/4":6.08,"5/6":6.08,"7/8":6.08,"9/10":6.08,"11/12":6.08},
+  'felpa-clasica': {"XS":4.76,"S":4.76,"M":4.76,"L":4.76,"XL":4.76,"XXL":4.76,"XXXL":5.2},
+  'felpa-clasica-kids': {"1/2":3.96,"3/4":3.96,"5/6":3.96,"7/8":3.96,"9/10":3.96,"11/12":3.96},
   'felpa-aneto': {"XS":6.8,"S":6.8,"M":6.8,"L":6.8,"XL":6.8,"XXL":6.8,"XXXL":7.36},
   'felpa-fuji': {"S":8.52,"M":8.52,"L":8.52,"XL":8.52,"XXL":8.52,"XXXL":8.96},
   'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
@@ -146,7 +148,7 @@ const CAMICIE_QTY_MULT = [
   { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
   { min: 100, mult: 2.00 },
 ];
-const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids', 'felpa-urban', 'felpa-urban-kids', 'felpa-ulan', 'felpa-ulan-kids', 'felpa-aneto', 'felpa-fuji'];
+const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids', 'felpa-urban', 'felpa-urban-kids', 'felpa-ulan', 'felpa-ulan-kids', 'felpa-clasica', 'felpa-clasica-kids', 'felpa-aneto', 'felpa-fuji'];
 // Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
 const POLO_QTY_MULT = [
   { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
@@ -508,6 +510,21 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
+  // Felpa Clasica (Roly SU1070) — costo Roly −20% × moltiplicatore 3: 3,00 → 2,00.
+  'felpa-clasica': { nome: 'Felpa Clasica', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-clasica', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('felpa-clasica', 1, null) * slugMult('felpa-clasica', qty) / slugMult('felpa-clasica', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'felpa-clasica-kids': { nome: 'Felpa Clasica Bambino', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-clasica-kids', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('felpa-clasica-kids', 1, null) * slugMult('felpa-clasica-kids', qty) / slugMult('felpa-clasica-kids', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
   'felpa-aneto': { nome: 'Felpa Aneto', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-aneto', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('felpa-aneto', 1, null) * slugMult('felpa-aneto', qty) / slugMult('felpa-aneto', 1),
@@ -569,6 +586,7 @@ const QTY_GROUPS = {
   'bahrain': 'bahrain', 'bahrain-kids': 'bahrain',
   'nebraska': 'nebraska', 'nebraska-kids': 'nebraska',
   'felpa-ulan': 'felpa-ulan', 'felpa-ulan-kids': 'felpa-ulan',
+  'felpa-clasica': 'felpa-clasica', 'felpa-clasica-kids': 'felpa-clasica',
 };
 function qtyGroup(productId) { return QTY_GROUPS[productId] || productId; }
 
