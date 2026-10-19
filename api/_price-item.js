@@ -350,11 +350,19 @@ function priceItem(input) {
       const sizeSum = SZ.reduce((n, s) => n + Math.max(0, parseInt(sizeMap[s], 10) || 0), 0);
       const qty = Math.max(product.minQty, Math.min(product.maxQty, sizeSum || parseInt(f.qty, 10) || product.minQty));
       const tier = product.tiers.filter((t) => qty >= t.min).pop() || product.tiers[0];
-      const unitGross = Math.round(tier.net * product.vat * 100) / 100;
+      const pChoice = product.prints ? (product.prints.find((x) => x.key === f.printKey) || product.prints[0]) : null;
+      const unitGross = pChoice
+        ? pChoice.gross[product.tiers.indexOf(tier)]
+        : Math.round(tier.net * product.vat * 100) / 100;
       unitAmountCents = Math.round(unitGross * qty * 100);
       const color = product.colors.includes(f.colorName) ? f.colorName : (product.colors[0]);
       const sizeLabel = SZ.filter((s) => (parseInt(sizeMap[s], 10) || 0) > 0).map((s) => `${s}×${parseInt(sizeMap[s], 10)}`).join(' ');
-      description = `${product.nome} — ${product.capo || 'Felpa Urban'}, ${qty}pz, ${color}, ${sizeLabel || 'taglie da definire'}, stampa: ${product.printLabel}`;
+      const mx = f.matrix && typeof f.matrix === 'object' ? f.matrix : null;
+      const mxLabel = mx ? Object.keys(mx).filter((n) => product.colors.includes(n)).slice(0, 12)
+        .map((n) => n + ': ' + SZ.filter((z) => (parseInt((mx[n] || {})[z], 10) || 0) > 0).map((z) => z + '×' + parseInt(mx[n][z], 10)).join(' ')).join(' | ') : '';
+      description = mxLabel
+        ? `${product.nome} — ${product.capo || 'Felpa Urban'}, ${qty}pz, ${mxLabel}, stampa: ${pChoice ? pChoice.label : product.printLabel}`.slice(0, 480)
+        : `${product.nome} — ${product.capo || 'Felpa Urban'}, ${qty}pz, ${color}, ${sizeLabel || 'taglie da definire'}, stampa: ${pChoice ? pChoice.label : product.printLabel}`;
     } else if (product.type === 'cap') {
       const f = formula || {};
       const qty = Math.max(1, Math.min(9999, parseInt(f.qty, 10) || 1));
