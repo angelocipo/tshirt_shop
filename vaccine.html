@@ -155,7 +155,16 @@
     @media (max-width: 700px) {
       .nav-sub-2, .nav-sub .nav-drop:hover > .nav-sub-2, .nav-sub .nav-drop:focus-within > .nav-sub-2 { display: none; }
     }
-  </style>
+  .mx-row{display:grid;align-items:center;border-bottom:1px solid var(--color-divider);}
+.mx-head{font-family:var(--font-heading);font-weight:800;font-size:11.5px;text-align:center;padding:6px 0;white-space:nowrap;overflow:hidden;color:var(--color-neutral-700);}
+.mx-input{width:100%;height:34px;border:none;border-left:1px solid var(--color-divider);background:transparent;text-align:center;font-family:var(--font-heading);font-weight:800;font-size:14px;color:var(--color-text);padding:0;border-radius:0;}
+.mx-input:hover{background:color-mix(in srgb,var(--color-accent) 8%,transparent);}
+.mx-input:focus{outline:2px solid var(--color-accent);outline-offset:-2px;background:var(--color-surface);}
+.mx-input:disabled{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--color-divider) 4px 5px);cursor:not-allowed;}
+.mx-tot{font-family:var(--font-heading);font-weight:800;font-size:13px;text-align:center;border:none;border-left:1px solid var(--color-divider);height:34px;display:flex;align-items:center;justify-content:center;background:none;color:var(--color-text);padding:0;width:100%;}
+button.mx-tot{cursor:pointer;}
+button.mx-tot:hover{color:#ec3013;}
+</style>
 </helmet>
 
 <div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); font-family: var(--font-body); color: var(--color-text);" class="{{ themeClass }}">
@@ -183,7 +192,7 @@
       </div>
     </div>
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
-        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colour:">Colore Maglietta:</span> {{ selectedColorName }}</label></div>
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colours:">Colori Maglietta:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
         <div style="display: grid; grid-template-columns: repeat(8, 30px); gap: var(--space-2); justify-content: space-between;">
           <sc-for list="{{ colorsByLightness }}" as="c" hint-placeholder-count="24">
@@ -262,18 +271,40 @@
         <sc-if value="{{ belowMin }}" hint-placeholder-val="{{ false }}">
           <p style="font-size:12px;margin:-4px 0 var(--space-2);color:#ec3013;" data-en="Add {{ missingQty }} more pcs to reach the 5-piece minimum.">Aggiungi altri {{ missingQty }} pz per raggiungere il minimo di 5.</p>
         </sc-if>
-        <div class="size-grid" style="border: 1px solid var(--color-divider); margin-bottom: var(--space-3);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="8">
-            <div class="{{ s.rowClass }}">
-              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 52px;">{{ s.label }}</span>
-              <div class="qty-group">
-                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
-                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
-                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
+        <div style="margin-bottom: var(--space-3);">
+          <sc-if value="{{ mxEmpty }}" hint-placeholder-val="{{ true }}">
+            <div style="border: 1px dashed var(--color-divider); padding: var(--space-5) var(--space-4); text-align: center; font-size: 13.5px; color: var(--color-neutral-700);" data-en="Tap one or more colours. Each one becomes a row: type the pieces per size.">Tocca uno o più colori. Ognuno diventa una riga: scrivi i pezzi per taglia.</div>
+          </sc-if>
+          <sc-if value="{{ mxHas }}" hint-placeholder-val="{{ false }}">
+            <div style="overflow-x: auto; border: 1px solid var(--color-divider); border-bottom: none;">
+              <div class="mx-row" style="grid-template-columns: minmax(84px, 1.8fr) repeat(8, minmax(28px, 1fr)) 36px; min-width: 344px; background: var(--color-surface);">
+                <div class="mx-head" style="text-align: left; padding-left: 10px;" data-en="Colour">Colore</div>
+                <sc-for list="{{ mxHeads }}" as="sh" hint-placeholder-count="8"><div class="mx-head" title="{{ sh.measure }}">{{ sh.label }}</div></sc-for>
+                <div class="mx-head">Tot</div>
               </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
+              <sc-for list="{{ mxRows }}" as="r" hint-placeholder-count="1">
+                <div class="mx-row" style="grid-template-columns: minmax(84px, 1.8fr) repeat(8, minmax(28px, 1fr)) 36px; min-width: 344px;">
+                  <div style="display: flex; align-items: center; gap: 6px; padding: 0 4px 0 10px; min-width: 0;">
+                    <span style="width: 14px; height: 14px; border-radius: 50%; flex: none; border: 1px solid var(--color-neutral-400); background: {{ r.hex }};"></span>
+                    <span style="font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ r.name }}">{{ r.short }}</span>
+                  </div>
+                  <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="8">
+                    <input class="mx-input" type="text" inputmode="numeric" placeholder="{{ c.ph }}" title="{{ c.title }}" aria-label="{{ c.aria }}" disabled="{{ c.blocked }}" value="{{ c.qty }}" onChange="{{ c.set }}" onFocus="{{ c.focus }}">
+                  </sc-for>
+                  <button type="button" class="mx-tot" onClick="{{ r.remove }}" title="Rimuovi colore" data-en-title="Remove colour" aria-label="Rimuovi colore">{{ r.total }}</button>
+                </div>
+              </sc-for>
+              <div class="mx-row" style="grid-template-columns: minmax(84px, 1.8fr) repeat(8, minmax(28px, 1fr)) 36px; min-width: 344px; background: var(--color-surface);">
+                <div class="mx-head" style="text-align: left; padding-left: 10px;" data-en="Total">Totale</div>
+                <sc-for list="{{ mxColTotals }}" as="ct" hint-placeholder-count="8"><div class="mx-head">{{ ct.n }}</div></sc-for>
+                <div class="mx-tot">{{ quantity }}</div>
+              </div>
             </div>
-          </sc-for>
+            <div class="text-muted" style="font-size: 11.5px; margin-top: 4px;" data-en="Add colours from the swatches. Tap a row total to remove it.">Aggiungi colori dai pallini. Tocca il totale di riga per rimuoverla.</div>
+          </sc-if>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 2px var(--space-3); margin-top: var(--space-2); font-size: 12px;">
+            <sc-for list="{{ mxHeads }}" as="sh" hint-placeholder-count="8"><div><strong style="font-family: var(--font-heading); font-weight: 800;">{{ sh.label }}</strong> <span class="text-muted">{{ sh.measure }}</span></div></sc-for>
+          </div>
         </div>
         <div class="cfg-comp-inline" style="border: 2px solid var(--color-accent); background: var(--color-surface); margin-bottom: var(--space-4);">
           <div style="padding: var(--space-4);">
@@ -511,7 +542,7 @@ function isEn() {
   try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; }
 }
 
-class Component extends DCLogic {
+class ComponentBase extends DCLogic {
   state = {
     colorIndex: null,
     sizeQty: {},
@@ -629,13 +660,14 @@ class Component extends DCLogic {
       };
     });
     const totalQty = sizes.reduce((n, x) => n + x.qty, 0);
+    const rateQty = totalQty + (this.state.mxOtherQty || 0);
     sizes.forEach(x => {
       x.measure = SIZE_MEASURE[x.label] ? SIZE_MEASURE[x.label] + ' cm' : '';
     });
     const zonePrice = (key) => {
-      if (key === 'cuore') return cuoreUnitPrice(totalQty || MIN_QTY);
-      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
-      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(totalQty || MIN_QTY);
+      if (key === 'cuore') return cuoreUnitPrice(rateQty || MIN_QTY);
+      if (key === 'davanti') return areaUnitPrice(st.davantiWidthIdx, st.davantiHeightIdx) * davantiDiscount(rateQty || MIN_QTY);
+      if (key === 'retro') return areaUnitPrice(st.retroWidthIdx, st.retroHeightIdx) * davantiDiscount(rateQty || MIN_QTY);
       return 0;
     };
     const zones = ZONE_DEFS.map(z => {
@@ -674,7 +706,7 @@ class Component extends DCLogic {
     const selectedColorNote = hasColor ? activeColor.cls : '';
     // Prezzo capo: somma per taglia (le taglie forti costano di più a listino),
     // mostrata come media per pezzo così il totale resta esatto.
-    const garmentSum = SIZES.reduce((sum, s) => sum + (sizeQty[s] || 0) * sizeUnitPrice(s, totalQty), 0);
+    const garmentSum = SIZES.reduce((sum, s) => sum + (sizeQty[s] || 0) * sizeUnitPrice(s, rateQty), 0);
     const garmentPrice = totalQty > 0 ? garmentSum / totalQty : sizeUnitPrice(SIZES[0], MIN_QTY);
     const unitTotal = garmentPrice + printTotal;
     const grandTotal = unitTotal * totalQty;
@@ -715,8 +747,8 @@ class Component extends DCLogic {
       retroWidthIdx: Math.min(st.retroWidthIdx, W_MAX_IDX), retroHeightIdx: Math.min(st.retroHeightIdx, H_MAX_IDX),
       selectedColorName: hasColor ? activeColor.name : '',
       quantity: totalQty,
-      belowMin: totalQty > 0 && totalQty < MIN_QTY,
-      missingQty: Math.max(0, MIN_QTY - totalQty),
+      belowMin: totalQty > 0 && rateQty < MIN_QTY,
+      missingQty: Math.max(0, MIN_QTY - rateQty),
       unitPriceLabel: totalQty > 0 ? this.fmt(unitTotal) + (en ? ' / piece' : ' / pezzo') : '',
       garmentPriceLabel: this.fmt(totalQty > 0 ? garmentPrice : 0),
       printPriceLabel: (printTotal > 0 ? '+' : '') + this.fmt(printTotal),
@@ -725,7 +757,7 @@ class Component extends DCLogic {
       checkout: () => {
         if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
         if (totalQty < 1) { alert(en ? 'Enter a quantity for at least one size.' : 'Inserisci la quantità per almeno una taglia.'); return; }
-        if (totalQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces, sizes can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi, anche in taglie miste.'); return; }
+        if (rateQty < MIN_QTY) { alert(en ? 'Minimum order is ' + MIN_QTY + ' pieces, sizes can be mixed.' : 'L\'ordine minimo è di ' + MIN_QTY + ' pezzi, anche in taglie miste.'); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
         const zoneNames = {
@@ -809,6 +841,117 @@ class Component extends DCLogic {
   }
 }
 
+
+class Component extends ComponentBase {
+  mxInit = (this.state = { ...this.state, picked: [], grid: {} }, true);
+  mxToggle(i, orig) {
+    const picked = this.state.picked || [];
+    if (picked.includes(i)) {
+      const rest = picked.filter(x => x !== i);
+      const grid = { ...this.state.grid }; delete grid[i];
+      this.setState({ picked: rest, grid, colorIndex: rest.length ? rest[rest.length - 1] : null, sizeQty: {} });
+    } else {
+      if (orig) orig();
+      this.setState(s => ({ picked: [...(s.picked || []), i], colorIndex: i, sizeQty: {} }));
+    }
+  }
+  mxSet(i, size, v) {
+    this.setState(s => ({ grid: { ...s.grid, [i]: { ...((s.grid || {})[i] || {}), [size]: Math.max(0, Math.min(9999, v)) } } }));
+  }
+  renderVals() {
+    const real = this.state;
+    const en = typeof isEn === 'function' ? isEn() : false;
+    const grid = real.grid || {};
+    const picked = (real.picked || []).filter(i => COLORS[i]);
+    const rowQ = i => SIZES.reduce((t, s) => t + ((grid[i] || {})[s] || 0), 0);
+    const Q = picked.reduce((t, i) => t + rowQ(i), 0);
+    const cart = real.cartGroupQty || 0;
+    const base = super.renderVals();
+    const sub = (i) => {
+      const other = Q - rowQ(i);
+      this.state = { ...real, colorIndex: i, sizeQty: { ...(grid[i] || {}) }, cartGroupQty: cart + other, mxOtherQty: other };
+      try { return super.renderVals(); } finally { this.state = real; }
+    };
+    const num = (l) => Number(String(l || '').replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+    const SHORT = { XXL: '2XL', XXXL: '3XL', XXXXL: '4XL' };
+    const mxHeads = SIZES.map((s, j) => ({ label: SHORT[s] || s, measure: ((base.sizes || [])[j] || {}).measure || '' }));
+    const colorsByLightness = (base.colorsByLightness || []).map(c => {
+      const i = COLORS.findIndex(x => x.name === c.name);
+      return { ...c, swatchClass: 'swatch' + (picked.includes(i) ? ' swatch-selected' : ''), select: () => this.mxToggle(i, c.select) };
+    });
+    const out = { ...base, colorsByLightness, mxHeads, mxEmpty: !picked.length, mxHas: picked.length > 0 };
+    if (!picked.length) {
+      out.mxRows = []; out.mxColTotals = [];
+      out.selectedColorName = '';
+      out.selectedColorNote = en ? 'Pick one or more. Mix them freely.' : 'Scegline uno o più. Mescolali liberamente.';
+      return out;
+    }
+    const subs = picked.map(i => ({ i, q: rowQ(i), v: sub(i) }));
+    out.mxRows = subs.map(({ i, q, v }) => {
+      const sz = v.sizes || [];
+      return {
+        hex: COLORS[i].hex, name: COLORS[i].name, short: COLORS[i].name.replace(/^\d+\s+/, ''), total: q,
+        remove: () => this.mxToggle(i),
+        cells: SIZES.map((s, j) => {
+          const it = sz.find(x => x.label === s) || sz[j] || {};
+          const blocked = !!it.blocked;
+          const n = (grid[i] || {})[s] || 0;
+          return {
+            qty: n ? String(n) : '', blocked, ph: blocked ? '' : '·',
+            title: blocked ? (en ? 'Not available' : 'Non disponibile') : (it.stockLabel || it.measure || ''),
+            aria: COLORS[i].name + ' ' + s,
+            set: (e) => { if (!blocked) this.mxSet(i, s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0); },
+            focus: (e) => { try { e.target.select(); } catch (_) {} },
+          };
+        }),
+      };
+    });
+    out.mxColTotals = SIZES.map(s => ({ n: picked.reduce((t, i) => t + ((grid[i] || {})[s] || 0), 0) || '·' }));
+    const live = subs.filter(x => x.q > 0);
+    const total = live.reduce((t, x) => t + num(x.v.totalPriceLabel), 0);
+    const garment = Q > 0 ? live.reduce((t, x) => t + num(x.v.garmentPriceLabel) * x.q, 0) / Q : 0;
+    const ref = (live[0] || subs[subs.length - 1]).v;
+    out.selectedColorName = picked.map(i => COLORS[i].name).join(', ');
+    out.selectedColorNote = ref.selectedColorNote || base.selectedColorNote || '';
+    out.quantity = Q;
+    out.totalPriceLabel = this.fmt(total);
+    out.garmentPriceLabel = this.fmt(garment);
+    if (live.length) out.printPriceLabel = ref.printPriceLabel;
+    out.unitPriceLabel = Q > 0 ? this.fmt(total / Q) + (en ? ' / piece' : ' / pezzo') : '';
+    if (live.length) { out.belowMin = ref.belowMin; out.missingQty = ref.missingQty; }
+    if (base.cartGroupNote) out.cartGroupNote = String(base.cartGroupNote).replace(/(su|on) \d+ (pz|pcs)/, '$1 ' + (cart + Q) + ' $2');
+    out.checkout = () => {
+      if (!live.length) { alert(en ? 'Enter at least one quantity in the colour and size table.' : 'Inserisci almeno una quantità nella tabella colori e taglie.'); return; }
+      const oa = window.alert, oc = window.confirm, tc = window.tsCart, tt = tc && tc.toast;
+      let stop = false, asked = false, ok = true;
+      window.alert = (m) => { stop = true; oa.call(window, m); };
+      window.confirm = (m) => { if (!asked) { asked = true; ok = oc.call(window, m); } return ok; };
+      try {
+        live.forEach((x, k) => {
+          if (stop || !ok) return;
+          if (tc) tc.toast = k === live.length - 1 ? tt : () => {};
+          x.v.checkout();
+        });
+      } finally { window.alert = oa; window.confirm = oc; if (tc) tc.toast = tt; }
+      if (!stop && ok) this.setState({ picked: [], grid: {}, colorIndex: null, sizeQty: {} });
+    };
+    out.preventivo = () => {
+      const oo = window.open; let url = null;
+      window.open = (u) => { url = u; return null; };
+      try { ref.preventivo(); } finally { window.open = oo; }
+      if (!url) return;
+      const k = url.indexOf('?'); const p = new URLSearchParams(url.slice(k + 1));
+      const combo = live.map(x => COLORS[x.i].name + ': ' + SIZES.filter(s => (grid[x.i] || {})[s] > 0).map(s => s + '×' + grid[x.i][s]).join(' ')).join(' | ');
+      if (combo) {
+        const rest = String(p.get('config') || '').replace(/^Colore: [^,]*, Taglie: (nessuna|[^,]+×\d+(, [^,]+×\d+)*)(, )?/, '');
+        p.set('config', 'Colori e taglie: ' + combo + (rest ? ' — ' + rest : ''));
+        p.set('quantita', String(Q)); p.set('prezzo', total.toFixed(2));
+      }
+      oo.call(window, url.slice(0, k) + '?' + p.toString(), '_blank', 'noopener');
+    };
+    return out;
+  }
+}
 </script>
 </body>
 </html>
