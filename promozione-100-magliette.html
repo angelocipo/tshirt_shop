@@ -71,6 +71,12 @@
       .prod-qty { grid-area: qty; }
       .cfg-rest { grid-area: cfgrest; }
     }
+    .mx-row { display: grid; grid-template-columns: minmax(84px, 1.8fr) repeat(8, minmax(28px, 1fr)) 36px; align-items: center; border-bottom: 1px solid var(--color-divider); min-width: 340px; }
+    .mx-head { font-family: var(--font-heading); font-weight: 800; font-size: 11.5px; white-space: nowrap; overflow: hidden; text-align: center; padding: 6px 0; color: var(--color-neutral-700); }
+    .mx-input { width: 100%; height: 34px; border: none; border-left: 1px solid var(--color-divider); background: transparent; text-align: center; font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .mx-input:hover { background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
+    .mx-input:focus-visible, .mx-input:focus { outline: 2px solid var(--color-accent); outline-offset: -2px; background: var(--color-surface); }
+    .mx-tot { font-family: var(--font-heading); font-weight: 800; font-size: 13px; text-align: center; border-left: 1px solid var(--color-divider); height: 34px; display: flex; align-items: center; justify-content: center; }
     .size-row { display: flex; align-items: center; gap: var(--space-3); padding: 2px var(--space-3); border-bottom: 1px solid var(--color-divider); }
     .size-row:last-child { border-bottom: none; }
     .qty-group { display: flex; align-items: center; }
@@ -152,9 +158,9 @@
           <button type="button" class="{{ qty50Class }}" onClick="{{ setQty50 }}" data-en="50 pieces">50 pezzi</button>
           <button type="button" class="{{ qty100Class }}" onClick="{{ setQty100 }}" data-en="100 pieces">100 pezzi</button>
         </div>
-        <div class="text-muted" style="font-size: 12.5px; margin-bottom: var(--space-4);" data-en="Need more than 100 pieces? Assign as many as you like in the size split: above 100 the price per piece stays the same.">Ti servono più di 100 pezzi? Assegnane quanti vuoi nella distribuzione taglie: oltre i 100 il prezzo al pezzo resta lo stesso.</div>
+        <div class="text-muted" style="font-size: 12.5px; margin-bottom: var(--space-4);" data-en="More than 100? Just add them to the table. Same price per piece.">Più di 100? Aggiungili in tabella. Stesso prezzo al pezzo.</div>
 
-        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colour:">Colore Maglietta:</span> {{ selectedColorName }}</label></div>
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="T-shirt Colours:">Colori Maglietta:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
         <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
           <sc-for list="{{ colors }}" as="c" hint-placeholder-count="11">
@@ -184,20 +190,41 @@
         <img src="img/misure-tshirt.webp" alt="Come misurare: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
-        <div class="field"><label><span data-en="Size split">Distribuzione taglie</span> — {{ assignedLabel }}</label></div>
-        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-2);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="8">
-            <div class="size-row">
-              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 58px;">{{ s.label }}</span>
-              <div class="qty-group">
-                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
-                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
-                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
-              </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
+        <div class="field"><label><span data-en="Colours and sizes. All at once.">Colori e taglie. Tutto in un colpo.</span> — {{ assignedLabel }}</label></div>
+        <sc-if value="{{ noColors }}" hint-placeholder-val="{{ true }}">
+          <div style="border: 1px dashed var(--color-divider); padding: var(--space-5) var(--space-4); text-align: center; font-size: 13.5px; color: var(--color-neutral-700);" data-en="Tap one or more colours. Each one becomes a row: type the pieces per size.">Tocca uno o più colori. Ognuno diventa una riga: scrivi i pezzi per taglia.</div>
+        </sc-if>
+        <sc-if value="{{ hasColor }}" hint-placeholder-val="{{ false }}">
+          <div style="overflow-x: auto; border: 1px solid var(--color-divider); border-bottom: none; margin-bottom: var(--space-2);">
+            <div class="mx-row" style="background: var(--color-surface);">
+              <div class="mx-head" style="text-align: left; padding-left: 10px;" data-en="Colour">Colore</div>
+              <sc-for list="{{ sizeHeads }}" as="sh" hint-placeholder-count="8">
+                <div class="mx-head" title="{{ sh.measure }}">{{ sh.label }}</div>
+              </sc-for>
+              <div class="mx-head">Tot</div>
             </div>
-          </sc-for>
-        </div>
+            <sc-for list="{{ rows }}" as="r" hint-placeholder-count="1">
+              <div class="mx-row">
+                <div style="display: flex; align-items: center; gap: 6px; padding: 0 4px 0 10px; min-width: 0;">
+                  <span style="width: 14px; height: 14px; border-radius: 50%; flex: none; border: 1px solid var(--color-neutral-400); background: {{ r.hex }};"></span>
+                  <span style="font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 1 auto;" title="{{ r.short }}">{{ r.short }}</span>
+                </div>
+                <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="8">
+                  <input class="mx-input" type="text" inputmode="numeric" placeholder="·" aria-label="{{ c.aria }}" value="{{ c.qty }}" onChange="{{ c.set }}" onFocus="{{ c.focus }}">
+                </sc-for>
+                <button type="button" class="mx-tot" onClick="{{ r.remove }}" title="Rimuovi colore" aria-label="Rimuovi colore" style="width: 100%; border-top: none; border-right: none; border-bottom: none; background: none; cursor: pointer; color: var(--color-text); padding: 0;" style-hover="color: #ec3013;">{{ r.total }}</button>
+              </div>
+            </sc-for>
+            <div class="mx-row" style="background: var(--color-surface);">
+              <div class="mx-head" style="text-align: left; padding-left: 10px;" data-en="Total">Totale</div>
+              <sc-for list="{{ colTotals }}" as="ct" hint-placeholder-count="8">
+                <div class="mx-head">{{ ct.n }}</div>
+              </sc-for>
+              <div class="mx-tot" style="color: {{ assignedColor }};">{{ assigned }}</div>
+            </div>
+          </div>
+          <div class="text-muted" style="font-size: 11.5px; margin-bottom: 4px;" data-en="Add colours from the swatches. Tap a row total to remove it.">Aggiungi colori dai pallini. Tocca il totale di riga per rimuoverla.</div>
+        </sc-if>
         <div style="font-size: 12.5px; color: {{ assignedColor }};">{{ assignedNote }}</div>
       </div>
     </div>
@@ -251,7 +278,7 @@
 
         <div style="display: grid; gap: 6px; font-size: 13px; margin-bottom: var(--space-4);">
           <div style="display:flex; justify-content:space-between;"><span class="text-muted"><span data-en="T-shirts + printing">Magliette + stampa</span> ({{ quantity }} pz)</span><span>{{ basePriceLabel }}</span></div>
-          <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Colour surcharge">Maggiorazione colore</span><span>{{ surchargeLabel }}</span></div>
+          <div style="display:flex; justify-content:space-between;"><span class="text-muted"><span data-en="Colour surcharge">Maggiorazione colore</span> ({{ coloredCount }} pz)</span><span>{{ surchargeLabel }}</span></div>
           <div style="display:flex; justify-content:space-between;"><span class="text-muted" data-en="Shipping">Spedizione</span><span data-en="Included">Inclusa</span></div>
           <div style="display:flex; justify-content:space-between; font-family: var(--font-heading); font-weight: 800; font-size: 16px; padding-top: 4px; border-top: 1px solid var(--color-divider);"><span>Prezzo Totale</span><span>{{ totalPriceLabel }}</span></div>
           <div style="text-align: right; font-style: italic; font-weight: 300; font-size: 11.5px; color: #ec3013;">{{ unitPriceLabel }}</div>
@@ -272,7 +299,7 @@
 
   <div style="max-width: 760px; margin: var(--space-8) auto 0; font-size: 14px; line-height: 1.65;">
     <h2 style="font-family: var(--font-heading); font-weight: 800; font-size: 22px; margin: 0 0 var(--space-3);" data-en="How the promotion works">Come funziona la promozione</h2>
-    <p style="margin: 0 0 var(--space-3);" data-en="Prices are for white t-shirts, VAT and shipping included. Coloured t-shirts carry a 10% surcharge. You can split the pieces across all sizes at no extra cost.">Prezzi per magliette bianche, IVA e spedizione incluse. Le magliette colorate hanno una maggiorazione del 10%. Puoi distribuire i pezzi su tutte le taglie senza costi aggiuntivi.</p>
+    <p style="margin: 0 0 var(--space-3);" data-en="Prices are for white t-shirts, VAT and shipping included. Coloured t-shirts carry a 10% surcharge. You can split the pieces across several colours and all sizes at no extra cost.">Prezzi per magliette bianche, IVA e spedizione incluse. Le magliette colorate hanno una maggiorazione del 10%. Puoi distribuire i pezzi su più colori e su tutte le taglie senza costi aggiuntivi.</p>
     <table class="table" style="font-size: 13px;">
       <thead>
         <tr><th data-en="VAT included">IVA compresa</th><th>8×8</th><th>25×10</th><th>25×32</th><th>8×8 + 25×10</th><th>8×8 + 25×32</th></tr>
@@ -283,7 +310,7 @@
         <tr><td><span data-en="Over 100 pcs">Oltre 100 pz</span><br><span class="text-muted" style="font-size:12px;" data-en="price per piece">prezzo al pezzo</span></td><td>€2,60</td><td>€3,43</td><td>€5,70</td><td>€3,93</td><td>€6,20</td></tr>
       </tbody>
     </table>
-    <p style="margin: var(--space-3) 0 0;">Sopra i 100 pezzi il prezzo resta quello unitario della fascia 100: ogni maglietta in più costa uguale, senza scaglioni. Ti basta assegnare più di 100 pezzi nella distribuzione taglie. Per ordini oltre i 1000 pezzi <a href="contattateci.html">chiedici un preventivo</a>.</p>
+    <p style="margin: var(--space-3) 0 0;">Sopra i 100 pezzi il prezzo resta quello unitario della fascia 100: ogni maglietta in più costa uguale, senza scaglioni. Ti basta inserire più di 100 pezzi nella tabella colori e taglie. Puoi mescolare più colori nello stesso ordine: la maggiorazione del 10% si applica solo ai pezzi colorati. Per ordini oltre i 1000 pezzi <a href="contattateci.html">chiedici un preventivo</a>.</p>
     <p class="text-muted" style="margin: var(--space-3) 0 0; font-size: 13px;" data-en="Proofs are sent within 1-2 working days of payment; production starts after your approval.">Le bozze vengono inviate entro 1-2 giorni lavorativi dal pagamento; la produzione parte dopo la tua approvazione.</p>
   </div>
 </div>
@@ -400,13 +427,14 @@ const PRINTS = [
   { key: 'cuore_retro_25x32', label: 'Cuore + retro 25×32 cm', labelEn: 'Chest + back 25×32 cm', col: 'cr32' },
 ];
 const SURCHARGE = 1.1;
+const WHITE = '01 Bianco';
 
 class Component extends DCLogic {
   state = {
     qty: 100,
-    colorIndex: null,
+    picked: [],      // nomi colore, nell'ordine di selezione
+    grid: {},        // { nomeColore: { taglia: n } }
     printKey: 'cuore_8x8',
-    sizeQty: {},
     designFiles: [],
     designRef: null,
     designLink: '',
@@ -415,17 +443,15 @@ class Component extends DCLogic {
 
   fmt(n) { const s = (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }); return '€' + s; }
 
-  // The hero <img> keeps a literal src in the template: a {{ hole }} in src makes the browser
-  // request the unresolved placeholder string once on every load. Swap it imperatively instead.
   syncHero() {
     const el = document.getElementById('promo-hero');
     if (!el) return;
-    const i = this.state.colorIndex;
-    const src = i != null ? (IMAGE_BY_COLOR[COLORS[i].name] || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
+    const last = this.state.picked[this.state.picked.length - 1];
+    const src = last ? (IMAGE_BY_COLOR[last] || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
     const want = new URL(src, window.location.href).href;
     if (el.src !== want) {
       el.src = src;
-      el.alt = i != null ? ('Maglietta ' + COLORS[i].name) : 'Promozione 100 magliette con stampa';
+      el.alt = last ? ('Maglietta ' + last) : 'Promozione 100 magliette con stampa';
     }
   }
   componentDidMount() {
@@ -480,64 +506,92 @@ class Component extends DCLogic {
     }
   }
 
+  toggleColor(name) {
+    this.setState(s => {
+      if (s.picked.includes(name)) {
+        const grid = { ...s.grid }; delete grid[name];
+        return { picked: s.picked.filter(n => n !== name), grid };
+      }
+      return { picked: [...s.picked, name] };
+    });
+  }
+
+  setCell(name, size, v) {
+    this.setState(s => ({ grid: { ...s.grid, [name]: { ...(s.grid[name] || {}), [size]: Math.max(0, Math.min(MAX_QTY, v)) } } }));
+  }
+
   renderVals() {
     const st = this.state;
     const en = isEn();
     const selQty = st.qty === 50 ? 50 : 100;
-    // Oltre i 100 pezzi la quantità la detta la distribuzione taglie, fino a un massimo di 1000.
-    const assignedTotal = SIZES.reduce((n, sz) => n + ((st.sizeQty || {})[sz] || 0), 0);
-    const qty = assignedTotal > 100 ? Math.min(assignedTotal, MAX_QTY) : selQty;
-    // Oltre i 100 pezzi il prezzo è lineare: prezzo unitario della fascia 100 × quantità.
+    const short = (n) => n.replace(/^\d+\s+/, '');
+    const pickedColors = st.picked.map(n => COLORS.find(c => c.name === n)).filter(Boolean);
+    const rowSum = (n) => SIZES.reduce((t, sz) => t + ((st.grid[n] || {})[sz] || 0), 0);
+    const assigned = pickedColors.reduce((t, c) => t + rowSum(c.name), 0);
+    const whiteCount = pickedColors.filter(c => c.name === WHITE).reduce((t, c) => t + rowSum(c.name), 0);
+    const coloredCount = assigned - whiteCount;
+    // Oltre i 100 pezzi la quantità la detta la tabella, fino a un massimo di 1000.
+    const qty = assigned > 100 ? Math.min(assigned, MAX_QTY) : selQty;
     const priceOf = (col) => (qty <= 50 ? MATRIX[50][col] : qty <= 100 ? MATRIX[100][col] : MATRIX[100][col] / 100 * qty);
-    const hasColor = st.colorIndex != null;
-    const activeColor = hasColor ? COLORS[st.colorIndex] : null;
-    const isWhite = hasColor && activeColor.name === '01 Bianco';
-    const colors = COLORS.map((c, i) => ({
+    const hasColor = pickedColors.length > 0;
+    // Maggiorazione solo sulla quota di pezzi colorati (stessa formula di api/_price-item.js).
+    const factor = assigned > 0 ? (whiteCount + coloredCount * SURCHARGE) / assigned
+      : (hasColor && pickedColors.every(c => c.name === WHITE)) || !hasColor ? 1 : SURCHARGE;
+
+    const colors = COLORS.map(c => ({
       ...c,
-      swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
-      select: () => this.setState({ colorIndex: i }),
+      swatchClass: 'swatch' + (st.picked.includes(c.name) ? ' swatch-selected' : ''),
+      select: () => this.toggleColor(c.name),
     }));
-    const priceFor = (key) => {
-      const p = PRINTS.find(x => x.key === key) || PRINTS[0];
-      const base = priceOf(p.col);
-      return isWhite || !hasColor ? base : base * SURCHARGE;
-    };
     const prints = PRINTS.map(p => ({
       label: en && p.labelEn ? p.labelEn : p.label,
       dotClass: 'opt-dot' + (p.key === st.printKey ? ' opt-dot-on' : ''),
-      priceLabel: this.fmt(priceFor(p.key)),
+      priceLabel: this.fmt(priceOf(p.col) * factor),
       select: () => this.setState({ printKey: p.key }),
     }));
 
-    const sizeQty = st.sizeQty || {};
-    const assigned = SIZES.reduce((n, s) => n + (sizeQty[s] || 0), 0);
-    const setQtyFor = (s, v) => this.setState(prev => ({
-      sizeQty: { ...prev.sizeQty, [s]: Math.max(0, Math.min(MAX_QTY, v)) },
+    const rows = pickedColors.map(c => ({
+      hex: c.hex,
+      short: short(c.name),
+      total: rowSum(c.name),
+      remove: () => this.toggleColor(c.name),
+      cells: SIZES.map(sz => {
+        const v = (st.grid[c.name] || {})[sz] || 0;
+        return {
+          qty: v ? String(v) : '',
+          aria: short(c.name) + ' ' + sz,
+          set: (e) => this.setCell(c.name, sz, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
+          focus: (e) => { try { e.target.select(); } catch (_) {} },
+        };
+      }),
     }));
-    const sizes = SIZES.map(s => ({
-      label: s,
-      qty: sizeQty[s] || 0,
-      measure: SIZE_MEASURE[s] + ' cm',
-      inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
-      dec: () => setQtyFor(s, (this.state.sizeQty[s] || 0) - 1),
-      setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
-    }));
-    const sizesOk = assigned === qty;
-    const assignedNote = sizesOk
-      ? (en ? 'Split complete: ' + qty + ' pieces assigned.' : 'Distribuzione completa: ' + qty + ' pezzi assegnati.')
-      : (assigned < qty
-          ? (en ? (qty - assigned) + ' pieces still to assign (total required: ' + qty + ').'
-                : 'Mancano ' + (qty - assigned) + ' pezzi da assegnare (totale richiesto: ' + qty + ').')
-          : assigned > MAX_QTY
-            ? (en ? 'Maximum ' + MAX_QTY + ' pieces per online order: you assigned ' + assigned + '. For larger runs ask us for a quote.'
-                  : 'Massimo ' + MAX_QTY + ' pezzi per ordine online: hai assegnato ' + assigned + ' pezzi. Per quantità superiori chiedici un preventivo.')
-            : (en ? 'You assigned ' + (assigned - qty) + ' pieces more than the total (' + qty + ').'
-                  : 'Hai assegnato ' + (assigned - qty) + ' pezzi in più del totale (' + qty + ').'));
+    const SIZE_SHORT = { XXL: '2XL', XXXL: '3XL', XXXXL: '4XL' };
+    const sizeHeads = SIZES.map(sz => ({ label: SIZE_SHORT[sz] || sz, measure: SIZE_MEASURE[sz] + ' cm' }));
+    const colTotals = SIZES.map(sz => ({ n: pickedColors.reduce((t, c) => t + ((st.grid[c.name] || {})[sz] || 0), 0) || '·' }));
+
+    const sizesOk = hasColor && assigned === qty;
+    const assignedNote = !hasColor ? ''
+      : sizesOk
+        ? (en ? 'Complete: ' + qty + ' pieces.' : 'Completo: ' + qty + ' pezzi.')
+        : (assigned < qty
+            ? (en ? (qty - assigned) + ' pieces still to assign (total required: ' + qty + ').'
+                  : 'Mancano ' + (qty - assigned) + ' pezzi da assegnare (totale richiesto: ' + qty + ').')
+            : assigned > MAX_QTY
+              ? (en ? 'Maximum ' + MAX_QTY + ' pieces per online order: you assigned ' + assigned + '. For larger runs ask us for a quote.'
+                    : 'Massimo ' + MAX_QTY + ' pezzi per ordine online: hai assegnato ' + assigned + ' pezzi. Per quantità superiori chiedici un preventivo.')
+              : (en ? 'You assigned ' + (assigned - qty) + ' pieces more than the total (' + qty + ').'
+                    : 'Hai assegnato ' + (assigned - qty) + ' pezzi in più del totale (' + qty + ').'));
 
     const base = priceOf((PRINTS.find(p => p.key === st.printKey) || PRINTS[0]).col);
-    const total = isWhite || !hasColor ? base : base * SURCHARGE;
+    const total = base * factor;
     const surcharge = total - base;
-    const sizeBreakdown = SIZES.filter(s => sizeQty[s] > 0).map(s => s + '×' + sizeQty[s]).join(', ') || 'nessuna';
+    const gridOut = {};
+    pickedColors.forEach(c => {
+      const m = {}; SIZES.forEach(sz => { const v = (st.grid[c.name] || {})[sz] || 0; if (v > 0) m[sz] = v; });
+      if (Object.keys(m).length) gridOut[c.name] = m;
+    });
+    const breakdown = Object.keys(gridOut).map(n => n + ': ' + SIZES.filter(sz => gridOut[n][sz]).map(sz => sz + '×' + gridOut[n][sz]).join(' ')).join(' | ') || 'nessuna';
+    const colorList = Object.keys(gridOut).map(n => n + ' (' + rowSum(n) + ')').join(', ') || pickedColors.map(c => c.name).join(', ');
     const printLabel = (PRINTS.find(p => p.key === st.printKey) || PRINTS[0]).label;
 
     const fileSizeLabel = (b) => (b < 1024 * 1024 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1).replace('.', ',') + ' MB');
@@ -557,24 +611,24 @@ class Component extends DCLogic {
     const orderNote = (st.orderNote || '').trim().slice(0, 480);
 
     return {
-      colors, prints, sizes,
+      colors, prints, rows, sizeHeads, colTotals,
       quantity: qty,
+      assigned,
+      coloredCount,
       qty50Class: 'qty-opt' + (selQty === 50 ? ' qty-opt-on' : ''),
       qty100Class: 'qty-opt' + (selQty === 100 ? ' qty-opt-on' : ''),
       setQty50: () => this.setState({ qty: 50 }),
       setQty100: () => this.setState({ qty: 100 }),
-      selectedColorName: hasColor ? activeColor.name : '',
+      selectedColorName: hasColor ? pickedColors.map(c => short(c.name)).join(', ') : '',
       selectedColorNote: !hasColor
-        ? (en ? 'Pick a colour' : 'Scegli un colore')
-        : (isWhite
-            ? (en ? 'Promo price, no surcharge' : 'Prezzo promozione, senza maggiorazione')
-            : (en ? 'Coloured — 10% surcharge' : 'Colorata — maggiorazione 10%')),
-      hasColor,
-      assignedLabel: assigned + ' / ' + qty + (en ? ' pcs assigned' : ' pz assegnati'),
+        ? (en ? 'Pick one or more. Mix them freely.' : 'Scegline uno o più. Mescolali liberamente.')
+        : (en ? 'White: promo price. Colours: +10% on those pieces only.' : 'Bianco: prezzo promo. Colori: +10% solo su quei pezzi.'),
+      hasColor, noColors: !hasColor,
+      assignedLabel: assigned + ' / ' + qty + (en ? ' pcs' : ' pz'),
       assignedNote,
       assignedColor: sizesOk ? 'var(--color-neutral-700)' : '#ec3013',
       basePriceLabel: this.fmt(base),
-      surchargeLabel: surcharge > 0 ? '+' + this.fmt(surcharge) : '—',
+      surchargeLabel: surcharge > 0.004 ? '+' + this.fmt(surcharge) : '—',
       totalPriceLabel: this.fmt(total),
       unitPriceLabel: this.fmt(total / qty) + (en ? ' / piece' : ' / pezzo'),
       designFiles, hasDesignRef, designRef: st.designRef || '',
@@ -584,7 +638,7 @@ class Component extends DCLogic {
       setOrderNote: (e) => this.setState({ orderNote: e.target.value }),
       pickFiles: (e) => { const fl = e.target.files; if (fl && fl.length) this.handleFiles(fl); e.target.value = ''; },
       checkout: () => {
-        if (!hasColor) { alert(en ? 'Pick a colour before continuing.' : 'Scegli un colore prima di procedere.'); return; }
+        if (!hasColor) { alert(en ? 'Pick at least one colour before continuing.' : 'Scegli almeno un colore prima di procedere.'); return; }
         if (!sizesOk) { alert(assignedNote); return; }
         if (designLinkError) { alert(en ? 'That link is not valid: it must start with http:// or https://' : 'Il link al file non è valido: deve iniziare con http:// o https://'); return; }
         if (uploadingCount > 0 && !confirm(en ? 'A file is still uploading. Continue to the cart anyway?' : 'Un file è ancora in caricamento. Procedere comunque al carrello?')) return;
@@ -592,8 +646,8 @@ class Component extends DCLogic {
           productId: 'promo100',
           human: {
             'Quantità': qty + ' pz',
-            'Colore': activeColor.name,
-            'Taglie': sizeBreakdown,
+            'Colori': colorList,
+            'Taglie': breakdown,
             'Stampa': printLabel,
             ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
             ...(designLinkOk ? { 'Link file': designLink } : {}),
@@ -601,9 +655,9 @@ class Component extends DCLogic {
           },
           formula: {
             qty,
-            isWhite,
-            colorName: activeColor.name,
-            sizes: sizeQty,
+            matrix: gridOut,
+            isWhite: coloredCount === 0,
+            colorName: Object.keys(gridOut).join(', ').slice(0, 40),
             printKey: st.printKey,
           },
           ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
@@ -621,7 +675,7 @@ class Component extends DCLogic {
         window.location.href = './checkout.html?' + params.toString();
       },
       preventivo: () => {
-        const config = 'Quantità: ' + qty + ' pz, Colore: ' + (hasColor ? activeColor.name : 'da definire') + ', Taglie: ' + sizeBreakdown + ', Stampa: ' + printLabel;
+        const config = 'Quantità: ' + qty + ' pz, Colori: ' + (hasColor ? colorList : 'da definire') + ', Taglie: ' + breakdown + ', Stampa: ' + printLabel;
         const params = new URLSearchParams({
           prodotto: 'Promozione 100 Magliette + Stampa',
           config: orderNote ? config + ' — Note: ' + orderNote : config,
