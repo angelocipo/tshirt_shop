@@ -294,6 +294,14 @@ const PRICING = {
     colors: ['01 Bianco', '58 Grigio Vigoré', '60 Rosso', '05 Blu Royal', '57 Granata', '56 Verde Bottiglia', '55 Blu Navy', '02 Nero'],
     printLabel: 'Lato cuore 8×8 cm' },
 
+  // Promozione Polo Austral + stampa lato cuore 8×8 cm. Prezzi al pezzo IVA esclusa; il carrello
+  // addebita IVA inclusa: prezzo × 1,22 arrotondato al centesimo. Minimo 10 pz.
+  'promo-polo': { nome: 'Promozione Polo Personalizzate', type: 'promoTiers', capo: 'Polo Austral',
+    minQty: 10, maxQty: 999, vat: 1.22,
+    tiers: [ { min: 10, net: 7.00 }, { min: 20, net: 6.30 }, { min: 30, net: 6.10 }, { min: 50, net: 5.50 }, { min: 100, net: 5.15 } ],
+    colors: ['01 Bianco', '03 Giallo', '12 Turchese Chiaro', '60 Rosso', '20 Verde Kelly', '05 Blue Royal', '55 Blue Navy', '02 Nero'],
+    printLabel: 'Lato cuore 8×8 cm' },
+
   'hv-delta': { nome: 'T-Shirt Alta Visibilità Delta', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('hv-delta', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('hv-delta', 1, null) * hvMult(qty) / hvMult(1),

@@ -354,7 +354,7 @@ function priceItem(input) {
       unitAmountCents = Math.round(unitGross * qty * 100);
       const color = product.colors.includes(f.colorName) ? f.colorName : (product.colors[0]);
       const sizeLabel = SZ.filter((s) => (parseInt(sizeMap[s], 10) || 0) > 0).map((s) => `${s}×${parseInt(sizeMap[s], 10)}`).join(' ');
-      description = `${product.nome} — Felpa Urban, ${qty}pz, ${color}, ${sizeLabel || 'taglie da definire'}, stampa: ${product.printLabel}`;
+      description = `${product.nome} — ${product.capo || 'Felpa Urban'}, ${qty}pz, ${color}, ${sizeLabel || 'taglie da definire'}, stampa: ${product.printLabel}`;
     } else if (product.type === 'cap') {
       const f = formula || {};
       const qty = Math.max(1, Math.min(9999, parseInt(f.qty, 10) || 1));
