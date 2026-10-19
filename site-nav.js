@@ -24,12 +24,9 @@
     whatsapp: { href: 'https://api.whatsapp.com/send/?phone=393396021366', it: 'Preventivo WhatsApp', en: 'Quote on WhatsApp' },
     items: [
       { it: 'PROMO', en: 'Promo', href: 'promozioni.html', accent: true, sub: [
-        { it: '100 Magliette + Stampa', en: '100 T-Shirts + Printing', href: 'promozione-100-magliette.html' },
-        { it: 'Promozione Felpe Personalizzate', en: 'Custom Hoodies Promo', href: 'promozione-felpe.html' },
-        { it: 'Promozione Polo Personalizzate', en: 'Custom Polo Promo', href: 'promozione-polo.html' },
-        { it: 'Maglietta Unisex', en: 'Unisex T-Shirt', href: 'beagle.html' },
-        { it: 'Stampa Oro, Argento, Ologramma', en: 'Gold, Silver, Hologram Print', href: 'maglietta-oro-argento-ologramma.html' },
-        { it: 'Altre offerte in arrivo', en: 'More offers coming soon' },
+        { it: '100 Magliette + Stampa', en: '100 T-Shirts + Printing', promo: true, href: 'promozione-100-magliette.html' },
+        { it: 'Felpe Personalizzate', en: 'Custom Hoodies', promo: true, href: 'promozione-felpe.html' },
+        { it: 'Polo Personalizzate', en: 'Custom Polos', promo: true, href: 'promozione-polo.html' },
       ] },
       { it: 'Uomo', en: 'Men', href: 'uomo.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-uomo.html' },
@@ -40,6 +37,7 @@
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html' },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html' },
         { it: 'Roma Sacra', en: 'Roma Sacra', href: 'roma-sacra.html' },
+        { it: 'Stampa Oro, Argento, Ologramma', en: 'Gold, Silver, Hologram Print', href: 'maglietta-oro-argento-ologramma.html' },
       ] },
       { it: 'Donna', en: 'Women', href: 'donna.html', sub: [
         { it: 'T-shirt', en: 'T-shirts', href: 'tshirt-donna.html' },
@@ -141,6 +139,7 @@
   // Livello 2 del menu (voci del sottomenu: nessuna ha pi\u00f9 un ulteriore sottolivello).
   function renderChild(node) {
     if (!node.href) return '<span' + en(node) + '>' + esc(node.it) + '</span>';
+    if (node.promo) return '<a href="' + esc(node.href) + '"><span style="color:#ec3013;font-weight:800;margin-right:5px;">PROMO</span><span' + en(node) + '>' + esc(node.it) + '</span></a>';
     return '<a href="' + esc(node.href) + '"' + en(node) + '>' + esc(node.it) + '</a>';
   }
   function renderTop(item) {
