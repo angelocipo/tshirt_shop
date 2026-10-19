@@ -310,7 +310,26 @@ function priceItem(input) {
         : qty <= 100
           ? product.matrix[100][choice.col]
           : (product.matrix[100][choice.col] / 100) * qty;
-      const total = isWhite ? base : base * product.coloredSurcharge;
+      // Più colori nello stesso ordine: f.matrix = { nomeColore: { taglia: n } }.
+      // La maggiorazione colore si applica solo alla quota di pezzi non bianchi.
+      const SZM = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'];
+      const mx = f.matrix && typeof f.matrix === 'object' ? f.matrix : null;
+      let mxWhite = 0, mxColored = 0;
+      const mxParts = [];
+      if (mx) {
+        Object.keys(mx).slice(0, 20).forEach((name) => {
+          const row = mx[name] && typeof mx[name] === 'object' ? mx[name] : {};
+          const cells = SZM.map((s) => [s, Math.max(0, Math.min(product.maxQty, parseInt(row[s], 10) || 0))]).filter(([, n]) => n > 0);
+          const sum = cells.reduce((t, [, n]) => t + n, 0);
+          if (!sum) return;
+          if (name === '01 Bianco') mxWhite += sum; else mxColored += sum;
+          mxParts.push(`${String(name).slice(0, 30)}: ${cells.map(([s, n]) => s + '×' + n).join(' ')}`);
+        });
+      }
+      const mxSum = mxWhite + mxColored;
+      const total = mxSum > 0
+        ? base * (mxWhite + mxColored * product.coloredSurcharge) / mxSum
+        : (isWhite ? base : base * product.coloredSurcharge);
       unitAmountCents = Math.round(total * 100);
       const color = (f.colorName || '').toString().slice(0, 40);
       const sizeMap = f.sizes && typeof f.sizes === 'object' ? f.sizes : null;
@@ -321,7 +340,9 @@ function priceItem(input) {
           .map((s) => `${s}×${parseInt(sizeMap[s], 10)}`)
           .join(' ');
       }
-      description = `${product.nome} — ${qty}pz, ${color || 'colore'}, ${sizeLabel || 'taglie da definire'}, stampa: ${choice.label}`;
+      description = mxParts.length
+        ? `${product.nome} — ${qty}pz, ${mxParts.join(' | ')}, stampa: ${choice.label}`.slice(0, 480)
+        : `${product.nome} — ${qty}pz, ${color || 'colore'}, ${sizeLabel || 'taglie da definire'}, stampa: ${choice.label}`;
     } else if (product.type === 'promoTiers') {
       const f = formula || {};
       const sizeMap = f.sizes && typeof f.sizes === 'object' ? f.sizes : {};
