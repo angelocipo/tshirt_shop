@@ -36,7 +36,6 @@
         { it: 'Sport', en: 'Sport', href: 'sport-uomo.html' },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html' },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html' },
-        { it: 'Roma Sacra', en: 'Roma Sacra', href: 'roma-sacra.html' },
         { it: 'Stampa Oro, Argento, Ologramma', en: 'Gold, Silver, Hologram Print', href: 'maglietta-oro-argento-ologramma.html' },
       ] },
       { it: 'Donna', en: 'Women', href: 'donna.html', sub: [
@@ -65,6 +64,9 @@
         { it: 'Pantaloni e tute', en: 'Trousers and tracksuits', href: 'sport.html#pantaloni' },
         { it: 'Felpe e giacche', en: 'Sweatshirts and jackets', href: 'sport.html#felpe' },
         { it: 'Completi calcio', en: 'Football kits', href: 'sport.html#calcio' },
+      ] },
+      { it: 'Tema', en: 'Themes', href: 'temi.html', sub: [
+        { it: 'Italian Lifestyle', en: 'Italian Lifestyle', href: 'temi.html#italian-lifestyle' },
       ] },
       { it: 'Lavoro', en: 'Workwear', href: 'abbigliamento-lavoro-personalizzato.html', sub: [
         { it: 'Alta visibilità', en: 'High visibility', href: 'alta-visibilita.html' },
