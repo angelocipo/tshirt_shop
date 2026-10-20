@@ -298,7 +298,17 @@ const PRICING = {
   // addebita IVA inclusa: prezzo × 1,22 arrotondato al centesimo. Minimo 10 pz.
   'promo-polo': { nome: 'Promozione Polo Personalizzate', type: 'promoTiers', capo: 'Polo Austral',
     minQty: 10, maxQty: 999, vat: 1.22,
-    tiers: [ { min: 10, net: 7.00 }, { min: 20, net: 6.30 }, { min: 30, net: 6.10 }, { min: 50, net: 5.50 }, { min: 100, net: 5.15 } ],
+    // Prezzo al pezzo IVA inclusa = listino Polo Austral (capo bianco + stampa) −10%, fasce 10/20/30/50/100.
+    tiers: [ { min: 10 }, { min: 20 }, { min: 30 }, { min: 50 }, { min: 100 } ],
+    prints: [
+      { key: 'cuore_8x8', label: 'Cuore/manica 8×8 cm', gross: [8.55, 7.65, 7.50, 6.75, 6.30] },
+      { key: 'davanti_25x10', label: 'Davanti 25×10 cm', gross: [11.77, 10.44, 10.44, 9.86, 8.84] },
+      { key: 'retro_25x10', label: 'Retro 25×10 cm', gross: [11.77, 10.44, 10.44, 9.86, 8.84] },
+      { key: 'davanti_25x32', label: 'Davanti 25×32 cm', gross: [14.31, 12.60, 12.60, 11.97, 10.62] },
+      { key: 'retro_25x32', label: 'Retro 25×32 cm', gross: [14.31, 12.60, 12.60, 11.97, 10.62] },
+      { key: 'cuore_retro_25x10', label: 'Cuore + retro 25×10 cm', gross: [14.47, 12.69, 12.69, 11.66, 10.46] },
+      { key: 'cuore_retro_25x32', label: 'Cuore + retro 25×32 cm', gross: [17.01, 14.85, 14.85, 13.77, 12.24] },
+    ],
     colors: ['01 Bianco', '03 Giallo', '12 Turchese Chiaro', '60 Rosso', '20 Verde Kelly', '05 Blue Royal', '55 Blue Navy', '02 Nero'],
     printLabel: 'Lato cuore 8×8 cm' },
 
@@ -577,6 +587,18 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(SHOPPER_HILL_DISCOUNT_TIERS, qty).mult },
 };
+
+// Spritz (tema Italian Lifestyle) — prezzo fisso al pezzo IVA inclusa, nessun minimo.
+// Grafica Spritz inclusa; nome/testo personalizzato incluso. Effetto jeans: in arrivo, non ordinabile.
+// Allineato a SPRITZ_CAPI in spritz.html.
+Object.assign(PRICING, {
+  'spritz': { nome: 'Spritz', type: 'spritz', capi: {
+    tshirt: { label: 'T-shirt Beagle', price: 19.90, sizes: ['S','M','L','XL','XXL','XXXL'],
+      colors: ['01 Bianco','03 Giallo','10 Celeste','58 Grigio','12 Turchese Chiaro','60 Rosso','05 Blue Royal','71 Viola','57 Granata','55 Blue Navy','02 Nero'] },
+    felpa: { label: 'Felpa Clasica', price: 29.99, sizes: ['XS','S','M','L','XL','XXL','XXXL'],
+      colors: ['132 Bianco Vintage','01 Bianco','264 Verde Menta','48 Rosa Chiaro','03 Giallo','229 Beige','07 Sabbia','177 Grigio Perla','10 Celeste','108 Grigio Chiaro','58 Grigio Vigoré','114 Verde Oasi','12 Turchese','168 Rosa Antico','120 Corallo','08 Cioccolato','263 Azzurro Polvere','172 Ocra','31 Arancione','100 Blu Oceano','20 Verde Prato','170 Blu Petrolio','60 Rosso','78 Rosa Fucsia','711 Lavanda','275 Verde Salvia','152 Verde Militare','121 Prugna','169 Malva','430 Verde Petrolio','231 Antracite','56 Verde Bottiglia','05 Blu Royal','71 Viola','57 Granata','46 Verde Abete','55 Blu Navy','02 Nero'] },
+  } },
+});
 
 // Collezione Roma Sacra — stesso listino del capo base, nessun minimo (anche 1 pz).
 Object.assign(PRICING, {

@@ -363,6 +363,19 @@ function priceItem(input) {
       description = mxLabel
         ? `${product.nome} — ${product.capo || 'Felpa Urban'}, ${qty}pz, ${mxLabel}, stampa: ${pChoice ? pChoice.label : product.printLabel}`.slice(0, 480)
         : `${product.nome} — ${product.capo || 'Felpa Urban'}, ${qty}pz, ${color}, ${sizeLabel || 'taglie da definire'}, stampa: ${pChoice ? pChoice.label : product.printLabel}`;
+    } else if (product.type === 'spritz') {
+      const f = formula || {};
+      const capo = product.capi[f.capo];
+      if (!capo) { const e = new Error('Capo Spritz non disponibile'); e.status = 400; throw e; }
+      const color = capo.colors.includes(f.colorName) ? f.colorName : null;
+      if (!color) { const e = new Error('Colore Spritz non valido'); e.status = 400; throw e; }
+      const sizeMap = f.sizes && typeof f.sizes === 'object' ? f.sizes : {};
+      const cells = capo.sizes.map((s) => [s, Math.max(0, Math.min(999, parseInt(sizeMap[s], 10) || 0))]).filter(([, n]) => n > 0);
+      const qty = cells.reduce((t, [, n]) => t + n, 0);
+      if (!qty) { const e = new Error('Quantità Spritz mancante'); e.status = 400; throw e; }
+      const testo = (f.testo || '').toString().replace(/[\r\n]+/g, ' ').trim().slice(0, 20);
+      unitAmountCents = Math.round(capo.price * qty * 100);
+      description = `${product.nome} — ${capo.label}, ${color}, ${cells.map(([s, n]) => s + '×' + n).join(' ')}, ${qty}pz${testo ? ', testo: ' + testo : ''}`;
     } else if (product.type === 'cap') {
       const f = formula || {};
       const qty = Math.max(1, Math.min(9999, parseInt(f.qty, 10) || 1));
