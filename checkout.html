@@ -191,11 +191,12 @@
         <div class="seg" role="radiogroup" aria-labelledby="ship-zone-label">
           <label class="seg-opt"><input type="radio" name="shipZone" value="gratuita" checked="{{ isZoneGratuita }}" disabled="{{ notFreeByThreshold }}" onChange="{{ setShipZone }}">Spedizione gratuita</label>
           <label class="seg-opt"><input type="radio" name="shipZone" value="standard" checked="{{ isZoneStandard }}" disabled="{{ freeByThreshold }}" onChange="{{ setShipZone }}">Italia — € 8</label>
+          <label class="seg-opt"><input type="radio" name="shipZone" value="ue" checked="{{ isZoneUe }}" onChange="{{ setShipZone }}">UE — € 25</label>
         </div>
-        <sc-if value="{{ freeByThreshold }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ showFreeMsg }}" hint-placeholder-val="{{ false }}">
           <p style="margin:var(--space-2) 0 0;font-size:13px;font-weight:700;font-family:var(--font-heading);color:var(--color-accent-700);">Spedizione gratuita applicata — ordine superiore a € 50.</p>
         </sc-if>
-        <p class="card-body" style="margin:var(--space-2) 0 0;">Nessuna consegna in Vaticano. Spedizione gratuita per ordini da € 50.</p>
+        <p class="card-body" style="margin:var(--space-2) 0 0;">Nessuna consegna in Vaticano. Italia: gratuita per ordini da € 50. Paesi UE: € 25 a ordine.</p>
       </div>
 
       <sc-if value="{{ shipDifferent }}" hint-placeholder-val="{{ false }}">
@@ -238,6 +239,9 @@
     <button type="submit" class="btn btn-primary btn-block blueprint" disabled="{{ submitting }}">
       <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>{{ submitLabel }}
     </button>
+    <sc-if value="{{ showNexi }}" hint-placeholder-val="{{ false }}">
+      <button type="button" class="btn btn-secondary btn-block" style="margin-top:var(--space-3);" disabled="{{ submitting }}" onClick="{{ payNexi }}">Paga con Nexi (test)</button>
+    </sc-if>
     <p style="text-align:center;font-size:12.5px;color:color-mix(in srgb, var(--color-text) 60%, transparent);margin-top:var(--space-4);">Pagamento sicuro tramite Stripe. Riceverai fattura elettronica via SDI o email secondo i dati inseriti.</p>
   </form>
 
@@ -377,6 +381,8 @@ class Component extends DCLogic {
 
   componentDidMount() {
     const params = new URLSearchParams(window.location.search);
+    const nx = params.get('nexi');
+    if (nx === 'rifiutato' || nx === 'annullato') this.setState({ errorMsg: nx === 'rifiutato' ? 'Pagamento Nexi non riuscito. Riprova o paga con carta.' : 'Pagamento Nexi annullato.' });
     if (params.get('cart') === '1' && !params.get('id')) { this.loadCart(); return; }
     const id = params.get('id');
     const name = params.get('name');
@@ -501,6 +507,7 @@ class Component extends DCLogic {
     // Carrello con solo il prodotto di test: nessuna spedizione.
     const ci = this.state.cartItems;
     if (ci && ci.length && ci.every((r) => r.id === 'test-settimanale')) return 0;
+    if (this.state.shipZone === 'ue') return 25;
     const price = parseFloat(this.state.productPrice) || 0;
     if (price >= 50) return 0;
     return 8;
@@ -544,7 +551,7 @@ class Component extends DCLogic {
     if (window.gtag) gtag('event', 'begin_checkout', { currency: 'EUR', value });
   }
 
-  async submit(e) {
+  async submit(e, via) {
     e.preventDefault();
     const err = this.validate();
     if (err) { this.setState({ errorMsg: err }); return; }
@@ -569,7 +576,7 @@ class Component extends DCLogic {
       payload = { ...(orderBody || { productId }) };
     }
     try {
-      const res = await fetch('/api/create-checkout-session', {
+      const res = await fetch(via === 'nexi' ? '/api/create-nexi-payment' : '/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -616,7 +623,9 @@ class Component extends DCLogic {
       isZoneGratuita: s.shipZone === 'gratuita' || shippingFee === 0,
       freeByThreshold: (parseFloat(s.productPrice) || 0) >= 50,
       notFreeByThreshold: (parseFloat(s.productPrice) || 0) < 50,
-      isZoneStandard: s.shipZone !== 'gratuita',
+      isZoneStandard: s.shipZone !== 'gratuita' && s.shipZone !== 'ue',
+      isZoneUe: s.shipZone === 'ue',
+      showFreeMsg: s.shipZone !== 'ue' && (parseFloat(s.productPrice) || 0) >= 50,
       isZoneRomaCentro: s.shipZone === 'roma_centro',
       isZoneRomaResto: s.shipZone === 'roma_resto',
       isZoneItalia: s.shipZone === 'italia',
@@ -660,6 +669,8 @@ class Component extends DCLogic {
       submitting: s.submitting,
       submitLabel: s.submitting ? 'Attendere…' : 'Procedi al pagamento',
       handleSubmit: (e) => this.submit(e),
+      showNexi: (() => { try { return new URLSearchParams(window.location.search).has('nexi'); } catch (_) { return false; } })(),
+      payNexi: (e) => this.submit(e, 'nexi'),
     };
   }
 }
