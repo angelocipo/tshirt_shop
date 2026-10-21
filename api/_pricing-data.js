@@ -616,6 +616,15 @@ Object.assign(PRICING, {
   } },
 });
 
+// Polpette al Sugo (tema Italian Lifestyle) — stessi capi e prezzi di Spritz; t-shirt solo nei 4 colori fotografati.
+// Allineato a POLPETTE_CAPI in polpette-al-sugo.html.
+Object.assign(PRICING, {
+  'polpette-al-sugo': { ...PRICING['spritz'], nome: 'Polpette al Sugo', capi: {
+    ...PRICING['spritz'].capi,
+    tshirt: { ...PRICING['spritz'].capi.tshirt, colors: ['01 Bianco','03 Giallo','10 Celeste','58 Grigio'] },
+  } },
+});
+
 // Collezione Roma Sacra — stesso listino del capo base, nessun minimo (anche 1 pz).
 Object.assign(PRICING, {
   'maglietta-roma-sacra': { ...PRICING['tshirt'], nome: 'Maglietta Roma Sacra' },
