@@ -4,11 +4,7 @@
   var MQ = '(max-width: 700px)';
 
   var css = '@media ' + MQ + ' {' +
-    'nav.nav { position: relative; column-gap: 11px; row-gap: 0 !important; padding: 8px 0 !important; justify-content: center; }' +
-    'nav.nav .nav-lang { position: absolute; top: 10px; right: 18px; margin-left: 0 !important; }' +
-    'nav.nav .nav-brand { flex: 1 1 100%; min-width: 0; box-sizing: border-box; padding-right: 96px; font-size: 15px; min-height: 0 !important; height: auto !important; line-height: 1.1; margin-bottom: 2px; overflow: hidden; justify-content: center; }' +
-    'nav.nav .nav-brand > span { overflow: hidden; text-overflow: ellipsis; }' +
-    'nav.nav .nav-brand > span > span { display: none; }' +
+    'nav.nav { position: relative; column-gap: 11px; row-gap: 0 !important; padding-top: 8px !important; padding-bottom: 8px !important; justify-content: center; }' +
     'nav.nav .nav-drop { display: inline-flex !important; width: auto; position: relative; }' +
     'nav.nav > a:not(.nav-brand), nav.nav .nav-drop > a { font-size: 13px; }' +
     'nav.nav > a:not(.nav-brand) { display: flex; align-items: center; min-height: 20px; padding: 0; line-height: 1.05; }' +
@@ -21,6 +17,8 @@
       'left: 50% !important; transform: translateX(-50%);' +
       'border: 1px solid var(--color-divider); background: var(--color-surface); z-index: 70;' +
     '}' +
+    'nav.nav .nav-drop:first-of-type.nav-open > .nav-sub { left: 0 !important; right: auto !important; transform: none; }' +
+    'nav.nav .nav-drop:last-of-type.nav-open > .nav-sub { left: auto !important; right: 0 !important; transform: none; }' +
     'nav.nav .nav-drop:not(.nav-open) > .nav-sub { display: none !important; }' +
     'nav.nav .nav-sub-2 { display: none !important; }' +
     'nav.nav .nav-sub, nav.nav .nav-sub-2 { padding: 5px 0; }' +
@@ -68,10 +66,28 @@
       });
     }
     drop.classList.add('nav-open');
+    clampSub(drop);
   }, true);
 
+  // keep the open submenu inside the viewport (portrait phones)
+  function clampSub(drop) {
+    var sub = drop.querySelector('.nav-sub');
+    if (!sub) return;
+    sub.style.setProperty('transform', 'none', 'important');
+    sub.style.setProperty('right', 'auto', 'important');
+    sub.style.setProperty('left', '0px', 'important');
+    var vw = document.documentElement.clientWidth, pad = 8;
+    var d = drop.getBoundingClientRect(), w = sub.getBoundingClientRect().width;
+    var x = d.left + d.width / 2 - w / 2;
+    x = Math.max(pad, Math.min(x, vw - pad - w));
+    sub.style.setProperty('left', (x - d.left) + 'px', 'important');
+  }
+
   window.addEventListener('resize', function () {
-    if (isMobile()) return;
+    if (isMobile()) {
+      Array.prototype.forEach.call(document.querySelectorAll('nav.nav > .nav-drop.nav-open'), clampSub);
+      return;
+    }
     Array.prototype.forEach.call(document.querySelectorAll('.nav-open'), function (n) {
       n.classList.remove('nav-open');
     });
