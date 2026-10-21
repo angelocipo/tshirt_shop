@@ -198,6 +198,20 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
+  // Maglietta effetto jeans (Roly Husky CA6689) — listino Beagle colorata +25%, stesso prezzo per tutti i colori.
+  // Allineato a PRICE_TIERS in maglietta-effetto-jeans.html. Stampa = tariffe DTF t-shirt.
+  'maglietta-effetto-jeans': { nome: 'Maglietta effetto jeans', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier([{ min: 1, price: 11 }, { min: 5, price: 8.94 }, { min: 10, price: 6.88 }, { min: 20, price: 4.81 }, { min: 50, price: 4 }, { min: 100, price: 3.44 }], qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+  // Maglietta donna effetto jeans (Roly Husky Woman CA6691) — stesso listino della versione uomo.
+  'maglietta-effetto-jeans-donna': { nome: 'Maglietta donna effetto jeans', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier([{ min: 1, price: 11 }, { min: 5, price: 8.94 }, { min: 10, price: 6.88 }, { min: 20, price: 4.81 }, { min: 50, price: 4 }, { min: 100, price: 3.44 }], qty).price,
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
   // Stampa Oro / Argento / Ologramma — capo Beagle + 5 €/pz di effetto lucido; stampa = tariffe DTF t-shirt. Nessun minimo.
   'tshirt-foil': { nome: 'Maglietta Stampa Oro, Argento, Ologramma', type: 'tshirt',
     garmentUnitPrice: (qty, isWhite) => { const t = pickTier(TSHIRT_PRICE_TIERS, qty); return (isWhite ? t.white : t.other) + 5; },
@@ -597,6 +611,8 @@ Object.assign(PRICING, {
       colors: ['01 Bianco','03 Giallo','10 Celeste','58 Grigio','12 Turchese Chiaro','60 Rosso','05 Blue Royal','71 Viola','57 Granata','55 Blue Navy','02 Nero'] },
     felpa: { label: 'Felpa Clasica', price: 29.99, sizes: ['XS','S','M','L','XL','XXL','XXXL'],
       colors: ['132 Bianco Vintage','01 Bianco','264 Verde Menta','48 Rosa Chiaro','03 Giallo','229 Beige','07 Sabbia','177 Grigio Perla','10 Celeste','108 Grigio Chiaro','58 Grigio Vigoré','114 Verde Oasi','12 Turchese','168 Rosa Antico','120 Corallo','08 Cioccolato','263 Azzurro Polvere','172 Ocra','31 Arancione','100 Blu Oceano','20 Verde Prato','170 Blu Petrolio','60 Rosso','78 Rosa Fucsia','711 Lavanda','275 Verde Salvia','152 Verde Militare','121 Prugna','169 Malva','430 Verde Petrolio','231 Antracite','56 Verde Bottiglia','05 Blu Royal','71 Viola','57 Granata','46 Verde Abete','55 Blu Navy','02 Nero'] },
+    jeans: { label: 'T-shirt effetto jeans', price: 25, sizes: ['S','M','L','XL','XXL'],
+      colors: ['86 Blue Denim','57 Granata','38 Verde Militare','02 Nero'] },
   } },
 });
 
