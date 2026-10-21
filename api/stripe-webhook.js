@@ -475,3 +475,6 @@ function ownerBlockHtml(order, buyerEmail, session, attachedCount) {
 // Raw body is required for Stripe signature verification. Must be assigned AFTER the
 // handler above, otherwise `module.exports = handler` discards it.
 module.exports.config = { api: { bodyParser: false } };
+
+// Shared with api/nexi-webhook.js so both payment methods send identical emails.
+Object.assign(module.exports, { sendEmail, collectDesignFiles, orderRef, orderEmailHtml, ownerBlockHtml, OWNER_EMAIL });
