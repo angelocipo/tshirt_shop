@@ -71,6 +71,12 @@
       .prod-qty { grid-area: qty; }
       .cfg-rest { grid-area: cfgrest; }
     }
+    .mx-row { display: grid; grid-template-columns: minmax(84px, 1.8fr) repeat(8, minmax(28px, 1fr)) 36px; align-items: center; border-bottom: 1px solid var(--color-divider); min-width: 340px; }
+    .mx-head { font-family: var(--font-heading); font-weight: 800; font-size: 11.5px; white-space: nowrap; overflow: hidden; text-align: center; padding: 6px 0; color: var(--color-neutral-700); }
+    .mx-input { width: 100%; height: 34px; border: none; border-left: 1px solid var(--color-divider); background: transparent; text-align: center; font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-text); padding: 0; }
+    .mx-input:hover { background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
+    .mx-input:focus-visible, .mx-input:focus { outline: 2px solid var(--color-accent); outline-offset: -2px; background: var(--color-surface); }
+    .mx-tot { font-family: var(--font-heading); font-weight: 800; font-size: 13px; text-align: center; border-left: 1px solid var(--color-divider); height: 34px; display: flex; align-items: center; justify-content: center; }
     .size-row { display: flex; align-items: center; gap: var(--space-3); padding: 2px var(--space-3); border-bottom: 1px solid var(--color-divider); }
     .size-row:last-child { border-bottom: none; }
     .qty-group { display: flex; align-items: center; }
@@ -152,7 +158,7 @@
       </div>
 
       <div class="cfg-top" style="margin-bottom: var(--space-4);">
-        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Hoodie Colour:">Colore Felpa:</span> {{ selectedColorName }}</label></div>
+        <div class="field"><label style="font-weight: 800; color: #000;"><span data-en="Hoodie Colours:">Colori Felpa:</span> {{ selectedColorName }}</label></div>
         <p class="text-muted" style="font-size: 12px; margin: -4px 0 var(--space-3);">{{ selectedColorNote }}</p>
         <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
           <sc-for list="{{ colors }}" as="c" hint-placeholder-count="8">
@@ -183,23 +189,43 @@
         <img src="img/misure-tshirt.webp" alt="Come misurare la felpa: A = larghezza, B = altezza" style="width:100%;display:block;margin:0 auto var(--space-2);">
       </div>
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
-        <div class="field"><label><span data-en="Quantity and sizes">Quantità e taglie</span> — {{ assignedLabel }}</label></div>
-        <div style="border: 1px solid var(--color-divider); margin-bottom: var(--space-2);">
-          <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="8">
-            <div class="size-row">
-              <span style="font-family: var(--font-heading); font-weight: 800; font-size: 14px; min-width: 58px;">{{ s.label }}</span>
-              <div class="qty-group">
-                <button type="button" class="qty-btn" onClick="{{ s.dec }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
-                <input class="qty-input" type="text" inputmode="numeric" value="{{ s.qty }}" onChange="{{ s.setQty }}">
-                <button type="button" class="qty-btn" onClick="{{ s.inc }}" aria-label="Aumenta" data-en-aria="Increase">+</button>
-              </div>
-              <span class="text-muted" style="font-size: 12.5px; margin-left: auto;">{{ s.measure }}</span>
+        <div class="field"><label><span data-en="Colours and sizes. All at once.">Colori e taglie. Tutto in un colpo.</span> — {{ assignedLabel }}</label></div>
+        <sc-if value="{{ noColors }}" hint-placeholder-val="{{ true }}">
+          <div style="border: 1px dashed var(--color-divider); padding: var(--space-5) var(--space-4); text-align: center; font-size: 13.5px; color: var(--color-neutral-700);" data-en="Tap one or more colours. Each one becomes a row: type the pieces per size.">Tocca uno o più colori. Ognuno diventa una riga: scrivi i pezzi per taglia.</div>
+        </sc-if>
+        <sc-if value="{{ hasColor }}" hint-placeholder-val="{{ false }}">
+          <div style="overflow-x: auto; border: 1px solid var(--color-divider); border-bottom: none; margin-bottom: var(--space-2);">
+            <div class="mx-row" style="background: var(--color-surface);">
+              <div class="mx-head" style="text-align: left; padding-left: 10px;" data-en="Colour">Colore</div>
+              <sc-for list="{{ sizeHeads }}" as="sh" hint-placeholder-count="8">
+                <div class="mx-head" title="{{ sh.measure }}">{{ sh.label }}</div>
+              </sc-for>
+              <div class="mx-head">Tot</div>
             </div>
-          </sc-for>
-        </div>
+            <sc-for list="{{ rows }}" as="r" hint-placeholder-count="1">
+              <div class="mx-row">
+                <div style="display: flex; align-items: center; gap: 6px; padding: 0 4px 0 10px; min-width: 0;">
+                  <span style="width: 14px; height: 14px; border-radius: 50%; flex: none; border: 1px solid var(--color-neutral-400); background: {{ r.hex }};"></span>
+                  <span style="font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 1 auto;" title="{{ r.short }}">{{ r.short }}</span>
+                </div>
+                <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="8">
+                  <input class="mx-input" type="text" inputmode="numeric" placeholder="·" aria-label="{{ c.aria }}" value="{{ c.qty }}" onChange="{{ c.set }}" onFocus="{{ c.focus }}">
+                </sc-for>
+                <button type="button" class="mx-tot" onClick="{{ r.remove }}" title="Rimuovi colore" aria-label="Rimuovi colore" style="width: 100%; border-top: none; border-right: none; border-bottom: none; background: none; cursor: pointer; color: var(--color-text); padding: 0;" style-hover="color: #ec3013;">{{ r.total }}</button>
+              </div>
+            </sc-for>
+            <div class="mx-row" style="background: var(--color-surface);">
+              <div class="mx-head" style="text-align: left; padding-left: 10px;" data-en="Total">Totale</div>
+              <sc-for list="{{ colTotals }}" as="ct" hint-placeholder-count="8">
+                <div class="mx-head">{{ ct.n }}</div>
+              </sc-for>
+              <div class="mx-tot" style="color: {{ assignedColor }};">{{ assigned }}</div>
+            </div>
+          </div>
+          <div class="text-muted" style="font-size: 11.5px; margin-bottom: 4px;" data-en="Add colours from the swatches. Tap a row total to remove it.">Aggiungi colori dai pallini. Tocca il totale di riga per rimuoverla.</div>
+        </sc-if>
         <div style="font-size: 12.5px; color: {{ assignedColor }};">{{ assignedNote }}</div>
       </div>
-    </div>
 
     <div class="prod-config col-right">
       <div class="cfg-comp" style="border: 1px solid var(--color-divider); background: var(--color-surface); margin-bottom: var(--space-4);">
@@ -376,14 +402,14 @@ const PRODUCT_NAME = 'Promozione Felpe Personalizzate';
 function isEn() { try { return localStorage.getItem('ts_lang') === 'en'; } catch (e) { return false; } }
 
 class Component extends DCLogic {
-  state = { colorIndex: null, sizeQty: {}, designFiles: [], designRef: null, designLink: '', orderNote: '' };
+  state = { colorIndex: null, picked: [], grid: {}, designFiles: [], designRef: null, designLink: '', orderNote: '' };
 
   fmt(n) { return '€' + (Number(n) || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
   syncHero() {
     const el = document.getElementById('promo-hero');
     if (!el) return;
-    const i = this.state.colorIndex;
+    const i = this.state.picked.length ? this.state.picked[this.state.picked.length - 1] : null;
     const src = i != null ? (IMAGE_BY_COLOR[COLORS[i].name] || DEFAULT_HERO_IMG) : DEFAULT_HERO_IMG;
     if (el.src !== new URL(src, window.location.href).href) {
       el.src = src;
@@ -393,6 +419,16 @@ class Component extends DCLogic {
   componentDidMount() { this.syncHero(); this.onLang = () => this.forceUpdate(); window.addEventListener('ts:langchange', this.onLang); }
   componentWillUnmount() { window.removeEventListener('ts:langchange', this.onLang); }
   componentDidUpdate() { this.syncHero(); }
+
+  toggleColor(i) {
+    this.setState(s => {
+      if (s.picked.includes(i)) { const grid = { ...s.grid }; delete grid[i]; return { picked: s.picked.filter(x => x !== i), grid }; }
+      return { picked: [...s.picked, i] };
+    });
+  }
+  setCell(i, size, v) {
+    this.setState(s => ({ grid: { ...s.grid, [i]: { ...(s.grid[i] || {}), [size]: Math.max(0, Math.min(MAX_QTY, v)) } } }));
+  }
 
   makeDesignRef() {
     const alpha = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -432,36 +468,51 @@ class Component extends DCLogic {
   renderVals() {
     const st = this.state;
     const en = isEn();
-    const sizeQty = st.sizeQty || {};
-    const assigned = SIZES.reduce((n, s) => n + (sizeQty[s] || 0), 0);
+    const picked = st.picked || [];
+    const grid = st.grid || {};
+    const rowQ = (i) => SIZES.reduce((n, s) => n + ((grid[i] || {})[s] || 0), 0);
+    const sizeQty = {};
+    SIZES.forEach(s => { const n = picked.reduce((t, i) => t + ((grid[i] || {})[s] || 0), 0); if (n) sizeQty[s] = n; });
+    const assigned = picked.reduce((n, i) => n + rowQ(i), 0);
     const qty = Math.max(MIN_QTY, Math.min(MAX_QTY, assigned));
     const tier = TIERS.filter(t => qty >= t.min).pop() || TIERS[0];
     const unitGross = Math.round(tier.net * VAT * 100) / 100;
     const total = Math.round(unitGross * qty * 100) / 100;
     const net = tier.net * qty;
-    const hasColor = st.colorIndex != null;
-    const activeColor = hasColor ? COLORS[st.colorIndex] : null;
+    const live = picked.filter(i => rowQ(i) > 0);
+    const hasColor = picked.length > 0;
+    const activeColor = hasColor ? { name: live.map(i => COLORS[i].name).join(', ').slice(0, 40) || COLORS[picked[0]].name } : null;
 
-    const colors = COLORS.map((c, i) => ({ ...c, swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''), select: () => this.setState({ colorIndex: i }) }));
+    const colors = COLORS.map((c, i) => ({ ...c, swatchClass: 'swatch' + (picked.includes(i) ? ' swatch-selected' : ''), select: () => this.toggleColor(i) }));
     const tiers = TIERS.map(t => ({
       label: t.max ? (t.min + '–' + t.max + (en ? ' pcs' : ' pz')) : (t.min + '+ ' + (en ? 'pcs' : 'pz')),
       priceLabel: this.fmt(t.net),
       dotClass: 'opt-dot' + (t === tier ? ' opt-dot-on' : ''),
     }));
-    const setQtyFor = (s, v) => this.setState(prev => ({ sizeQty: { ...prev.sizeQty, [s]: Math.max(0, Math.min(MAX_QTY, v)) } }));
-    const sizes = SIZES.map(s => ({
-      label: s, qty: sizeQty[s] || 0, measure: SIZE_MEASURE[s] + ' cm',
-      inc: () => setQtyFor(s, (this.state.sizeQty[s] || 0) + 1),
-      dec: () => setQtyFor(s, (this.state.sizeQty[s] || 0) - 1),
-      setQty: (e) => setQtyFor(s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
+    const short = (n) => n.replace(/^\d+\s+/, '');
+    const sizeHeads = SIZES.map(s => ({ label: s === 'XXXXL' ? '4XL' : s === 'XXXL' ? '3XL' : s === 'XXL' ? '2XL' : s, measure: SIZE_MEASURE[s] + ' cm' }));
+    const rows = picked.map(i => ({
+      hex: COLORS[i].hex, short: short(COLORS[i].name), total: rowQ(i),
+      remove: () => this.toggleColor(i),
+      cells: SIZES.map(s => {
+        const n = (grid[i] || {})[s] || 0;
+        return {
+          qty: n ? String(n) : '', aria: COLORS[i].name + ' ' + s,
+          set: (e) => this.setCell(i, s, parseInt(String(e.target.value).replace(/\D/g, ''), 10) || 0),
+          focus: (e) => { try { e.target.select(); } catch (_) {} },
+        };
+      }),
     }));
+    const colTotals = SIZES.map(s => ({ n: sizeQty[s] || '·' }));
+    const matrix = {};
+    live.forEach(i => { const m = {}; SIZES.forEach(s => { const n = (grid[i] || {})[s] || 0; if (n) m[s] = n; }); matrix[COLORS[i].name] = m; });
     const sizesOk = assigned >= MIN_QTY && assigned <= MAX_QTY;
     const assignedNote = assigned < MIN_QTY
       ? (en ? 'Minimum ' + MIN_QTY + ' pieces: ' + (MIN_QTY - assigned) + ' still to assign.' : 'Minimo ' + MIN_QTY + ' pezzi: ne mancano ' + (MIN_QTY - assigned) + '.')
       : assigned > MAX_QTY
         ? (en ? 'Maximum ' + MAX_QTY + ' pieces online. Ask us for a quote.' : 'Massimo ' + MAX_QTY + ' pezzi online. Chiedici un preventivo.')
         : (en ? assigned + ' pieces. Price band ' + tiers[TIERS.indexOf(tier)].label + '.' : assigned + ' pezzi. Fascia ' + tiers[TIERS.indexOf(tier)].label + '.');
-    const sizeBreakdown = SIZES.filter(s => sizeQty[s] > 0).map(s => s + '×' + sizeQty[s]).join(', ') || 'nessuna';
+    const sizeBreakdown = live.map(i => short(COLORS[i].name) + ': ' + SIZES.filter(s => (grid[i] || {})[s] > 0).map(s => s + '×' + grid[i][s]).join(' ')).join(' | ') || 'nessuna';
 
     const fileSizeLabel = (b) => (b < 1024 * 1024 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1).replace('.', ',') + ' MB');
     const statusText = { uploading: 'invio…', done: 'caricato', error: 'errore' };
@@ -479,11 +530,12 @@ class Component extends DCLogic {
     const orderNote = (st.orderNote || '').trim().slice(0, 480);
 
     return {
-      colors, tiers, sizes,
+      colors, tiers, sizeHeads, rows, colTotals, assigned,
+      noColors: !hasColor, hasColor,
       quantity: qty,
-      selectedColorName: hasColor ? activeColor.name : '',
-      selectedColorNote: hasColor ? (en ? 'Same price for every colour' : 'Stesso prezzo per ogni colore') : (en ? 'Pick a colour' : 'Scegli un colore'),
-      assignedLabel: assigned + (en ? ' pcs' : ' pz'),
+      selectedColorName: hasColor ? picked.length + (en ? ' selected' : ' scelti') : '',
+      selectedColorNote: hasColor ? (en ? 'Same price for every colour. Mix them freely.' : 'Stesso prezzo per ogni colore. Mescolali liberamente.') : (en ? 'Pick one or more colours' : 'Scegli uno o più colori'),
+      assignedLabel: assigned + ' / ' + MIN_QTY + (en ? ' pcs min' : ' pz min'),
       assignedNote,
       assignedColor: sizesOk ? 'var(--color-neutral-700)' : '#ec3013',
       unitNetLabel: this.fmt(tier.net),
@@ -507,14 +559,13 @@ class Component extends DCLogic {
           human: {
             'Prodotto': 'Felpa Urban (Roly SU1067)',
             'Quantità': qty + ' pz',
-            'Colore': activeColor.name,
-            'Taglie': sizeBreakdown,
+            'Colori e taglie': sizeBreakdown,
             'Stampa': 'Lato cuore 8×8 cm',
             ...(hasDesignRef ? { 'File design': st.designRef + ' — ' + uploadedFiles.join(', ') } : {}),
             ...(designLinkOk ? { 'Link file': designLink } : {}),
             ...(orderNote ? { 'Consegna richiesta / note': orderNote } : {}),
           },
-          formula: { qty, colorName: activeColor.name, sizes: sizeQty },
+          formula: { qty, colorName: live.length ? COLORS[live[0]].name : COLORS[0].name, sizes: sizeQty, matrix },
           ...(hasDesignRef ? { designRef: st.designRef, designFiles: uploadedFiles } : {}),
           ...(designLinkOk ? { designLink } : {}),
           ...(orderNote ? { customerNote: orderNote } : {}),
@@ -524,7 +575,7 @@ class Component extends DCLogic {
         window.location.href = './checkout.html?' + params.toString();
       },
       preventivo: () => {
-        const config = 'Felpa Urban, Quantità: ' + qty + ' pz, Colore: ' + (hasColor ? activeColor.name : 'da definire') + ', Taglie: ' + sizeBreakdown + ', Stampa: lato cuore 8×8 cm';
+        const config = 'Felpa Urban, Quantità: ' + qty + ' pz, Colori e taglie: ' + sizeBreakdown + ', Stampa: lato cuore 8×8 cm';
         const params = new URLSearchParams({
           prodotto: PRODUCT_NAME,
           config: orderNote ? config + ' — Note: ' + orderNote : config,
