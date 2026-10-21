@@ -390,7 +390,20 @@ const SPRITZ_CAPI = {
         : 'img/felpa-clasica-' + name.split(' ')[0] + '.webp',
     })),
   },
-  jeans: { label: 'Effetto jeans', labelEn: 'Denim effect', price: 25, soon: true },
+  jeans: {
+    label: 'Effetto jeans', labelEn: 'Denim effect', price: 25, capoName: 'T-shirt effetto jeans',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    measure: { S: 'A 48 × B 69', M: 'A 50 × B 71', L: 'A 54 × B 73', XL: 'A 58 × B 75', XXL: 'A 62 × B 77' },
+    comp: ['100% cotone pettinato, 160 g/m², effetto lavato.', 'Grafica Spritz arancio stampata DTF sul petto.'],
+    compEn: ['100% combed cotton, 160 g/m², washed effect.', 'Orange Spritz graphic, DTF printed on the chest.'],
+    ref: 'Rif. Roly Husky CA6689',
+    colors: [
+      { name: '86 Blue Denim', hex: '#7b8aa8', img: 'img/effetto-jeans-86-denim.webp' },
+      { name: '57 Granata', hex: '#8e3b45', img: 'img/effetto-jeans-57-granata.webp' },
+      { name: '38 Verde Militare', hex: '#5c5f52', img: 'img/effetto-jeans-38-verde.webp' },
+      { name: '02 Nero', hex: '#2b2b2b', img: 'img/effetto-jeans-02-nero.webp' },
+    ],
+  },
 };
 const CAPI_ORDER = ['tshirt', 'felpa', 'jeans'];
 const DEFAULT_HERO_IMG = 'img/spritz-hero-plain.webp';
