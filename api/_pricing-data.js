@@ -113,6 +113,8 @@ const HV_BASE = {
   'hv-atrio': {"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5,"XXXXL":11},
   'hv-atrio-ls': {"S":12.5,"M":12.5,"L":12.5,"XL":12.5,"XXL":12.5,"XXXL":13.15,"XXXXL":13.8},
   'prince-donna': {"S":4.9,"M":4.9,"L":4.9,"XL":4.9,"XXL":4.9,"XXXL":5.9},
+  'extreme': {"S":2.75,"M":2.75,"L":2.75,"XL":2.75,"XXL":2.75,"XXXL":3.15,"XXXXL":3.45},
+  'extreme-kids': {"3/4":1.95,"5/6":1.95,"7/8":1.95,"9/10":1.95,"11/12":1.95},
   'prince-polo': {"S":4.9,"M":4.9,"L":4.9,"XL":4.9,"XXL":4.9,"XXXL":5.9},
   'aifos': {"S":6.95,"M":6.95,"L":6.95,"XL":6.95,"XXL":6.95,"XXXL":7.65},
   'aifos-ls': {"S":7.25,"M":7.25,"L":7.25,"XL":7.25,"XXL":7.25,"XXXL":7.65},
@@ -155,7 +157,7 @@ const POLO_QTY_MULT = [
   { min: 10, mult: 1.85 }, { min: 20, mult: 1.70 }, { min: 50, mult: 1.57 },
   { min: 100, mult: 1.50 },
 ];
-const POLO_SLUGS = ['prince-polo', 'prince-donna'];
+const POLO_SLUGS = ['prince-polo', 'prince-donna', 'extreme', 'extreme-kids'];
 function slugMult(slug, qty) {
   const tiers = CAMICIE_SLUGS.includes(slug) ? CAMICIE_QTY_MULT
     : POLO_SLUGS.includes(slug) ? POLO_QTY_MULT : HV_QTY_MULT;
@@ -378,6 +380,21 @@ const PRICING = {
   'prince-polo': { nome: 'Polo da Uomo Prince', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('prince-polo', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('prince-polo', 1, null) * slugMult('prince-polo', qty) / slugMult('prince-polo', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Maglietta manica lunga Extreme (Roly CA1217) — listino per taglia × scala polo.
+  'extreme': { nome: 'Maglietta Manica Lunga Extreme', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('extreme', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('extreme', 1, null) * slugMult('extreme', qty) / slugMult('extreme', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'extreme-kids': { nome: 'Maglietta Manica Lunga Extreme Bambino', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('extreme-kids', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('extreme-kids', 1, null) * slugMult('extreme-kids', qty) / slugMult('extreme-kids', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
