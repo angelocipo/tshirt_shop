@@ -935,7 +935,7 @@ class Component extends ComponentBase {
       const k = url.indexOf('?'); const p = new URLSearchParams(url.slice(k + 1));
       const combo = live.map(x => COLORS[x.i].name + ': ' + SIZES.filter(s => (grid[x.i] || {})[s] > 0).map(s => s + '×' + grid[x.i][s]).join(' ')).join(' | ');
       if (combo) {
-        const rest = String(p.get('config') || '').replace(/^Colore: [^,]*, Taglie: (nessuna|[^,]+×\d+(, [^,]+×\d+)*)(, )?/, '');
+        const rest = String(p.get('config') || '').replace(/^Colore: [^,]*, Taglie: (nessuna|[^,\s]+×\d+(, [^,\s]+×\d+)*)(, )?/, '');
         p.set('config', 'Colori e taglie: ' + combo + (rest ? ' — ' + rest : ''));
         p.set('quantita', String(Q)); p.set('prezzo', total.toFixed(2));
       }
