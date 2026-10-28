@@ -165,8 +165,9 @@ module.exports = async (req, res) => {
           address: md.inv_address || session.customer_details?.address?.line1 || '',
           cap: md.inv_cap || session.customer_details?.address?.postal_code || '',
           city: md.inv_city || session.customer_details?.address?.city || '',
-          province: '',
+          province: md.inv_province || '',
           country: md.inv_country || session.customer_details?.address?.country || 'IT',
+          type: md.inv_type || 'privato', company: md.inv_company || '', vat: md.inv_vat || '', cf: md.inv_cf || '', sdi: md.inv_sdi || '',
           // No SDI code = "consumatore finale", invoice made available via portal instead of pushed by SDI.
           sdiCode: md.inv_sdi || '0000000',
         },
@@ -174,10 +175,15 @@ module.exports = async (req, res) => {
           description: li.description,
           quantity: li.quantity,
           unitPrice: li.amount_total / 100 / li.quantity,
-          vatRate: 22, // adjust if any product carries a different aliquota
+          vatRate: 22, // prices are VAT-inclusive; _fattura-xml scorpora. Adjust if any product carries a different aliquota
         })),
       };
       const buyerEmail = md.inv_email || session.customer_details?.email || session.customer_email;
+      order.email = buyerEmail;
+      let pmType = (session.payment_method_types || []).length === 1 ? session.payment_method_types[0] : null;
+      try { if (session.payment_intent) { const pi = await stripe.paymentIntents.retrieve(session.payment_intent, { expand: ['latest_charge'] }); pmType = pi.latest_charge?.payment_method_details?.type || pmType; } }
+      catch (e) { console.error('Payment method lookup failed', e); }
+      order.payment = { method: pmType, date: new Date(event.created * 1000) };
       console.log('Order', order.number, 'session', session.id, 'buyerEmail:', buyerEmail || 'NONE', '— owner:', OWNER_EMAIL);
       const summaryHtml = orderEmailHtml(order, total, md);
       // Each send gets its OWN try. They used to share one: if the buyer send threw, the owner
@@ -190,6 +196,18 @@ module.exports = async (req, res) => {
           console.error('Buyer confirmation FAILED for session', session.id, mailErr);
         }
       }
+      // Invoice draft (XML) for the owner to import and confirm in Aruba. Own try: a failure here
+      // must never block the order emails.
+      let invoice = null;
+      try { invoice = await require('./create-invoice').prepareInvoiceDraft(order); }
+      catch (invErr) { console.error('Invoice draft FAILED for order', order.number, invErr); }
+      const inv = invoice ? require('./create-invoice').draftEmailParts(invoice) : { attachment: null, html: '' };
+      let ups = { attachment: null, html: '' };
+      try { const U = require('./_ups-csv'); ups = U.upsEmailParts(U.buildUpsCsv(order, md, { phone: session.customer_details?.phone, email: buyerEmail })); }
+      catch (upsErr) { console.error('UPS file FAILED for order', order.number, upsErr); }
+      let ddt = { attachment: null, html: '' };
+      try { const D = require('./_ddt'); ddt = D.ddtEmailParts(D.buildDdtHtml(order, md)); }
+      catch (e) { console.error('DDT FAILED for order', order.number, e); }
       let design = { attachments: [], urls: [] };
       try {
         design = await collectDesignFiles(md.design_ref);
@@ -199,9 +217,9 @@ module.exports = async (req, res) => {
       try {
         await sendEmail({
           to: OWNER_EMAIL,
-          subject: `Nuovo ordine #${order.number} — € ${total.toFixed(2)}${design.attachments.length ? ` — ${design.attachments.length} file` : ''}`,
-          html: summaryHtml.replace('</body></html>', ownerBlockHtml(order, buyerEmail, session, design.attachments.length) + '</body></html>'),
-          attachments: design.attachments,
+          subject: `Nuovo ordine #${order.number} — € ${total.toFixed(2)}${design.attachments.length ? ` — ${design.attachments.length} file` : ''}${invoice ? ` — bozza fattura ${invoice.invoiceNumber}` : ''}`,
+          html: summaryHtml.replace('</body></html>', ownerBlockHtml(order, buyerEmail, session, design.attachments.length) + inv.html + ddt.html + ups.html + '</body></html>'),
+          attachments: [...design.attachments, inv.attachment, ddt.attachment, ups.attachment].filter(Boolean),
         });
         console.log('Owner notification sent to', OWNER_EMAIL, 'with', design.attachments.length, 'file(s)');
         // Delete only after the mail with the files went out — otherwise a Stripe retry can resend them.
@@ -212,18 +230,10 @@ module.exports = async (req, res) => {
         console.error('Owner notification FAILED to', OWNER_EMAIL, mailErr);
       }
 
-      // Aruba is NOT connected yet (it needs a professional account) — invoices are issued by
-      // hand for now. Set ARUBA_ENABLED=1 in the environment to switch the automatic submission
-      // back on; until then we skip it instead of failing on every order.
-      if (process.env.ARUBA_ENABLED === '1') {
-        try {
-          const { createInvoiceForOrder } = require('./create-invoice');
-          await createInvoiceForOrder(order);
-        } catch (invErr) {
-          console.error('Invoice creation failed for session', session.id, invErr);
-        }
-      } else {
-        console.log('Aruba disabled — invoice for order', order.number, 'must be issued manually. Total €', total.toFixed(2));
+      // ARUBA_ENABLED=1 sends straight to SDI (no draft step). Off by default: drafts are confirmed by hand.
+      if (process.env.ARUBA_ENABLED === '1' && invoice && !invoice.existing && !invoice.warnings.length) {
+        try { await require('./create-invoice').sendInvoiceToAruba(invoice); console.log('Invoice', invoice.invoiceNumber, 'sent to Aruba'); }
+        catch (invErr) { console.error('Aruba send failed for', invoice.invoiceNumber, invErr); }
       }
 
       // Shipping/sender details aren't part of the invoice — they drive the packing slip

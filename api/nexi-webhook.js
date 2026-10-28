@@ -40,12 +40,17 @@ module.exports = async (req, res) => {
         name: isCompany ? (md.inv_company || md.inv_name) : (md.inv_name || 'Cliente'),
         isCompany,
         vatNumber: md.inv_vat || undefined, fiscalCode: md.inv_cf || undefined, pec: md.inv_pec || undefined,
-        address: md.inv_address || '', cap: md.inv_cap || '', city: md.inv_city || '', province: '',
+        address: md.inv_address || '', cap: md.inv_cap || '', city: md.inv_city || '', province: md.inv_province || '',
         country: md.inv_country || 'IT', sdiCode: md.inv_sdi || '0000000',
+        type: md.inv_type || 'privato', company: md.inv_company || '', vat: md.inv_vat || '', cf: md.inv_cf || '', sdi: md.inv_sdi || '',
       },
       lines: stored.lines,
     };
     const buyerEmail = md.inv_email;
+    order.email = buyerEmail;
+    // Nexi: brand = VISA/MasterCard/Maestro/Amex… (card) or PayPal, MyBank, Satispay…
+    const brand = String(p.brand || '').toLowerCase();
+    order.payment = { method: /visa|master|maestro|amex|american|diners|jcb|carta|card|vpay/.test(brand) ? 'card' : (p.brand || null), date: new Date() };
     console.log('Order', order.number, 'nexi', orderId, 'buyerEmail:', buyerEmail || 'NONE', '— owner:', W.OWNER_EMAIL);
     const summaryHtml = W.orderEmailHtml(order, total, md);
     if (buyerEmail) {
@@ -54,14 +59,26 @@ module.exports = async (req, res) => {
         console.log('Buyer confirmation sent to', buyerEmail);
       } catch (e) { console.error('Buyer confirmation FAILED for nexi', orderId, e); }
     }
+    let invoice = null, inv = { attachment: null, html: '' };
+    try {
+      const CI = require('./create-invoice');
+      invoice = await CI.prepareInvoiceDraft(order);
+      inv = CI.draftEmailParts(invoice);
+    } catch (e) { console.error('Invoice draft FAILED for', order.number, e); }
+    let ups = { attachment: null, html: '' };
+    try { const U = require('./_ups-csv'); ups = U.upsEmailParts(U.buildUpsCsv(order, md, { email: buyerEmail })); }
+    catch (e) { console.error('UPS file FAILED for', order.number, e); }
+    let ddt = { attachment: null, html: '' };
+    try { const D = require('./_ddt'); ddt = D.ddtEmailParts(D.buildDdtHtml(order, md)); }
+    catch (e) { console.error('DDT FAILED for', order.number, e); }
     let design = { attachments: [], urls: [] };
     try { design = await W.collectDesignFiles(md.design_ref); } catch (e) { console.error('Design files lookup FAILED', e); }
     try {
       await W.sendEmail({
         to: W.OWNER_EMAIL,
-        subject: `Nuovo ordine #${order.number} (Nexi) — € ${total.toFixed(2)}${design.attachments.length ? ` — ${design.attachments.length} file` : ''}`,
-        html: summaryHtml.replace('</body></html>', W.ownerBlockHtml(order, buyerEmail, { metadata: md }, design.attachments.length) + '</body></html>'),
-        attachments: design.attachments,
+        subject: `Nuovo ordine #${order.number} (Nexi) — € ${total.toFixed(2)}${design.attachments.length ? ` — ${design.attachments.length} file` : ''}${invoice ? ` — bozza fattura ${invoice.invoiceNumber}` : ''}`,
+        html: summaryHtml.replace('</body></html>', W.ownerBlockHtml(order, buyerEmail, { metadata: md }, design.attachments.length) + inv.html + ddt.html + ups.html + '</body></html>'),
+        attachments: [...design.attachments, inv.attachment, ddt.attachment, ups.attachment].filter(Boolean),
       });
       console.log('Owner notification sent to', W.OWNER_EMAIL, 'with', design.attachments.length, 'file(s)');
       const { put, del } = require('@vercel/blob');
