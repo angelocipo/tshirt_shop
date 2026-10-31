@@ -24,6 +24,7 @@
   <script defer src="i18n.js"></script>
   <script defer src="site-nav.js"></script>
   <script defer src="nav-mobile.js"></script>
+  <script defer src="filtro-sezioni.js"></script>
   <script defer src="consent.js" data-ga="G-4XJG8VZY6S" data-fbq="817112403879732"></script>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="_ds/modernist-265b41d5-1cb3-49cc-9ae4-806afd25a945/styles.css">
@@ -82,7 +83,7 @@
   <nav class="nav" data-site-nav style="margin: 0 0 var(--space-6); padding-inline: 0;"></nav>
 
   <nav aria-label="Breadcrumb" style="font-size:12.5px;color:var(--color-neutral-700);margin-bottom:var(--space-4);">
-    <a href="index.html">Tshirt Shop Online</a> / <span data-en="Workwear">Lavoro</span> / <span data-en="High visibility">Alta visibilità</span>
+    <a href="index.html">Tshirt Shop Online</a> / <a href="lavoro.html" data-en="Workwear">Lavoro</a> / <span data-en="High visibility">Alta visibilità</span>
   </nav>
 
   <header style="margin-bottom: var(--space-8);">
@@ -90,8 +91,17 @@
     <p style="font-size:19px;font-weight:600;margin:0 0 var(--space-2);" data-en="Impossible to miss.">Impossibile non vederti.</p>
     <p style="font-size:16px;line-height:1.6;margin:0;color:var(--color-neutral-700);" data-en="Twenty-six models: T-shirts, polos, sweatshirts, vests, jackets and trousers. Personalised with your logo. Prices on request — tell us the model and the quantity.">Ventisei modelli: magliette, polo, felpe, gilet, giacche e pantaloni. Personalizzati con il tuo logo. Prezzi su richiesta: dicci modello e quantità.</p>
   </header>
+  <nav aria-label="Categorie" data-filtro-nav style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin:calc(var(--space-8) * -0.5) 0 var(--space-8);">
+    <a class="btn btn-primary" href="#tutti" data-filtro="tutti" style="text-decoration:none;" data-en="All">Tutti</a>
+    <a class="btn btn-secondary" href="#sez-magliette" data-filtro="sez-magliette" style="text-decoration:none;" data-en="T-shirts">Magliette</a>
+    <a class="btn btn-secondary" href="#sez-polo" data-filtro="sez-polo" style="text-decoration:none;" data-en="Polos">Polo</a>
+    <a class="btn btn-secondary" href="#sez-felpe" data-filtro="sez-felpe" style="text-decoration:none;" data-en="Sweatshirts">Felpe</a>
+    <a class="btn btn-secondary" href="#sez-gilet" data-filtro="sez-gilet" style="text-decoration:none;" data-en="Vests">Gilet</a>
+    <a class="btn btn-secondary" href="#sez-giacche-e-parka" data-filtro="sez-giacche-e-parka" style="text-decoration:none;" data-en="Jackets & parkas">Giacche e parka</a>
+    <a class="btn btn-secondary" href="#sez-pantaloni" data-filtro="sez-pantaloni" style="text-decoration:none;" data-en="Trousers">Pantaloni</a>
+  </nav>
 
-  <section style="margin-bottom: var(--space-8);">
+  <section id="sez-magliette" data-sez="sez-magliette" style="margin-bottom: var(--space-8);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="High-vis T-shirts">Magliette</h2>
     <div class="cat-list">
       <a class="cat-item" href="hv-tauri.html">
@@ -113,7 +123,7 @@
     </div>
   </section>
 
-  <section style="margin-bottom: var(--space-8);">
+  <section id="sez-polo" data-sez="sez-polo" style="margin-bottom: var(--space-8);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="High-vis polos">Polo</h2>
     <div class="cat-list">
       <a class="cat-item" href="hv-foran.html">
@@ -183,7 +193,7 @@
     </div>
   </section>
 
-  <section style="margin-bottom: var(--space-8);">
+  <section id="sez-felpe" data-sez="sez-felpe" style="margin-bottom: var(--space-8);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="High-vis sweatshirts">Felpe</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Buongiorno%2C%20vorrei%20un%20preventivo%20per%20SPICA%20HV9314%20(alta%20visibilit%C3%A0).">
@@ -197,7 +207,7 @@
     </div>
   </section>
 
-  <section style="margin-bottom: var(--space-8);">
+  <section id="sez-gilet" data-sez="sez-gilet" style="margin-bottom: var(--space-8);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="High-vis vests">Gilet</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Buongiorno%2C%20vorrei%20un%20preventivo%20per%20PERSEI%20HV9313%20(alta%20visibilit%C3%A0).">
@@ -235,7 +245,7 @@
     </div>
   </section>
 
-  <section style="margin-bottom: var(--space-8);">
+  <section id="sez-giacche-e-parka" data-sez="sez-giacche-e-parka" style="margin-bottom: var(--space-8);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="High-vis jackets & parkas">Giacche e parka</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Buongiorno%2C%20vorrei%20un%20preventivo%20per%20ALTAIR%20HV9305%20(alta%20visibilit%C3%A0).">
@@ -273,7 +283,7 @@
     </div>
   </section>
 
-  <section style="margin-bottom: var(--space-8);">
+  <section id="sez-pantaloni" data-sez="sez-pantaloni" style="margin-bottom: var(--space-8);">
     <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.1;margin:0 0 var(--space-4);" data-en="High-vis trousers">Pantaloni</h2>
     <div class="cat-list">
       <a class="cat-item" href="https://api.whatsapp.com/send/?phone=393396021366&text=Buongiorno%2C%20vorrei%20un%20preventivo%20per%20LADA%20HV9328%20(alta%20visibilit%C3%A0).">

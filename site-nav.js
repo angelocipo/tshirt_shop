@@ -68,7 +68,7 @@
       { it: 'Tema', en: 'Themes', href: 'temi.html', sub: [
         { it: 'Italian Lifestyle', en: 'Italian Lifestyle', href: 'temi.html#italian-lifestyle' },
       ] },
-      { it: 'Lavoro', en: 'Workwear', href: 'abbigliamento-lavoro-personalizzato.html', sub: [
+      { it: 'Lavoro', en: 'Workwear', href: 'lavoro.html', sub: [
         { it: 'Alta visibilità', en: 'High visibility', href: 'alta-visibilita.html' },
         { it: 'Camicie', en: 'Shirts', href: 'camicie.html' },
         { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html' },
