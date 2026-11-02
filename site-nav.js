@@ -35,6 +35,7 @@
         { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici-uomo.html' },
         { it: 'Sport', en: 'Sport', href: 'sport-uomo.html' },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html' },
+        { it: 'Gilet', en: 'Vests', href: 'gilet-uomo.html' },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-uomo.html' },
         { it: 'Stampa Oro, Argento, Ologramma', en: 'Gold, Silver, Hologram Print', href: 'maglietta-oro-argento-ologramma.html' },
       ] },
@@ -45,6 +46,7 @@
         { it: 'Camici da laboratorio', en: 'Lab coats', href: 'camici.html' },
         { it: 'Sport', en: 'Sport', href: 'sport-donna.html' },
         { it: 'Felpe', en: 'Sweatshirts', href: 'felpe.html' },
+        { it: 'Gilet', en: 'Vests', href: 'gilet-donna.html' },
         { it: 'Giubbotti', en: 'Jackets', href: 'giubbotti-donna.html' },
       ] },
       { it: 'Bambino', en: 'Kids', href: 'bambino.html', sub: [
