@@ -97,60 +97,61 @@ const BASICA_CAP_PRINT_TIERS = [
   { min: 10, price: 3.8 }, { min: 20, price: 3.5 }, { min: 50, price: 3.2 }, { min: 100, price: 3 },
 ];
 // --- Alta visibilità Roly (mirror delle pagine hv-*.html) ---
-// Prezzo capo = listino di acquisto della TAGLIA × moltiplicatore della fascia quantità.
+// Prezzo capo = listino di acquisto della TAGLIA (IVA 22% inclusa: i listini Roly sono IVA esclusa) × moltiplicatore della fascia quantità.
+// Dal 2 nov 2026 tutti i prodotti Roly usano la scala 1,8: 1,80 a 1 pz → 1,50 da 100 pz.
 // Minimo ordine 5 pz; le fasce sotto i 10 restano per sicurezza ma non sono raggiungibili.
 const HV_QTY_MULT = [
-  { min: 1, mult: 5.00 }, { min: 2, mult: 4.50 }, { min: 5, mult: 4.20 },
-  { min: 10, mult: 3.80 }, { min: 20, mult: 3.50 }, { min: 50, mult: 3.20 },
-  { min: 100, mult: 3.00 },
+  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
+  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
+  { min: 100, mult: 1.50 },
 ];
 function hvMult(qty) { let t = HV_QTY_MULT[0]; for (const x of HV_QTY_MULT) if (qty >= x.min) t = x; return t.mult; }
 const HV_BASE = {
-  'hv-delta': {"S":4.65,"M":4.65,"L":4.65,"XL":4.65,"XXL":4.65,"XXXL":4.9,"XXXXL":5.2},
-  'hv-tauri': {"S":8.95,"M":8.95,"L":8.95,"XL":8.95,"XXL":8.95,"XXXL":9.75,"XXXXL":10},
-  'hv-vega': {"S":6.5,"M":6.5,"L":6.5,"XL":6.5,"XXL":6.5,"XXXL":6.9,"XXXXL":7.25},
-  'hv-vega-ls': {"S":8.5,"M":8.5,"L":8.5,"XL":8.5,"XXL":8.5,"XXXL":8.95,"XXXXL":9.5},
-  'hv-atrio': {"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5,"XXXXL":11},
-  'hv-atrio-ls': {"S":12.5,"M":12.5,"L":12.5,"XL":12.5,"XXL":12.5,"XXXL":13.15,"XXXXL":13.8},
-  'prince-donna': {"S":4.9,"M":4.9,"L":4.9,"XL":4.9,"XXL":4.9,"XXXL":5.9},
-  'extreme': {"S":2.75,"M":2.75,"L":2.75,"XL":2.75,"XXL":2.75,"XXXL":3.15,"XXXXL":3.45},
-  'extreme-donna': {"S":2.75,"M":2.75,"L":2.75,"XL":2.75,"XXL":2.75,"XXXL":3.15},
-  'extreme-kids': {"3/4":1.95,"5/6":1.95,"7/8":1.95,"9/10":1.95,"11/12":1.95},
-  'prince-polo': {"S":4.9,"M":4.9,"L":4.9,"XL":4.9,"XXL":4.9,"XXXL":5.9},
-  'aifos': {"S":6.95,"M":6.95,"L":6.95,"XL":6.95,"XXL":6.95,"XXXL":7.65},
-  'aifos-ls': {"S":7.25,"M":7.25,"L":7.25,"XL":7.25,"XXL":7.25,"XXXL":7.65},
-  'moscu': {"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
-  'vaccine-donna': {"XS":7.95,"S":7.95,"M":7.95,"L":7.95,"XL":7.95,"XXL":7.95},
-  'vaccine': {"XS":7.95,"S":7.95,"M":7.95,"L":7.95,"XL":7.95,"XXL":7.95,"XXXL":7.95,"XXXXL":7.95},
-  'sofia-ls': {"S":7.25,"M":7.25,"L":7.25,"XL":7.25,"XXL":7.25,"XXXL":7.25},
-  'sofia': {"S":5.95,"M":5.95,"L":5.95,"XL":5.95,"XXL":5.95,"XXXL":6.25},
-  'moscu-donna': {"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":9.95},
-  'hv-polaris': {"S":4.95,"M":4.95,"L":4.95,"XL":4.95,"XXL":4.95,"XXXL":5.5,"XXXXL":5.95},
-  'hv-foran': {"XS":7.95,"S":7.95,"M":7.95,"L":7.95,"XL":7.95,"XXL":7.95,"XXXL":8.35},
-  'serena': {"S":9.25,"M":9.25,"L":9.25,"XL":9.25,"XXL":9.25},
-  'murray': {"S":8.65,"M":8.65,"L":8.65,"XL":8.65,"XXL":8.65},
-  'slam-donna': {"S":2.6,"M":2.6,"L":2.6,"XL":2.6,"XXL":2.6},
-  'slam': {"S":2.6,"M":2.6,"L":2.6,"XL":2.6,"XXL":2.6,"XXXL":2.8},
-  'monzha': {"S":2.95,"M":2.95,"L":2.95,"XL":2.95,"XXL":2.95,"XXXL":3.41},
-  'tormo': {"S":3.75,"M":3.75,"L":3.75,"XL":3.75,"XXL":3.75,"XXXL":3.95},
-  'felpa-badet': {"XS":8.4,"S":8.4,"M":8.4,"L":8.4,"XL":8.4,"XXL":8.4,"XXXL":8.8},
-  'felpa-badet-kids': {"3/4":6.92,"5/6":6.92,"7/8":6.92,"9/10":6.92,"11/12":6.92},
-  'felpa-urban': {"XS":6,"S":6,"M":6,"L":6,"XL":6,"XXL":6,"XXXL":6.6,"XXXXL":7},
-  'felpa-urban-kids': {"3/4":5.2,"5/6":5.2,"7/8":5.2,"9/10":5.2,"11/12":5.2},
-  'felpa-ulan': {"XS":7.6,"S":7.6,"M":7.6,"L":7.6,"XL":7.6,"XXL":7.6,"XXXL":7.84},
-  'felpa-ulan-kids': {"3/4":6.08,"5/6":6.08,"7/8":6.08,"9/10":6.08,"11/12":6.08},
-  'felpa-clasica': {"XS":4.76,"S":4.76,"M":4.76,"L":4.76,"XL":4.76,"XXL":4.76,"XXXL":5.2},
-  'felpa-clasica-kids': {"1/2":3.96,"3/4":3.96,"5/6":3.96,"7/8":3.96,"9/10":3.96,"11/12":3.96},
-  'felpa-aneto': {"XS":6.8,"S":6.8,"M":6.8,"L":6.8,"XL":6.8,"XXL":6.8,"XXXL":7.36},
+  'hv-delta': {"S":5.67,"M":5.67,"L":5.67,"XL":5.67,"XXL":5.67,"XXXL":5.98,"XXXXL":6.34},
+  'hv-tauri': {"S":10.92,"M":10.92,"L":10.92,"XL":10.92,"XXL":10.92,"XXXL":11.9,"XXXXL":12.2},
+  'hv-vega': {"S":7.93,"M":7.93,"L":7.93,"XL":7.93,"XXL":7.93,"XXXL":8.42,"XXXXL":8.85},
+  'hv-vega-ls': {"S":10.37,"M":10.37,"L":10.37,"XL":10.37,"XXL":10.37,"XXXL":10.92,"XXXXL":11.59},
+  'hv-atrio': {"S":12.14,"M":12.14,"L":12.14,"XL":12.14,"XXL":12.14,"XXXL":12.81,"XXXXL":13.42},
+  'hv-atrio-ls': {"S":15.25,"M":15.25,"L":15.25,"XL":15.25,"XXL":15.25,"XXXL":16.04,"XXXXL":16.84},
+  'prince-donna': {"S":5.98,"M":5.98,"L":5.98,"XL":5.98,"XXL":5.98,"XXXL":7.2},
+  'extreme': {"S":3.36,"M":3.36,"L":3.36,"XL":3.36,"XXL":3.36,"XXXL":3.84,"XXXXL":4.21},
+  'extreme-donna': {"S":3.36,"M":3.36,"L":3.36,"XL":3.36,"XXL":3.36,"XXXL":3.84},
+  'extreme-kids': {"3/4":2.38,"5/6":2.38,"7/8":2.38,"9/10":2.38,"11/12":2.38},
+  'prince-polo': {"S":5.98,"M":5.98,"L":5.98,"XL":5.98,"XXL":5.98,"XXXL":7.2},
+  'aifos': {"S":8.48,"M":8.48,"L":8.48,"XL":8.48,"XXL":8.48,"XXXL":9.33},
+  'aifos-ls': {"S":8.85,"M":8.85,"L":8.85,"XL":8.85,"XXL":8.85,"XXXL":9.33},
+  'moscu': {"S":12.14,"M":12.14,"L":12.14,"XL":12.14,"XXL":12.14,"XXXL":12.81},
+  'vaccine-donna': {"XS":9.7,"S":9.7,"M":9.7,"L":9.7,"XL":9.7,"XXL":9.7},
+  'vaccine': {"XS":9.7,"S":9.7,"M":9.7,"L":9.7,"XL":9.7,"XXL":9.7,"XXXL":9.7,"XXXXL":9.7},
+  'sofia-ls': {"S":8.85,"M":8.85,"L":8.85,"XL":8.85,"XXL":8.85,"XXXL":8.85},
+  'sofia': {"S":7.26,"M":7.26,"L":7.26,"XL":7.26,"XXL":7.26,"XXXL":7.63},
+  'moscu-donna': {"S":12.14,"M":12.14,"L":12.14,"XL":12.14,"XXL":12.14,"XXXL":12.14},
+  'hv-polaris': {"S":6.04,"M":6.04,"L":6.04,"XL":6.04,"XXL":6.04,"XXXL":6.71,"XXXXL":7.26},
+  'hv-foran': {"XS":9.7,"S":9.7,"M":9.7,"L":9.7,"XL":9.7,"XXL":9.7,"XXXL":10.19},
+  'serena': {"S":11.29,"M":11.29,"L":11.29,"XL":11.29,"XXL":11.29},
+  'murray': {"S":10.55,"M":10.55,"L":10.55,"XL":10.55,"XXL":10.55},
+  'slam-donna': {"S":3.17,"M":3.17,"L":3.17,"XL":3.17,"XXL":3.17},
+  'slam': {"S":3.17,"M":3.17,"L":3.17,"XL":3.17,"XXL":3.17,"XXXL":3.42},
+  'monzha': {"S":3.6,"M":3.6,"L":3.6,"XL":3.6,"XXL":3.6,"XXXL":4.16},
+  'tormo': {"S":4.58,"M":4.58,"L":4.58,"XL":4.58,"XXL":4.58,"XXXL":4.82},
+  'felpa-badet': {"XS":10.25,"S":10.25,"M":10.25,"L":10.25,"XL":10.25,"XXL":10.25,"XXXL":10.74},
+  'felpa-badet-kids': {"3/4":8.44,"5/6":8.44,"7/8":8.44,"9/10":8.44,"11/12":8.44},
+  'felpa-urban': {"XS":7.32,"S":7.32,"M":7.32,"L":7.32,"XL":7.32,"XXL":7.32,"XXXL":8.05,"XXXXL":8.54},
+  'felpa-urban-kids': {"3/4":6.34,"5/6":6.34,"7/8":6.34,"9/10":6.34,"11/12":6.34},
+  'felpa-ulan': {"XS":9.27,"S":9.27,"M":9.27,"L":9.27,"XL":9.27,"XXL":9.27,"XXXL":9.56},
+  'felpa-ulan-kids': {"3/4":7.42,"5/6":7.42,"7/8":7.42,"9/10":7.42,"11/12":7.42},
+  'felpa-clasica': {"XS":5.81,"S":5.81,"M":5.81,"L":5.81,"XL":5.81,"XXL":5.81,"XXXL":6.34},
+  'felpa-clasica-kids': {"1/2":4.83,"3/4":4.83,"5/6":4.83,"7/8":4.83,"9/10":4.83,"11/12":4.83},
+  'felpa-aneto': {"XS":8.3,"S":8.3,"M":8.3,"L":8.3,"XL":8.3,"XXL":8.3,"XXXL":8.98},
   'felpa-fuji': {"S":10.39,"M":10.39,"L":10.39,"XL":10.39,"XXL":10.39,"XXXL":10.93},
-  'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
+  'hv-foran-ls': {"XS":12.14,"S":12.14,"M":12.14,"L":12.14,"XL":12.14,"XXL":12.14,"XXXL":12.81},
   'gilet-jannu': {"XS":4.83,"S":4.83,"M":4.83,"L":4.83,"XL":4.83,"XXL":4.83},
 };
-// Le camicie hanno una scala moltiplicatore propria (più bassa): 3,00 a 1 pz → 2,00 da 100 pz.
+// Camicie, sport e felpe: scala 1,8 (1,80 → 1,50), uguale a tutti i Roly.
 const CAMICIE_QTY_MULT = [
-  { min: 1, mult: 3.00 }, { min: 2, mult: 2.90 }, { min: 5, mult: 2.80 },
-  { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
-  { min: 100, mult: 2.00 },
+  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
+  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
+  { min: 100, mult: 1.50 },
 ];
 const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids', 'felpa-urban', 'felpa-urban-kids', 'felpa-ulan', 'felpa-ulan-kids', 'felpa-clasica', 'felpa-clasica-kids', 'felpa-aneto'];
 // Scala moltiplicatore 1,8: 1,80 a 1 pz → 1,50 da 100 pz (Felpa Fuji, Gilet Jannu).
@@ -160,10 +161,10 @@ const ROLY18_QTY_MULT = [
   { min: 100, mult: 1.50 },
 ];
 const ROLY18_SLUGS = ['felpa-fuji', 'gilet-jannu'];
-// Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
+// Polo Prince ed Extreme: scala 1,8 (1,80 → 1,50), uguale a tutti i Roly.
 const POLO_QTY_MULT = [
-  { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
-  { min: 10, mult: 1.85 }, { min: 20, mult: 1.70 }, { min: 50, mult: 1.57 },
+  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
+  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
   { min: 100, mult: 1.50 },
 ];
 const POLO_SLUGS = ['prince-polo', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
