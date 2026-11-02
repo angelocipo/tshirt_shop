@@ -142,8 +142,9 @@ const HV_BASE = {
   'felpa-clasica': {"XS":4.76,"S":4.76,"M":4.76,"L":4.76,"XL":4.76,"XXL":4.76,"XXXL":5.2},
   'felpa-clasica-kids': {"1/2":3.96,"3/4":3.96,"5/6":3.96,"7/8":3.96,"9/10":3.96,"11/12":3.96},
   'felpa-aneto': {"XS":6.8,"S":6.8,"M":6.8,"L":6.8,"XL":6.8,"XXL":6.8,"XXXL":7.36},
-  'felpa-fuji': {"S":8.52,"M":8.52,"L":8.52,"XL":8.52,"XXL":8.52,"XXXL":8.96},
+  'felpa-fuji': {"S":10.39,"M":10.39,"L":10.39,"XL":10.39,"XXL":10.39,"XXXL":10.93},
   'hv-foran-ls': {"XS":9.95,"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5},
+  'gilet-jannu': {"XS":4.83,"S":4.83,"M":4.83,"L":4.83,"XL":4.83,"XXL":4.83},
 };
 // Le camicie hanno una scala moltiplicatore propria (più bassa): 3,00 a 1 pz → 2,00 da 100 pz.
 const CAMICIE_QTY_MULT = [
@@ -151,7 +152,14 @@ const CAMICIE_QTY_MULT = [
   { min: 10, mult: 2.60 }, { min: 20, mult: 2.40 }, { min: 50, mult: 2.20 },
   { min: 100, mult: 2.00 },
 ];
-const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids', 'felpa-urban', 'felpa-urban-kids', 'felpa-ulan', 'felpa-ulan-kids', 'felpa-clasica', 'felpa-clasica-kids', 'felpa-aneto', 'felpa-fuji'];
+const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids', 'felpa-urban', 'felpa-urban-kids', 'felpa-ulan', 'felpa-ulan-kids', 'felpa-clasica', 'felpa-clasica-kids', 'felpa-aneto'];
+// Scala moltiplicatore 1,8: 1,80 a 1 pz → 1,50 da 100 pz (Felpa Fuji, Gilet Jannu).
+const ROLY18_QTY_MULT = [
+  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
+  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
+  { min: 100, mult: 1.50 },
+];
+const ROLY18_SLUGS = ['felpa-fuji', 'gilet-jannu'];
 // Le polo Prince seguono la scala di Austral/Star: 2,30 a 1 pz → 1,50 da 100 pz.
 const POLO_QTY_MULT = [
   { min: 1, mult: 2.30 }, { min: 2, mult: 2.15 }, { min: 5, mult: 2.00 },
@@ -160,7 +168,8 @@ const POLO_QTY_MULT = [
 ];
 const POLO_SLUGS = ['prince-polo', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
 function slugMult(slug, qty) {
-  const tiers = CAMICIE_SLUGS.includes(slug) ? CAMICIE_QTY_MULT
+  const tiers = ROLY18_SLUGS.includes(slug) ? ROLY18_QTY_MULT
+    : CAMICIE_SLUGS.includes(slug) ? CAMICIE_QTY_MULT
     : POLO_SLUGS.includes(slug) ? POLO_QTY_MULT : HV_QTY_MULT;
   let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t.mult;
 }
@@ -588,10 +597,18 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
-  // Felpa Fuji (Roly SU1105) — moltiplicatore 3: 3,00 → 2,00.
+  // Felpa Fuji (Roly SU1105) — costo 10,65 € + IVA −20% = 10,39 (XXXL 11,20 + IVA → 10,93); moltiplicatore 1,8: 1,80 → 1,50.
   'felpa-fuji': { nome: 'Felpa Fuji', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('felpa-fuji', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('felpa-fuji', 1, null) * slugMult('felpa-fuji', qty) / slugMult('felpa-fuji', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // Gilet Jannu (Roly 6684) — costo 6,04 € IVA incl. (4,95 + IVA) −20% = 4,83; moltiplicatore 1,8: 1,80 → 1,50.
+  'gilet-jannu': { nome: 'Gilet Jannu', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('gilet-jannu', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('gilet-jannu', 1, null) * slugMult('gilet-jannu', qty) / slugMult('gilet-jannu', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
