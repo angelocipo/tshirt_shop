@@ -510,7 +510,7 @@ class Component extends DCLogic {
       swatchClass: 'swatch' + (i === st.colorIndex ? ' swatch-selected' : ''),
       select: () => this.setState({ colorIndex: i, galleryIdx: null }),
     }));
-    const thumbs = GALLERY.map((t, k) => ({ ...t, cls: 'thumb' + (st.galleryIdx === k || (k === 0 && st.galleryIdx == null) ? ' thumb-selected' : ''), select: () => this.setState({ galleryIdx: k === 0 ? null : k }) }));
+    const thumbs = GALLERY.map((t, k) => ({ ...t, cls: 'thumb' + (st.galleryIdx === k || (k === 0 && st.galleryIdx == null && st.colorIndex == null) ? ' thumb-selected' : ''), select: () => this.setState({ galleryIdx: k }) }));
     const lum = (hex) => {
       const h = hex.replace('#', '');
       const [r, g, b] = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255)
