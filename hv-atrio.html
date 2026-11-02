@@ -484,13 +484,13 @@ const DEFAULT_HERO_IMG = 'img/hv-atrio-hv9318-plain.webp';
 const MIN_QTY = 5;
 const SIZES = ["S","M","L","XL","XXL","XXXL","XXXXL"];
 const SIZE_MEASURE = {"S":"A 51 × B 69","M":"A 54 × B 71","L":"A 57 × B 73","XL":"A 60 × B 75","XXL":"A 64 × B 77","XXXL":"A 68 × B 79","XXXXL":"A 72 × B 80"};
-// Listino Roly HV9318 per taglia (prezzo di acquisto) × moltiplicatore della fascia quantità.
+// Listino Roly HV9318 per taglia (prezzo di acquisto + IVA 22%) × moltiplicatore della fascia quantità.
 // Ogni modifica va replicata in api/_pricing-data.js (validazione server).
-const BASE_PRICE = {"S":9.95,"M":9.95,"L":9.95,"XL":9.95,"XXL":9.95,"XXXL":10.5,"XXXXL":11};
+const BASE_PRICE = {"S":12.14,"M":12.14,"L":12.14,"XL":12.14,"XXL":12.14,"XXXL":12.81,"XXXXL":13.42};
 const QTY_MULT = [
-  { min: 1, mult: 5.00 }, { min: 2, mult: 4.50 }, { min: 5, mult: 4.20 },
-  { min: 10, mult: 3.80 }, { min: 20, mult: 3.50 }, { min: 50, mult: 3.20 },
-  { min: 100, mult: 3.00 },
+  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
+  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
+  { min: 100, mult: 1.50 },
 ];
 function qtyMult(qty) { let t = QTY_MULT[0]; for (const x of QTY_MULT) if (qty >= x.min) t = x; return t.mult; }
 function sizeUnitPrice(size, qty) { return Math.round((BASE_PRICE[size] || 0) * qtyMult(qty) * 100) / 100; }
