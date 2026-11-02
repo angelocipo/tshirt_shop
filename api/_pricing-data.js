@@ -79,6 +79,11 @@ const SHOPPER_HILL_PRICE_TIERS = [
 const SHOPPER_HILL_DISCOUNT_TIERS = [...TSHIRT_DISCOUNT_TIERS,
   { min: 150, mult: 0.25928571 }, { min: 200, mult: 0.19428571 }, { min: 250, mult: 0.13642857 }, { min: 300, mult: 0.09642857 }, { min: 350, mult: 0.06836735 }, { min: 500, mult: 0.06428571 }, { min: 1000, mult: 0.06071429 },
 ];
+// Zaino Siox (Stamina MO1869) — costo 2,9579 € + IVA = 3,61 € × scala 1,8. Allineato a BAG_PRICE_TIERS in zaino-siox.html.
+const ZAINO_SIOX_PRICE_TIERS = [
+  { min: 1, price: 6.50 }, { min: 2, price: 6.32 }, { min: 5, price: 6.14 },
+  { min: 10, price: 5.96 }, { min: 20, price: 5.78 }, { min: 50, price: 5.60 }, { min: 100, price: 5.42 },
+];
 // Zaino Hamelin — prezzo zaino (senza stampa), listino fornitore × moltiplicatore fascia qty.
 const ZAINO_HAMELIN_PRICE_TIERS = [
   { min: 1, price: 0.61 }, { min: 2, price: 0.60 }, { min: 5, price: 0.58 },
@@ -630,6 +635,10 @@ const PRICING = {
   'uranus-cap': { nome: 'Cappellino Uranus', type: 'cap',
     garmentUnitPrice: (qty) => pickTier(URANUS_CAP_PRICE_TIERS, qty).price,
     printUnitPrice: (qty) => pickTier(BASICA_CAP_PRINT_TIERS, qty).price },
+  'zaino-siox': { nome: 'Zaino Siox', type: 'tshirt',
+    garmentUnitPrice: (qty) => pickTier(ZAINO_SIOX_PRICE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
   'zaino-hamelin': { nome: 'Zaino Hamelin', type: 'tshirt',
     garmentUnitPrice: (qty) => pickTier(ZAINO_HAMELIN_PRICE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
