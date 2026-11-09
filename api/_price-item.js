@@ -278,7 +278,7 @@ function priceItem(input) {
       // Alcuni prodotti (alta visibilità) hanno un prezzo capo diverso per taglia:
       // se il listino espone garmentTotal si usa quello, altrimenti prezzo unico × quantità.
       const garmentTotal = typeof product.garmentTotal === 'function'
-        ? product.garmentTotal(qty, f.sizes, rateQty)
+        ? product.garmentTotal(qty, f.sizes, rateQty, f.colorName)
         : product.garmentUnitPrice(rateQty, isWhite) * qty;
       unitAmountCents = Math.round((garmentTotal + printTotal * qty) * 100);
       const color = (f.colorName || '').toString().slice(0, 40);

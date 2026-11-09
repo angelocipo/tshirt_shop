@@ -130,6 +130,12 @@ const HV_BASE = {
   'pegaso-donna': {"S":4.88,"M":4.88,"L":4.88,"XL":4.88,"XXL":4.88,"XXXL":6.47},
   // Polo manica lunga Carpe (Roly PO5009) — acquisto Gorfactory 09/11/2026 5,40 × IVA 22%.
   // Polo manica lunga Carpe Child (Roly PO5008) — acquisto Gorfactory 09/11/2026 3,90 × IVA 22%.
+  // Polo manica lunga Estrella (Roly PO6635) — acquisto Gorfactory 09/11/2026 × IVA 22%. Grigio 58 con listino suo.
+  'estrella-polo': {"S":6.83,"M":6.83,"L":6.83,"XL":6.83,"XXL":6.83,"XXXL":8.17,"XXXXL":8.6,"XXXXXL":9.15},
+  'estrella-polo-58': {"S":7.56,"M":7.56,"L":7.56,"XL":7.56,"XXL":7.56,"XXXL":9.03,"XXXXL":9.52,"XXXXXL":10.07},
+  'estrella-donna': {"S":6.83,"M":6.83,"L":6.83,"XL":6.83,"XXL":6.83,"XXXL":8.17},
+  'estrella-donna-58': {"S":7.56,"M":7.56,"L":7.56,"XL":7.56,"XXL":7.56,"XXXL":9.03},
+  'estrella-polo-kids': {"1/2":5.12,"3/4":5.12,"5/6":5.12,"7/8":5.12,"9/10":5.12,"11/12":5.12},
   'carpe-polo-kids': {"1/2":4.76,"3/4":4.76,"5/6":4.76,"7/8":4.76,"9/10":4.76,"11/12":4.76},
   'carpe-polo': {"S":6.59,"M":6.59,"L":6.59,"XL":6.59,"XXL":6.59},
   'pegaso-polo': {"S":4.88,"M":4.88,"L":4.88,"XL":4.88,"XXL":4.88,"XXXL":6.47,"XXXXL":6.89,"XXXXXL":7.56},
@@ -182,7 +188,7 @@ const POLO_QTY_MULT = [
   { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
   { min: 100, mult: 1.50 },
 ];
-const POLO_SLUGS = ['prince-polo', 'carpe-polo', 'carpe-polo-kids', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
+const POLO_SLUGS = ['prince-polo', 'estrella-polo', 'estrella-polo-58', 'estrella-polo-kids', 'estrella-donna', 'estrella-donna-58', 'carpe-polo', 'carpe-polo-kids', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
 // Pegaso: scala polo ridotta. Adulto (pegaso-polo, pegaso-donna) tarato su 6,59 € a 30 pz;
 // bambino tarato su 5,02 € a 50 pz (IVA compresa). Deve coincidere con QTY_MULT delle pagine.
 const PEGASO_QTY_MULT = [
@@ -437,6 +443,28 @@ const PRICING = {
   'pegaso-donna': { nome: 'Polo Pegaso Woman Premium', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('pegaso-donna', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('pegaso-donna', 1, null) * slugMult('pegaso-donna', qty) / slugMult('pegaso-donna', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  // colorName arriva da _price-item: il grigio 58 usa il listino 'estrella-polo-58'.
+  'estrella-polo': { nome: 'Polo Manica Lunga Estrella', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '58' ? 'estrella-polo-58' : 'estrella-polo', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('estrella-polo', 1, null) * slugMult('estrella-polo', qty) / slugMult('estrella-polo', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'estrella-donna': { nome: 'Polo Donna Manica Lunga Estrella', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '58' ? 'estrella-donna-58' : 'estrella-donna', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('estrella-donna', 1, null) * slugMult('estrella-donna', qty) / slugMult('estrella-donna', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'estrella-polo-kids': { nome: 'Polo Manica Lunga Estrella Bambino', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('estrella-polo-kids', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('estrella-polo-kids', 1, null) * slugMult('estrella-polo-kids', qty) / slugMult('estrella-polo-kids', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
