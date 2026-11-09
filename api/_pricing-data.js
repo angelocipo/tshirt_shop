@@ -129,6 +129,8 @@ const HV_BASE = {
   // Polo Pegaso Woman Premium (Roly PO6644) — acquisto Gorfactory 09/11/2026 × IVA 22%.
   'pegaso-donna': {"S":4.88,"M":4.88,"L":4.88,"XL":4.88,"XXL":4.88,"XXXL":6.47},
   // Polo manica lunga Carpe (Roly PO5009) — acquisto Gorfactory 09/11/2026 5,40 × IVA 22%.
+  // Polo manica lunga Carpe Child (Roly PO5008) — acquisto Gorfactory 09/11/2026 3,90 × IVA 22%.
+  'carpe-polo-kids': {"1/2":4.76,"3/4":4.76,"5/6":4.76,"7/8":4.76,"9/10":4.76,"11/12":4.76},
   'carpe-polo': {"S":6.59,"M":6.59,"L":6.59,"XL":6.59,"XXL":6.59},
   'pegaso-polo': {"S":4.88,"M":4.88,"L":4.88,"XL":4.88,"XXL":4.88,"XXXL":6.47,"XXXXL":6.89,"XXXXXL":7.56},
   'aifos': {"S":8.48,"M":8.48,"L":8.48,"XL":8.48,"XXL":8.48,"XXXL":9.33},
@@ -180,7 +182,7 @@ const POLO_QTY_MULT = [
   { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
   { min: 100, mult: 1.50 },
 ];
-const POLO_SLUGS = ['prince-polo', 'carpe-polo', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
+const POLO_SLUGS = ['prince-polo', 'carpe-polo', 'carpe-polo-kids', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
 // Pegaso: scala polo ridotta. Adulto (pegaso-polo, pegaso-donna) tarato su 6,59 € a 30 pz;
 // bambino tarato su 5,02 € a 50 pz (IVA compresa). Deve coincidere con QTY_MULT delle pagine.
 const PEGASO_QTY_MULT = [
@@ -435,6 +437,13 @@ const PRICING = {
   'pegaso-donna': { nome: 'Polo Pegaso Woman Premium', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('pegaso-donna', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('pegaso-donna', 1, null) * slugMult('pegaso-donna', qty) / slugMult('pegaso-donna', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'carpe-polo-kids': { nome: 'Polo Manica Lunga Carpe Bambino', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('carpe-polo-kids', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('carpe-polo-kids', 1, null) * slugMult('carpe-polo-kids', qty) / slugMult('carpe-polo-kids', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
