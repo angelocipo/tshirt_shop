@@ -178,8 +178,25 @@ const POLO_QTY_MULT = [
   { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
   { min: 100, mult: 1.50 },
 ];
-const POLO_SLUGS = ['prince-polo', 'pegaso-polo', 'pegaso-polo-kids', 'pegaso-donna', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
+const POLO_SLUGS = ['prince-polo', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
+// Pegaso: scala polo ridotta. Adulto (pegaso-polo, pegaso-donna) tarato su 6,59 € a 30 pz;
+// bambino tarato su 5,02 € a 50 pz (IVA compresa). Deve coincidere con QTY_MULT delle pagine.
+const PEGASO_QTY_MULT = [
+  { min: 1, mult: 1.5192 }, { min: 2, mult: 1.477 }, { min: 5, mult: 1.4348 },
+  { min: 10, mult: 1.3926 }, { min: 20, mult: 1.3504 }, { min: 50, mult: 1.3082 },
+  { min: 100, mult: 1.266 },
+];
+const PEGASO_KIDS_QTY_MULT = [
+  { min: 1, mult: 1.4948 }, { min: 2, mult: 1.4533 }, { min: 5, mult: 1.4117 },
+  { min: 10, mult: 1.3702 }, { min: 20, mult: 1.3287 }, { min: 50, mult: 1.2872 },
+  { min: 100, mult: 1.2457 },
+];
+const PEGASO_SLUGS = ['pegaso-polo', 'pegaso-donna'];
 function slugMult(slug, qty) {
+  if (PEGASO_SLUGS.includes(slug) || slug === 'pegaso-polo-kids') {
+    const tiers = slug === 'pegaso-polo-kids' ? PEGASO_KIDS_QTY_MULT : PEGASO_QTY_MULT;
+    let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t.mult;
+  }
   const tiers = ROLY18_SLUGS.includes(slug) ? ROLY18_QTY_MULT
     : CAMICIE_SLUGS.includes(slug) ? CAMICIE_QTY_MULT
     : POLO_SLUGS.includes(slug) ? POLO_QTY_MULT : HV_QTY_MULT;
