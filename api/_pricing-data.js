@@ -123,6 +123,12 @@ const HV_BASE = {
   'extreme-donna': {"S":3.36,"M":3.36,"L":3.36,"XL":3.36,"XXL":3.36,"XXXL":3.84},
   'extreme-kids': {"3/4":2.38,"5/6":2.38,"7/8":2.38,"9/10":2.38,"11/12":2.38},
   'prince-polo': {"S":5.98,"M":5.98,"L":5.98,"XL":5.98,"XXL":5.98,"XXXL":7.2},
+  // Polo Pegaso Premium (Roly PO6609) — acquisto Gorfactory 09/11/2026 × IVA 22%. 5XL solo in 01, 60, 57, 05, 55, 56, 02.
+  // Polo Pegaso Premium Bambino — PROVVISORIO: "da 3,20" Gorfactory × IVA 22%, da confermare per taglia.
+  'pegaso-polo-kids': {"1/2":3.9,"3/4":3.9,"5/6":3.9,"7/8":3.9,"9/10":3.9,"11/12":3.9},
+  // Polo Pegaso Woman Premium (Roly PO6644) — acquisto Gorfactory 09/11/2026 × IVA 22%.
+  'pegaso-donna': {"S":4.88,"M":4.88,"L":4.88,"XL":4.88,"XXL":4.88,"XXXL":6.47},
+  'pegaso-polo': {"S":4.88,"M":4.88,"L":4.88,"XL":4.88,"XXL":4.88,"XXXL":6.47,"XXXXL":6.89,"XXXXXL":7.56},
   'aifos': {"S":8.48,"M":8.48,"L":8.48,"XL":8.48,"XXL":8.48,"XXXL":9.33},
   'aifos-ls': {"S":8.85,"M":8.85,"L":8.85,"XL":8.85,"XXL":8.85,"XXXL":9.33},
   'moscu': {"S":12.14,"M":12.14,"L":12.14,"XL":12.14,"XXL":12.14,"XXXL":12.81},
@@ -172,7 +178,7 @@ const POLO_QTY_MULT = [
   { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
   { min: 100, mult: 1.50 },
 ];
-const POLO_SLUGS = ['prince-polo', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
+const POLO_SLUGS = ['prince-polo', 'pegaso-polo', 'pegaso-polo-kids', 'pegaso-donna', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
 function slugMult(slug, qty) {
   const tiers = ROLY18_SLUGS.includes(slug) ? ROLY18_QTY_MULT
     : CAMICIE_SLUGS.includes(slug) ? CAMICIE_QTY_MULT
@@ -396,6 +402,27 @@ const PRICING = {
   'prince-polo': { nome: 'Polo da Uomo Prince', type: 'tshirt',
     garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('prince-polo', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('prince-polo', 1, null) * slugMult('prince-polo', qty) / slugMult('prince-polo', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'pegaso-polo-kids': { nome: 'Polo Pegaso Premium Bambino', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('pegaso-polo-kids', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('pegaso-polo-kids', 1, null) * slugMult('pegaso-polo-kids', qty) / slugMult('pegaso-polo-kids', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'pegaso-donna': { nome: 'Polo Pegaso Woman Premium', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('pegaso-donna', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('pegaso-donna', 1, null) * slugMult('pegaso-donna', qty) / slugMult('pegaso-donna', 1),
+    cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
+    areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
+    discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
+
+  'pegaso-polo': { nome: 'Polo Pegaso Premium', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('pegaso-polo', qty, sizes, rateQty),
+    garmentUnitPrice: (qty) => hvGarmentTotal('pegaso-polo', 1, null) * slugMult('pegaso-polo', qty) / slugMult('pegaso-polo', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },

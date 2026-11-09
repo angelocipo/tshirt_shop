@@ -289,7 +289,8 @@ function priceItem(input) {
       const sizeMap = f.sizes && typeof f.sizes === 'object' ? f.sizes : null;
       let sizeLabel = '';
       if (sizeMap) {
-        sizeLabel = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL']
+        // Anche 5XL e taglie bambino, altrimenti spariscono da conferma e fattura.
+        sizeLabel = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL', 'XXXXXL', '1/2', '3/4', '5/6', '7/8', '9/10', '11/12']
           .filter((s) => (parseInt(sizeMap[s], 10) || 0) > 0)
           .map((s) => `${s}×${parseInt(sizeMap[s], 10)}`)
           .join(' ');
