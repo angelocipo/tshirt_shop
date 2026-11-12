@@ -38,6 +38,441 @@
       "permanent": true
     },
     {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/shop",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pages",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/catalogo-2024",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/contattateci.html",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog-printing-services-in-italy.html",
+      "destination": "/custom-t-shirt-printing-rome.html",
+      "permanent": true
+    },
+    {
+      "source": "/magliette-personalizzate-roma-eur",
+      "destination": "/stampa-su-magliette-centro-stampa-roma-eur.html",
+      "permanent": true
+    },
+    {
+      "source": "/stampa-magliette-roma-24h",
+      "destination": "/stampa-magliette-24-ore-roma.html",
+      "permanent": true
+    },
+    {
+      "source": "/magliette-personalizzate-da-bambino",
+      "destination": "/bambino.html",
+      "permanent": true
+    },
+    {
+      "source": "/capi-sportivi-al-100-personalizzabili",
+      "destination": "/sport.html",
+      "permanent": true
+    },
+    {
+      "source": "/category/servizio-express-stampa-t-shirt-a-roma-sud/:rest*",
+      "destination": "/servizio-express-stampa-roma-sud.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/magliette-stile-di-vita-italiano/:rest*",
+      "destination": "/temi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/tema/:rest*",
+      "destination": "/temi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/magliette-tematiche/:rest*",
+      "destination": "/temi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/sport/:rest*",
+      "destination": "/sport.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/gadget/:rest*",
+      "destination": "/cappellini.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/cappellini/:rest*",
+      "destination": "/cappellini.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/24h/:rest*",
+      "destination": "/stampa-magliette-24-ore-roma.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/felpe-uomo/:rest*",
+      "destination": "/felpe.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/felpe-donna/:rest*",
+      "destination": "/felpe.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/felpe/:rest*",
+      "destination": "/felpe.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/felpa-bambino/:rest*",
+      "destination": "/felpe-bambino.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/felpe-da-bambino/:rest*",
+      "destination": "/felpe-bambino.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/borsa-shopper/:rest*",
+      "destination": "/shopper.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/sacco-zaino/:rest*",
+      "destination": "/zaini.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/maglietta-uomo/:rest*",
+      "destination": "/tshirt-uomo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/maglietta-da-donna/:rest*",
+      "destination": "/tshirt-donna.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/maglietta-da-bambino/:rest*",
+      "destination": "/tshirt-bambino.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/magliette-stampa/:rest*",
+      "destination": "/beagle.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/polo-da-donna/:rest*",
+      "destination": "/polo-donna.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/polo-da-uomo/:rest*",
+      "destination": "/polo-uomo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/polo/:rest*",
+      "destination": "/polo-uomo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/camicia-uomo/:rest*",
+      "destination": "/camicie-uomo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/camicia/:rest*",
+      "destination": "/camicie.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/camicia/:rest*",
+      "destination": "/camicie.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/grembiuli/:rest*",
+      "destination": "/abbigliamento-lavoro-personalizzato.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/indumento-lavoro/:rest*",
+      "destination": "/lavoro.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/stampa-dtf/:rest*",
+      "destination": "/stampa-dtf-roma.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/donna/:rest*",
+      "destination": "/donna.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/uomo/:rest*",
+      "destination": "/uomo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/bambino/:rest*",
+      "destination": "/bambino.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/polo-da-uomo-stampata-miglior-prezzo-austral",
+      "destination": "/austral-polo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/polo-manica-corta",
+      "destination": "/polo-uomo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/polo-da-uomo-24h",
+      "destination": "/polo-uomo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/borse-in-cotone-poliestere-stampate",
+      "destination": "/shopper.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/1-pacco-di-25-borse-in-cotone-personalizzate-per-lo-shopping",
+      "destination": "/shopper.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/25-borse-in-cotone-personalizzate-per-lo-shopping",
+      "destination": "/shopper.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/zaino-personalizzabile",
+      "destination": "/zaini.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/camicia-uomo-manica-lunga-poliestere",
+      "destination": "/aifos-ls.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/camicia-uomo-manica-corta-poliestere-aifos",
+      "destination": "/aifos.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/camicia-donna-manica-corta-poliestere-sofia",
+      "destination": "/sofia.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/camice-da-laboratorio-poliestere-vaccine",
+      "destination": "/vaccine.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/maglietta-daje-(.*)",
+      "destination": "/magliette-con-frasi-romani-roma-eur.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/t-shirt-frasi-romane",
+      "destination": "/magliette-con-frasi-romani-roma-eur.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/magliette-stampate-con-slogan-romani-daje",
+      "destination": "/magliette-con-frasi-romani-roma-eur.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/maglietta-polpette-al-sugo-(.*)",
+      "destination": "/polpette-al-sugo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/t-shirt-tema-stile-di-vita-italiano",
+      "destination": "/temi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/maglietta-100-cotone-pettinato-single-jersey-180-gr-(.*)",
+      "destination": "/beagle.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/maglietta-di-altissima-qualita-190gr-2",
+      "destination": "/tshirt-uomo.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/magliette-da-donna-1-settimana",
+      "destination": "/tshirt-donna.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/maglietta-da-bambina-stampata",
+      "destination": "/jamaica-kids.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/maglietta-da-bambino-24h",
+      "destination": "/beagle-kids.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/maglietta-da-bambino-1-settimana",
+      "destination": "/beagle-kids.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/magliette-techniche-personalizzate-da-uomo-tinta-unica-bahrain",
+      "destination": "/bahrain.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/magliette-techniche-personalizzate-da-donna-tinta-unica-bahrain",
+      "destination": "/bahrain-donna.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/magliette-techniche-personalizzate-kids-tinta-unica-bahrain",
+      "destination": "/bahrain-kids.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/felpa-da-uomo-cappuccio-zip-intera",
+      "destination": "/felpa-ulan.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/felpa-da-uomo-e-donna-24h",
+      "destination": "/felpe.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/t-shirt-con-stampa-in-oro-argento-e-olografico",
+      "destination": "/maglietta-oro-argento-ologramma.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/magliette-effetto-jeans-donna",
+      "destination": "/maglietta-effetto-jeans-donna.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/cappellini-personalizzati-miglior-prezzo-basica",
+      "destination": "/cappellini-basica.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/cappellini-personalizzati-migliore-qualita-uranus",
+      "destination": "/cappellini-uranus.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/promozione-100-magliette-stampa-e213-cad",
+      "destination": "/promozione-100-magliette.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/magliette-maturita-2026-personalizzate",
+      "destination": "/magliette-personalizzate-eventi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/t-shirt-usa-50-motivi",
+      "destination": "/magliette-personalizzate-eventi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/t-shirt-tema-50-anni",
+      "destination": "/magliette-personalizzate-eventi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/t-shirt-tema-diplomata-scientifico",
+      "destination": "/magliette-personalizzate-eventi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/t-shirt-tema-estate",
+      "destination": "/magliette-personalizzate-eventi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/magliette-tematiche-halloween-personalizzabile-24h-urgent",
+      "destination": "/magliette-personalizzate-eventi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/stampa-maglietta-warhol-pop-art-roma-eur",
+      "destination": "/esempi.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/stampa-magliette-fornite-roma-eur",
+      "destination": "/solo-stampa.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/2-grembiuli-personalizzate-per-uomo-donna",
+      "destination": "/abbigliamento-lavoro-personalizzato.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/kit-da-lavoro-personalizzabile-safe-working-t-shirt-pantalone-felpa-e-gilet",
+      "destination": "/lavoro.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/1-pacco-di-20-gilet-alta-visibilita-personalizzati-rapidi",
+      "destination": "/alta-visibilita.html",
+      "permanent": true
+    },
+    {
+      "source": "/product/t-shirt-con-",
+      "destination": "/maglietta-oro-argento-ologramma.html",
+      "permanent": true
+    },
+    {
       "source": "/:page.dc.html",
       "destination": "/:page.html",
       "permanent": true
