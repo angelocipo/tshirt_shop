@@ -216,18 +216,57 @@
     }
   }
 
+
+  // Simbolo Roly in alto a destra sulle foto dei prodotti Roly (card negli elenchi e foto
+  // principale della pagina prodotto). È un livello sopra l'immagine, non dentro il file:
+  // le foto restano pulite per Google Merchant, dove i loghi sovrapposti non sono ammessi.
+  var ROLY = ["aifos-ls.html", "aifos.html", "austral-polo.html", "bahrain-donna.html", "bahrain-kids.html", "bahrain.html", "beagle-kids.html", "beagle.html", "carpe-polo-kids.html", "carpe-polo.html", "estrella-donna.html", "estrella-polo-kids.html", "estrella-polo.html", "extreme-donna.html", "extreme-kids.html", "extreme.html", "felpa-aneto.html", "felpa-badet-kids.html", "felpa-badet.html", "felpa-clasica-kids.html", "felpa-clasica.html", "felpa-fuji.html", "felpa-roma-sacra.html", "felpa-ulan-kids.html", "felpa-ulan.html", "felpa-urban-kids.html", "felpa-urban.html", "gilet-jannu.html", "hv-atrio-ls.html", "hv-atrio.html", "hv-delta.html", "hv-foran-ls.html", "hv-foran.html", "hv-polaris.html", "hv-tauri.html", "hv-vega-ls.html", "hv-vega.html", "jamaica-kids.html", "jamaica.html", "maglietta-effetto-jeans-donna.html", "maglietta-effetto-jeans.html", "maglietta-oro-argento-ologramma.html", "maglietta-roma-sacra.html", "monzha.html", "moscu-donna.html", "moscu.html", "murray.html", "nebraska-donna.html", "nebraska-kids.html", "nebraska.html", "pegaso-donna.html", "pegaso-polo-kids.html", "pegaso-polo.html", "polo-roma-sacra.html", "prince-donna.html", "prince-polo.html", "rudolph.html", "serena.html", "slam-donna.html", "slam.html", "sofia-ls.html", "sofia.html", "star-polo-donna.html", "star-polo-kids.html", "star-polo.html", "tormo.html", "vaccine-donna.html", "vaccine.html"];
+  var ROLY_CSS = 'img.roly-mark{position:absolute!important;top:12px!important;right:12px!important;left:auto!important;bottom:auto!important;width:auto!important;height:24px!important;max-width:none!important;min-width:0!important;aspect-ratio:auto!important;object-fit:contain!important;margin:0!important;padding:0!important;border:0!important;background:none!important;pointer-events:none;z-index:2;display:block!important;}';
+  function pageOf(href) {
+    var h = String(href || '').split('#')[0].split('?')[0];
+    return h.slice(h.lastIndexOf('/') + 1);
+  }
+  function addMark(img) {
+    var box = img && img.parentElement;
+    if (!box || box.querySelector(':scope > .roly-mark')) return;
+    if (getComputedStyle(box).position === 'static') box.style.position = 'relative';
+    var m = document.createElement('img');
+    m.className = 'roly-mark'; m.src = 'img/logo-roly-simbolo.webp'; m.alt = ''; m.setAttribute('aria-hidden', 'true');
+    box.appendChild(m);
+  }
+  function markRoly() {
+    if (!document.querySelector('style[data-roly-mark]')) {
+      var st = document.createElement('style'); st.setAttribute('data-roly-mark', ''); st.textContent = ROLY_CSS;
+      (document.head || document.documentElement).appendChild(st);
+    }
+    var links = document.querySelectorAll('a[href]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      if (a.closest('nav, footer') || ROLY.indexOf(pageOf(a.getAttribute('href'))) < 0) continue;
+      var img = a.querySelector('img:not(.roly-mark)');
+      if (img) addMark(img);
+    }
+    if (ROLY.indexOf(pageOf(location.pathname)) >= 0) addMark(document.getElementById('prod-hero'));
+  }
+  var markQueued = false;
+  function queueMark() {
+    if (markQueued) return; markQueued = true;
+    requestAnimationFrame(function () { markQueued = false; markRoly(); });
+  }
+
   window.tsSiteNav = { menu: MENU, mount: mount };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mount);
+    document.addEventListener('DOMContentLoaded', function () { mount(); markRoly(); });
   } else {
-    mount();
+    mount(); markRoly();
   }
   // I product page sono Design Component: React può rimontare il segnaposto.
   if (window.MutationObserver) {
     var obs = new MutationObserver(function () {
       var slots = document.querySelectorAll('[data-site-nav]:not([data-site-nav-done="1"])');
       if (slots.length) mount();
+      queueMark();
     });
     if (document.body) obs.observe(document.body, { childList: true, subtree: true });
     else document.addEventListener('DOMContentLoaded', function () { obs.observe(document.body, { childList: true, subtree: true }); });
