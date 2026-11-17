@@ -150,7 +150,7 @@
           <div class="field"><label for="inv-address">Address</label><input class="input" id="inv-address" value="{{ inv.address }}" onChange="{{ setInvAddress }}"></div>
           <div class="field"><label for="inv-city">City</label><input class="input" id="inv-city" value="{{ inv.city }}" onChange="{{ setInvCity }}"></div>
           <div class="field"><label for="inv-cap">Postal code</label><input class="input" id="inv-cap" value="{{ inv.cap }}" onChange="{{ setInvCap }}"></div>
-          <div class="field"><label for="inv-country">Country</label><input class="input" id="inv-country" value="{{ inv.country }}" onChange="{{ setInvCountry }}"></div>
+          <div class="field"><label for="inv-country">Country code</label><input class="input" id="inv-country" maxLength="2" placeholder="DE, FR, US…" value="{{ inv.country }}" onChange="{{ setInvCountry }}"></div>
         </div>
       </sc-if>
 
@@ -162,6 +162,7 @@
           <div class="field"><label for="inv-address-p">Indirizzo</label><input class="input" id="inv-address-p" value="{{ inv.address }}" onChange="{{ setInvAddress }}"></div>
           <div class="field"><label for="inv-city-p">Città</label><input class="input" id="inv-city-p" value="{{ inv.city }}" onChange="{{ setInvCity }}"></div>
           <div class="field"><label for="inv-cap-p">CAP</label><input class="input" id="inv-cap-p" value="{{ inv.cap }}" onChange="{{ setInvCap }}"></div>
+          <div class="field"><label for="inv-prov-p">Provincia</label><input class="input" id="inv-prov-p" maxLength="2" placeholder="RM" value="{{ inv.province }}" onChange="{{ setInvProvince }}"></div>
         </div>
       </sc-if>
 
@@ -174,6 +175,7 @@
           <div class="field"><label for="inv-address-a">Indirizzo sede legale</label><input class="input" id="inv-address-a" value="{{ inv.address }}" onChange="{{ setInvAddress }}"></div>
           <div class="field"><label for="inv-city-a">Città</label><input class="input" id="inv-city-a" value="{{ inv.city }}" onChange="{{ setInvCity }}"></div>
           <div class="field"><label for="inv-cap-a">CAP</label><input class="input" id="inv-cap-a" value="{{ inv.cap }}" onChange="{{ setInvCap }}"></div>
+          <div class="field"><label for="inv-prov-a">Provincia</label><input class="input" id="inv-prov-a" maxLength="2" placeholder="RM" value="{{ inv.province }}" onChange="{{ setInvProvince }}"></div>
           <div class="field"><label for="inv-pec">PEC</label><input class="input" id="inv-pec" type="email" placeholder="opzionale se inserisci Codice SDI" value="{{ inv.pec }}" onChange="{{ setInvPec }}"></div>
           <div class="field"><label for="inv-sdi">Codice SDI</label><input class="input" id="inv-sdi" placeholder="opzionale se inserisci PEC" value="{{ inv.sdi }}" onChange="{{ setInvSdi }}"></div>
         </div>
@@ -303,6 +305,24 @@
         </div>
       </div>
       <div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Altri prodotti</div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+          <a href="felpe.html" style="font-size:13.5px;">Felpe</a>
+          <a href="camicie.html" style="font-size:13.5px;">Camicie</a>
+          <a href="giubbotti-uomo.html" style="font-size:13.5px;">Giubbotti</a>
+          <a href="gilet-uomo.html" style="font-size:13.5px;">Gilet uomo</a>
+          <a href="gilet-donna.html" style="font-size:13.5px;">Gilet donna</a>
+          <a href="lavoro.html" style="font-size:13.5px;">Abbigliamento da lavoro</a>
+          <a href="alta-visibilita.html" style="font-size:13.5px;">Alta visibilità</a>
+          <a href="sport-uomo.html" style="font-size:13.5px;">Sport uomo</a>
+          <a href="sport-donna.html" style="font-size:13.5px;">Sport donna</a>
+          <a href="cappellini.html" style="font-size:13.5px;">Cappellini</a>
+          <a href="zaini.html" style="font-size:13.5px;">Zaini</a>
+          <a href="shopper.html" style="font-size:13.5px;">Shopper</a>
+          <a href="roly-rivenditore-ufficiale.html" style="font-size:13.5px;">Rivenditore ufficiale Roly</a>
+        </div>
+      </div>
+      <div>
         <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3);">Azienda</div>
         <div style="display:flex;flex-direction:column;gap:var(--space-2);">
           <a href="blog.html" style="font-size:13.5px;">Blog</a>
@@ -341,7 +361,7 @@ class Component extends DCLogic {
     productId: null, productName: '', productPrice: null, productCollection: 'misura', orderBody: null,
     cartItems: null, quotedRows: null, quoteFailed: false,
     invType: 'privato',
-    inv: { name: '', email: '', company: '', vat: '', cf: '', pec: '', sdi: '', address: '', city: '', cap: '', country: '' },
+    inv: { name: '', email: '', company: '', vat: '', cf: '', pec: '', sdi: '', address: '', city: '', cap: '', province: '', country: '' },
     shipSame: true,
     shipZone: 'roma_centro',
     ship: { name: '', phone: '', address: '', city: '', cap: '', notes: '' },
@@ -517,6 +537,8 @@ class Component extends DCLogic {
     const { invType, inv } = this.state;
     if (!inv.name || !inv.email) return 'Inserisci nome e email.';
     if (!inv.address || !inv.city || !inv.cap) return 'Inserisci un indirizzo di fatturazione completo.';
+    if (invType !== 'estero' && !/^[A-Za-z]{2}$/.test(inv.province || '')) return 'Inserisci la Provincia (sigla di 2 lettere, es. RM).';
+    if (invType === 'estero' && !/^[A-Za-z]{2}$/.test(inv.country || '')) return 'Enter the 2-letter country code (e.g. DE).';
     if (invType === 'privato' && !inv.cf) return 'Inserisci il Codice Fiscale.';
     if (invType === 'azienda' && (!inv.company || !inv.vat)) return 'Inserisci Ragione Sociale e Partita IVA.';
     if (invType === 'azienda' && !inv.pec && !inv.sdi) return 'Inserisci PEC o Codice SDI.';
@@ -645,7 +667,8 @@ class Component extends DCLogic {
       setInvAddress: (e) => this.setState({ inv: { ...this.state.inv, address: e.target.value } }),
       setInvCity: (e) => this.setState({ inv: { ...this.state.inv, city: e.target.value } }),
       setInvCap: (e) => this.setState({ inv: { ...this.state.inv, cap: e.target.value } }),
-      setInvCountry: (e) => this.setState({ inv: { ...this.state.inv, country: e.target.value } }),
+      setInvCountry: (e) => this.setState({ inv: { ...this.state.inv, country: e.target.value.toUpperCase() } }),
+      setInvProvince: (e) => this.setState({ inv: { ...this.state.inv, province: e.target.value.toUpperCase() } }),
       shipSame: s.shipSame,
       shipDifferent: !s.shipSame,
       setShipSameTrue: () => this.setState({ shipSame: true }),
