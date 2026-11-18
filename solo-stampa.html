@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Solo Stampa DTF sul Tuo Capo | Tshirt Shop Online</title>
-<meta name="description" content="Servizio di sola stampa DTF: porti o spedisci i tuoi capi, noi stampiamo. Preventivo in 30 secondi, minimo 5 pezzi, a Roma.">
+<meta name="description" content="Servizio di sola stampa DTF: porti o spedisci i tuoi capi, noi stampiamo. Preventivo in 30 secondi, minimo 10 pezzi, a Roma.">
 <link rel="canonical" href="https://www.tshirt-shop.online/solo-stampa.html">
 <meta property="og:url" content="https://www.tshirt-shop.online/solo-stampa.html">
 <meta property="og:type" content="website">
@@ -12,11 +12,11 @@
 <meta property="og:locale" content="it_IT">
 <meta property="og:locale:alternate" content="en_GB">
 <meta property="og:title" content="Solo Stampa DTF sul Tuo Capo">
-<meta property="og:description" content="Servizio di sola stampa DTF: porti o spedisci i tuoi capi, noi stampiamo. Preventivo in 30 secondi, minimo 5 pezzi, a Roma.">
+<meta property="og:description" content="Servizio di sola stampa DTF: porti o spedisci i tuoi capi, noi stampiamo. Preventivo in 30 secondi, minimo 10 pezzi, a Roma.">
 <meta property="og:image" content="https://www.tshirt-shop.online/img/solo-stampa-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
 <script src="./support.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Solo Stampa","description":"Servizio di sola stampa DTF: porti o spedisci i tuoi capi, noi stampiamo. Preventivo in 30 secondi, minimo 5 pezzi, a Roma.","url":"https://www.tshirt-shop.online/solo-stampa.html","inLanguage":"it-IT","isPartOf":{"@type":"WebSite","name":"Tshirt Shop Online","url":"https://www.tshirt-shop.online/"},"mainEntity":{"@type":"ItemList","numberOfItems":1,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.tshirt-shop.online/beagle.html","name":"Maglietta Unisex"}]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Solo Stampa","description":"Servizio di sola stampa DTF: porti o spedisci i tuoi capi, noi stampiamo. Preventivo in 30 secondi, minimo 10 pezzi, a Roma.","url":"https://www.tshirt-shop.online/solo-stampa.html","inLanguage":"it-IT","isPartOf":{"@type":"WebSite","name":"Tshirt Shop Online","url":"https://www.tshirt-shop.online/"},"mainEntity":{"@type":"ItemList","numberOfItems":1,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.tshirt-shop.online/beagle.html","name":"Maglietta Unisex"}]}}</script>
 </head>
 <body>
 <x-dc>
@@ -165,7 +165,7 @@
 
     <div class="prod-head">
       <h1 style="margin-bottom: 4px;" data-en="Print Only">Solo Stampa</h1>
-      <p style="margin: 0; font-size: 15px; color: var(--color-neutral-700); max-width: 60ch;" data-en="Your garment. Our press. DTF printing on the clothes you already have — from 5 pieces.">Il tuo capo. La nostra stampa. DTF sui capi che hai già, da 5 pezzi.</p>
+      <p style="margin: 0; font-size: 15px; color: var(--color-neutral-700); max-width: 60ch;" data-en="Your garment. Our press. DTF printing on the clothes you already have — from 10 pieces.">Il tuo capo. La nostra stampa. DTF sui capi che hai già, da 10 pezzi.</p>
     </div>
 
     <div class="col-left">
@@ -252,7 +252,7 @@
 
       <div class="prod-qty" style="margin-bottom: var(--space-4);">
         <div class="field">
-          <label for="solo-qty"><span data-en="Quantity">Quantità</span> — <span data-en="min 5 pcs">minimo 5 pz</span></label>
+          <label for="solo-qty"><span data-en="Quantity">Quantità</span> — <span data-en="min 10 pcs">minimo 10 pz</span></label>
           <div class="qty-group" style="margin-bottom: var(--space-2);">
             <button type="button" class="qty-btn" onClick="{{ decQty }}" aria-label="Diminuisci" data-en-aria="Decrease">–</button>
             <input class="qty-input" id="solo-qty" type="text" inputmode="numeric" value="{{ quantity }}" onChange="{{ setQty }}">
@@ -283,7 +283,7 @@
           <div style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 6px;" data-en="The service">Il servizio</div>
           <div style="display: grid; gap: 2px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: var(--space-3);">
             <div data-en="Print-only service: you supply the garments, we print them with DTF in Rome.">Servizio di sola stampa: i capi li fornisci tu, la stampa DTF la facciamo noi a Roma.</div>
-            <div data-en="Delivery to our lab or shipping to us is at your charge. Minimum 5 pieces.">Consegna in laboratorio o spedizione verso di noi a tuo carico. Minimo 5 pezzi.</div>
+            <div data-en="Delivery to our lab or shipping to us is at your charge. Minimum 10 pieces.">Consegna in laboratorio o spedizione verso di noi a tuo carico. Minimo 10 pezzi.</div>
             <div style="font-weight: 700; color: var(--color-text);">EAN 0652026570038</div>
           </div>
         </div>
@@ -553,7 +553,7 @@ class Component extends DCLogic {
   renderVals() {
     const st = this.state;
     const en = isEn();
-    const MIN_QTY = 5;
+    const MIN_QTY = 10;
     const totalQty = Math.max(0, Math.min(9999, st.qty || 0));
     const setQtyTo = (v) => this.setState({ qty: Math.max(0, Math.min(9999, v)) });
     const zonePrice = (key) => {
