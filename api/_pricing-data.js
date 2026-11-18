@@ -9,9 +9,7 @@ function angoliArrotondatiPrice(qty) {
 
 // --- T-Shirt Unisex (mirror of T-Shirt Product Page.html) ---
 const TSHIRT_PRICE_TIERS = [
-  { min: 1, white: 8, other: 8.8 }, { min: 5, white: 6.5, other: 7.15 },
-  { min: 10, white: 5, other: 5.5 }, { min: 20, white: 3.5, other: 3.85 },
-  { min: 50, white: 2.9, other: 3.2 }, { min: 100, white: 2.5, other: 2.75 },
+  { min: 1, white: 2.66, other: 3.01 },
 ];
 const TSHIRT_CUORE_TIERS = [
   { min: 1, price: 14 }, { min: 2, price: 10 }, { min: 5, price: 3.5 },
@@ -30,12 +28,10 @@ const TSHIRT_DISCOUNT_TIERS = [
   { min: 10, mult: 0.47 }, { min: 20, mult: 0.40 }, { min: 50, mult: 0.39 }, { min: 100, mult: 0.33 },
 ];
 const BAHRAIN_PRICE_TIERS = [
-  { min: 1, price: 6.1 }, { min: 5, price: 4.88 }, { min: 10, price: 3.78 },
-  { min: 20, price: 2.5 }, { min: 50, price: 2.2 }, { min: 100, price: 1.95 },
+  { min: 1, price: 2.39 },
 ];
 const BAHRAIN_KIDS_PRICE_TIERS = [
-  { min: 1, price: 6.1 }, { min: 5, price: 4.88 }, { min: 10, price: 3.78 },
-  { min: 20, price: 2.5 }, { min: 50, price: 2.2 }, { min: 100, price: 1.95 },
+  { min: 1, price: 2.3 },
 ];
 const POLO_PRICE_TIERS = [
   { min: 1, price: 8 }, { min: 2, price: 7.5 }, { min: 5, price: 7 },
@@ -53,17 +49,18 @@ const NEBRASKA_PRICE_TIERS = [
   { min: 1, price: 24 }, { min: 2, price: 23.5 }, { min: 5, price: 23 },
   { min: 10, price: 22.5 }, { min: 20, price: 22 }, { min: 50, price: 21.5 }, { min: 100, price: 21 },
 ];
-// Cappellino Basica — capo e stampa fronte 12×8, prezzi IVA compresa. Minimo ordine 5 pz
-// (le fasce sotto i 10 pz restano per sicurezza ma non sono raggiungibili dal configuratore).
+// Nebraska bambino: 1 € in meno dell'adulto, come in nebraska-kids.html.
+const NEBRASKA_KIDS_PRICE_TIERS = NEBRASKA_PRICE_TIERS.map((t) => ({ min: t.min, price: t.price - 1 }));
+// Cappellino Basica — capo e stampa fronte 12×8, prezzi IVA compresa. Minimo ordine 10 pz.
 const BASICA_CAP_PRICE_TIERS = [
   { min: 1, price: 5 }, { min: 5, price: 4 }, { min: 10, price: 3.1 },
   { min: 20, price: 2.2 }, { min: 50, price: 2 }, { min: 100, price: 1.8 },
 ];
 // Shopper Miso (Stamina 7618) — prezzo shopper senza stampa: costo fornitore 0,7684€ × moltiplicatori Hamelin.
 const SHOPPER_MISO_PRICE_TIERS = [
-  { min: 1, price: 1.54 }, { min: 2, price: 1.51 }, { min: 5, price: 1.46 },
-  { min: 10, price: 1.41 }, { min: 20, price: 1.38 }, { min: 50, price: 1.33 }, { min: 100, price: 1.31 },
-  { min: 150, price: 1.27 }, { min: 200, price: 1.23 }, { min: 250, price: 1.19 }, { min: 300, price: 1.15 }, { min: 350, price: 1.10 }, { min: 500, price: 1.05 }, { min: 1000, price: 1.00 },
+  { min: 1, price: 1.41 }, { min: 2, price: 1.41 }, { min: 5, price: 1.41 },
+  { min: 10, price: 1.41 }, { min: 20, price: 1.41 }, { min: 50, price: 1.41 }, { min: 100, price: 1.41 },
+  { min: 150, price: 1.41 }, { min: 200, price: 1.41 }, { min: 250, price: 1.41 }, { min: 300, price: 1.41 }, { min: 350, price: 1.41 }, { min: 500, price: 1.41 }, { min: 1000, price: 1.41 },
 ];
 // Sconto stampa Miso: come TSHIRT_DISCOUNT_TIERS + fasce 150–1000 (350 pz × 20×20 = 720 €).
 const SHOPPER_MISO_DISCOUNT_TIERS = [...TSHIRT_DISCOUNT_TIERS,
@@ -71,9 +68,9 @@ const SHOPPER_MISO_DISCOUNT_TIERS = [...TSHIRT_DISCOUNT_TIERS,
 ];
 // Shopper Hill (Stamina 7601) — prezzo shopper senza stampa: costo fornitore 0,3632€ × moltiplicatori Hamelin.
 const SHOPPER_HILL_PRICE_TIERS = [
-  { min: 1, price: 0.73 }, { min: 2, price: 0.71 }, { min: 5, price: 0.69 },
-  { min: 10, price: 0.67 }, { min: 20, price: 0.65 }, { min: 50, price: 0.63 }, { min: 100, price: 0.62 },
-  { min: 150, price: 0.60 }, { min: 200, price: 0.58 }, { min: 250, price: 0.56 }, { min: 300, price: 0.54 }, { min: 350, price: 0.52 }, { min: 500, price: 0.50 }, { min: 1000, price: 0.47 },
+  { min: 1, price: 0.66 }, { min: 2, price: 0.66 }, { min: 5, price: 0.66 },
+  { min: 10, price: 0.66 }, { min: 20, price: 0.66 }, { min: 50, price: 0.66 }, { min: 100, price: 0.66 },
+  { min: 150, price: 0.66 }, { min: 200, price: 0.66 }, { min: 250, price: 0.66 }, { min: 300, price: 0.66 }, { min: 350, price: 0.66 }, { min: 500, price: 0.66 }, { min: 1000, price: 0.66 },
 ];
 // Sconto stampa Hill: stessa scala graduale della Miso.
 const SHOPPER_HILL_DISCOUNT_TIERS = [...TSHIRT_DISCOUNT_TIERS,
@@ -81,13 +78,13 @@ const SHOPPER_HILL_DISCOUNT_TIERS = [...TSHIRT_DISCOUNT_TIERS,
 ];
 // Zaino Siox (Stamina MO1869) — costo 2,9579 € + IVA = 3,61 € × scala 1,8. Allineato a BAG_PRICE_TIERS in zaino-siox.html.
 const ZAINO_SIOX_PRICE_TIERS = [
-  { min: 1, price: 6.50 }, { min: 2, price: 6.32 }, { min: 5, price: 6.14 },
-  { min: 10, price: 5.96 }, { min: 20, price: 5.78 }, { min: 50, price: 5.60 }, { min: 100, price: 5.42 },
+  { min: 1, price: 5.42 }, { min: 2, price: 5.42 }, { min: 5, price: 5.42 },
+  { min: 10, price: 5.42 }, { min: 20, price: 5.42 }, { min: 50, price: 5.42 }, { min: 100, price: 5.42 },
 ];
 // Zaino Hamelin — prezzo zaino (senza stampa), listino fornitore × moltiplicatore fascia qty.
 const ZAINO_HAMELIN_PRICE_TIERS = [
-  { min: 1, price: 0.61 }, { min: 2, price: 0.60 }, { min: 5, price: 0.58 },
-  { min: 10, price: 0.56 }, { min: 20, price: 0.55 }, { min: 50, price: 0.53 }, { min: 100, price: 0.52 },
+  { min: 1, price: 0.55 }, { min: 2, price: 0.55 }, { min: 5, price: 0.55 },
+  { min: 10, price: 0.55 }, { min: 20, price: 0.55 }, { min: 50, price: 0.55 }, { min: 100, price: 0.55 },
 ];
 const KARIN_CAP_PRICE_TIERS = [
   { min: 1, price: 7.8 }, { min: 5, price: 6.24 }, { min: 10, price: 4.84 },
@@ -103,12 +100,12 @@ const BASICA_CAP_PRINT_TIERS = [
 ];
 // --- Alta visibilità Roly (mirror delle pagine hv-*.html) ---
 // Prezzo capo = listino di acquisto della TAGLIA (IVA 22% inclusa: i listini Roly sono IVA esclusa) × moltiplicatore della fascia quantità.
-// Dal 2 nov 2026 tutti i prodotti Roly usano la scala 1,8: 1,80 a 1 pz → 1,50 da 100 pz.
-// Minimo ordine 5 pz; le fasce sotto i 10 restano per sicurezza ma non sono raggiungibili.
+// Dal 18 nov 2026: prezzo capo = costo Roly + 50% + IVA 22%, uguale per ogni quantità (moltiplicatore fisso 1,5).
+// Minimo ordine 10 pz per modello.
 const HV_QTY_MULT = [
-  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
-  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
-  { min: 100, mult: 1.50 },
+  { min: 1, mult: 1.5 }, { min: 2, mult: 1.5 }, { min: 5, mult: 1.5 },
+  { min: 10, mult: 1.5 }, { min: 20, mult: 1.5 }, { min: 50, mult: 1.5 },
+  { min: 100, mult: 1.5 },
 ];
 function hvMult(qty) { let t = HV_QTY_MULT[0]; for (const x of HV_QTY_MULT) if (qty >= x.min) t = x; return t.mult; }
 const HV_BASE = {
@@ -125,19 +122,24 @@ const HV_BASE = {
   'prince-polo': {"S":5.98,"M":5.98,"L":5.98,"XL":5.98,"XXL":5.98,"XXXL":7.2},
   // Polo Pegaso Premium (Roly PO6609) — acquisto Gorfactory 09/11/2026 × IVA 22%. 5XL solo in 01, 60, 57, 05, 55, 56, 02.
   // Polo Pegaso Premium Bambino — PROVVISORIO: "da 3,20" Gorfactory × IVA 22%, da confermare per taglia.
-  'pegaso-polo-kids': {"1/2":3.9,"3/4":3.9,"5/6":3.9,"7/8":3.9,"9/10":3.9,"11/12":3.9},
+  'pegaso-polo-kids': {"1/2":4.27,"3/4":4.27,"5/6":4.27,"7/8":4.27,"9/10":4.27,"11/12":4.27},
   // Polo Pegaso Woman Premium (Roly PO6644) — acquisto Gorfactory 09/11/2026 × IVA 22%.
   'pegaso-donna': {"S":4.88,"M":4.88,"L":4.88,"XL":4.88,"XXL":4.88,"XXXL":6.47},
   // Polo manica lunga Carpe (Roly PO5009) — acquisto Gorfactory 09/11/2026 5,40 × IVA 22%.
   // Polo manica lunga Carpe Child (Roly PO5008) — acquisto Gorfactory 09/11/2026 3,90 × IVA 22%.
   // Polo manica lunga Estrella (Roly PO6635) — acquisto Gorfactory 09/11/2026 × IVA 22%. Grigio 58 con listino suo.
-  'estrella-polo': {"S":6.83,"M":6.83,"L":6.83,"XL":6.83,"XXL":6.83,"XXXL":8.17,"XXXXL":8.6,"XXXXXL":9.15},
+  'estrella-polo': {"S":7.56,"M":7.56,"L":7.56,"XL":7.56,"XXL":7.56,"XXXL":9.03,"XXXXL":9.52,"XXXXXL":10.07},
   'estrella-polo-58': {"S":7.56,"M":7.56,"L":7.56,"XL":7.56,"XXL":7.56,"XXXL":9.03,"XXXXL":9.52,"XXXXXL":10.07},
-  'estrella-donna': {"S":6.83,"M":6.83,"L":6.83,"XL":6.83,"XXL":6.83,"XXXL":8.17},
+  'estrella-donna': {"S":7.56,"M":7.56,"L":7.56,"XL":7.56,"XXL":7.56,"XXXL":9.03},
   'estrella-donna-58': {"S":7.56,"M":7.56,"L":7.56,"XL":7.56,"XXL":7.56,"XXXL":9.03},
   'estrella-polo-kids': {"1/2":5.12,"3/4":5.12,"5/6":5.12,"7/8":5.12,"9/10":5.12,"11/12":5.12},
   'carpe-polo-kids': {"1/2":4.76,"3/4":4.76,"5/6":4.76,"7/8":4.76,"9/10":4.76,"11/12":4.76},
-  'carpe-polo': {"S":6.59,"M":6.59,"L":6.59,"XL":6.59,"XXL":6.59},
+  'carpe-polo': {"S":7.93,"M":7.93,"L":7.93,"XL":7.93,"XXL":7.93},
+  'carpe-polo-01': {"S":6.59,"M":6.59,"L":6.59,"XL":6.59,"XXL":6.59},
+  'estrella-polo-01': {"S":6.83,"M":6.83,"L":6.83,"XL":6.83,"XXL":6.83,"XXXL":8.17,"XXXXL":8.6,"XXXXXL":9.15},
+  'estrella-donna-01': {"S":6.83,"M":6.83,"L":6.83,"XL":6.83,"XXL":6.83,"XXXL":8.17},
+  'pegaso-polo-01': {"S":4.58,"M":4.58,"L":4.58,"XL":4.58,"XXL":4.58,"XXXL":6.47,"XXXXL":6.89,"XXXXXL":7.56},
+  'pegaso-polo-kids-01': {"1/2":3.9,"3/4":3.9,"5/6":3.9,"7/8":3.9,"9/10":3.9,"11/12":3.9},
   'pegaso-polo': {"S":4.88,"M":4.88,"L":4.88,"XL":4.88,"XXL":4.88,"XXXL":6.47,"XXXXL":6.89,"XXXXXL":7.56},
   'aifos': {"S":8.48,"M":8.48,"L":8.48,"XL":8.48,"XXL":8.48,"XXXL":9.33},
   'aifos-ls': {"S":8.85,"M":8.85,"L":8.85,"XL":8.85,"XXL":8.85,"XXXL":9.33},
@@ -155,51 +157,51 @@ const HV_BASE = {
   'slam': {"S":3.17,"M":3.17,"L":3.17,"XL":3.17,"XXL":3.17,"XXXL":3.42},
   'monzha': {"S":3.6,"M":3.6,"L":3.6,"XL":3.6,"XXL":3.6,"XXXL":4.16},
   'tormo': {"S":4.58,"M":4.58,"L":4.58,"XL":4.58,"XXL":4.58,"XXXL":4.82},
-  'felpa-badet': {"XS":10.25,"S":10.25,"M":10.25,"L":10.25,"XL":10.25,"XXL":10.25,"XXXL":10.74},
-  'felpa-badet-kids': {"3/4":8.44,"5/6":8.44,"7/8":8.44,"9/10":8.44,"11/12":8.44},
-  'felpa-urban': {"XS":7.32,"S":7.32,"M":7.32,"L":7.32,"XL":7.32,"XXL":7.32,"XXXL":8.05,"XXXXL":8.54},
-  'felpa-urban-kids': {"3/4":6.34,"5/6":6.34,"7/8":6.34,"9/10":6.34,"11/12":6.34},
-  'felpa-ulan': {"XS":9.27,"S":9.27,"M":9.27,"L":9.27,"XL":9.27,"XXL":9.27,"XXXL":9.56},
-  'felpa-ulan-kids': {"3/4":7.42,"5/6":7.42,"7/8":7.42,"9/10":7.42,"11/12":7.42},
-  'felpa-clasica': {"XS":5.81,"S":5.81,"M":5.81,"L":5.81,"XL":5.81,"XXL":5.81,"XXXL":6.34},
-  'felpa-clasica-kids': {"1/2":4.83,"3/4":4.83,"5/6":4.83,"7/8":4.83,"9/10":4.83,"11/12":4.83},
-  'felpa-aneto': {"XS":8.3,"S":8.3,"M":8.3,"L":8.3,"XL":8.3,"XXL":8.3,"XXXL":8.98},
-  'felpa-fuji': {"S":10.39,"M":10.39,"L":10.39,"XL":10.39,"XXL":10.39,"XXXL":10.93},
+  'felpa-badet': {"XS":12.81,"S":12.81,"M":12.81,"L":12.81,"XL":12.81,"XXL":12.81,"XXXL":13.42},
+  'felpa-badet-kids': {"3/4":10.55,"5/6":10.55,"7/8":10.55,"9/10":10.55,"11/12":10.55},
+  'felpa-urban': {"XS":9.15,"S":9.15,"M":9.15,"L":9.15,"XL":9.15,"XXL":9.15,"XXXL":10.07,"XXXXL":10.68},
+  'felpa-urban-kids': {"3/4":7.93,"5/6":7.93,"7/8":7.93,"9/10":7.93,"11/12":7.93},
+  'felpa-ulan': {"XS":11.59,"S":11.59,"M":11.59,"L":11.59,"XL":11.59,"XXL":11.59,"XXXL":11.96},
+  'felpa-ulan-kids': {"3/4":9.27,"5/6":9.27,"7/8":9.27,"9/10":9.27,"11/12":9.27},
+  'felpa-clasica': {"XS":7.26,"S":7.26,"M":7.26,"L":7.26,"XL":7.26,"XXL":7.26,"XXXL":7.93},
+  'felpa-clasica-kids': {"1/2":6.04,"3/4":6.04,"5/6":6.04,"7/8":6.04,"9/10":6.04,"11/12":6.04},
+  'felpa-aneto': {"XS":10.37,"S":10.37,"M":10.37,"L":10.37,"XL":10.37,"XXL":10.37,"XXXL":11.22},
+  'felpa-fuji': {"S":12.99,"M":12.99,"L":12.99,"XL":12.99,"XXL":12.99,"XXXL":13.66},
   'hv-foran-ls': {"XS":12.14,"S":12.14,"M":12.14,"L":12.14,"XL":12.14,"XXL":12.14,"XXXL":12.81},
-  'gilet-jannu': {"XS":4.83,"S":4.83,"M":4.83,"L":4.83,"XL":4.83,"XXL":4.83},
+  'gilet-jannu': {"XS":6.04,"S":6.04,"M":6.04,"L":6.04,"XL":6.04,"XXL":6.04},
 };
 // Camicie, sport e felpe: scala 1,8 (1,80 → 1,50), uguale a tutti i Roly.
 const CAMICIE_QTY_MULT = [
-  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
-  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
-  { min: 100, mult: 1.50 },
+  { min: 1, mult: 1.5 }, { min: 2, mult: 1.5 }, { min: 5, mult: 1.5 },
+  { min: 10, mult: 1.5 }, { min: 20, mult: 1.5 }, { min: 50, mult: 1.5 },
+  { min: 100, mult: 1.5 },
 ];
 const CAMICIE_SLUGS = ['aifos', 'aifos-ls', 'moscu', 'sofia', 'sofia-ls', 'moscu-donna', 'vaccine', 'vaccine-donna', 'tormo', 'serena', 'murray', 'monzha', 'slam', 'slam-donna', 'felpa-badet', 'felpa-badet-kids', 'felpa-urban', 'felpa-urban-kids', 'felpa-ulan', 'felpa-ulan-kids', 'felpa-clasica', 'felpa-clasica-kids', 'felpa-aneto'];
 // Scala moltiplicatore 1,8: 1,80 a 1 pz → 1,50 da 100 pz (Felpa Fuji, Gilet Jannu).
 const ROLY18_QTY_MULT = [
-  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
-  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
-  { min: 100, mult: 1.50 },
+  { min: 1, mult: 1.5 }, { min: 2, mult: 1.5 }, { min: 5, mult: 1.5 },
+  { min: 10, mult: 1.5 }, { min: 20, mult: 1.5 }, { min: 50, mult: 1.5 },
+  { min: 100, mult: 1.5 },
 ];
 const ROLY18_SLUGS = ['felpa-fuji', 'gilet-jannu'];
 // Polo Prince ed Extreme: scala 1,8 (1,80 → 1,50), uguale a tutti i Roly.
 const POLO_QTY_MULT = [
-  { min: 1, mult: 1.80 }, { min: 2, mult: 1.75 }, { min: 5, mult: 1.70 },
-  { min: 10, mult: 1.65 }, { min: 20, mult: 1.60 }, { min: 50, mult: 1.55 },
-  { min: 100, mult: 1.50 },
+  { min: 1, mult: 1.5 }, { min: 2, mult: 1.5 }, { min: 5, mult: 1.5 },
+  { min: 10, mult: 1.5 }, { min: 20, mult: 1.5 }, { min: 50, mult: 1.5 },
+  { min: 100, mult: 1.5 },
 ];
 const POLO_SLUGS = ['prince-polo', 'estrella-polo', 'estrella-polo-58', 'estrella-polo-kids', 'estrella-donna', 'estrella-donna-58', 'carpe-polo', 'carpe-polo-kids', 'prince-donna', 'extreme', 'extreme-kids', 'extreme-donna'];
 // Pegaso: scala polo ridotta. Adulto (pegaso-polo, pegaso-donna) tarato su 6,59 € a 30 pz;
 // bambino tarato su 5,02 € a 50 pz (IVA compresa). Deve coincidere con QTY_MULT delle pagine.
 const PEGASO_QTY_MULT = [
-  { min: 1, mult: 1.5192 }, { min: 2, mult: 1.477 }, { min: 5, mult: 1.4348 },
-  { min: 10, mult: 1.3926 }, { min: 20, mult: 1.3504 }, { min: 50, mult: 1.3082 },
-  { min: 100, mult: 1.266 },
+  { min: 1, mult: 1.5 }, { min: 2, mult: 1.5 }, { min: 5, mult: 1.5 },
+  { min: 10, mult: 1.5 }, { min: 20, mult: 1.5 }, { min: 50, mult: 1.5 },
+  { min: 100, mult: 1.5 },
 ];
 const PEGASO_KIDS_QTY_MULT = [
-  { min: 1, mult: 1.4948 }, { min: 2, mult: 1.4533 }, { min: 5, mult: 1.4117 },
-  { min: 10, mult: 1.3702 }, { min: 20, mult: 1.3287 }, { min: 50, mult: 1.2872 },
-  { min: 100, mult: 1.2457 },
+  { min: 1, mult: 1.5 }, { min: 2, mult: 1.5 }, { min: 5, mult: 1.5 },
+  { min: 10, mult: 1.5 }, { min: 20, mult: 1.5 }, { min: 50, mult: 1.5 },
+  { min: 100, mult: 1.5 },
 ];
 const PEGASO_SLUGS = ['pegaso-polo', 'pegaso-donna'];
 function slugMult(slug, qty) {
@@ -231,12 +233,34 @@ function hvGarmentTotal(slug, qty, sizes, rateQty) {
   return total;
 }
 
+// --- Prezzo capo per taglia, IVA inclusa: costo Roly + 50% + IVA 22%, uguale per ogni quantità (dal 18 nov 2026).
+// Deve coincidere con SIZE_PRICE / SIZE_PRICE_WHITE nelle pagine. Il bianco è "01 Bianco".
+const SIZE_PRICES = {
+  beagle: { col: Object.assign({"S":3.01,"M":3.01,"L":3.01,"XL":3.01,"XXL":3.01,"XXXL":3.66}, {"1/2":2.57,"3/4":2.57,"5/6":2.57,"7/8":2.57,"9/10":2.57,"11/12":2.57}), white: Object.assign({"S":2.66,"M":2.66,"L":2.66,"XL":2.66,"XXL":2.66,"XXXL":3.66}, {"1/2":2.19,"3/4":2.19,"5/6":2.19,"7/8":2.19,"9/10":2.19,"11/12":2.19}) },
+  bahrain: { col: Object.assign({"S":2.39,"M":2.39,"L":2.39,"XL":2.39,"XXL":2.39,"XXXL":2.93}, {"4":2.3,"8":2.3,"12":2.3,"16":2.3}), white: Object.assign({"S":2.39,"M":2.39,"L":2.39,"XL":2.39,"XXL":2.39,"XXXL":2.93}, {"4":2.3,"8":2.3,"12":2.3,"16":2.3}) },
+};
+function sizePriceTotal(table, qty, sizes, colorName, extra) {
+  const t = String(colorName || '').slice(0, 2) === '01' ? table.white : table.col;
+  const map = sizes && typeof sizes === 'object' ? sizes : {};
+  let total = 0, counted = 0;
+  for (const s of Object.keys(map)) {
+    const n = Math.max(0, parseInt(map[s], 10) || 0);
+    if (!n) continue;
+    const p = t[s] != null ? t[s] : Math.max(...Object.values(t));
+    total += n * (p + (extra || 0)); counted += n;
+  }
+  // Taglie non indicate: prezzo della taglia più cara (mai un prezzo inferiore).
+  const rest = Math.max(0, qty - counted);
+  if (rest) total += rest * (Math.max(...Object.values(t)) + (extra || 0));
+  return total;
+}
+
 function pickTier(tiers, qty) { let t = tiers[0]; for (const x of tiers) if (qty >= x.min) t = x; return t; }
 
 const PRICING = {
   // Prodotto di test interno (test-settimanale.html, non linkato): verifica settimanale del checkout.
   'test-settimanale': { nome: 'Test settimanale', type: 'flat', price: 1 },
-  // Solo stampa — il capo lo fornisce il cliente: nessun costo capo, solo tariffe DTF. Minimo 5 pz.
+  // Solo stampa — il capo lo fornisce il cliente: nessun costo capo, solo tariffe DTF. Minimo 10 pz.
   'solo-stampa': { nome: 'Solo Stampa DTF', type: 'tshirt',
     garmentUnitPrice: () => 0,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
@@ -244,6 +268,7 @@ const PRICING = {
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'tshirt': { nome: 'Maglietta Unisex', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty, colorName) => sizePriceTotal(SIZE_PRICES.beagle, qty, sizes, colorName),
     garmentUnitPrice: (qty, isWhite) => { const t = pickTier(TSHIRT_PRICE_TIERS, qty); return isWhite ? t.white : t.other; },
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -263,8 +288,9 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
-  // Stampa Oro / Argento / Ologramma — capo Beagle + 5 €/pz di effetto lucido; stampa = tariffe DTF t-shirt. Nessun minimo.
+  // Stampa Oro / Argento / Ologramma — capo Beagle + 5 €/pz di effetto lucido; stampa = tariffe DTF t-shirt. Minimo 10 pz.
   'tshirt-foil': { nome: 'Maglietta Stampa Oro, Argento, Ologramma', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty, colorName) => sizePriceTotal(SIZE_PRICES.beagle, qty, sizes, colorName, 5),
     garmentUnitPrice: (qty, isWhite) => { const t = pickTier(TSHIRT_PRICE_TIERS, qty); return (isWhite ? t.white : t.other) + 5; },
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -293,7 +319,7 @@ const PRICING = {
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'nebraska-kids': { nome: 'Giubbotto Nebraska Bambino', type: 'tshirt',
-    garmentUnitPrice: (qty) => pickTier(NEBRASKA_PRICE_TIERS, qty).price,
+    garmentUnitPrice: (qty) => pickTier(NEBRASKA_KIDS_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
@@ -306,18 +332,21 @@ const PRICING = {
 
   // Maglietta Tecnica Bahrain — listino capi (unico per colore e taglia); stampa = tariffe DTF t-shirt.
   'bahrain': { nome: 'Maglietta Tecnica Bahrain', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty, colorName) => sizePriceTotal(SIZE_PRICES.bahrain, qty, sizes, colorName),
     garmentUnitPrice: (qty) => pickTier(BAHRAIN_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'bahrain-donna': { nome: 'Maglietta Tecnica Bahrain Donna', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty, colorName) => sizePriceTotal(SIZE_PRICES.bahrain, qty, sizes, colorName),
     garmentUnitPrice: (qty) => pickTier(BAHRAIN_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'bahrain-kids': { nome: 'Maglietta Tecnica Bahrain Bambino', type: 'tshirt',
+    garmentTotal: (qty, sizes, rateQty, colorName) => sizePriceTotal(SIZE_PRICES.bahrain, qty, sizes, colorName),
     garmentUnitPrice: (qty) => pickTier(BAHRAIN_KIDS_PRICE_TIERS, qty).price,
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -434,7 +463,7 @@ const PRICING = {
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'pegaso-polo-kids': { nome: 'Polo Pegaso Premium Bambino', type: 'tshirt',
-    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('pegaso-polo-kids', qty, sizes, rateQty),
+    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '01' ? 'pegaso-polo-kids-01' : 'pegaso-polo-kids', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('pegaso-polo-kids', 1, null) * slugMult('pegaso-polo-kids', qty) / slugMult('pegaso-polo-kids', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -447,16 +476,16 @@ const PRICING = {
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
-  // colorName arriva da _price-item: il grigio 58 usa il listino 'estrella-polo-58'.
+  // colorName arriva da _price-item: il bianco 01 usa il listino '<slug>-01' (più basso dei colori).
   'estrella-polo': { nome: 'Polo Manica Lunga Estrella', type: 'tshirt',
-    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '58' ? 'estrella-polo-58' : 'estrella-polo', qty, sizes, rateQty),
+    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '01' ? 'estrella-polo-01' : 'estrella-polo', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('estrella-polo', 1, null) * slugMult('estrella-polo', qty) / slugMult('estrella-polo', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'estrella-donna': { nome: 'Polo Donna Manica Lunga Estrella', type: 'tshirt',
-    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '58' ? 'estrella-donna-58' : 'estrella-donna', qty, sizes, rateQty),
+    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '01' ? 'estrella-donna-01' : 'estrella-donna', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('estrella-donna', 1, null) * slugMult('estrella-donna', qty) / slugMult('estrella-donna', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -477,14 +506,14 @@ const PRICING = {
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'carpe-polo': { nome: 'Polo Manica Lunga Carpe', type: 'tshirt',
-    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('carpe-polo', qty, sizes, rateQty),
+    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '01' ? 'carpe-polo-01' : 'carpe-polo', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('carpe-polo', 1, null) * slugMult('carpe-polo', qty) / slugMult('carpe-polo', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
     discount: (qty) => pickTier(TSHIRT_DISCOUNT_TIERS, qty).mult },
 
   'pegaso-polo': { nome: 'Polo Pegaso Premium', type: 'tshirt',
-    garmentTotal: (qty, sizes, rateQty) => hvGarmentTotal('pegaso-polo', qty, sizes, rateQty),
+    garmentTotal: (qty, sizes, rateQty, colorName) => hvGarmentTotal(String(colorName || '').slice(0, 2) === '01' ? 'pegaso-polo-01' : 'pegaso-polo', qty, sizes, rateQty),
     garmentUnitPrice: (qty) => hvGarmentTotal('pegaso-polo', 1, null) * slugMult('pegaso-polo', qty) / slugMult('pegaso-polo', 1),
     cuoreUnitPrice: (qty) => pickTier(TSHIRT_CUORE_TIERS, qty).price,
     areaUnitPrice: (wIdx, hIdx) => TSHIRT_AREA_TABLE[wIdx][hIdx],
@@ -769,7 +798,7 @@ Object.assign(PRICING, {
 // Collezione Roma Sacra — stesso listino del capo base, nessun minimo (anche 1 pz).
 Object.assign(PRICING, {
   'maglietta-roma-sacra': { ...PRICING['tshirt'], nome: 'Maglietta Roma Sacra' },
-  'felpa-roma-sacra': { ...PRICING['felpa-urban'], nome: 'Felpa Roma Sacra' },
+  'felpa-roma-sacra': {"XS":9.15,"S":9.15,"M":9.15,"L":9.15,"XL":9.15,"XXL":9.15,"XXXL":10.07,"XXXXL":10.68},
   'polo-roma-sacra': { ...PRICING['star-polo'], nome: 'Polo Roma Sacra' },
   'cappellino-roma-sacra': { ...PRICING['basica-cap'], nome: 'Cappellino Roma Sacra' },
   'shopper-roma-sacra': { ...PRICING['shopper-hill'], nome: 'Shopper Roma Sacra' },
