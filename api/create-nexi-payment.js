@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
     const md = {
       inv_type: c.invType || 'privato', inv_name: c.name || '', inv_email: c.email || '', inv_company: c.company || '',
       inv_vat: c.vat || '', inv_cf: c.cf || '', inv_pec: c.pec || '', inv_sdi: c.sdi || '',
-      inv_address: c.address || '', inv_city: c.city || '', inv_cap: c.cap || '', inv_country: c.country || 'IT',
+      inv_address: c.address || '', inv_city: c.city || '', inv_cap: c.cap || '', inv_province: c.province || '', inv_country: c.country || 'IT',
       ship_same: sh.sameAsBilling ? '1' : '0',
       sender_use: sn.use ? '1' : '0',
       shipping_fee: String(shipFee), shipping_zone: shippingZone || '',
