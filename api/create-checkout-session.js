@@ -15,6 +15,15 @@ function getStripe() {
   return stripe;
 }
 
+// Spedizione calcolata dal server, mai dal browser: UE 25 €; Italia gratuita da 50 € di prodotti, altrimenti 8 €.
+// Carrello con solo il prodotto di test settimanale: nessuna spedizione.
+function serverShippingFee(priced, shippingZone) {
+  if (priced.length && priced.every((p) => p.productId === 'test-settimanale')) return 0;
+  if (shippingZone === 'ue') return 25;
+  const subtotalCents = priced.reduce((t, p) => t + (p.unitAmountCents || 0), 0);
+  return subtotalCents >= 5000 ? 0 : 8;
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -27,7 +36,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { productId, tierIndex, sizeIndex, formula, deliveryIndex, items, customer, shipping, sender, shippingFee, shippingZone, designRef, designFiles, designLink, customerNote } = req.body || {};
+    const { productId, tierIndex, sizeIndex, formula, deliveryIndex, items, customer, shipping, sender, shippingFee, shippingZone, designRef, designFiles, designLink, customerNote, invLater } = req.body || {};
     const cart = Array.isArray(items) && items.length
       ? items.slice(0, 20)
       : [{ productId, tierIndex, sizeIndex, formula, deliveryIndex }];
@@ -57,7 +66,7 @@ module.exports = async (req, res) => {
       if (bits.length) lineItems[0].price_data.product_data.description = bits.join(' · ').slice(0, 480);
     }
     // Zona UE: tariffa fissa 25 € imposta lato server, qualunque valore arrivi dal client.
-    const shipFee = shippingZone === 'ue' ? 25 : Math.max(0, Number(shippingFee) || 0);
+    const shipFee = serverShippingFee(priced, shippingZone);
     if (shipFee > 0) {
       lineItems.push({
         price_data: {
@@ -74,6 +83,8 @@ module.exports = async (req, res) => {
     // invoice and to know where/who the shipment should show as sender.
     const metadata = {};
     const c = customer || {};
+    // Passo 2: i dati di fattura arrivano dopo il pagamento (grazie.html → api/invoice-details).
+    metadata.inv_later = invLater ? '1' : '0';
     metadata.inv_type = c.invType || 'privato';
     metadata.inv_name = c.name || '';
     metadata.inv_email = c.email || '';
@@ -89,8 +100,10 @@ module.exports = async (req, res) => {
     metadata.inv_country = c.country || 'IT';
 
     const sh = shipping || {};
+    metadata.inv_phone = String(c.phone || '').slice(0, 40);
     if (sh.sameAsBilling) {
       metadata.ship_same = '1';
+      if (sh.notes) metadata.ship_notes = String(sh.notes).slice(0, 490);
     } else {
       metadata.ship_same = '0';
       metadata.ship_name = sh.name || '';

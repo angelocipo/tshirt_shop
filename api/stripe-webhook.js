@@ -198,15 +198,20 @@ module.exports = async (req, res) => {
       }
       // Invoice draft (XML) for the owner to import and confirm in Aruba. Own try: a failure here
       // must never block the order emails.
+      // Passo 2 (md.inv_later = '1'): i dati di fattura arrivano dopo, da api/invoice-details.js.
+      const invLater = md.inv_later === '1';
       let invoice = null;
-      try { invoice = await require('./create-invoice').prepareInvoiceDraft(order); }
-      catch (invErr) { console.error('Invoice draft FAILED for order', order.number, invErr); }
-      const inv = invoice ? require('./create-invoice').draftEmailParts(invoice) : { attachment: null, html: '' };
+      if (!invLater) {
+        try { invoice = await require('./create-invoice').prepareInvoiceDraft(order); }
+        catch (invErr) { console.error('Invoice draft FAILED for order', order.number, invErr); }
+      }
+      const inv = invoice ? require('./create-invoice').draftEmailParts(invoice)
+        : { attachment: null, html: invLater ? '<div style="margin:16px auto;max-width:600px;padding:14px 18px;background:#fff4d6;font-family:sans-serif;font-size:14px;"><strong>Fattura</strong>: il cliente inserisce i dati di fatturazione dopo il pagamento (passo 2 sulla pagina di conferma). Arrivano in un\'email separata «Dati fattura ordine #' + order.number + '» con la bozza XML.</div>' : '' };
       let ups = { attachment: null, html: '' };
-      try { const U = require('./_ups-csv'); ups = U.upsEmailParts(U.buildUpsCsv(order, md, { phone: session.customer_details?.phone, email: buyerEmail })); }
+      try { const U = require('./_ups-csv'); ups = U.upsEmailParts(U.buildUpsCsv(order, md, { phone: md.inv_phone || session.customer_details?.phone, email: buyerEmail })); }
       catch (upsErr) { console.error('UPS file FAILED for order', order.number, upsErr); }
       let ddt = { attachment: null, html: '' };
-      try { const D = require('./_ddt'); ddt = D.ddtEmailParts(D.buildDdtHtml(order, md)); }
+      try { const D = require('./_ddt'); ddt = D.ddtEmailParts(await D.buildDdtPdf(order, md)); }
       catch (e) { console.error('DDT FAILED for order', order.number, e); }
       let design = { attachments: [], urls: [] };
       try {
@@ -333,7 +338,14 @@ function orderEmailHtml(order, total, md) {
   if (order.customer.isCompany) {
     billingRows.push(['PEC / SDI', [md.inv_pec, md.inv_sdi].filter(Boolean).join(' — ') || '—']);
   }
-  const billingBlock = `<tr><td style="padding:26px 32px 0;">
+  // Passo 2: i dati di fattura il cliente li inserisce sulla pagina di conferma, dopo il pagamento.
+  const laterBlock = `<tr><td style="padding:26px 32px 0;">
+        <div style="border:2px solid ${STEEL};padding:14px 16px;font:400 14px/1.6 ${BODY_FONT};color:${INK};">
+          <div style="font:700 11px/1 ${BODY_FONT};letter-spacing:.16em;text-transform:uppercase;color:${STEEL};padding-bottom:8px;">Dati per la fatturazione</div>
+          Inseriscili nella pagina di conferma dell'ordine (passo 2): la fattura viene emessa esattamente con quei dati. Se hai chiuso la pagina, rispondi a questa email con intestatario, indirizzo, Codice Fiscale o Partita IVA (e Codice SDI o PEC per le aziende).
+        </div>
+      </td></tr>`;
+  const billingBlock = md.inv_later === '1' ? laterBlock : `<tr><td style="padding:26px 32px 0;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:2px solid ${STEEL};border-collapse:separate;">
           <tr><td style="padding:14px 16px 4px;">
             <div style="font:700 11px/1 ${BODY_FONT};letter-spacing:.16em;text-transform:uppercase;color:${STEEL};">Dati per la fatturazione</div>
@@ -444,7 +456,15 @@ function orderEmailHtml(order, total, md) {
 
 function ownerBlockHtml(order, buyerEmail, session, attachedCount) {
   const md = session.metadata || {};
-  const rowsData = [
+  const later = md.inv_later === '1';
+  const rowsData = later ? [
+    ['Destinatario', order.customer.name],
+    ['Email', buyerEmail || '—'],
+    ['Consegna', [order.customer.address, order.customer.cap, order.customer.city, order.customer.province, order.customer.country !== 'IT' ? order.customer.country : ''].filter(Boolean).join(', ') || '—'],
+    ['Cellulare', md.inv_phone || session.customer_details?.phone || '—'],
+    ['Note consegna', esc(md.ship_notes || '—')],
+    ['Fattura', 'Dati in arrivo dal cliente (passo 2)'],
+  ] : [
     ['Cliente', order.customer.name],
     ['Email', buyerEmail || '—'],
     ['Tipo', order.customer.isCompany ? 'Azienda' : 'Privato'],

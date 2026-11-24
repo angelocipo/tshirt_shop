@@ -7,19 +7,28 @@ const crypto = require('crypto');
 const { priceCart } = require('./_price-item');
 const NX = require('./_nexi');
 
+// Spedizione calcolata dal server, mai dal browser: UE 25 €; Italia gratuita da 50 € di prodotti, altrimenti 8 €.
+// Carrello con solo il prodotto di test settimanale: nessuna spedizione.
+function serverShippingFee(priced, shippingZone) {
+  if (priced.length && priced.every((p) => p.productId === 'test-settimanale')) return 0;
+  if (shippingZone === 'ue') return 25;
+  const subtotalCents = priced.reduce((t, p) => t + (p.unitAmountCents || 0), 0);
+  return subtotalCents >= 5000 ? 0 : 8;
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method not allowed' }); return; }
   if (!process.env.NEXI_ALIAS || !process.env.NEXI_MAC_KEY) { res.status(500).json({ error: 'NEXI_ALIAS / NEXI_MAC_KEY non configurate su Vercel (Environment Variables → Redeploy).' }); return; }
   if (!process.env.BLOB_READ_WRITE_TOKEN) { res.status(500).json({ error: 'BLOB_READ_WRITE_TOKEN mancante.' }); return; }
 
   try {
-    const { productId, tierIndex, sizeIndex, formula, deliveryIndex, items, customer, shipping, sender, shippingFee, shippingZone, designRef, designFiles, designLink, customerNote } = req.body || {};
+    const { productId, tierIndex, sizeIndex, formula, deliveryIndex, items, customer, shipping, sender, shippingFee, shippingZone, designRef, designFiles, designLink, customerNote, invLater } = req.body || {};
     const cart = Array.isArray(items) && items.length ? items.slice(0, 20) : [{ productId, tierIndex, sizeIndex, formula, deliveryIndex }];
     const priced = priceCart(cart);
     const origin = req.headers.origin || `https://${req.headers.host}`;
 
     const lines = priced.map((p) => ({ description: p.description, quantity: 1, unitPrice: p.unitAmountCents / 100, vatRate: 22 }));
-    const shipFee = shippingZone === 'ue' ? 25 : Math.max(0, Number(shippingFee) || 0);
+    const shipFee = serverShippingFee(priced, shippingZone);
     if (shipFee > 0) lines.push({ description: shippingZone === 'ue' ? 'Spedizione UE' : 'Spedizione Italia', quantity: 1, unitPrice: shipFee, vatRate: 22 });
     const amountCents = Math.round(lines.reduce((t, l) => t + l.unitPrice * l.quantity, 0) * 100);
     if (amountCents <= 0) { res.status(400).json({ error: 'Importo non valido' }); return; }
@@ -30,10 +39,13 @@ module.exports = async (req, res) => {
       inv_type: c.invType || 'privato', inv_name: c.name || '', inv_email: c.email || '', inv_company: c.company || '',
       inv_vat: c.vat || '', inv_cf: c.cf || '', inv_pec: c.pec || '', inv_sdi: c.sdi || '',
       inv_address: c.address || '', inv_city: c.city || '', inv_cap: c.cap || '', inv_province: c.province || '', inv_country: c.country || 'IT',
+      inv_later: invLater ? '1' : '0',
+      inv_phone: String(c.phone || '').slice(0, 40),
       ship_same: sh.sameAsBilling ? '1' : '0',
       sender_use: sn.use ? '1' : '0',
       shipping_fee: String(shipFee), shipping_zone: shippingZone || '',
     };
+    if (sh.sameAsBilling && sh.notes) md.ship_notes = String(sh.notes).slice(0, 490);
     if (!sh.sameAsBilling) Object.assign(md, { ship_name: sh.name || '', ship_phone: sh.phone || '', ship_address: sh.address || '', ship_city: sh.city || '', ship_cap: sh.cap || '', ship_notes: (sh.notes || '').slice(0, 490) });
     if (sn.use) Object.assign(md, { sender_company: sn.company || '', sender_phone: sn.phone || '', sender_address: sn.address || '', sender_city: sn.city || '', sender_cap: sn.cap || '' });
     if (designRef) md.design_ref = String(designRef).slice(0, 490);

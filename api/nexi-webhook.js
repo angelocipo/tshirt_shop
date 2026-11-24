@@ -59,17 +59,21 @@ module.exports = async (req, res) => {
         console.log('Buyer confirmation sent to', buyerEmail);
       } catch (e) { console.error('Buyer confirmation FAILED for nexi', orderId, e); }
     }
-    let invoice = null, inv = { attachment: null, html: '' };
-    try {
-      const CI = require('./create-invoice');
-      invoice = await CI.prepareInvoiceDraft(order);
-      inv = CI.draftEmailParts(invoice);
-    } catch (e) { console.error('Invoice draft FAILED for', order.number, e); }
+    // Passo 2 (md.inv_later = '1'): i dati di fattura arrivano dopo, da api/invoice-details.js.
+    const invLater = md.inv_later === '1';
+    let invoice = null, inv = { attachment: null, html: invLater ? '<div style="margin:16px auto;max-width:600px;padding:14px 18px;background:#fff4d6;font-family:sans-serif;font-size:14px;"><strong>Fattura</strong>: il cliente inserisce i dati di fatturazione dopo il pagamento (passo 2 sulla pagina di conferma). Arrivano in un\'email separata «Dati fattura ordine #' + order.number + '» con la bozza XML.</div>' : '' };
+    if (!invLater) {
+      try {
+        const CI = require('./create-invoice');
+        invoice = await CI.prepareInvoiceDraft(order);
+        inv = CI.draftEmailParts(invoice);
+      } catch (e) { console.error('Invoice draft FAILED for', order.number, e); }
+    }
     let ups = { attachment: null, html: '' };
-    try { const U = require('./_ups-csv'); ups = U.upsEmailParts(U.buildUpsCsv(order, md, { email: buyerEmail })); }
+    try { const U = require('./_ups-csv'); ups = U.upsEmailParts(U.buildUpsCsv(order, md, { phone: md.inv_phone, email: buyerEmail })); }
     catch (e) { console.error('UPS file FAILED for', order.number, e); }
     let ddt = { attachment: null, html: '' };
-    try { const D = require('./_ddt'); ddt = D.ddtEmailParts(D.buildDdtHtml(order, md)); }
+    try { const D = require('./_ddt'); ddt = D.ddtEmailParts(await D.buildDdtPdf(order, md)); }
     catch (e) { console.error('DDT FAILED for', order.number, e); }
     let design = { attachments: [], urls: [] };
     try { design = await W.collectDesignFiles(md.design_ref); } catch (e) { console.error('Design files lookup FAILED', e); }
@@ -82,7 +86,7 @@ module.exports = async (req, res) => {
       });
       console.log('Owner notification sent to', W.OWNER_EMAIL, 'with', design.attachments.length, 'file(s)');
       const { put, del } = require('@vercel/blob');
-      await put(`nexi-orders/${orderId}.sent`, new Date().toISOString(), { access: 'public', addRandomSuffix: true });
+      await put(`nexi-orders/${orderId}.sent`, JSON.stringify({ at: new Date().toISOString(), brand: p.brand || '' }), { access: 'public', addRandomSuffix: true, contentType: 'application/json' });
       if (design.urls.length) { try { await del(design.urls); } catch (e) { console.error('Blob delete failed', e); } }
     } catch (e) { console.error('Owner notification FAILED to', W.OWNER_EMAIL, e); }
   } catch (err) {
