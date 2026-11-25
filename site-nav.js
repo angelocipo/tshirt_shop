@@ -20,7 +20,7 @@
     document.head.appendChild(siScript);
   }
   var MENU = {
-    brand: { href: 'index.html', logo: 'img/logo-tshirt-shop.webp', name: 'TSHIRT SHOP ONLINE' },
+    brand: { href: '/', logo: 'img/logo-tshirt-shop.webp', name: 'TSHIRT SHOP ONLINE' },
     whatsapp: { href: 'https://api.whatsapp.com/send/?phone=393396021366', it: 'Preventivo WhatsApp', en: 'Quote on WhatsApp' },
     items: [
       { it: 'PROMO', en: 'Promo', href: 'promozioni.html', accent: true, sub: [
