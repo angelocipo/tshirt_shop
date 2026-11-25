@@ -18,9 +18,12 @@ function buildUpsCsv(order, md, extra = {}) {
   if (!to.phone) warnings.push('Telefono destinatario mancante.');
   if (!to.address || !to.cap || !to.city) warnings.push('Indirizzo di spedizione incompleto.');
 
-  const kg = process.env.UPS_DEFAULT_WEIGHT_KG || '2';
+  const w = require('./_peso').parcelWeight(order);
+  const kg = String(w.kg);
   const [L, W, H] = (process.env.UPS_DEFAULT_DIMS_CM || '40x30x10').split('x');
-  warnings.push(`Peso e misure di default (${kg} kg, ${L}x${W}x${H} cm): correggili in UPS prima di stampare.`);
+  warnings.push(w.exact
+    ? `Peso calcolato ${kg} kg (scatola 600 g + 500 g a felpa); misure di default ${L}x${W}x${H} cm: controllale in UPS.`
+    : `Peso ${kg} kg da verificare (articoli senza peso noto) e misure di default ${L}x${W}x${H} cm: correggili in UPS prima di stampare.`);
 
   const cols = new Array(35).fill('');
   cols[0] = clean(to.name, 35);                       // Contact Name

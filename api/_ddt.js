@@ -22,11 +22,7 @@ async function fetchLogo() {
   } catch (e) { return null; }
 }
 
-// Pieces in a line: the cart sends one line per model with "10pz" in the description.
-function pieces(l) {
-  const m = /(\d+)\s*pz/i.exec(String(l.description || ''));
-  return m ? parseInt(m[1], 10) : (Number(l.quantity) || 1);
-}
+const { pieces, parcelWeight, fmtKg } = require('./_peso');
 
 async function buildDdtPdf(order, md = {}) {
   const c = order.customer || {};
@@ -42,7 +38,8 @@ async function buildDdtPdf(order, md = {}) {
     : null;
   // Note di consegna (citofono, reception…) sul blocco dove arriva il pacco.
   if (md.ship_notes) (ship || dest).notes = md.ship_notes;
-  const kg = process.env.UPS_DEFAULT_WEIGHT_KG || '2';
+  const w = parcelWeight(order);
+
 
   const pdf = await PDFDocument.create();
   pdf.setTitle(`DDT ordine ${order.number}`);
@@ -155,7 +152,7 @@ async function buildDdtPdf(order, md = {}) {
     items.forEach(([k, v], i) => field(k, v, M + (i % cols) * (w + g), w, fy - Math.floor(i / cols) * 44));
   };
   grid([
-    ['Causale del trasporto', 'Vendita'], ['Aspetto dei beni', 'Scatola'], ['N. colli', '1'], ['Peso indicativo', `${kg} kg`],
+    ['Causale del trasporto', 'Vendita'], ['Aspetto dei beni', 'Scatola'], ['N. colli', '1'], ['Peso indicativo', `${fmtKg(w.kg)} kg${w.exact ? '' : ' da verificare'}`],
     ['Trasporto a cura di', 'Vettore'], ['Vettore', 'UPS'], ['Porto', 'Franco'], ['Data e ora ritiro', ''],
   ], 4, y);
   y -= 44 * 2 + 40;
