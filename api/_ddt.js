@@ -40,6 +40,8 @@ async function buildDdtPdf(order, md = {}) {
   const ship = md.ship_same === '0'
     ? { name: md.ship_name, l1: md.ship_address, l2: [md.ship_cap, md.ship_city].filter(Boolean).join(' '), vat: md.ship_phone ? `Tel. ${md.ship_phone}` : '' }
     : null;
+  // Note di consegna (citofono, reception…) sul blocco dove arriva il pacco.
+  if (md.ship_notes) (ship || dest).notes = md.ship_notes;
   const kg = process.env.UPS_DEFAULT_WEIGHT_KG || '2';
 
   const pdf = await PDFDocument.create();
@@ -98,14 +100,15 @@ async function buildDdtPdf(order, md = {}) {
   y -= 18;
 
   // Parties.
-  const parties = [['MITTENTE', from], ['DESTINATARIO', dest]];
-  if (ship) parties.push(['LUOGO DI DESTINAZIONE', ship]);
+  // Con un indirizzo di consegna diverso il DDT mostra solo quello (niente quadro Destinatario).
+  const parties = ship ? [['MITTENTE', from], ['LUOGO DI DESTINAZIONE', ship]] : [['MITTENTE', from], ['DESTINATARIO', dest]];
   const gap = 14, bw = (CW - gap * (parties.length - 1)) / parties.length;
   const blocks = parties.map(([label, p]) => {
     const rows = [];
     wrap(p.name, bold, 11, bw - 24).forEach((t) => rows.push([t, bold, 11, INK]));
     [p.l1, p.l2].filter(Boolean).forEach((v) => wrap(v, reg, 9.5, bw - 24).forEach((t) => rows.push([t, reg, 9.5, INK])));
     if (p.vat) wrap(p.vat, reg, 9.5, bw - 24).forEach((t) => rows.push([t, reg, 9.5, MUTED]));
+    if (p.notes) wrap('Note: ' + p.notes, reg, 9.5, bw - 24).forEach((t) => rows.push([t, reg, 9.5, MUTED]));
     return { label, rows };
   });
   const bh = Math.max(92, ...blocks.map((b) => 34 + b.rows.length * 13 + 10));
