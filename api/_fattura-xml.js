@@ -21,6 +21,9 @@ const eur = (cents) => (cents / 100).toFixed(2);
 const clean = (s) => String(s || '').replace(/\s+/g, '').toUpperCase();
 
 // customer: { type: 'privato'|'azienda'|'estero', name, company, vat, cf, pec, sdi, address, cap, city, province, country }
+// Webmail domains that are never PEC (PEC addresses use providers like pec.it, legalmail.it, arubapec.it).
+const NOT_PEC = /@(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|icloud|me|mac|aol|gmx|libero|virgilio|tiscali|alice|tim|fastwebnet|email|inwind|katamail)\.[a-z.]+$/i;
+
 function buyerBlock(c, warnings) {
   const country = clean(c.country) || 'IT';
   const foreign = country !== 'IT';
@@ -57,9 +60,14 @@ function buyerBlock(c, warnings) {
   if (c.type === 'azienda' && foreign === false && codDest === '0000000' && !c.pec) warnings.push('Azienda senza Codice SDI né PEC');
   if (foreign && vat && company) warnings.push('Cliente aziendale estero con P.IVA: verifica se serve non imponibilità (art. 41) invece del 22%');
 
+  // A normal mailbox (gmail, libero, icloud…) typed in the PEC field is not a PEC: SDI can't deliver
+  // to it. Left out of the XML, the invoice still reaches the buyer's cassetto fiscale.
+  let pec = codDest === '0000000' && c.pec ? String(c.pec).trim() : '';
+  if (pec && NOT_PEC.test(pec)) { warnings.push(`"${pec}" non è una PEC: tolta dalla fattura (arriva nel cassetto fiscale del cliente)`); pec = ''; }
+
   return {
     codDest,
-    pec: codDest === '0000000' && c.pec ? c.pec : '',
+    pec,
     xml: `<CessionarioCommittente>
       <DatiAnagrafici>${fiscal}<Anagrafica>${anagrafica}</Anagrafica></DatiAnagrafici>
       <Sede>
