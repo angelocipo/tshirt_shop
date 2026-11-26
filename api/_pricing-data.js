@@ -385,7 +385,8 @@ const PRICING = {
   'promo-felpe': { nome: 'Promozione Felpe Personalizzate', type: 'promoTiers',
     minQty: 10, maxQty: 999, vat: 1.22,
     tiers: [ { min: 10, net: 13.10 }, { min: 20, net: 12.60 }, { min: 30, net: 12.30 }, { min: 50, net: 11.55 }, { min: 100, net: 11.10 } ],
-    colors: ['01 Bianco', '58 Grigio Vigoré', '60 Rosso', '05 Blu Royal', '57 Granata', '56 Verde Bottiglia', '55 Blu Navy', '02 Nero'],
+    // Tutti i colori della Felpa Urban: deve coincidere con COLORS in promozione-felpe.html.
+    colors: ['01 Bianco', '132 Bianco Vintage', '07 Sabbia', '08 Cioccolato', '229 Beige', '03 Giallo', '172 Ocra', '31 Arancione', '60 Rosso', '120 Corallo', '168 Rosa Antico', '169 Malva', '57 Granata', '78 Rosa Fucsia', '48 Rosa Chiaro', '71 Viola', '121 Prugna', '711 Lavanda', '05 Blu Royal', '12 Turchese', '55 Blu Navy', '263 Azzurro Polvere', '170 Blu Petrolio', '430 Verde Petrolio', '264 Verde Menta', '56 Verde Bottiglia', '275 Verde Salvia', '152 Verde Militare', '58 Grigio Vigoré', '108 Grigio Chiaro', '231 Antracite', '02 Nero', '177 Grigio Perla', '0155 Bianco / Nero', '5802 Grigio Vigoré / Nero', '6002 Rosso / Nero', '5758 Granata / Grigio Vigoré', '4858 Rosa / Grigio Vigoré', '0501 Blu Royal / Bianco', '1001 Celeste / Bianco', '5558 Blu Navy / Grigio Vigoré', '2001 Verde Prato / Bianco', '5658 Verde Bottiglia / Grigio Vigoré', '0258 Nero / Grigio Vigoré'],
     printLabel: 'Lato cuore 8×8 cm' },
 
   // Promozione Polo Austral + stampa lato cuore 8×8 cm. Prezzi al pezzo IVA esclusa; il carrello
