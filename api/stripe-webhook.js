@@ -292,6 +292,31 @@ function esc(s) {
     .replace(/"/g, '&quot;').replace(/\n/g, '<br>');
 }
 
+// Riga d'ordine nell'email: nome prodotto, poi un colore per riga con le sue taglie, poi il resto.
+// "Felpa Urban, 60pz, 01 Bianco: S×2 M×5 | 57 Granata: S×2, stampa: …" →
+//   Felpa Urban, 60pz / 01 Bianco: S×2 M×5 / 57 Granata: S×2 / stampa: …
+const SIZE_RE = /^(?:(?:XXXXXL|XXXXL|XXXL|XXL|XL|XS|S|M|L|\d+(?:\/\d+)?)×\d+\s*)+$|^tagli[ae] /i;
+function lineDescHtml(desc) {
+  const d = String(desc || '');
+  const cut = d.indexOf(' — ');
+  if (cut < 0) return esc(d);
+  const name = d.slice(0, cut);
+  const tokens = d.slice(cut + 3).split(', ');
+  const head = [], colors = [], tail = [];
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    if (/ \| /.test(t) || /^[^:]+: (?:XXXXXL|XXXXL|XXXL|XXL|XL|XS|S|M|L|\d)/.test(t)) {
+      t.split(' | ').forEach((c) => colors.push(c));
+    } else if (i + 1 < tokens.length && SIZE_RE.test(tokens[i + 1]) && !/\d+pz$/.test(t)) {
+      colors.push(t + ': ' + tokens[i + 1]); i++;
+    } else (colors.length ? tail : head).push(t);
+  }
+  if (!colors.length) return esc(d);
+  const top = esc(name) + (head.length ? ' — ' + esc(head.join(', ')) : '');
+  const sub = (txt) => `<div style="font-size:14px;color:${MUTED};">${esc(txt)}</div>`;
+  return top + colors.map((c) => `<div style="font-size:14px;">${esc(c)}</div>`).join('') + (tail.length ? sub(tail.join(', ')) : '');
+}
+
 function orderEmailHtml(order, total, md) {
   md = md || {};
   const designRows = [];
@@ -322,7 +347,7 @@ function orderEmailHtml(order, total, md) {
   const rows = order.lines.map((l) => {
     const lineTotal = l.unitPrice * l.quantity;
     return `<tr>
-      <td style="padding:14px 0;border-bottom:1px solid ${RULE};font:400 15px/1.45 ${BODY_FONT};color:${INK};">${l.description}</td>
+      <td style="padding:14px 0;border-bottom:1px solid ${RULE};font:400 15px/1.45 ${BODY_FONT};color:${INK};">${lineDescHtml(l.description)}</td>
       <td style="padding:14px 0 14px 16px;border-bottom:1px solid ${RULE};font:400 15px/1.45 ${BODY_FONT};color:${MUTED};text-align:right;white-space:nowrap;">${l.quantity}×</td>
       <td style="padding:14px 0 14px 16px;border-bottom:1px solid ${RULE};font:400 15px/1.45 ${BODY_FONT};color:${INK};text-align:right;white-space:nowrap;">${eur(lineTotal)}</td>
     </tr>`;
